@@ -31,19 +31,28 @@ class _MyHomePageState extends State<MyHomePage> {
 
   int _currentIndex = 1;
 
+  TabController _tabController = TabController(
+    length: 3,
+    initialIndex: 0,
+  );
 
-
-  final List<Widget> _children = [
-    HostTab(),
-    SearchTab(),
-    SettingsPage()
-  ];
+  refresh() {
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
 
     final Brightness brightnessValue = MediaQuery.of(context).platformBrightness;
     darkMode = brightnessValue == Brightness.dark;
+
+    List<Widget> _children = [
+      HostTab(),
+      SearchTab(currentTab: _currentIndex, notifyParent: refresh),
+      SettingsPage()
+    ];
+
+
 
     return Stack(
      children: [
@@ -53,7 +62,7 @@ class _MyHomePageState extends State<MyHomePage> {
            children: [
              Spacer(),
              Image(
-               image: AssetImage('Assets/fonzIcons/mountainProfile.png'),
+               image: AssetImage('assets/fonzIcons/mountainProfile.png'),
 
              ),
            ],
@@ -64,6 +73,7 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Scaffold(
           backgroundColor: Colors.transparent,
           body: _children[_currentIndex], // new
+          // body: ,
           bottomNavigationBar: BottomNavigationBar(
             currentIndex: _currentIndex,
             selectedItemColor: AMBER,
