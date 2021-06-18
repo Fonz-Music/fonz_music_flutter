@@ -3,7 +3,7 @@ import 'package:fonz_music_flutter/MainTabs/HostTab.dart';
 import 'package:fonz_music_flutter/MainTabs/SearchTab.dart';
 import 'package:fonz_music_flutter/MainTabs/SettingsPage.dart';
 
-import 'GlobalComponents/FrontEndConstants.dart';
+import 'GlobalComponents/FrontEnd/FrontEndConstants.dart';
 
 void main() {
   runApp(MyApp());

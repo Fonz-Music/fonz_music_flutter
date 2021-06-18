@@ -69,7 +69,7 @@ const Color(0xFFC894A6); //lilac
 const Color DARKLILAC =
 const Color(0xFFd9c4dc); //darker lilac
 
-const Color SPOTIFYGREEN =
+const Color SUCCESSGREEN =
 const Color(0xFF55b519); //green
 
 const Color AMAZONCOLOR =

@@ -1,7 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:fonz_music_flutter/GlobalComponents/FrontEndConstants.dart';
+import 'package:fonz_music_flutter/GlobalComponents/FrontEnd/FrontEndConstants.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
 class SettingsPage extends StatefulWidget {
