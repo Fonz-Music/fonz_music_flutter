@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:fonz_music_flutter/GlobalComponents/FrontEnd/FrontEndConstants.dart';
+import 'package:fonz_music_flutter/SearchTab/HomePageWidgets/scanForCoasterDetails.dart';
+
+import '../HomePageDecision.dart';
 
 class FailPartyJoin extends StatefulWidget {
 
   String errorMessage;
   String errorImage;
 
-  FailPartyJoin({Key key, @required this.errorMessage, this.errorImage}) : super(key: key);
+  final Function() notifyParent;
+
+  FailPartyJoin({Key key, @required this.errorMessage, this.errorImage, this.notifyParent}) : super(key: key);
 
   @override
   _FailPartyJoinState createState() => _FailPartyJoinState();
@@ -40,12 +45,16 @@ class _FailPartyJoinState extends State<FailPartyJoin> {
                   border: NeumorphicBorder(width: 2, color: Colors.red),
                   color: determineColorThemeBackground()
               ),
+              onPressed: () async {
+                hostCoasterDetails = await scanForCoasterDetails();
+                widget.notifyParent();
+              },
             ),
           ),
           Padding(
-            padding: EdgeInsets.fromLTRB(20, 10, 0, 0),
+            padding: EdgeInsets.fromLTRB(20, 10, 20, 0),
             child: new Text(
-              "${widget.errorMessage}",
+              "${widget.errorMessage}, press to try again",
               style: TextStyle(
                 fontFamily: FONZFONTTWO,
                 fontSize: HEADINGFOUR,

@@ -1,8 +1,18 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:fonz_music_flutter/GlobalComponents/FrontEnd/FrontEndConstants.dart';
+import 'package:fonz_music_flutter/SearchTab/HomePageWidgets/scanForCoasterDetails.dart';
+
+import '../HomePageDecision.dart';
 
 class JoinAPartyButton extends StatefulWidget {
+
+  JoinAPartyButton({Key key, @required this.notifyParent}) : super(key: key);
+
+  final Function() notifyParent;
+
   @override
   _JoinAPartyButtonState createState() => _JoinAPartyButtonState();
 }
@@ -34,16 +44,18 @@ class _JoinAPartyButtonState extends State<JoinAPartyButton> {
                   border: NeumorphicBorder(width: 2, color: LILAC),
                   color: determineColorThemeBackground()
               ),
-              onPressed: () {
-                // widget.currentTab = 0;
-                // widget.notifyParent();
-                // log("pressed sign out");
+              onPressed: () async {
+                pressedNfcButton = true;
+                widget.notifyParent();
+
+                hostCoasterDetails = await scanForCoasterDetails();
+                widget.notifyParent();
               },
 
             ),
           ),
           Padding(
-            padding: EdgeInsets.fromLTRB(20, 10, 0, 0),
+            padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
             child: new Text(
               "i want to queue a song",
               style: TextStyle(
@@ -58,4 +70,6 @@ class _JoinAPartyButtonState extends State<JoinAPartyButton> {
       ),
     );
   }
+
+
 }

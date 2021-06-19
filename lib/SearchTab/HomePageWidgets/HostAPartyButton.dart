@@ -43,7 +43,7 @@ class _HostAPartyButtonState extends State<HostAPartyButton> {
             ),
           ),
           Padding(
-            padding: EdgeInsets.fromLTRB(20, 10, 0, 0),
+            padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
             child: new Text(
               "i want to setup my coaster",
               style: TextStyle(

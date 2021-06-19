@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:fonz_music_flutter/GlobalComponents/FrontEnd/FrontEndConstants.dart';
 import 'package:fonz_music_flutter/SearchTab/HomePageDecision.dart';
+import 'package:fonz_music_flutter/SearchTab/SearchPage.dart';
 
 class SearchTab extends StatefulWidget {
 
@@ -30,7 +31,7 @@ class _SearchTabState extends State<SearchTab> {
       scrollDirection: Axis.vertical,
       children: [
         HomeDecisionPage(controller: _searchTabController, currentTab: widget.currentTab, notifyParent: widget.notifyParent),
-
+        SearchPage()
       ],
     );
   }

@@ -8,4 +8,8 @@ class CoasterObject {
 
 
   CoasterObject(this.hostName, this.coasterName, this.sessionId, this.coasterUid);
+
+  setStatusCode(int code ) {
+    this.statusCode = code;
+  }
 }
