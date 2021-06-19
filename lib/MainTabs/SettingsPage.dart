@@ -218,7 +218,7 @@ class _SettingsPageState extends State<SettingsPage> {
                                   "a few",
                                   style: TextStyle(
                                     fontFamily: FONZFONTONE,
-                                    fontSize: 16,
+                                    fontSize: 14,
                                     color: AMBER,
                                   ),
                                 ),
@@ -256,7 +256,7 @@ class _SettingsPageState extends State<SettingsPage> {
                                   "a lot",
                                   style: TextStyle(
                                     fontFamily: FONZFONTONE,
-                                    fontSize: 16,
+                                    fontSize: 14,
                                     color: AMBER,
                                   ),
                                 ),
@@ -294,7 +294,7 @@ class _SettingsPageState extends State<SettingsPage> {
                                   "unlimited",
                                   style: TextStyle(
                                     fontFamily: FONZFONTONE,
-                                    fontSize: 16,
+                                    fontSize: 14,
                                     color: AMBER,
                                   ),
                                 ),

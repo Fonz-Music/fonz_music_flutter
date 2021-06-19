@@ -84,6 +84,10 @@ class _HomeDecisionPageState extends State<HomeDecisionPage> {
     if (pressedNfcButton) {
       // await scanForCoasterDetails();
       if (hostCoasterDetails.statusCode == 0) {
+        Timer(Duration(seconds: 10), () {
+          pressedNfcButton = false;
+          notifyParent();
+        });
         return Container(
           child: Column(
             children: [
@@ -107,6 +111,7 @@ class _HomeDecisionPageState extends State<HomeDecisionPage> {
         );
       }
       else {
+        // if successful
         if (hostCoasterDetails.statusCode == 200) {
           Timer(Duration(milliseconds: SUCCESSPAGELENGTH), () {
             widget.controller.animateToPage(1,
@@ -117,40 +122,42 @@ class _HomeDecisionPageState extends State<HomeDecisionPage> {
             child: JoinSuccessfulCircle(connectedCoasterName: hostCoasterDetails.coasterName, coasterHostName: hostCoasterDetails.hostName),
           );
         }
-        else if (hostCoasterDetails.statusCode == 600) {
-          return Container(
-            child: FailPartyJoin(
-              errorMessage: "this coaster lacks a host",
-              errorImage: getDisableIcon(),
-            ),
-          );
-        }
+        // if unsuccessful
         else {
-          return Container(
-            child: FailPartyJoin(
-              errorMessage: "something went wrong",
-              errorImage: getDisableIcon(),
-            ),
-          );
+          Timer(Duration(seconds: 10), () {
+            pressedNfcButton = false;
+            notifyParent();
+          });
+          if (hostCoasterDetails.statusCode == 600) {
+            return Container(
+              child: FailPartyJoin(
+                errorMessage: "this coaster lacks a host",
+                errorImage: getDisableIcon(),
+              ),
+            );
+          }
+          else {
+            return Container(
+              child: FailPartyJoin(
+                errorMessage: "something went wrong",
+                errorImage: getDisableIcon(),
+              ),
+            );
+          }
         }
-
       }
-
     }
     else {
       return Container(
         height: height * 0.7,
         child: Column(
-
           children: [
               HostAPartyButton(),
               Spacer(),
               JoinAPartyButton(notifyParent: notifyParent),
-
           ],
         ),
       );
-
     }
   }
 
