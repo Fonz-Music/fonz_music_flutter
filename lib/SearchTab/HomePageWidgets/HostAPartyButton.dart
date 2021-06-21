@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:fonz_music_flutter/GlobalComponents/FrontEnd/FrontEndConstants.dart';
 
@@ -10,6 +11,12 @@ class HostAPartyButton extends StatefulWidget {
 }
 
 class _HostAPartyButtonState extends State<HostAPartyButton> {
+
+  // for platform specific code
+  static const platformShare = const MethodChannel("ShareSheet");
+  static const platformIgStory = const MethodChannel("ShareOnInstagram");
+  var message;
+
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -36,8 +43,21 @@ class _HostAPartyButtonState extends State<HostAPartyButton> {
                   border: NeumorphicBorder(width: 2, color: AMBER),
                   color: determineColorThemeBackground()
               ),
-              onPressed: () {
+              onPressed: () async {
                 log("pressed sign out");
+
+                try {
+                  // var result = await platformShare.invokeMethod('launchShareSheet');
+                  // var result = await platformShare.invokeMethod('launchShareSheet', {"url": "www.fonzmusic.com"});
+                  var result = await platformIgStory.invokeMethod('shareOnInstagram', {"songTitle": "All Yours", "songArtist": "APRE", "albumArt": "https://picsum.photos/300/300"});
+                  // message = result;
+                  log("got result");
+                  log(result.toString());
+                  return message;
+                } on PlatformException catch (e) {
+                message = "Error: ${e.message}'.";
+                }
+
               },
 
             ),
