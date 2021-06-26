@@ -54,20 +54,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
 
 
-    return Stack(
-     children: [
-       Container(
-         color: determineColorThemeBackground(),
-         child: Column(
-           children: [
-             Spacer(),
-             Image(
-               image: AssetImage('assets/fonzIcons/mountainProfile.png'),
-
-             ),
-           ],
-         ),
-       ),
+    return
        DefaultTabController(
         length: 3,
         child: Scaffold(
@@ -94,10 +81,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ],
           ),
         ),
-      ),
-
-    ]
-    );
+            );
 
   }
 

@@ -6,6 +6,8 @@ import 'package:fonz_music_flutter/GlobalComponents/FrontEnd/FrontEndConstants.d
 import 'package:fonz_music_flutter/SearchTab/HomePageDecision.dart';
 import 'package:fonz_music_flutter/SearchTab/SearchPage.dart';
 
+bool connectedToAHost = false;
+
 class SearchTab extends StatefulWidget {
 
   SearchTab({Key key, this.currentTab, this.notifyParent}) : super(key: key);
@@ -25,14 +27,40 @@ class _SearchTabState extends State<SearchTab> {
   @override
   Widget build(BuildContext context) {
 
-    return PageView(
-      controller: _searchTabController,
-      physics: NeverScrollableScrollPhysics(),
-      scrollDirection: Axis.vertical,
-      children: [
-        HomeDecisionPage(controller: _searchTabController, currentTab: widget.currentTab, notifyParent: widget.notifyParent),
-        SearchPage()
-      ],
+    return Stack(
+      children:[
+        DetermineSearchTabBackgroundColor(),
+        Image(image: AssetImage("assets/fonzIcons/mountainProfile.png")),
+        PageView(
+          controller: _searchTabController,
+          physics: NeverScrollableScrollPhysics(),
+          scrollDirection: Axis.vertical,
+          children: [
+            HomeDecisionPage(controller: _searchTabController, currentTab: widget.currentTab, notifyParent: widget.notifyParent),
+            SearchPage()
+          ],
+        ),
+      ]
     );
   }
+
+  Widget DetermineSearchTabBackgroundColor() {
+
+    final size = MediaQuery.of(context).size;
+    final width = size.width;
+    final height = size.height;
+
+    if (connectedToAHost) {
+      return Container(
+        height: height,
+        width: width,
+        color: LILAC,
+      );
+    } else {
+      return  Container(
+        color: determineColorThemeBackground(),
+      );
+    }
+  }
+
 }

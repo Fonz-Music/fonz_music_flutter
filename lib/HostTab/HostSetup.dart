@@ -5,35 +5,35 @@ import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:fonz_music_flutter/ApiFunctions/GuestApi/GuestGetCoasterApi.dart';
 import 'package:fonz_music_flutter/GlobalComponents/FrontEnd/FrontEndConstants.dart';
 import 'package:fonz_music_flutter/GlobalComponents/Objects/CoasterObject.dart';
-import 'package:fonz_music_flutter/MainTabs/SearchTab.dart';
+import 'package:fonz_music_flutter/HostTab/HostSetupViews/ConnectSpotifyButton.dart';
+import 'package:fonz_music_flutter/HostTab/HostSetupViews/ConnectYourFirstCoasterButton.dart';
+import 'package:fonz_music_flutter/HostTab/HostSetupViews/NameYourFirstCoaster.dart';
+import 'package:fonz_music_flutter/MainTabs/HostTab.dart';
 import 'package:fonz_music_flutter/NfcFunctions/GuestNfcFunctions.dart';
 import 'package:fonz_music_flutter/SearchTab/HomePageWidgets/FailPartyJoin.dart';
 import 'package:fonz_music_flutter/SearchTab/HomePageWidgets/HostAPartyButton.dart';
 import 'package:fonz_music_flutter/SearchTab/HomePageWidgets/JoinAPartyButton.dart';
 import 'package:fonz_music_flutter/SearchTab/HomePageWidgets/JoinSuccessfulCircle.dart';
 
-bool pressedNfcButtonToJoinPartu = false;
-CoasterObject hostCoasterDetails = CoasterObject("", "", "", "");
-bool launchedNfcToJoinParty = false;
+bool pressedToConnectFirstCoaster = false;
+CoasterObject firstConnectedCoasterDetails = CoasterObject("", "", "", "");
+bool launchedNfcForFirstCoaster = false;
 
-class HomeDecisionPage extends StatefulWidget {
 
-  HomeDecisionPage({Key key, this.controller, this.currentTab, this.notifyParent}) : super(key: key);
+class HostSetupPage extends StatefulWidget {
+
+  HostSetupPage({Key key, this.controller, this.currentTab, this.notifyParent}) : super(key: key);
   PageController controller;
   int currentTab;
   final Function() notifyParent;
 
   @override
-  _HomeDecisionPageState createState() => _HomeDecisionPageState();
+  _HostSetupPageState createState() => _HostSetupPageState();
 }
 
-class _HomeDecisionPageState extends State<HomeDecisionPage> {
+class _HostSetupPageState extends State<HostSetupPage> {
 
-  // use this to update the view
-  refresh() {
-    setState(() {});
-    log("being rebuilt");
-  }
+
 
 
 
@@ -56,7 +56,7 @@ class _HomeDecisionPageState extends State<HomeDecisionPage> {
               child: Padding(
                 padding: EdgeInsets.fromLTRB(20, 30, 0, 0),
                 child: new Text(
-                  "search",
+                  "host",
                   style: TextStyle(
                     fontFamily: FONZFONTTWO,
                     fontSize: HEADINGTHREE,
@@ -67,54 +67,59 @@ class _HomeDecisionPageState extends State<HomeDecisionPage> {
               )
           ),
           Spacer(),
-          HomePageMainBody(),
+          HostPageMainBody(),
           Spacer()
         ],
       ),
     );
   }
 
-  Widget HomePageMainBody()  {
+  Widget HostPageMainBody()  {
 
     final size = MediaQuery.of(context).size;
     final width = size.width;
     final height = size.height;
 
+
     // use this to update the view
     refresh() {
       setState(() {});
-      log("being rebuilt");
+      log("host setup being rebuilt");
     }
 
-    log("pressed nfc " + pressedNfcButtonToJoinPartu.toString());
-    log("the code is " + hostCoasterDetails.statusCode.toString());
+    log("pressed nfc in host  " + pressedToConnectFirstCoaster.toString());
+    log("the code in host is " + firstConnectedCoasterDetails.statusCode.toString());
 
-    if (launchedNfcToJoinParty) {
+    if (launchedNfcForFirstCoaster) {
 
-
-
+      // else {
         // if successful
-        if (hostCoasterDetails.statusCode == 200) {
-          Timer(Duration(milliseconds: SUCCESSPAGELENGTH), () {
-            widget.controller.animateToPage(1,
-                duration: Duration(seconds: 1), curve: Curves.easeInOutCirc);
-            connectedToAHost = true;
-          });
+        if (firstConnectedCoasterDetails.statusCode == 204) {
 
+          // Timer(Duration(milliseconds: SUCCESSPAGELENGTH), () {
+          //   hasConnectedCoasters = true;
+          //   widget.controller.animateToPage(1,
+          //       duration: Duration(seconds: 1), curve: Curves.easeInOutCirc);
+          // });
+
+
+          // name coaster
           return Container(
-            child: JoinSuccessfulCircle(connectedCoasterName: hostCoasterDetails.coasterName, coasterHostName: hostCoasterDetails.hostName),
+            child: NameYourFirstCoaster(notifyParent: refresh,controller: widget.controller),
+            // child: JoinSuccessfulCircle(connectedCoasterName: hostCoasterDetails.coasterName, coasterHostName: hostCoasterDetails.hostName),
           );
         }
         // if unsuccessful
         else {
-          Timer(Duration(seconds: 10), () {
-            launchedNfcToJoinParty = false;
+          Timer(Duration(seconds: 5), () {
+            // pressedToConnectFirstCoaster = false;
+            launchedNfcForFirstCoaster = false;
             refresh();
           });
-          if (hostCoasterDetails.statusCode == 600) {
+          if (firstConnectedCoasterDetails.statusCode == 200) {
             return Container(
               child: FailPartyJoin(
-                errorMessage: "this coaster lacks a host",
+                errorMessage: "this coaster belongs to " + firstConnectedCoasterDetails.coasterName + " & is named " + firstConnectedCoasterDetails.hostName,
                 errorImage: getDisableIcon(),
               ),
             );
@@ -128,13 +133,13 @@ class _HomeDecisionPageState extends State<HomeDecisionPage> {
             );
           }
         }
-
+      // }
     }
     else {
-      if (pressedNfcButtonToJoinPartu) {
-        Timer(Duration(seconds: 10), () {
-          pressedNfcButtonToJoinPartu = false;
-          if (!launchedNfcToJoinParty) {
+      if (pressedToConnectFirstCoaster) {
+        Timer(Duration(seconds: 15), () {
+          pressedToConnectFirstCoaster = false;
+          if (!launchedNfcForFirstCoaster) {
             refresh();
           }
 
@@ -161,18 +166,37 @@ class _HomeDecisionPageState extends State<HomeDecisionPage> {
           ),
         );
       }
-      return Container(
-        height: height * 0.7,
-        child: Column(
-          children: [
-              HostAPartyButton(),
-              Spacer(),
-              JoinAPartyButton(notifyParent: refresh),
-          ],
-        ),
-      );
+      else {
+        return Container(
+            height: height * 0.7,
+            child: determineViewBasedOnSpotify(refresh)
+        );
+      }
     }
   }
 
+  Widget determineViewBasedOnSpotify (notifyParent) {
+
+    if (!connectedToSpotify) {
+      return Column(
+        children: [
+          ConnectSpotifyButton(notifyParent: notifyParent),
+          Spacer(),
+          ConnectYourFirstCoasterButton(notifyParent: notifyParent)
+        ],
+      );
+
+    }
+    else
+      return Column(
+        children: [
+
+          Spacer(),
+          ConnectYourFirstCoasterButton(notifyParent: notifyParent),
+          Spacer()
+        ],
+      );
+
+    }
 
 }
