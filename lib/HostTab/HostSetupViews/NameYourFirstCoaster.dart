@@ -63,7 +63,7 @@ class _NameYourFirstCoasterState extends State<NameYourFirstCoaster> {
               style: TextStyle(
                 fontFamily: FONZFONTTWO,
                 fontSize: HEADINGFOUR,
-                color: determineColorThemeText(),
+                color: determineColorThemeTextInverse(),
               ),
               textAlign: TextAlign.center,
             ),

@@ -2,10 +2,11 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:fonz_music_flutter/GlobalComponents/FrontEnd/FrontEndConstants.dart';
+import 'package:fonz_music_flutter/HostTab/CoasterDashboardPage.dart';
 import 'package:fonz_music_flutter/HostTab/HostSetup.dart';
 
-bool connectedToSpotify = false;
-bool hasConnectedCoasters = false;
+bool connectedToSpotify = true;
+bool hasConnectedCoasters = true;
 
 class HostTab extends StatefulWidget {
   @override
@@ -17,7 +18,7 @@ class _HostTabState extends State<HostTab> {
   Widget build(BuildContext context) {
 
     PageController _hostTabController = PageController(
-      initialPage: 0,
+      initialPage: determineInitalPage(),
     );
 
     // use this to update the view
@@ -34,26 +35,37 @@ class _HostTabState extends State<HostTab> {
 
       children:[
         DetermineHostTabBackgroundColor(),
-        Image(image: AssetImage("assets/fonzIcons/mountainProfile.png")),
+        Opacity(
+            child: Image(image: AssetImage("assets/fonzIcons/mountainProfile.png")),
+          opacity: 0.4,
+        ),
         PageView(
           controller: _hostTabController,
           physics: NeverScrollableScrollPhysics(),
           scrollDirection: Axis.vertical,
           children: [
             HostSetupPage(controller: _hostTabController, notifyParent: refresh),
-
+            CoasterDashboardPage()
           ],
         ),
     ]
     );
   }
+
+  determineInitalPage() {
+    if (connectedToSpotify && hasConnectedCoasters) {
+      return 1;
+    }
+    else return 0;
+  }
+
   Widget DetermineHostTabBackgroundColor() {
 
     final size = MediaQuery.of(context).size;
     final width = size.width;
     final height = size.height;
 
-    if (hasConnectedCoasters) {
+    if (hasConnectedCoasters && connectedToSpotify) {
       return Container(
         height: height,
         width: width,

@@ -105,7 +105,7 @@ class _ConnectYourFirstCoasterButtonState extends State<ConnectYourFirstCoasterB
               style: TextStyle(
                 fontFamily: FONZFONTTWO,
                 fontSize: HEADINGFOUR,
-                color: determineColorThemeText(),
+                color: determineColorThemeTextInverse(),
               ),
               textAlign: TextAlign.center,
             ),

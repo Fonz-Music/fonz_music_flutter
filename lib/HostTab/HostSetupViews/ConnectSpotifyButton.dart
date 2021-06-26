@@ -62,7 +62,7 @@ class _ConnectSpotifyButtonState extends State<ConnectSpotifyButton> {
               style: TextStyle(
                 fontFamily: FONZFONTTWO,
                 fontSize: HEADINGFOUR,
-                color: determineColorThemeText(),
+                color: determineColorThemeTextInverse(),
               ),
               textAlign: TextAlign.center,
             ),

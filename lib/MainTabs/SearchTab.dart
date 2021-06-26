@@ -30,7 +30,10 @@ class _SearchTabState extends State<SearchTab> {
     return Stack(
       children:[
         DetermineSearchTabBackgroundColor(),
-        Image(image: AssetImage("assets/fonzIcons/mountainProfile.png")),
+        Opacity(
+          child: Image(image: AssetImage("assets/fonzIcons/mountainProfile.png")),
+          opacity: 0.4,
+        ),
         PageView(
           controller: _searchTabController,
           physics: NeverScrollableScrollPhysics(),

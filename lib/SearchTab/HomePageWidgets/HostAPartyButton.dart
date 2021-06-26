@@ -69,7 +69,7 @@ class _HostAPartyButtonState extends State<HostAPartyButton> {
               style: TextStyle(
                 fontFamily: FONZFONTTWO,
                 fontSize: HEADINGFOUR,
-                color: determineColorThemeText(),
+                color: determineColorThemeTextInverse(),
               ),
               textAlign: TextAlign.center,
             ),

@@ -63,7 +63,7 @@ class _JoinAPartyButtonState extends State<JoinAPartyButton> {
               style: TextStyle(
                 fontFamily: FONZFONTTWO,
                 fontSize: HEADINGFOUR,
-                color: determineColorThemeText(),
+                color: determineColorThemeTextInverse(),
               ),
               textAlign: TextAlign.center,
             ),

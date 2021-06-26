@@ -11,18 +11,22 @@ bool darkMode;
 
 // Determines if the color should be white or black
 determineColorThemeBackground() {
-  if (darkMode) return const Color(0xFF2C2C2E);
-  else return const Color(0xFFE5E5EA);
+  if (darkMode) return const Color(0xFF404040);
+  else return const Color(0xFFFFFFFF);
 }
 // Determines if the color should be white or black
 determineColorThemeText() {
-  if (darkMode) return const Color(0xFFE5E5EA);
-  else return const Color(0xFF2C2C2E);
+  if (darkMode) return const Color(0xFF474747);
+  else return const Color(0xFFFFFFFF);
+}
+determineColorThemeTextInverse() {
+  if (darkMode) return const Color(0xFFFFFFFF);
+  else return const Color(0xFF474747);
 }
 
 getCoasterIcon() {
-  if (darkMode) return "assets/darkGreyIcons/coasterIconDarkGrey.png";
-  else return "assets/lightGreyIcons/coasterIconLightGrey.png";
+  if (darkMode) return "assets/lightGreyIcons/coasterIconLightGrey.png";
+  else return "assets/darkGreyIcons/coasterIconDarkGrey.png";
 }
 
 getFonzLogoIcon() {
@@ -34,21 +38,21 @@ getQueueIcon() {
   else return "assets/lightGreyIcons/queueIconLightGrey.png";
 }
 getEditIcon() {
-  if (darkMode) return "assets/darkGreyIcons/editIconDarkGrey.png";
-  else return "assets/lightGreyIcons/editIconLightGrey.png";
+  if (darkMode) return "assets/lightGreyIcons/editIconLightGrey.png";
+  else return "assets/darkGreyIcons/editIconDarkGrey.png";
 }
 getDisableIcon() {
-  if (darkMode) return "assets/darkGreyIcons/disableIconDarkGrey.png";
-  else return "assets/lightGreyIcons/disableIconLightGrey.png";
+  if (darkMode) return "assets/lightGreyIcons/disableIconLightGrey.png";
+  else return "assets/darkGreyIcons/disableIconDarkGrey.png";
 }
 getPauseIcon() {
-  if (darkMode) return "assets/darkGreyIcons/pauseIconDarkGrey.png";
-  else return "assets/lightGreyIcons/pauseIconLightGrey.png";
+  if (darkMode) return "assets/lightGreyIcons/pauseIconLightGrey.png";
+  else return "assets/darkGreyIcons/pauseIconDarkGrey.png";
 }
-getRockOnIcon() {
-  if (darkMode) return "assets/darkGreyIcons/rockOnIconDarkGrey.png";
-  else return "assets/lightGreyIcons/rockOnIconLightGrey.png";
-}
+// getRockOnIcon() {
+//   if (darkMode) return "assets/darkGreyIcons/rockOnIconDarkGrey.png";
+//   else return "assets/lightGreyIcons/rockOnIconLightGrey.png";
+// }
 getSpotifyIcon() {
   // return "assets/fonzIcons/SpotifyBlack.png";
   if (darkMode) return "assets/darkGreyIcons/spotifyIconDarkGrey.png";

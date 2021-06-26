@@ -60,7 +60,7 @@ class _HomeDecisionPageState extends State<HomeDecisionPage> {
                   style: TextStyle(
                     fontFamily: FONZFONTTWO,
                     fontSize: HEADINGTHREE,
-                    color: determineColorThemeText(),
+                    color: determineColorThemeTextInverse(),
                   ),
                   textAlign: TextAlign.left,
                 ),

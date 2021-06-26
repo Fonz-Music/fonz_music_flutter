@@ -22,7 +22,10 @@ class _SettingsPageState extends State<SettingsPage> {
          Container(
           color: determineColorThemeBackground(),
          ),
-        Image(image: AssetImage("assets/fonzIcons/mountainProfile.png")),
+        Opacity(
+          child: Image(image: AssetImage("assets/fonzIcons/mountainProfile.png")),
+          opacity: 0.4,
+        ),
         Column(
           children: [
 
@@ -36,7 +39,7 @@ class _SettingsPageState extends State<SettingsPage> {
                   style: TextStyle(
                     fontFamily: FONZFONTTWO,
                     fontSize: HEADINGTHREE,
-                    color: determineColorThemeText(),
+                    color: determineColorThemeTextInverse(),
                   ),
                   textAlign: TextAlign.left,
                 ),
@@ -62,7 +65,7 @@ class _SettingsPageState extends State<SettingsPage> {
                         style: TextStyle(
                           fontFamily: FONZFONTONE,
                           fontSize: HEADINGFIVE,
-                          color: determineColorThemeText(),
+                          color: determineColorThemeTextInverse(),
                         ),
                       ),
                     ],
@@ -99,7 +102,7 @@ class _SettingsPageState extends State<SettingsPage> {
                         style: TextStyle(
                           fontFamily: FONZFONTONE,
                           fontSize: HEADINGFIVE,
-                          color: determineColorThemeText(),
+                          color: determineColorThemeTextInverse(),
                         ),
                       ),
                     ],
@@ -136,7 +139,7 @@ class _SettingsPageState extends State<SettingsPage> {
                         style: TextStyle(
                           fontFamily: FONZFONTONE,
                           fontSize: HEADINGFIVE,
-                          color: determineColorThemeText(),
+                          color: determineColorThemeTextInverse(),
                         ),
                       ),
                     ],
@@ -173,7 +176,7 @@ class _SettingsPageState extends State<SettingsPage> {
                         style: TextStyle(
                           fontFamily: FONZFONTONE,
                           fontSize: HEADINGFIVE,
-                          color: determineColorThemeText(),
+                          color: determineColorThemeTextInverse(),
                         ),
                       ),
                     ],
