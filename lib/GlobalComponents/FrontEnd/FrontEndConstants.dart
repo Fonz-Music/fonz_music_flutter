@@ -107,6 +107,10 @@ const FONZFONTTWO = 'MuseoSans-300';
 const FONZFONTTHREE = 'MuseoSans-500';
 const FONZFONTFOUR = 'MuseoSans-700';
 
+// ---------------------------Corner Radius-------------------------------------
+
+const CORNERRADIUSBUTTON = 3.0;
+
 // ---------------------------Swipe Speed---------------------------------------
 
 const SWIPESPEED = 650;
