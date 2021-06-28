@@ -59,7 +59,7 @@ class _ConnectYourFirstCoasterButtonState extends State<ConnectYourFirstCoasterB
                 // firstConnectedCoasterDetails
                 // check to see if that coaster is ours and if its already connected
                 // CHECK COASTER
-                Map checkCoasterResponse = await CoasterManagementApi.getSingleOwnedCoaster(coasterUid);
+                Map checkCoasterResponse = await GuestGetCoasterApi.getCoasterDetails(coasterUid);
 
                 firstConnectedCoasterDetails.coasterUid = coasterUid;
                 firstConnectedCoasterDetails.statusCode = checkCoasterResponse["responseCode"];
@@ -67,30 +67,20 @@ class _ConnectYourFirstCoasterButtonState extends State<ConnectYourFirstCoasterB
                 if (checkCoasterResponse["responseCode"] == 204) {
                   // if it is already connected, nav to next page
 
-                  Map addCoasterResponse = await CoasterManagementApi.addCoaster(coasterUid);
+                  Map addCoasterResponse = await CoasterManagementApi
+                      .addCoaster(coasterUid);
                   log("second resp code: " +
                       addCoasterResponse["responseCode"].toString());
-                  if (addCoasterResponse["responseCode"] == 200) {
+                  if (addCoasterResponse["responseCode"] != 200) {
                     // if it is already connected, nav to next page
-                    firstConnectedCoasterDetails.statusCode = 700;
+                    firstConnectedCoasterDetails.statusCode =
+                    addCoasterResponse["responseCode"];
                   }
-                } else if (checkCoasterResponse["responseCode"] == 200) {
-                  Map otherHostsCoaster = await GuestGetCoasterApi.getCoasterDetails(coasterUid);
-                  log(otherHostsCoaster.toString());
-                  if (otherHostsCoaster["responseCode"] == 200) {
-                    if (otherHostsCoaster["body"]["displayName"] != null) {
-                      firstConnectedCoasterDetails.hostName = otherHostsCoaster["body"]["displayName"];
-                      firstConnectedCoasterDetails.coasterName = otherHostsCoaster["body"]["name"];
-
-                    } else {
-                      //errorOccured = true;
-                      // errorMessage =
-                      // "the nfc TAP didn't work properly...\nor this coaster is not registered by Fonz";
-                      throw new NotFonzException();
-                    }
+                  else if (checkCoasterResponse["responseCode"] == 200) {
+                    firstConnectedCoasterDetails.coasterName = checkCoasterResponse["body"]["name"];
+                    firstConnectedCoasterDetails.hostName = checkCoasterResponse["body"]["displayName"];
                   }
                 }
-
 
                 launchedNfcForFirstCoaster = true;
                 widget.notifyParent();

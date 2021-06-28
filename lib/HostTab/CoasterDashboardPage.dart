@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:fonz_music_flutter/GlobalComponents/FrontEnd/FrontEndConstants.dart';
 import 'package:fonz_music_flutter/GlobalComponents/Objects/CoasterObject.dart';
+import 'package:fonz_music_flutter/HostTab/CoasterDashboardViews/AddCoasterButton.dart';
 import 'package:fonz_music_flutter/HostTab/HostSetupViews/ConnectSpotifyButton.dart';
 import 'package:fonz_music_flutter/HostTab/HostSetupViews/ConnectYourFirstCoasterButton.dart';
 import 'package:fonz_music_flutter/HostTab/HostSetupViews/NameYourFirstCoaster.dart';
@@ -97,6 +98,7 @@ class _CoasterDashboardPageState extends State<CoasterDashboardPage> {
 
         // name coaster
         return Container(
+          padding: EdgeInsets.fromLTRB(20, 0, 20, height * 0.1),
           child: NameYourFirstCoaster(notifyParent: refresh,controller: widget.controller),
           // child: JoinSuccessfulCircle(connectedCoasterName: hostCoasterDetails.coasterName, coasterHostName: hostCoasterDetails.hostName),
         );
@@ -110,6 +112,7 @@ class _CoasterDashboardPageState extends State<CoasterDashboardPage> {
         });
         if (newConnectedCoasterDetails.statusCode == 200) {
           return Container(
+            padding: EdgeInsets.fromLTRB(20, 0, 20, height * 0.1),
             child: FailPartyJoin(
               errorMessage: "this coaster belongs to " + newConnectedCoasterDetails.coasterName + " & is named " + newConnectedCoasterDetails.hostName,
               errorImage: getDisableIcon(),
@@ -118,6 +121,7 @@ class _CoasterDashboardPageState extends State<CoasterDashboardPage> {
         }
         else {
           return Container(
+            padding: EdgeInsets.fromLTRB(20, 0, 20, height * 0.1),
             child: FailPartyJoin(
               errorMessage: "something went wrong",
               errorImage: getDisableIcon(),
@@ -137,11 +141,11 @@ class _CoasterDashboardPageState extends State<CoasterDashboardPage> {
 
         });
         return Container(
+          padding: EdgeInsets.fromLTRB(20, 0, 20, height * 0.1),
           child: Column(
             children: [
-              Padding(
-                padding: EdgeInsets.fromLTRB(20, 10, 0, 0),
-                child: new Text(
+              // Spacer(),
+              Text(
                   "tap your phone to the Fonz",
                   style: TextStyle(
                     fontFamily: FONZFONTTWO,
@@ -149,11 +153,12 @@ class _CoasterDashboardPageState extends State<CoasterDashboardPage> {
                     color: determineColorThemeTextInverse(),
                   ),
                   textAlign: TextAlign.center,
-                ),
+               
               ),
               Image(
                 image: AssetImage("assets/fonzIcons/tapCoasterIconLilac.png"),
               ),
+              // Spacer()
             ],
           ),
         );
@@ -184,6 +189,8 @@ class _CoasterDashboardPageState extends State<CoasterDashboardPage> {
                     child: CoasterDashboardView()
                 ),
                 // add new coaster button
+                Spacer(),
+                AddCoasterButton(notifyParent: refresh,)
               ],
             ),
     ]
