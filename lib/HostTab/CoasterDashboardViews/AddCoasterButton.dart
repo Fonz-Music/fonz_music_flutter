@@ -35,13 +35,20 @@ class _AddCoasterButtonState extends State<AddCoasterButton> {
               pressedToConnectNewCoaster = true;
               widget.notifyParent();
 
-              var coasterUid = await HostNfcFunctions.readCoasterUid();
+              var coasterDetails = await HostNfcFunctions.readCoasterUid();
               // firstConnectedCoasterDetails
               // check to see if that coaster is ours and if its already connected
               // CHECK COASTER
-              Map checkCoasterResponse = await GuestGetCoasterApi.getCoasterDetails(coasterUid);
+              Map checkCoasterResponse = await GuestGetCoasterApi.getCoasterDetails(coasterDetails[0]);
 
-              newConnectedCoasterDetails.coasterUid = coasterUid;
+              if (coasterDetails[1].length < 25) {
+                log(coasterDetails[1].length.toString());
+                needToRewriteNewCoaster = true;
+              }
+
+              log(coasterDetails[1].length.toString());
+
+              newConnectedCoasterDetails.coasterUid = coasterDetails[0];
               newConnectedCoasterDetails.statusCode = checkCoasterResponse["responseCode"];
 
               log(checkCoasterResponse["body"].toString());
@@ -50,7 +57,7 @@ class _AddCoasterButtonState extends State<AddCoasterButton> {
                 // if it is already connected, nav to next page
 
                 Map addCoasterResponse = await CoasterManagementApi
-                    .addCoaster(coasterUid);
+                    .addCoaster(coasterDetails[0]);
                 log("second resp code: " +
                     addCoasterResponse["responseCode"].toString());
                 if (addCoasterResponse["responseCode"] != 200) {
@@ -64,6 +71,7 @@ class _AddCoasterButtonState extends State<AddCoasterButton> {
                 newConnectedCoasterDetails.hostName = checkCoasterResponse["body"]["displayName"];
               }
 
+              pressedToConnectNewCoaster = false;
               launchedNfcForNewCoaster = true;
               widget.notifyParent();
             },

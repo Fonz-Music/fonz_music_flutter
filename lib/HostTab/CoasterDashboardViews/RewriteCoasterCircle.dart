@@ -1,26 +1,13 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:fonz_music_flutter/GlobalComponents/FrontEnd/FrontEndConstants.dart';
-import 'package:fonz_music_flutter/MainTabs/HostTab.dart';
-import 'package:fonz_music_flutter/SearchTab/HomePageWidgets/scanForCoasterDetails.dart';
 
-import '../HostSetup.dart';
-
-
-
-class ConnectSpotifyButton extends StatefulWidget {
-
-  ConnectSpotifyButton({Key key, @required this.notifyParent}) : super(key: key);
-
-  final Function() notifyParent;
-
+class RewriteCoasterCircle extends StatefulWidget {
   @override
-  _ConnectSpotifyButtonState createState() => _ConnectSpotifyButtonState();
+  _RewriteCoasterCircleState createState() => _RewriteCoasterCircleState();
 }
 
-class _ConnectSpotifyButtonState extends State<ConnectSpotifyButton> {
+class _RewriteCoasterCircleState extends State<RewriteCoasterCircle> {
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -36,7 +23,7 @@ class _ConnectSpotifyButtonState extends State<ConnectSpotifyButton> {
                 Container(
                   padding: const EdgeInsets.all(30),
                   child: Image(
-                    image: AssetImage("assets/thirdParties/spotifyIcon.png"),
+                    image: AssetImage("assets/lightGreyIcons/coasterIconLightGrey.png"),
 
                   ),
                 ),
@@ -44,21 +31,16 @@ class _ConnectSpotifyButtonState extends State<ConnectSpotifyButton> {
               style: NeumorphicStyle(
                   shape: NeumorphicShape.flat,
                   boxShape: NeumorphicBoxShape.circle(),
-                  border: NeumorphicBorder(width: 2, color: SUCCESSGREEN),
-                  color: determineColorThemeBackground()
+                  border: NeumorphicBorder(width: 2, color: Colors.white),
+                  color: LILAC
               ),
-              onPressed: () async {
-                // link to spotify
-                connectedToSpotify = true;
-                widget.notifyParent();
-              },
 
             ),
           ),
           Padding(
             padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
             child: new Text(
-              "connect your spotify",
+              "let's setup this coaster",
               style: TextStyle(
                 fontFamily: FONZFONTTWO,
                 fontSize: HEADINGFOUR,
@@ -71,6 +53,4 @@ class _ConnectSpotifyButtonState extends State<ConnectSpotifyButton> {
       ),
     );
   }
-
-
 }

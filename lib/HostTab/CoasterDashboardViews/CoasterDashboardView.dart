@@ -15,6 +15,10 @@ var updatePageCoasterDashboard = false;
 
 
 class CoasterDashboardView extends StatefulWidget {
+
+  CoasterDashboardView({Key key, this.notifyParent}) : super(key: key);
+  final Function() notifyParent;
+
   @override
   _CoasterDashboardViewState createState() => _CoasterDashboardViewState();
 }
@@ -232,7 +236,7 @@ class _CoasterDashboardViewState extends State<CoasterDashboardView> {
                                       ),
                                       // troubleshoot
                                       TroubleShootCoasterButton(
-                                        notifyParent: refresh,
+                                        notifyParent: widget.notifyParent,
                                         coasterUid: singleCoaster['coasterId'].toString(),
                                         coasterName: singleCoaster['name'],
                                       ),

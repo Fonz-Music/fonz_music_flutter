@@ -9,13 +9,17 @@ import 'package:fonz_music_flutter/HostTab/HostSetupViews/ConnectSpotifyButton.d
 import 'package:fonz_music_flutter/HostTab/HostSetupViews/ConnectYourFirstCoasterButton.dart';
 import 'package:fonz_music_flutter/HostTab/HostSetupViews/NameYourFirstCoaster.dart';
 import 'package:fonz_music_flutter/MainTabs/HostTab.dart';
+import 'package:fonz_music_flutter/NfcFunctions/HostNfcFunctions.dart';
 import 'package:fonz_music_flutter/SearchTab/HomePageWidgets/FailPartyJoin.dart';
 
 import 'CoasterDashboardViews/CoasterDashboardView.dart';
+import 'CoasterDashboardViews/RewriteCoasterCircle.dart';
+import 'TapYourPhoneLilac.dart';
 
 bool pressedToConnectNewCoaster = false;
 CoasterObject newConnectedCoasterDetails = CoasterObject("", "", "", "");
 bool launchedNfcForNewCoaster = false;
+bool needToRewriteNewCoaster = false;
 
 
 class CoasterDashboardPage extends StatefulWidget {
@@ -89,19 +93,48 @@ class _CoasterDashboardPageState extends State<CoasterDashboardPage> {
       // if successful
       if (newConnectedCoasterDetails.statusCode == 204) {
 
-        // Timer(Duration(milliseconds: SUCCESSPAGELENGTH), () {
-        //   hasConnectedCoasters = true;
-        //   widget.controller.animateToPage(1,
-        //       duration: Duration(seconds: 1), curve: Curves.easeInOutCirc);
-        // });
+        // writes url + uid on coaster
+        if (needToRewriteNewCoaster) {
+          // tells user they need to connect to their account
+          if (!pressedToConnectNewCoaster){
+            Timer(Duration(milliseconds: 2000), () async {
+              pressedToConnectNewCoaster = true;
+              setState(() {});
+            });
+            return Container(
+                child: Container(
+                    padding: EdgeInsets.fromLTRB(20, 0, 20, height * 0.1),
+                    child: RewriteCoasterCircle()
+                )
+            );
+          }
+          // shows tap phone icon & launches nfc
+          else {
+            Timer(Duration(milliseconds: 0), () async {
+              await HostNfcFunctions.writeNFC(newConnectedCoasterDetails.coasterUid);
+              needToRewriteNewCoaster = false;
+              pressedToConnectNewCoaster = true;
+              setState(() {});
+            });
+            return Container(
+                child: Container(
+                    padding: EdgeInsets.fromLTRB(20, 0, 20, height * 0.1),
+                    child: TapYourPhoneLilac()
+                )
+            );
+          }
+        }
+        else {
+          // name coaster
+          return Container(
+            padding: EdgeInsets.fromLTRB(20, 0, 20, height * 0.1),
+            child: NameYourFirstCoaster(notifyParent: refresh,controller: widget.controller),
+            // child: JoinSuccessfulCircle(connectedCoasterName: hostCoasterDetails.coasterName, coasterHostName: hostCoasterDetails.hostName),
+          );
+        }
 
 
-        // name coaster
-        return Container(
-          padding: EdgeInsets.fromLTRB(20, 0, 20, height * 0.1),
-          child: NameYourFirstCoaster(notifyParent: refresh,controller: widget.controller),
-          // child: JoinSuccessfulCircle(connectedCoasterName: hostCoasterDetails.coasterName, coasterHostName: hostCoasterDetails.hostName),
-        );
+
       }
       // if unsuccessful
       else {
@@ -140,28 +173,7 @@ class _CoasterDashboardPageState extends State<CoasterDashboardPage> {
           }
 
         });
-        return Container(
-          padding: EdgeInsets.fromLTRB(20, 0, 20, height * 0.1),
-          child: Column(
-            children: [
-              // Spacer(),
-              Text(
-                  "tap your phone to the Fonz",
-                  style: TextStyle(
-                    fontFamily: FONZFONTTWO,
-                    fontSize: HEADINGFOUR,
-                    color: determineColorThemeTextInverse(),
-                  ),
-                  textAlign: TextAlign.center,
-               
-              ),
-              Image(
-                image: AssetImage("assets/fonzIcons/tapCoasterIconLilac.png"),
-              ),
-              // Spacer()
-            ],
-          ),
-        );
+        return TapYourPhoneLilac();
       }
       else {
         return Container(
@@ -186,7 +198,7 @@ class _CoasterDashboardPageState extends State<CoasterDashboardPage> {
                 Container(
                     alignment: Alignment.center,
                     // height: height * 0.7,
-                    child: CoasterDashboardView()
+                    child: CoasterDashboardView(notifyParent: refresh,)
                 ),
                 // add new coaster button
                 Spacer(),

@@ -71,84 +71,87 @@ class _NameYourFirstCoasterState extends State<NameYourFirstCoaster> {
           // text box
 
           // continue button
-          Form(
-            key: _newCoasterNameKey,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Container(
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.grey),
-                    borderRadius: BorderRadius.circular(20),
+          Container(
+            padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
+            child: Form(
+              key: _newCoasterNameKey,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Container(
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.grey),
+                      borderRadius: BorderRadius.circular(CORNERRADIUSBUTTON),
+                    ),
+                    child: TextFormField(
+                        maxLines: 1,
+                        //                obscureText: true,
+                        autofocus: false,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontFamily: FONZFONTFOUR,
+                            fontSize: 16,
+                            color: determineColorThemeText()),
+                        decoration: new InputDecoration(
+                          border: InputBorder.none,
+                          focusedBorder: InputBorder.none,
+                          enabledBorder: InputBorder.none,
+                          errorBorder: InputBorder.none,
+                          disabledBorder: InputBorder.none,
+                          contentPadding: EdgeInsets.only(
+                              left: 15, bottom: 11, top: 11, right: 15),
+                        ),
+                        validator: (value) =>
+                        value.isEmpty ? 'Name can\'t be empty' : null,
+                        onSaved: (value) => newCoasterName = value.trim(),
+                        onChanged: (value) {
+                          setState(() {
+                            newCoasterName = value;
+                          });
+                        }
+                    ),
                   ),
-                  child: TextFormField(
-                      maxLines: 1,
-                      //                obscureText: true,
-                      autofocus: false,
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          fontFamily: FONZFONTFOUR,
-                          fontSize: 16,
-                          color: determineColorThemeText()),
-                      decoration: new InputDecoration(
-                        border: InputBorder.none,
-                        focusedBorder: InputBorder.none,
-                        enabledBorder: InputBorder.none,
-                        errorBorder: InputBorder.none,
-                        disabledBorder: InputBorder.none,
-                        contentPadding: EdgeInsets.only(
-                            left: 15, bottom: 11, top: 11, right: 15),
-                      ),
-                      validator: (value) =>
-                      value.isEmpty ? 'Name can\'t be empty' : null,
-                      onSaved: (value) => newCoasterName = value.trim(),
-                      onChanged: (value) {
-                        setState(() {
-                          newCoasterName = value;
-                        });
-                      }
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 16.0),
-                  child:
-                      Center(
-                        child: FlatButton(
-                          onPressed: () async {
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 16.0),
+                    child:
+                        Center(
+                          child: FlatButton(
+                            onPressed: () async {
 
-                            // Validate returns true if the form is valid, or false
-                            // otherwise.
-                            if (_newCoasterNameKey.currentState.validate()) {
-                              _newCoasterNameKey.currentState.save();
-                              await CoasterManagementApi.renameCoaster(firstConnectedCoasterDetails.coasterUid,
-                                  newCoasterName);
-                              Timer(Duration(milliseconds: SUCCESSPAGELENGTH), () {
-                                hasConnectedCoasters = true;
-                                widget.controller.animateToPage(1,
-                                    duration: Duration(seconds: 1), curve: Curves.easeInOutCirc);
-                              });
-                            }
-                            // Timer(Duration(seconds: 1),
-                            //         () => widget.loginCallback());
-                          },
-                          child: Text(
-                            'continue',
-                            style: TextStyle(
-                              fontFamily: FONZFONTTWO,
-                              fontWeight: FontWeight.w800,
-                              fontSize: 20,
-                              color: Colors.white,
+                              // Validate returns true if the form is valid, or false
+                              // otherwise.
+                              if (_newCoasterNameKey.currentState.validate()) {
+                                _newCoasterNameKey.currentState.save();
+                                await CoasterManagementApi.renameCoaster(firstConnectedCoasterDetails.coasterUid,
+                                    newCoasterName);
+                                Timer(Duration(milliseconds: SUCCESSPAGELENGTH), () {
+                                  hasConnectedCoasters = true;
+                                  widget.controller.animateToPage(1,
+                                      duration: Duration(seconds: 1), curve: Curves.easeInOutCirc);
+                                });
+                              }
+                              // Timer(Duration(seconds: 1),
+                              //         () => widget.loginCallback());
+                            },
+                            child: Text(
+                              'continue',
+                              style: TextStyle(
+                                fontFamily: FONZFONTTWO,
+                                fontWeight: FontWeight.w800,
+                                fontSize: 20,
+                                color: Colors.white,
+                              ),
+                            ),
+                            color: LILAC,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(3.0),
                             ),
                           ),
-                          color: LILAC,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(3.0),
-                          ),
                         ),
-                      ),
 
-                ),
-              ],
+                  ),
+                ],
+              ),
             ),
           )
 

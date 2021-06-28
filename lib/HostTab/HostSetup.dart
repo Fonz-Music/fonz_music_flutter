@@ -4,15 +4,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:fonz_music_flutter/GlobalComponents/FrontEnd/FrontEndConstants.dart';
 import 'package:fonz_music_flutter/GlobalComponents/Objects/CoasterObject.dart';
+import 'package:fonz_music_flutter/HostTab/CoasterDashboardViews/RewriteCoasterCircle.dart';
 import 'package:fonz_music_flutter/HostTab/HostSetupViews/ConnectSpotifyButton.dart';
 import 'package:fonz_music_flutter/HostTab/HostSetupViews/ConnectYourFirstCoasterButton.dart';
 import 'package:fonz_music_flutter/HostTab/HostSetupViews/NameYourFirstCoaster.dart';
+import 'package:fonz_music_flutter/HostTab/TapYourPhoneLilac.dart';
 import 'package:fonz_music_flutter/MainTabs/HostTab.dart';
+import 'package:fonz_music_flutter/NfcFunctions/HostNfcFunctions.dart';
 import 'package:fonz_music_flutter/SearchTab/HomePageWidgets/FailPartyJoin.dart';
 
 bool pressedToConnectFirstCoaster = false;
 CoasterObject firstConnectedCoasterDetails = CoasterObject("", "", "", "");
 bool launchedNfcForFirstCoaster = false;
+bool needToRewriteFirstCoaster = false;
 
 
 class HostSetupPage extends StatefulWidget {
@@ -87,22 +91,49 @@ class _HostSetupPageState extends State<HostSetupPage> {
 
     if (launchedNfcForFirstCoaster) {
 
+
       // else {
         // if successful
         if (firstConnectedCoasterDetails.statusCode == 204) {
 
-          // Timer(Duration(milliseconds: SUCCESSPAGELENGTH), () {
-          //   hasConnectedCoasters = true;
-          //   widget.controller.animateToPage(1,
-          //       duration: Duration(seconds: 1), curve: Curves.easeInOutCirc);
-          // });
 
 
-          // name coaster
-          return Container(
-            child: NameYourFirstCoaster(notifyParent: refresh,controller: widget.controller),
-            // child: JoinSuccessfulCircle(connectedCoasterName: hostCoasterDetails.coasterName, coasterHostName: hostCoasterDetails.hostName),
-          );
+          // writes url + uid on coaster
+          if (needToRewriteFirstCoaster) {
+            // tells user they need to connect to their account
+            if (!pressedToConnectFirstCoaster){
+              Timer(Duration(milliseconds: 2000), () async {
+                pressedToConnectFirstCoaster = true;
+                setState(() {});
+              });
+              return Container(
+                  child: RewriteCoasterCircle()
+              );
+            }
+            // shows tap phone icon & launches nfc
+            else {
+              Timer(Duration(milliseconds: 0), () async {
+                await HostNfcFunctions.writeNFC(firstConnectedCoasterDetails.coasterUid);
+                needToRewriteFirstCoaster = false;
+                pressedToConnectFirstCoaster = true;
+                setState(() {});
+              });
+              return Container(
+                  child: TapYourPhoneLilac()
+              );
+            }
+
+          }
+          else {
+            // name coaster
+            return Container(
+              child: NameYourFirstCoaster(notifyParent: refresh,controller: widget.controller),
+              // child: JoinSuccessfulCircle(connectedCoasterName: hostCoasterDetails.coasterName, coasterHostName: hostCoasterDetails.hostName),
+            );
+          }
+
+
+
         }
         // if unsuccessful
         else {
@@ -139,27 +170,7 @@ class _HostSetupPageState extends State<HostSetupPage> {
           }
 
         });
-        return Container(
-          child: Column(
-            children: [
-              Padding(
-                padding: EdgeInsets.fromLTRB(20, 10, 0, 0),
-                child: new Text(
-                  "tap your phone to the Fonz",
-                  style: TextStyle(
-                    fontFamily: FONZFONTTWO,
-                    fontSize: HEADINGFOUR,
-                    color: determineColorThemeText(),
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-              ),
-              Image(
-                image: AssetImage("assets/fonzIcons/tapCoasterIconLilac.png"),
-              ),
-            ],
-          ),
-        );
+        return TapYourPhoneLilac();
       }
       else {
         return Container(

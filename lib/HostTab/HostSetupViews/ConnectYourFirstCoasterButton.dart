@@ -55,20 +55,27 @@ class _ConnectYourFirstCoasterButtonState extends State<ConnectYourFirstCoasterB
                 pressedToConnectFirstCoaster = true;
                 widget.notifyParent();
 
-                var coasterUid = await HostNfcFunctions.readCoasterUid();
+                var coasterDetails = await HostNfcFunctions.readCoasterUid();
                 // firstConnectedCoasterDetails
                 // check to see if that coaster is ours and if its already connected
                 // CHECK COASTER
-                Map checkCoasterResponse = await GuestGetCoasterApi.getCoasterDetails(coasterUid);
+                Map checkCoasterResponse = await GuestGetCoasterApi.getCoasterDetails(coasterDetails[0]);
 
-                firstConnectedCoasterDetails.coasterUid = coasterUid;
+                if (coasterDetails[1].length < 25 ) {
+                  log(coasterDetails[1].length.toString());
+                  needToRewriteFirstCoaster = true;
+                }
+
+                log(coasterDetails[1].length.toString());
+
+                firstConnectedCoasterDetails.coasterUid = coasterDetails[0];
                 firstConnectedCoasterDetails.statusCode = checkCoasterResponse["responseCode"];
 
                 if (checkCoasterResponse["responseCode"] == 204) {
                   // if it is already connected, nav to next page
 
                   Map addCoasterResponse = await CoasterManagementApi
-                      .addCoaster(coasterUid);
+                      .addCoaster(coasterDetails[0]);
                   log("second resp code: " +
                       addCoasterResponse["responseCode"].toString());
                   if (addCoasterResponse["responseCode"] != 200) {
@@ -82,7 +89,9 @@ class _ConnectYourFirstCoasterButtonState extends State<ConnectYourFirstCoasterB
                   }
                 }
 
+                // firstConnectedCoasterDetails.statusCode = 204;
                 launchedNfcForFirstCoaster = true;
+                pressedToConnectFirstCoaster = false;
                 widget.notifyParent();
               },
 

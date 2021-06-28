@@ -11,6 +11,7 @@ import 'package:fonz_music_flutter/SearchTab/HomePageWidgets/FailPartyJoin.dart'
 import 'package:fonz_music_flutter/SearchTab/HomePageWidgets/HostAPartyButton.dart';
 import 'package:fonz_music_flutter/SearchTab/HomePageWidgets/JoinAPartyButton.dart';
 import 'package:fonz_music_flutter/SearchTab/HomePageWidgets/JoinSuccessfulCircle.dart';
+import 'package:fonz_music_flutter/SearchTab/HomePageWidgets/TapYourPhoneAmber.dart';
 
 bool pressedNfcButtonToJoinPartu = false;
 CoasterObject hostCoasterDetails = CoasterObject("", "", "", "");
@@ -139,27 +140,7 @@ class _HomeDecisionPageState extends State<HomeDecisionPage> {
           }
 
         });
-        return Container(
-          child: Column(
-            children: [
-              Padding(
-                padding: EdgeInsets.fromLTRB(20, 10, 0, 0),
-                child: new Text(
-                  "tap your phone to the Fonz",
-                  style: TextStyle(
-                    fontFamily: FONZFONTTWO,
-                    fontSize: HEADINGFOUR,
-                    color: determineColorThemeText(),
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-              ),
-              Image(
-                image: AssetImage("assets/fonzIcons/tapCoasterIconLilac.png"),
-              ),
-            ],
-          ),
-        );
+        return TapYourPhoneAmber();
       }
       return Container(
         height: height * 0.7,
