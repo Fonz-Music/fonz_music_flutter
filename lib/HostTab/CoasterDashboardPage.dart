@@ -13,6 +13,7 @@ import 'package:fonz_music_flutter/NfcFunctions/HostNfcFunctions.dart';
 import 'package:fonz_music_flutter/SearchTab/HomePageWidgets/FailPartyJoin.dart';
 
 import 'CoasterDashboardViews/CoasterDashboardView.dart';
+import 'CoasterDashboardViews/NameYourNewCoaster.dart';
 import 'CoasterDashboardViews/RewriteCoasterCircle.dart';
 import 'TapYourPhoneLilac.dart';
 
@@ -128,7 +129,7 @@ class _CoasterDashboardPageState extends State<CoasterDashboardPage> {
           // name coaster
           return Container(
             padding: EdgeInsets.fromLTRB(20, 0, 20, height * 0.1),
-            child: NameYourFirstCoaster(notifyParent: refresh,controller: widget.controller),
+            child: NameYourNewCoaster(notifyParent: refresh),
             // child: JoinSuccessfulCircle(connectedCoasterName: hostCoasterDetails.coasterName, coasterHostName: hostCoasterDetails.hostName),
           );
         }
