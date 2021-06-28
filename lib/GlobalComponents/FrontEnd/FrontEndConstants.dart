@@ -85,6 +85,9 @@ const Color(0xFF292929); //darker grey
 const Color LIGHTERGREY =
 const Color(0xFFB9B9B9); // lighter grey
 
+const Color SPOTIFYGREEN =
+const Color(0xFF1DB954);
+
 //const Color(0xFF55b519); //green
 //const Color(0xFFf0a555); //light orange
 //const Color(0xFFFF7300); //dark orange

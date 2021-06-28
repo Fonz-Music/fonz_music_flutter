@@ -28,7 +28,7 @@ class _ChangeNameButtonState extends State<ChangeNameButton> {
               Padding(
                 padding: const EdgeInsets.fromLTRB(0, 0, 20, 0),
                 child: Image(
-                  image: AssetImage("assets/darkGreyIcons/coasterIconDarkGrey.png"),
+                  image: AssetImage("assets/fonzIcons/changeNameIcon.png"),
                   height: 30,
                   width: 30,
                 ),

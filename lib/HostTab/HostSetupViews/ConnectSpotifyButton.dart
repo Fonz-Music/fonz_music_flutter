@@ -32,7 +32,7 @@ class _ConnectSpotifyButtonState extends State<ConnectSpotifyButton> {
                 Container(
                   padding: const EdgeInsets.all(30),
                   child: Image(
-                    image: AssetImage("assets/thirdParties/spotifyIcon.png"),
+                    image: AssetImage("assets/fonzIcons/spotifyIconGreen.png"),
 
                   ),
                 ),
@@ -40,7 +40,7 @@ class _ConnectSpotifyButtonState extends State<ConnectSpotifyButton> {
               style: NeumorphicStyle(
                   shape: NeumorphicShape.flat,
                   boxShape: NeumorphicBoxShape.circle(),
-                  border: NeumorphicBorder(width: 2, color: SUCCESSGREEN),
+                  border: NeumorphicBorder(width: 2, color: SPOTIFYGREEN),
                   color: determineColorThemeBackground()
               ),
               onPressed: () async {

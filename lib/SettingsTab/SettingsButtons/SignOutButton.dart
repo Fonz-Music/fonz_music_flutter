@@ -32,7 +32,7 @@ class _SignOutButtonState extends State<SignOutButton> {
               Padding(
                 padding: const EdgeInsets.fromLTRB(0, 0, 20, 0),
                 child: Image(
-                  image: AssetImage("assets/darkGreyIcons/disableIconDarkGrey.png"),
+                  image: AssetImage("assets/fonzIcons/signOutIcon.png"),
                   height: 30,
                   width: 30,
                 ),

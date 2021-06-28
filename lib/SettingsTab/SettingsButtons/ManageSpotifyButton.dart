@@ -31,7 +31,7 @@ class _ManageSpotifyButtonState extends State<ManageSpotifyButton> {
               Padding(
                 padding: const EdgeInsets.fromLTRB(0, 0, 20, 0),
                 child: Image(
-                  image: AssetImage("assets/darkGreyIcons/spotifyIconDarkGrey.png"),
+                  image: AssetImage("assets/fonzIcons/spotifyIconAmber.png"),
                   height: 30,
                   width: 30,
                 ),

@@ -69,14 +69,14 @@ class _HomeDecisionPageState extends State<HomeDecisionPage> {
               )
           ),
           Spacer(),
-          HomePageMainBody(),
+          HomePageMainBody(widget.notifyParent),
           Spacer()
         ],
       ),
     );
   }
 
-  Widget HomePageMainBody()  {
+  Widget HomePageMainBody(notifyParent)  {
 
     final size = MediaQuery.of(context).size;
     final width = size.width;
@@ -151,7 +151,7 @@ class _HomeDecisionPageState extends State<HomeDecisionPage> {
         height: height * 0.7,
         child: Column(
           children: [
-              HostAPartyButton(),
+              HostAPartyButton(notifyParent: widget.notifyParent,),
               Spacer(),
               JoinAPartyButton(notifyParent: refresh),
           ],

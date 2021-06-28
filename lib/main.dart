@@ -109,6 +109,8 @@ class FonzMusicApp extends StatelessWidget {
   }
 }
 
+int currentTab = 1;
+
 class MyHomePage extends StatefulWidget {
 
   MyHomePage({Key key, this.title}) : super(key: key);
@@ -119,7 +121,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
 
-  int _currentIndex = 1;
+
 
   // TabController _tabController = TabController(
   //   length: 3,
@@ -138,7 +140,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
     List<Widget> _children = [
       HostTab(),
-      SearchTab(currentTab: _currentIndex, notifyParent: refresh),
+      SearchTab(currentTab: currentTab, notifyParent: refresh),
       SettingsPage()
     ];
 
@@ -149,10 +151,10 @@ class _MyHomePageState extends State<MyHomePage> {
         length: 3,
         child: Scaffold(
           backgroundColor: Colors.transparent,
-          body: _children[_currentIndex], // new
+          body: _children[currentTab], // new
           // body: ,
           bottomNavigationBar: BottomNavigationBar(
-            currentIndex: _currentIndex,
+            currentIndex: currentTab,
             selectedItemColor: AMBER,
             onTap: onTabTapped,// this will be set when a new tab is tapped
             items: [
@@ -178,7 +180,7 @@ class _MyHomePageState extends State<MyHomePage> {
   // updates the currentIndex
   void onTabTapped(int index) {
     setState(() {
-      _currentIndex = index;
+      currentTab = index;
     });
   }
 }

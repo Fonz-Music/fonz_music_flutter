@@ -34,7 +34,7 @@ class _JoinAPartyButtonState extends State<JoinAPartyButton> {
                 Container(
                   padding: const EdgeInsets.all(30),
                   child: Image(
-                    image: AssetImage("assets/darkGreyIcons/queueIconDarkGrey.png"),
+                    image: AssetImage("assets/fonzIcons/plusIconAmber.png"),
 
                   ),
                 ),
@@ -42,7 +42,7 @@ class _JoinAPartyButtonState extends State<JoinAPartyButton> {
               style: NeumorphicStyle(
                   shape: NeumorphicShape.flat,
                   boxShape: NeumorphicBoxShape.circle(),
-                  border: NeumorphicBorder(width: 2, color: LILAC),
+                  border: NeumorphicBorder(width: 2, color: AMBER),
                   color: determineColorThemeBackground()
               ),
               onPressed: () async {

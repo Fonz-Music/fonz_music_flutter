@@ -31,7 +31,7 @@ class _BuyACoasterButtonState extends State<BuyACoasterButton> {
               Padding(
                 padding: const EdgeInsets.fromLTRB(0, 0, 20, 0),
                 child: Image(
-                  image: AssetImage("assets/darkGreyIcons/coasterIconDarkGrey.png"),
+                  image: AssetImage("assets/fonzIcons/coasterIconAmber.png"),
                   height: 30,
                   width: 30,
                 ),

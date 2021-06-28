@@ -20,7 +20,7 @@ class TapYourPhoneAmber extends StatelessWidget {
             ),
           ),
           Image(
-            image: AssetImage("assets/fonzIcons/tapCoasterIconLilac.png"),
+            image: AssetImage("assets/fonzIcons/tapCoasterIconAmber.png"),
           ),
         ],
       ),
