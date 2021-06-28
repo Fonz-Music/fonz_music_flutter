@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:developer';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
@@ -96,6 +97,9 @@ class _HomeDecisionPageState extends State<HomeDecisionPage> {
 
         // if successful
         if (hostCoasterDetails.statusCode == 200) {
+          // this tells firebase there was a successful party join
+          FirebaseAnalytics().logEvent(
+              name: "guestJoinedSession", parameters: {'string': "guest"});
           Timer(Duration(milliseconds: SUCCESSPAGELENGTH), () {
             widget.controller.animateToPage(1,
                 duration: Duration(seconds: 1), curve: Curves.easeInOutCirc);
@@ -113,6 +117,7 @@ class _HomeDecisionPageState extends State<HomeDecisionPage> {
             refresh();
           });
           if (hostCoasterDetails.statusCode == 600) {
+            FirebaseAnalytics().logEvent(name: "guestTappedUnownedCoaster", parameters: {'string': "guest"});
             return Container(
               child: FailPartyJoin(
                 errorMessage: "this coaster lacks a host",

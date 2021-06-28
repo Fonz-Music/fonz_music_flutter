@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:fonz_music_flutter/ApiFunctions/HostApi/CoasterManagementApi.dart';
 import 'package:fonz_music_flutter/GlobalComponents/FrontEnd/FrontEndConstants.dart';
@@ -147,7 +148,7 @@ class _RenameCoasterFieldState extends State<RenameCoasterField> {
                               }
                               // updatePageCoasterDashboard = true;
                               // tells firebase that the host changed the coaster name
-                              // FirebaseAnalytics().logEvent(name: "hostChangedCoasterName", parameters: {'string':"host" });
+                              FirebaseAnalytics().logEvent(name: "hostChangedCoasterName", parameters: {'string':"host" });
                               Navigator.pop(widget.popupContext);
                             },
                             child: Icon(

@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:fonz_music_flutter/ApiFunctions/HostApi/CoasterManagementApi.dart';
 import 'package:fonz_music_flutter/GlobalComponents/FrontEnd/FrontEndConstants.dart';
@@ -137,8 +138,8 @@ class _DisconnectCoasterFieldState extends State<DisconnectCoasterField> {
                       // coasterActive = !coasterActive;
                       log("here? ");
                       // updatePageCoasterDashboard = true;
-                      // tells firebase that the host paused the coaster
-                      // FirebaseAnalytics().logEvent(name: "hostPausedCoaster", parameters: {'string':"host" });
+                      // tells firebase that the host disconnected the coaster
+                      FirebaseAnalytics().logEvent(name: "hostDisconnectedCoaster", parameters: {'string':"host" });
                       widget.notifyParent();
                       Navigator.pop(widget.popupContext);
                     },

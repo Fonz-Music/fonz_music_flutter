@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:fonz_music_flutter/GlobalComponents/FrontEnd/FrontEndConstants.dart';
 
@@ -144,7 +145,7 @@ class _TroubleShootCoasterFieldState extends State<TroubleShootCoasterField> {
                       log("here? ");
                       // updatePageCoasterDashboard = true;
                       // tells firebase that the host paused the coaster
-                      // FirebaseAnalytics().logEvent(name: "hostPausedCoaster", parameters: {'string':"host" });
+                      FirebaseAnalytics().logEvent(name: "hostTroubleShootedCoaster", parameters: {'string':"host" });
                       widget.notifyParent();
                       Navigator.pop(widget.popupContext);
                     },

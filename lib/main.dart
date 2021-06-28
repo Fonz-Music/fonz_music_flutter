@@ -42,7 +42,8 @@ void main() async {
 
   var versionResponse = await GetVersionApi.sendVersion(platform);
 
-  determineWhichVerion(version, versionResponse);
+  // determineWhichVerion(version, versionResponse);
+  runApp(FonzMusicApp());
 }
 
 determineWhichVerion(var version, var versionResponse) {

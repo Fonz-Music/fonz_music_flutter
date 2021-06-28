@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:fonz_music_flutter/ApiFunctions/GuestApi/GuestGetCoasterApi.dart';
@@ -82,11 +83,17 @@ class _ConnectYourFirstCoasterButtonState extends State<ConnectYourFirstCoasterB
                     // if it is already connected, nav to next page
                     firstConnectedCoasterDetails.statusCode =
                     addCoasterResponse["responseCode"];
+                    FirebaseAnalytics().logEvent(name: "hostAddCoasterFail", parameters: {'string': "host"});
                   }
-                  else if (checkCoasterResponse["responseCode"] == 200) {
-                    firstConnectedCoasterDetails.coasterName = checkCoasterResponse["body"]["name"];
-                    firstConnectedCoasterDetails.hostName = checkCoasterResponse["body"]["displayName"];
+
+                  else {
+                    FirebaseAnalytics().logEvent(name: "hostAddCoaster", parameters: {'string': "host"});
                   }
+                }
+                else if (checkCoasterResponse["responseCode"] == 200) {
+                  FirebaseAnalytics().logEvent(name: "hostTappedSomeoneElsesCoaster", parameters: {'string': "host"});
+                  firstConnectedCoasterDetails.coasterName = checkCoasterResponse["body"]["name"];
+                  firstConnectedCoasterDetails.hostName = checkCoasterResponse["body"]["displayName"];
                 }
 
                 // firstConnectedCoasterDetails.statusCode = 204;

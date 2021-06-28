@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:fonz_music_flutter/ApiFunctions/GuestApi/GuestGetCoasterApi.dart';
 import 'package:fonz_music_flutter/ApiFunctions/HostApi/CoasterManagementApi.dart';
@@ -64,9 +65,14 @@ class _AddCoasterButtonState extends State<AddCoasterButton> {
                   // if it is already connected, nav to next page
                   newConnectedCoasterDetails.statusCode =
                   addCoasterResponse["responseCode"];
+                  FirebaseAnalytics().logEvent(name: "hostAddCoasterFail", parameters: {'string': "host"});
+                }
+                else {
+                FirebaseAnalytics().logEvent(name: "hostAddCoaster", parameters: {'string': "host"});
                 }
               }
               else if (checkCoasterResponse["responseCode"] == 200) {
+                FirebaseAnalytics().logEvent(name: "hostTappedSomeoneElsesCoaster", parameters: {'string': "host"});
                 newConnectedCoasterDetails.coasterName = checkCoasterResponse["body"]["name"];
                 newConnectedCoasterDetails.hostName = checkCoasterResponse["body"]["displayName"];
               }
