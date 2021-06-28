@@ -1,7 +1,6 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:fonz_music_flutter/ApiFunctions/HostApi/CoasterManagementApi.dart';
 import 'package:fonz_music_flutter/GlobalComponents/FrontEnd/FrontEndConstants.dart';
 import 'package:fonz_music_flutter/HostTab/CoasterDashboardViews/CoasterDashboardButtons/DisconnectCoasterButton.dart';
 import 'package:fonz_music_flutter/HostTab/CoasterDashboardViews/CoasterDashboardButtons/PauseCoasterButton.dart';

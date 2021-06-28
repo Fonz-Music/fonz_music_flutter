@@ -1,6 +1,7 @@
 import 'dart:io';
 // import 'package:firebase_auth/firebase_auth.dart';
 // import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'FrontEnd/FrontEndConstants.dart';
 
@@ -10,14 +11,14 @@ abstract class FonzException implements Exception {
   static Future<void> report() {}
 }
 
-// Future<void> setCrashlyticsInfo() async {
-//   await FirebaseCrashlytics.instance
-//       .setCustomKey('OS', Platform.operatingSystem);
-//   await FirebaseCrashlytics.instance
-//       .setCustomKey('OS_Version', Platform.operatingSystemVersion);
-//   await FirebaseCrashlytics.instance
-//       .setUserIdentifier(FirebaseAuth.instance.currentUser.uid);
-// }
+Future<void> setCrashlyticsInfo() async {
+  await FirebaseCrashlytics.instance
+      .setCustomKey('OS', Platform.operatingSystem);
+  await FirebaseCrashlytics.instance
+      .setCustomKey('OS_Version', Platform.operatingSystemVersion);
+  // await FirebaseCrashlytics.instance
+  //     .setUserIdentifier(FirebaseAuth.instance.currentUser.uid);
+}
 
 class GenericException implements FonzException {
   final String message = "Unknown Exception has Occured";
@@ -25,10 +26,10 @@ class GenericException implements FonzException {
   const GenericException(this.e);
   @override
   static Future<void> report(Exception e, StackTrace stacktrace) async {
-    // await setCrashlyticsInfo();
-    // await FirebaseCrashlytics.instance.recordError(
-    //     GenericException(e), stacktrace,
-    //     reason: "Unknown exception occured");
+    await setCrashlyticsInfo();
+    await FirebaseCrashlytics.instance.recordError(
+        GenericException(e), stacktrace,
+        reason: "Unknown exception occured");
   }
 }
 
@@ -36,10 +37,10 @@ class HostNotPlayingException implements FonzException {
   const HostNotPlayingException();
   final String message = "Check that the host is already playing music";
   static Future<void> report(String hostId, StackTrace stacktrace) async {
-    // await setCrashlyticsInfo();
-    // await FirebaseCrashlytics.instance.recordError(
-    //     HostNotPlayingException(), stacktrace,
-    //     reason: "Host is not currently playing HostID: " + hostId);
+    await setCrashlyticsInfo();
+    await FirebaseCrashlytics.instance.recordError(
+        HostNotPlayingException(), stacktrace,
+        reason: "Host is not currently playing HostID: " + hostId);
   }
 }
 
@@ -48,10 +49,10 @@ class ErrorOnTapException implements FonzException {
   final String message = "Error with the tap";
   @override
   static Future<void> report(StackTrace stacktrace) async {
-    // await setCrashlyticsInfo();
-    // await FirebaseCrashlytics.instance.recordError(
-    //     ErrorOnTapException(), stacktrace,
-    //     reason: "error with tap");
+    await setCrashlyticsInfo();
+    await FirebaseCrashlytics.instance.recordError(
+        ErrorOnTapException(), stacktrace,
+        reason: "error with tap");
   }
 }
 
@@ -60,10 +61,10 @@ class NfcNotSupportedException implements FonzException {
   final message = "Device does not support NFC";
   @override
   static Future<void> report(StackTrace stacktrace) async {
-    // await setCrashlyticsInfo();
-    // await FirebaseCrashlytics.instance.recordError(
-    //     NfcNotSupportedException(), stacktrace,
-    //     reason: 'device does not support NFC');
+    await setCrashlyticsInfo();
+    await FirebaseCrashlytics.instance.recordError(
+        NfcNotSupportedException(), stacktrace,
+        reason: 'device does not support NFC');
   }
 }
 
@@ -72,10 +73,10 @@ class NotFonzException implements FonzException {
   final String message = "Scanned tag is not a Fonz coaster";
   @override
   static Future<void> report(StackTrace stacktrace) async {
-    // await setCrashlyticsInfo();
-    // await FirebaseCrashlytics.instance.recordError(
-    //     NotFonzException(), stacktrace,
-    //     reason: "scanned tag not fonz");
+    await setCrashlyticsInfo();
+    await FirebaseCrashlytics.instance.recordError(
+        NotFonzException(), stacktrace,
+        reason: "scanned tag not fonz");
   }
 }
 
@@ -84,10 +85,10 @@ class NoHostException implements FonzException {
   const NoHostException();
   @override
   static Future<void> report(StackTrace stacktrace) async {
-    // await setCrashlyticsInfo();
-    // await FirebaseCrashlytics.instance.recordError(
-    //     NoHostException(), stacktrace,
-    //     reason: "no current host for user");
+    await setCrashlyticsInfo();
+    await FirebaseCrashlytics.instance.recordError(
+        NoHostException(), stacktrace,
+        reason: "no current host for user");
   }
 }
 
@@ -97,11 +98,11 @@ class SearchIssueException implements FonzException {
   const SearchIssueException(this.term);
   @override
   static Future<void> report(String term, StackTrace stacktrace) async {
-    // await setCrashlyticsInfo();
-    // await FirebaseCrashlytics.instance.setCustomKey('term', term);
-    // await FirebaseCrashlytics.instance.recordError(
-    //     SearchIssueException(term), stacktrace,
-    //     reason: "issue on search");
+    await setCrashlyticsInfo();
+    await FirebaseCrashlytics.instance.setCustomKey('term', term);
+    await FirebaseCrashlytics.instance.recordError(
+        SearchIssueException(term), stacktrace,
+        reason: "issue on search");
   }
 }
 
@@ -110,10 +111,10 @@ class SessionNotJoinedException implements FonzException {
   const SessionNotJoinedException();
   @override
   static Future<void> report(StackTrace stacktrace) async {
-    // await setCrashlyticsInfo();
-    // await FirebaseCrashlytics.instance.recordError(
-    //     SessionNotJoinedException(), stacktrace,
-    //     reason: "session could not be joined");
+    await setCrashlyticsInfo();
+    await FirebaseCrashlytics.instance.recordError(
+        SessionNotJoinedException(), stacktrace,
+        reason: "session could not be joined");
   }
 }
 
@@ -122,10 +123,10 @@ class SessionIDCreationException implements FonzException {
   const SessionIDCreationException();
   @override
   static Future<void> report(StackTrace stacktrace) async {
-    // await setCrashlyticsInfo();
-    // await FirebaseCrashlytics.instance.recordError(
-    //     SessionIDCreationException(), stacktrace,
-    //     reason: "error creating sessionId");
+    await setCrashlyticsInfo();
+    await FirebaseCrashlytics.instance.recordError(
+        SessionIDCreationException(), stacktrace,
+        reason: "error creating sessionId");
   }
 }
 
@@ -134,10 +135,10 @@ class NoSessionIDException implements FonzException {
   const NoSessionIDException();
   @override
   static Future<void> report(StackTrace stacktrace) async {
-    // await setCrashlyticsInfo();
-  //   await FirebaseCrashlytics.instance.recordError(
-  //       NoSessionIDException(), stacktrace,
-  //       reason: "no sessionId found");
+    await setCrashlyticsInfo();
+    await FirebaseCrashlytics.instance.recordError(
+        NoSessionIDException(), stacktrace,
+        reason: "no sessionId found");
   }
 }
 

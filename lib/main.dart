@@ -1,15 +1,104 @@
+import 'dart:developer';
+import 'dart:io';
+
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
+import 'package:fonz_music_flutter/ApiFunctions/GetVersionApi.dart';
 import 'package:fonz_music_flutter/MainTabs/HostTab.dart';
 import 'package:fonz_music_flutter/MainTabs/SearchTab.dart';
 import 'package:fonz_music_flutter/MainTabs/SettingsPage.dart';
+import 'package:package_info/package_info.dart';
 
 import 'GlobalComponents/FrontEnd/FrontEndConstants.dart';
+import 'MustUpdateApp.dart';
 
-void main() {
-  runApp(MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+
+  // await FlutterCrashlytics().initialize();
+  // this enables crashlytics
+  FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(true);
+  // Pass all uncaught errors to Crashlytics.
+  FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
+
+  // runApp(MyApp());
+
+  PackageInfo packageInfo = await PackageInfo.fromPlatform();
+
+  var version = packageInfo.version;
+
+  // log("part 1 is " + partsOfVersion[0] + "part 2 is " + partsOfVersion[1] + "part 3 is " + partsOfVersion[2]);
+
+  log("version " + version.runtimeType.toString());
+  var platform;
+  if (Platform.isIOS) {
+    platform = "iOS";
+  }
+  else {
+    platform = "Android";
+  }
+
+  var versionResponse = await GetVersionApi.sendVersion(platform);
+
+  determineWhichVerion(version, versionResponse);
 }
 
-class MyApp extends StatelessWidget {
+determineWhichVerion(var version, var versionResponse) {
+  var partsOfCurrentAppVersion = version.split(".");
+  var partsOfMinAppVersion = versionResponse.split(".");
+
+  if (Platform.isIOS) {
+    var firstCurrentNumber = int.parse(partsOfCurrentAppVersion[0]);
+    var secondCurrentNumber = int.parse(partsOfCurrentAppVersion[1]);
+
+    var firstMinNumber = int.parse(partsOfMinAppVersion[0]);
+    var secondMinNumber = int.parse(partsOfMinAppVersion[1]);
+
+    var currentNumber = (firstCurrentNumber * 100) + secondCurrentNumber;
+    var minNumber = (firstMinNumber * 100) + secondMinNumber;
+
+    log("currentNumber = " + currentNumber.toString() + " , minNumber = " + minNumber.toString());
+
+    if (currentNumber >= minNumber) {
+      log("greater ");
+      runApp(FonzMusicApp());
+    }
+    else {
+      log("less than");
+      // runApp(FonzMusicApp());
+      runApp(MustUpdateApp());
+    }
+  }
+  else {
+    var firstCurrentNumber = int.parse(partsOfCurrentAppVersion[0]);
+    var secondCurrentNumber = int.parse(partsOfCurrentAppVersion[1]);
+    var thirdCurrentNumber = int.parse(partsOfCurrentAppVersion[2]);
+
+    var firstMinNumber = int.parse(partsOfMinAppVersion[0]);
+    var secondMinNumber = int.parse(partsOfMinAppVersion[1]);
+    var thirdMinNumber = int.parse(partsOfMinAppVersion[2]);
+
+    var currentNumber = (firstCurrentNumber * 10000) + (secondCurrentNumber * 100) + thirdCurrentNumber;
+    var minNumber = (firstMinNumber * 10000) + (secondMinNumber * 100) + thirdMinNumber;
+
+    log("currentNumber = " + currentNumber.toString() + " , minNumber = " + minNumber.toString());
+
+    if (currentNumber >= minNumber) {
+      log("greater ");
+      runApp(FonzMusicApp());
+    }
+    else {
+      log("less than");
+      // runApp(FonzMusicApp());
+      runApp(MustUpdateApp());
+    }
+  }
+
+}
+
+class FonzMusicApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {

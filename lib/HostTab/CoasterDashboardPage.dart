@@ -5,10 +5,6 @@ import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:fonz_music_flutter/GlobalComponents/FrontEnd/FrontEndConstants.dart';
 import 'package:fonz_music_flutter/GlobalComponents/Objects/CoasterObject.dart';
 import 'package:fonz_music_flutter/HostTab/CoasterDashboardViews/AddCoasterButton.dart';
-import 'package:fonz_music_flutter/HostTab/HostSetupViews/ConnectSpotifyButton.dart';
-import 'package:fonz_music_flutter/HostTab/HostSetupViews/ConnectYourFirstCoasterButton.dart';
-import 'package:fonz_music_flutter/HostTab/HostSetupViews/NameYourFirstCoaster.dart';
-import 'package:fonz_music_flutter/MainTabs/HostTab.dart';
 import 'package:fonz_music_flutter/NfcFunctions/HostNfcFunctions.dart';
 import 'package:fonz_music_flutter/SearchTab/HomePageWidgets/FailPartyJoin.dart';
 
