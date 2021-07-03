@@ -13,6 +13,8 @@ import 'package:fonz_music_flutter/MainTabs/HostTab.dart';
 import 'package:fonz_music_flutter/NfcFunctions/HostNfcFunctions.dart';
 import 'package:fonz_music_flutter/SearchTab/HomePageWidgets/FailPartyJoin.dart';
 
+import '../main.dart';
+
 bool pressedToConnectFirstCoaster = false;
 CoasterObject firstConnectedCoasterDetails = CoasterObject("", "", "", "");
 bool launchedNfcForFirstCoaster = false;

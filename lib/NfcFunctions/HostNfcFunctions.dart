@@ -79,7 +79,7 @@ class HostNfcFunctions {
 
   static Future<NDEFMessage> _buildMessage(String uid) async {
     List<NDEFRecord> _records = [];
-    var fonzUrl = Uri(path: "fonzmusic.com/" + uid, scheme: "https");
+    var fonzUrl = Uri(path: "fonzmusic.com/" + uid, scheme: "https://");
     NDEFRecord url = new NDEFRecord.uri(fonzUrl);
 
     _records.add(url);

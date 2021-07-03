@@ -110,6 +110,9 @@ class FonzMusicApp extends StatelessWidget {
 }
 
 int currentTab = 1;
+bool connectedToSpotify = true;
+bool hasConnectedCoasters = true;
+bool hasAccount = false;
 
 class MyHomePage extends StatefulWidget {
 

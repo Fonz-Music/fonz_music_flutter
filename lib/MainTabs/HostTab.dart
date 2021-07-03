@@ -5,8 +5,9 @@ import 'package:fonz_music_flutter/GlobalComponents/FrontEnd/FrontEndConstants.d
 import 'package:fonz_music_flutter/HostTab/CoasterDashboardPage.dart';
 import 'package:fonz_music_flutter/HostTab/HostSetup.dart';
 
-bool connectedToSpotify = true;
-bool hasConnectedCoasters = true;
+import '../main.dart';
+
+
 
 class HostTab extends StatefulWidget {
   @override

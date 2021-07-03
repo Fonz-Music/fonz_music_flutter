@@ -3,11 +3,16 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:fonz_music_flutter/GlobalComponents/FrontEnd/FrontEndConstants.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
+import 'package:fonz_music_flutter/HostTab/CoasterDashboardViews/CoasterDashboardView.dart';
+import 'package:fonz_music_flutter/MainTabs/HostTab.dart';
 import 'package:fonz_music_flutter/SettingsTab/SettingsButtons/BuyACoasterButton.dart';
 import 'package:fonz_music_flutter/SettingsTab/SettingsButtons/ChangeNameButton.dart';
+import 'package:fonz_music_flutter/SettingsTab/SettingsButtons/CreateAccountSettingsButton.dart';
 import 'package:fonz_music_flutter/SettingsTab/SettingsButtons/DetermineAmountSongRequests.dart';
 import 'package:fonz_music_flutter/SettingsTab/SettingsButtons/ManageSpotifyButton.dart';
 import 'package:fonz_music_flutter/SettingsTab/SettingsButtons/SignOutButton.dart';
+
+import '../main.dart';
 
 class SettingsPage extends StatefulWidget {
   @override
@@ -51,19 +56,67 @@ class _SettingsPageState extends State<SettingsPage> {
                 ),
               )
           ),
-            // change name
-            ChangeNameButton(),
+            Padding(
+              padding: EdgeInsets.fromLTRB(20, 30, 0, 0),
+              child: new Text(
+                "shop",
+                style: TextStyle(
+                  fontFamily: FONZFONTTWO,
+                  fontSize: HEADINGFOUR,
+                  color: determineColorThemeTextInverse(),
+                ),
+                textAlign: TextAlign.left,
+              ),
+            ),
             // buy a coaster
             BuyACoasterButton(),
-            // manage spotify
-            ManageSpotifyButton(),
-            // sign out
-            SignOutButton(),
+            Padding(
+              padding: EdgeInsets.fromLTRB(20, 30, 0, 0),
+              child: new Text(
+                "account",
+                style: TextStyle(
+                  fontFamily: FONZFONTTWO,
+                  fontSize: HEADINGFOUR,
+                  color: determineColorThemeTextInverse(),
+                ),
+                textAlign: TextAlign.left,
+              ),
+            ),
+            DetermineWhichButtonsShown(),
             // determine # of song queues
             // DetermineAmountSongRequests()
         ]
         ),
       ]
     );
+  }
+  Widget DetermineWhichButtonsShown() {
+    if (hasConnectedCoasters && connectedToSpotify) {
+      return Column(
+        children: [
+
+          // change name
+          ChangeNameButton(),
+          // sign out
+          SignOutButton(),
+          // manage spotify
+          ManageSpotifyButton(),
+        ],
+      );
+    }
+    else if (hasConnectedCoasters) {
+      return Column(
+        children: [
+
+          // change name
+          ChangeNameButton(),
+          // sign out
+          SignOutButton(),
+        ],
+      );
+    }
+    else {
+      return CreateAccountSettingsButton();
+    }
   }
 }
