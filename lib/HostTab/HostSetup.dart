@@ -11,9 +11,10 @@ import 'package:fonz_music_flutter/HostTab/HostSetupViews/NameYourFirstCoaster.d
 import 'package:fonz_music_flutter/HostTab/TapYourPhoneLilac.dart';
 import 'package:fonz_music_flutter/MainTabs/HostTab.dart';
 import 'package:fonz_music_flutter/NfcFunctions/HostNfcFunctions.dart';
-import 'package:fonz_music_flutter/SearchTab/HomePageWidgets/FailPartyJoin.dart';
+import 'package:fonz_music_flutter/SearchTab/HomePageWidgets/HomePageResponses/FailPartyJoin.dart';
 
 import '../main.dart';
+import 'HostNfcResponses/CoasterHasDifferentHost.dart';
 
 bool pressedToConnectFirstCoaster = false;
 CoasterObject firstConnectedCoasterDetails = CoasterObject("", "", "", "");
@@ -146,10 +147,7 @@ class _HostSetupPageState extends State<HostSetupPage> {
           });
           if (firstConnectedCoasterDetails.statusCode == 200) {
             return Container(
-              child: FailPartyJoin(
-                errorMessage: "this coaster belongs to " + firstConnectedCoasterDetails.coasterName + " & is named " + firstConnectedCoasterDetails.hostName,
-                errorImage: getDisableIcon(),
-              ),
+              child:  CoasterHasDifferentHost(connectedCoasterName: firstConnectedCoasterDetails.coasterName, coasterHostName: firstConnectedCoasterDetails.hostName,),
             );
           }
           else {

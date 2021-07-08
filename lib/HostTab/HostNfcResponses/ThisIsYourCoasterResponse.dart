@@ -1,19 +1,23 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:fonz_music_flutter/GlobalComponents/FrontEnd/FrontEndConstants.dart';
 
-class JoinSuccessfulCircle extends StatefulWidget {
-  String connectedCoasterName;
-  String coasterHostName;
+class ThisIsYourCoaster extends StatefulWidget {
 
-  JoinSuccessfulCircle({Key key, @required this.connectedCoasterName, this.coasterHostName}) : super(key: key);
+  String connectedCoasterName;
+
+
+  ThisIsYourCoaster({Key key, @required this.connectedCoasterName}) : super(key: key);
+
 
 
   @override
-  _JoinSuccessfulCircleState createState() => _JoinSuccessfulCircleState();
+  _ThisIsYourCoasterState createState() => _ThisIsYourCoasterState();
 }
 
-class _JoinSuccessfulCircleState extends State<JoinSuccessfulCircle> {
+class _ThisIsYourCoasterState extends State<ThisIsYourCoaster> {
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -29,31 +33,44 @@ class _JoinSuccessfulCircleState extends State<JoinSuccessfulCircle> {
                 Container(
                   padding: const EdgeInsets.all(30),
                   child: Image(
-                    image: AssetImage("assets/darkGreyIcons/queueIconDarkGrey.png"),
-
+                    image: AssetImage("assets/fonzIcons/coasterIconLilac.png"),
                   ),
                 ),
               ),
               style: NeumorphicStyle(
                   shape: NeumorphicShape.flat,
                   boxShape: NeumorphicBoxShape.circle(),
-                  border: NeumorphicBorder(width: 2, color: SUCCESSGREEN),
+                  border: NeumorphicBorder(width: 2, color: LILAC),
                   color: determineColorThemeBackground()
               ),
             ),
           ),
           Padding(
-            padding: EdgeInsets.fromLTRB(20, 10, 0, 0),
+            padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
             child: new Text(
-              "successfully connected to ${widget.coasterHostName}'s coaster ${widget.connectedCoasterName}",
+              "this is your coaster",
               style: TextStyle(
                 fontFamily: FONZFONTTWO,
                 fontSize: HEADINGFOUR,
-                color: SUCCESSGREEN,
+                color: determineColorThemeTextInverse(),
               ),
               textAlign: TextAlign.center,
             ),
-          )
+          ),
+          Padding(
+            padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+            child: new Text(
+              "${widget.connectedCoasterName}",
+              style: TextStyle(
+                fontFamily: FONZFONTTWO,
+                fontSize: HEADINGTHREE,
+                color: LILAC,
+              ),
+              textAlign: TextAlign.center,
+            ),
+          ),
+
+
         ],
       ),
     );

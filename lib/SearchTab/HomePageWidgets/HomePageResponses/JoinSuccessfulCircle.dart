@@ -1,24 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:fonz_music_flutter/GlobalComponents/FrontEnd/FrontEndConstants.dart';
-import 'package:fonz_music_flutter/SearchTab/HomePageWidgets/scanForCoasterDetails.dart';
 
-import '../HomePageDecision.dart';
+class JoinSuccessfulCircle extends StatefulWidget {
+  String connectedCoasterName;
+  String coasterHostName;
 
-class FailPartyJoin extends StatefulWidget {
+  JoinSuccessfulCircle({Key key, @required this.connectedCoasterName, this.coasterHostName}) : super(key: key);
 
-  String errorMessage;
-  String errorImage;
-
-  final Function() notifyParent;
-
-  FailPartyJoin({Key key, @required this.errorMessage, this.errorImage, this.notifyParent}) : super(key: key);
 
   @override
-  _FailPartyJoinState createState() => _FailPartyJoinState();
+  _JoinSuccessfulCircleState createState() => _JoinSuccessfulCircleState();
 }
 
-class _FailPartyJoinState extends State<FailPartyJoin> {
+class _JoinSuccessfulCircleState extends State<JoinSuccessfulCircle> {
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -34,7 +29,7 @@ class _FailPartyJoinState extends State<FailPartyJoin> {
                 Container(
                   padding: const EdgeInsets.all(30),
                   child: Image(
-                    image: AssetImage("${widget.errorImage}"),
+                    image: AssetImage("assets/darkGreyIcons/queueIconDarkGrey.png"),
 
                   ),
                 ),
@@ -42,23 +37,19 @@ class _FailPartyJoinState extends State<FailPartyJoin> {
               style: NeumorphicStyle(
                   shape: NeumorphicShape.flat,
                   boxShape: NeumorphicBoxShape.circle(),
-                  border: NeumorphicBorder(width: 2, color: Colors.red),
+                  border: NeumorphicBorder(width: 2, color: SUCCESSGREEN),
                   color: determineColorThemeBackground()
               ),
-              onPressed: () async {
-                hostCoasterDetails = await scanForCoasterDetails();
-                widget.notifyParent();
-              },
             ),
           ),
           Padding(
-            padding: EdgeInsets.fromLTRB(20, 10, 20, 0),
+            padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
             child: new Text(
-              "${widget.errorMessage}, press to try again",
+              "successfully connected to ${widget.coasterHostName}'s coaster ${widget.connectedCoasterName}",
               style: TextStyle(
                 fontFamily: FONZFONTTWO,
                 fontSize: HEADINGFOUR,
-                color: Colors.red,
+                color: SUCCESSGREEN,
               ),
               textAlign: TextAlign.center,
             ),

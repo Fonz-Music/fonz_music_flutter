@@ -6,11 +6,13 @@ import 'package:fonz_music_flutter/GlobalComponents/FrontEnd/FrontEndConstants.d
 import 'package:fonz_music_flutter/GlobalComponents/Objects/CoasterObject.dart';
 import 'package:fonz_music_flutter/HostTab/CoasterDashboardViews/AddCoasterButton.dart';
 import 'package:fonz_music_flutter/NfcFunctions/HostNfcFunctions.dart';
-import 'package:fonz_music_flutter/SearchTab/HomePageWidgets/FailPartyJoin.dart';
+import 'package:fonz_music_flutter/SearchTab/HomePageWidgets/HomePageResponses/FailPartyJoin.dart';
 
 import 'CoasterDashboardViews/CoasterDashboardView.dart';
 import 'CoasterDashboardViews/NameYourNewCoaster.dart';
 import 'CoasterDashboardViews/RewriteCoasterCircle.dart';
+import 'HostNfcResponses/CoasterHasDifferentHost.dart';
+import 'HostNfcResponses/ThisIsYourCoasterResponse.dart';
 import 'TapYourPhoneLilac.dart';
 
 bool pressedToConnectNewCoaster = false;
@@ -140,13 +142,18 @@ class _CoasterDashboardPageState extends State<CoasterDashboardPage> {
           launchedNfcForNewCoaster = false;
           refresh();
         });
+        // if someone else's coaster
         if (newConnectedCoasterDetails.statusCode == 200) {
           return Container(
             padding: EdgeInsets.fromLTRB(20, 0, 20, height * 0.1),
-            child: FailPartyJoin(
-              errorMessage: "this coaster belongs to " + newConnectedCoasterDetails.coasterName + " & is named " + newConnectedCoasterDetails.hostName,
-              errorImage: getDisableIcon(),
-            ),
+            child: CoasterHasDifferentHost(connectedCoasterName: newConnectedCoasterDetails.coasterName, coasterHostName: newConnectedCoasterDetails.hostName,),
+          );
+        }
+        // if your existing coaster
+        else if (newConnectedCoasterDetails.statusCode == 403) {
+          return Container(
+            padding: EdgeInsets.fromLTRB(20, 0, 20, height * 0.1),
+            child: ThisIsYourCoaster(connectedCoasterName: newConnectedCoasterDetails.coasterName)
           );
         }
         else {

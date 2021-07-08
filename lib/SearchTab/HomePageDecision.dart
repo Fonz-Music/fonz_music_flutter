@@ -8,11 +8,13 @@ import 'package:fonz_music_flutter/GlobalComponents/FrontEnd/FrontEndConstants.d
 import 'package:fonz_music_flutter/GlobalComponents/Objects/CoasterObject.dart';
 import 'package:fonz_music_flutter/MainTabs/SearchTab.dart';
 
-import 'package:fonz_music_flutter/SearchTab/HomePageWidgets/FailPartyJoin.dart';
+import 'package:fonz_music_flutter/SearchTab/HomePageWidgets/HomePageResponses/FailPartyJoin.dart';
 import 'package:fonz_music_flutter/SearchTab/HomePageWidgets/HostAPartyButton.dart';
 import 'package:fonz_music_flutter/SearchTab/HomePageWidgets/JoinAPartyButton.dart';
-import 'package:fonz_music_flutter/SearchTab/HomePageWidgets/JoinSuccessfulCircle.dart';
+import 'package:fonz_music_flutter/SearchTab/HomePageWidgets/HomePageResponses/JoinSuccessfulCircle.dart';
 import 'package:fonz_music_flutter/SearchTab/HomePageWidgets/TapYourPhoneAmber.dart';
+
+import 'HomePageWidgets/HomePageResponses/CoasterHasNoHost.dart';
 
 bool pressedNfcButtonToJoinPartu = false;
 CoasterObject hostCoasterDetails = CoasterObject("", "", "", "");
@@ -69,14 +71,14 @@ class _HomeDecisionPageState extends State<HomeDecisionPage> {
               )
           ),
           Spacer(),
-          HomePageMainBody(widget.notifyParent),
+          HomePageMainBody(widget.currentTab, widget.notifyParent),
           Spacer()
         ],
       ),
     );
   }
 
-  Widget HomePageMainBody(notifyParent)  {
+  Widget HomePageMainBody(notifyParent, currentTab)  {
 
     final size = MediaQuery.of(context).size;
     final width = size.width;
@@ -118,12 +120,7 @@ class _HomeDecisionPageState extends State<HomeDecisionPage> {
           });
           if (hostCoasterDetails.statusCode == 600) {
             FirebaseAnalytics().logEvent(name: "guestTappedUnownedCoaster", parameters: {'string': "guest"});
-            return Container(
-              child: FailPartyJoin(
-                errorMessage: "this coaster lacks a host",
-                errorImage: getDisableIcon(),
-              ),
-            );
+            return CoasterHasNoHost(tabSelected: widget.currentTab, notifyParent: widget.notifyParent );
           }
           else {
             return Container(
