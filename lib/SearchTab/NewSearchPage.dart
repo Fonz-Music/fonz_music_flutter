@@ -1,14 +1,12 @@
 import 'dart:developer';
 
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:fonzie/GlobalComponents/GlobalVariables.dart';
-import 'package:fonzie/GlobalComponents/errors.dart';
-import 'package:fonzie/GuestRoute/GuestRouteSongSearch/songSearch.dart';
-import 'package:fonzie/GuestRoute/GuestRouteSongSearch/spotifySearchDecoder.dart';
-import 'package:fonzie/JSONConverters/userTopArtistsResponse.dart';
-import 'package:fonzie/JSONConverters/userTopTracksResponse.dart';
-import 'package:fonzie/apiHandler/get.dart';
+import 'package:fonz_music_flutter/ApiFunctions/SpotifySuggestionInterpreter.dart';
+import 'package:fonz_music_flutter/ApiFunctions/UserTopArtistsResponse.dart';
+import 'package:fonz_music_flutter/ApiFunctions/UserTopTracksResponse.dart';
+import 'package:fonz_music_flutter/GlobalComponents/ExceptionHandling.dart';
+import 'package:fonz_music_flutter/GlobalComponents/Objects/Post.dart';
 import 'package:http/http.dart';
 
 class SearchPage extends StatefulWidget {
@@ -147,10 +145,11 @@ class _SearchResultsPaneState extends State<SearchResultsPane> {
       // } else if (response.statusCode == 403) {
     } else if (response["responseCode"] == 403) {
       log('Invalid jwt when trying to search spotify');
-      errorMessageSongSearch =
+      String errorMessageSongSearch =
           "looks like theres an issue with your host's connection to their Spotify.";
       log(response["body"]);
-      throw GenericException(Exception(response["body"]));
+      throw GenericException(
+          Exception(response["body"] + "\n" + errorMessageSongSearch));
 
       // } else if (response.statusCode == 500) {
     } else if (response["responseCode"] == 500) {
@@ -160,21 +159,19 @@ class _SearchResultsPaneState extends State<SearchResultsPane> {
       // dio
       log(response["body"]);
 
-      errorMessageSongSearch =
+      String errorMessageSongSearch =
           "have your host refresh their spotify login on the providers dashboard.";
-      throw new GenericException(Exception(
-          'Please tell the host to refresh their spotify login on the providers dashboard.'));
+      throw new GenericException(Exception(errorMessageSongSearch));
     } else {
       log('issue with search');
-      errorMessageSongSearch =
+      String errorMessageSongSearch =
           "something isn't right :/ \nensure that your internet connection is strong & try again";
       // http
       // log(response.body);
       // dio
       log(response["data"]);
 
-      throw new GenericException(
-          Exception("There was an issue with your host's coaster."));
+      throw new GenericException(Exception(errorMessageSongSearch));
     }
   }
 
