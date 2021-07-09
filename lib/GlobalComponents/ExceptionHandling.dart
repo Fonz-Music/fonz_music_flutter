@@ -5,7 +5,6 @@ import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'FrontEnd/FrontEndConstants.dart';
 
-
 abstract class FonzException implements Exception {
   final String message = "";
   static Future<void> report() {}
@@ -139,6 +138,26 @@ class NoSessionIDException implements FonzException {
     await FirebaseCrashlytics.instance.recordError(
         NoSessionIDException(), stacktrace,
         reason: "no sessionId found");
+  }
+}
+
+// Add more enums for exception types for spotify
+enum SpotifyExceptionTypes {
+  ARTISTS,
+  TRACKS,
+}
+
+// Helper class for Spotify issues when querying directly
+class SpotifyException implements FonzException {
+  String message = 'Failed to fetch personalized Spotify info for user';
+  SpotifyExceptionTypes type;
+  SpotifyException(SpotifyExceptionTypes type) {
+    this.type = type;
+    if (type == SpotifyExceptionTypes.ARTISTS) {
+      this.message = 'Failed trying to fetch personalized artists for user';
+    } else if (type == SpotifyExceptionTypes.TRACKS) {
+      this.message = 'Failed to fetch personalizes tracks for user';
+    }
   }
 }
 
