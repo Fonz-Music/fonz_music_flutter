@@ -56,31 +56,41 @@ class _SettingsPageState extends State<SettingsPage> {
                 ),
               )
           ),
-            Padding(
-              padding: EdgeInsets.fromLTRB(20, 30, 0, 0),
-              child: new Text(
-                "shop",
-                style: TextStyle(
-                  fontFamily: FONZFONTTWO,
-                  fontSize: HEADINGFOUR,
-                  color: determineColorThemeTextInverse(),
+            Row(
+              children: [
+                Padding(
+                  padding: EdgeInsets.fromLTRB(20, 30, 0, 10),
+                  child: new Text(
+                    "shop",
+                    style: TextStyle(
+                      fontFamily: FONZFONTTWO,
+                      fontSize: HEADINGFIVE,
+                      color: determineColorThemeTextInverse(),
+                    ),
+                    textAlign: TextAlign.left,
+                  ),
                 ),
-                textAlign: TextAlign.left,
-              ),
+                Spacer()
+              ],
             ),
             // buy a coaster
             BuyACoasterButton(),
-            Padding(
-              padding: EdgeInsets.fromLTRB(20, 30, 0, 0),
-              child: new Text(
-                "account",
-                style: TextStyle(
-                  fontFamily: FONZFONTTWO,
-                  fontSize: HEADINGFOUR,
-                  color: determineColorThemeTextInverse(),
+            Row(
+              children: [
+                Padding(
+                  padding: EdgeInsets.fromLTRB(20, 30, 0, 10),
+                  child: new Text(
+                    "account",
+                    style: TextStyle(
+                      fontFamily: FONZFONTTWO,
+                      fontSize: HEADINGFIVE,
+                      color: determineColorThemeTextInverse(),
+                    ),
+                    textAlign: TextAlign.left,
+                  ),
                 ),
-                textAlign: TextAlign.left,
-              ),
+                Spacer()
+              ],
             ),
             DetermineWhichButtonsShown(),
             // determine # of song queues

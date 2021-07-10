@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:fonz_music_flutter/GlobalComponents/FrontEnd/FrontEndConstants.dart';
+import 'package:fonz_music_flutter/MainTabs/CreateAccountPrompt.dart';
 
 import '../../main.dart';
 
@@ -26,6 +27,13 @@ class _HostAPartyButtonState extends State<HostAPartyButton> {
 
   @override
   Widget build(BuildContext context) {
+
+    final size = MediaQuery
+        .of(context)
+        .size;
+    final width = size.width;
+    final height = size.height;
+
     return Center(
       child: Column(
         children: [
@@ -51,9 +59,40 @@ class _HostAPartyButtonState extends State<HostAPartyButton> {
                   color: determineColorThemeBackground()
               ),
               onPressed: () async {
+                if (!hasAccount) {
+                  showModalBottomSheet<dynamic>(context: context,
+                      // shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
+                   isScrollControlled: true,
+                    builder: (BuildContext bc) {
+                      return Wrap(
+                          children: <Widget>[
+                            Container(
+                              height: height * 0.9,
+                              child: Container(
+                                decoration: new BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: new BorderRadius.only(
+                                        topLeft: const Radius.circular(25.0),
+                                        topRight: const Radius.circular(25.0))),
+                                child: CreateAccountPrompt(),
+                              ),
+                            )
+                          ]
+                      );
+                      return Wrap(children:[CreateAccountPrompt()]);
+                   }
+                  );
+                  // Navigator.of(context).push(PageRouteBuilder(
+                  //     opaque: false,
+                  //     pageBuilder: (BuildContext context, _, __) =>
+                  //         CreateAccountPrompt()));
+                }
+                else {
+                  currentTab = 0;
+                  widget.notifyParent();
+                }
                 log("pressed sign out");
-                currentTab = 0;
-                widget.notifyParent();
+
 
                 // try {
                 //   // var result = await platformShare.invokeMethod('launchShareSheet');
