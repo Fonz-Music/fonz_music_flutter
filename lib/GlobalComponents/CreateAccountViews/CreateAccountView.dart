@@ -7,6 +7,7 @@ import 'SignInSignUpViews/SignInView.dart';
 import 'SignInSignUpViews/SignUpView.dart';
 
 PageController _emailController = PageController(initialPage: 1);
+bool onSignUp = true;
 
 
 
@@ -32,11 +33,19 @@ class _CreateAccountViewState extends State<CreateAccountView> {
 //                    height: height * .5,
 //            width: width * .75,
               children:[
-                Spacer(),
+                // Spacer(),
+            Container(
+              padding: EdgeInsets.all(5),
+              height: 80,
+              width: 40,
+              child: Image(
+                image: AssetImage("assets/fonzIcons/fonzLogoGradiant.png"),
+              ),
+            ),
             ToggleSignInSignOut(),
             Container(
-              height: height * .75,
-              // width: width * .75,
+              height: height * .72,
+              // width: width * .72,
               child: PageView(
               controller: _emailController,
               scrollDirection: Axis.horizontal,
@@ -60,7 +69,7 @@ class _CreateAccountViewState extends State<CreateAccountView> {
             "sign in",
             style: new TextStyle(
                 fontFamily: FONZFONTONE,
-                fontSize: 20.0,
+                fontSize: 16.0,
                 fontWeight: FontWeight.w300,
                 color: determineColorThemeTextInverse(),
                 decoration: determineIfSignInButtonHasUnderline(),
@@ -73,7 +82,7 @@ class _CreateAccountViewState extends State<CreateAccountView> {
             //     duration: Duration(milliseconds: 500), curve: Curves.easeIn);
             _emailController.jumpToPage(0);
             setState(() {
-              log("setting staet");
+              onSignUp = false;
             });
           }
         ),
@@ -82,7 +91,7 @@ class _CreateAccountViewState extends State<CreateAccountView> {
               "sign up",
               style: new TextStyle(
                   fontFamily: FONZFONTONE,
-                  fontSize: 20.0,
+                  fontSize: 16.0,
                   fontWeight: FontWeight.w300,
                   color: determineColorThemeTextInverse(),
                   decoration: determineIfSignUpButtonHasUnderline(),
@@ -95,8 +104,7 @@ class _CreateAccountViewState extends State<CreateAccountView> {
               //     duration: Duration(milliseconds: 500), curve: Curves.easeIn);
               _emailController.jumpToPage(1);
               setState(() {
-
-                log("setting staet");
+                onSignUp = true;
               });
             }
         ),
@@ -112,7 +120,7 @@ class _CreateAccountViewState extends State<CreateAccountView> {
   //   else return Colors.transparent;
   // }
   determineIfSignInButtonHasUnderline() {
-    if (_emailController.page == 0) {
+    if (!onSignUp) {
       return TextDecoration.underline;
     }
     else return TextDecoration.none;
@@ -126,10 +134,12 @@ class _CreateAccountViewState extends State<CreateAccountView> {
   //   else return Colors.transparent;
   // }
   determineIfSignUpButtonHasUnderline() {
-    if (_emailController.page == 1) {
+    if (onSignUp) {
       return TextDecoration.underline;
     }
     else return TextDecoration.none;
   }
+
+
 
 }

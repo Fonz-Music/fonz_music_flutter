@@ -67,7 +67,7 @@ class _HostAPartyButtonState extends State<HostAPartyButton> {
                       return Wrap(
                           children: <Widget>[
                             Container(
-                              height: height * 0.9,
+                              height: height * 0.95,
                               child: Container(
                                 decoration: new BoxDecoration(
                                     color: Colors.white,

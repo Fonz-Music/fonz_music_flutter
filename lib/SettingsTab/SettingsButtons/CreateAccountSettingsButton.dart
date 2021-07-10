@@ -55,11 +55,11 @@ class _CreateAccountSettingsButtonState extends State<CreateAccountSettingsButto
             color: determineColorThemeBackground()
         ),
         onPressed: () {
-          showModalBottomSheet(context: context, builder: (BuildContext context) {
-            return CreateAccountPrompt();
-          });
-          log("pressed sign out");
-          FirebaseAnalytics().logEvent(name: "userTappedCreateAccountSettings", parameters: {'string': "user"});
+          // showModalBottomSheet(context: context, builder: (BuildContext context) {
+          //   return CreateAccountPrompt();
+          // });
+          // log("pressed sign out");
+          // FirebaseAnalytics().logEvent(name: "userTappedCreateAccountSettings", parameters: {'string': "user"});
         },
 
       ),
