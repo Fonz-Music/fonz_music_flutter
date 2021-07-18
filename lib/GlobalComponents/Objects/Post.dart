@@ -1,5 +1,8 @@
 import 'package:fonz_music_flutter/ApiFunctions/ApiConstants.dart';
 import 'package:fonz_music_flutter/ApiFunctions/GuestApi/GuestGetCoasterApi.dart';
+import 'package:fonz_music_flutter/ApiFunctions/GuestApi/GuestSpotifyApi.dart';
+
+import '../GlobalVariables.dart';
 // search bar widget
 class Post {
   String title;
@@ -22,7 +25,7 @@ class Post {
     } else {
       // TODO: fix guest API
       getHostResponse =
-          await GuestApi.queueTrackSpotify(this.trackID, hostSessionIdGlobal);
+          await GuestSpotifyApi.queueTrackSpotify(this.trackID, hostSessionIdGlobal);
       //await GuestApi.queueTrackSpotify(this.trackID, host.hostId);
 
       return {

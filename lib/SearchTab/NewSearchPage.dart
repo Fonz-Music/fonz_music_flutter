@@ -2,24 +2,32 @@ import 'dart:developer';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:fonz_music_flutter/ApiFunctions/GuestApi/GuestSpotifyApi.dart';
 import 'package:fonz_music_flutter/ApiFunctions/SpotifySuggestionInterpreter.dart';
 import 'package:fonz_music_flutter/ApiFunctions/UserTopArtistsResponse.dart';
 import 'package:fonz_music_flutter/ApiFunctions/UserTopTracksResponse.dart';
 import 'package:fonz_music_flutter/GlobalComponents/ExceptionHandling.dart';
+import 'package:fonz_music_flutter/GlobalComponents/GlobalVariables.dart';
 import 'package:fonz_music_flutter/GlobalComponents/Objects/Post.dart';
 import 'package:http/http.dart';
 
-class SearchPage extends StatefulWidget {
-  SearchPage({Key key}) : super(key: key);
+class NewSearchPage extends StatefulWidget {
+  NewSearchPage({Key key}) : super(key: key);
 
   @override
-  _SearchPageState createState() => _SearchPageState();
+  _NewSearchPageState createState() => _NewSearchPageState();
 }
 
-class _SearchPageState extends State<SearchPage> {
+class _NewSearchPageState extends State<NewSearchPage> {
   @override
   Widget build(BuildContext context) {
+
+    final size = MediaQuery.of(context).size;
+    final width = size.width;
+    final height = size.height;
+
     return Container(
+      width: width,
       child: Padding(
         padding: EdgeInsets.all(8.0),
         child: Column(
@@ -45,16 +53,23 @@ class _SearchBarState extends State<SearchBar> {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    final width = size.width;
+    final height = size.height;
     return Container(
+      width: width,
       child: Form(
           key: _formKey,
           child: Row(
             children: <Widget>[
               Icon(Icons.search),
-              TextFormField(
-                decoration: InputDecoration(hintText: 'Search'),
-                controller: _searchController,
-                focusNode: _focusNode,
+              Container(
+                width: width * 0.8,
+                child: TextFormField(
+                  decoration: InputDecoration(hintText: 'Search'),
+                  controller: _searchController,
+                  focusNode: _focusNode,
+                ),
               ),
             ],
           )),
@@ -81,7 +96,7 @@ class SearchResultsPane extends StatefulWidget {
 }
 
 class _SearchResultsPaneState extends State<SearchResultsPane> {
-  final Future<UserTopTracksResponse> _result = SpotifyAPI.getUserTopTracks();
+  final Future<UserTopTracksResponse> _result = GuestSpotifyApi.getUserTopTracks();
   Future<List<Post>> _search;
   bool isSearching = false;
   bool isLoading = false;
@@ -106,7 +121,7 @@ class _SearchResultsPaneState extends State<SearchResultsPane> {
   Future<List<Post>> search(String search) async {
     log("beginning search");
     var account;
-    String token = await FirebaseAuth.instance.currentUser.getIdToken();
+    // String token = await FirebaseAuth.instance.currentUser.getIdToken();
     log("got token");
     search.trim();
     search.replaceAll(' ', '+');
@@ -116,7 +131,7 @@ class _SearchResultsPaneState extends State<SearchResultsPane> {
 
     // var host = await RepositoryServiceAuth.getActiveHostAccount();
 
-    var response = await GuestApi.sessionSearch(hostSessionIdGlobal, search);
+    var response = await GuestSpotifyApi.sessionSearch(hostSessionIdGlobal, search);
 
     var searchResponse;
     log("resp from search " + response.toString());
