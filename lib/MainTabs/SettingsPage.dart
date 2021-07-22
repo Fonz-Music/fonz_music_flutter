@@ -33,7 +33,12 @@ class _SettingsPageState extends State<SettingsPage> {
           color: determineColorThemeBackground(),
          ),
         Opacity(
-          child: Image(image: AssetImage("assets/fonzIcons/mountainProfile.png")),
+          child: Column(
+            children: [
+              Spacer(),
+              Image(image: AssetImage("assets/fonzIcons/mountainProfile.png"), width: width),
+            ],
+          ),
           opacity: 0.4,
         ),
         Column(

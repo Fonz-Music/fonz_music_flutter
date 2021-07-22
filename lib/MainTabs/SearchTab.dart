@@ -28,11 +28,19 @@ class _SearchTabState extends State<SearchTab> {
   @override
   Widget build(BuildContext context) {
 
+    final size = MediaQuery.of(context).size;
+    final width = size.width;
+
     return Stack(
       children:[
         DetermineSearchTabBackgroundColor(),
         Opacity(
-          child: Image(image: AssetImage("assets/fonzIcons/mountainProfile.png")),
+          child: Column(
+            children: [
+              Spacer(),
+              Image(image: AssetImage("assets/fonzIcons/mountainProfile.png"), width: width),
+            ],
+          ),
           opacity: 0.4,
         ),
         PageView(
