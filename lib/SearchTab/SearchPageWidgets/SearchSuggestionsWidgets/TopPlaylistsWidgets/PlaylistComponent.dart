@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:fonz_music_flutter/GlobalComponents/FrontEnd/FrontEndConstants.dart';
 import 'package:fonz_music_flutter/GlobalComponents/Objects/Playlist.dart';
 
+import 'PlaylistTrackModal.dart';
+
 class PlaylistComponent extends StatefulWidget {
 
   PlaylistComponent({Key key, this.givenPlaylist}) : super(key: key);
@@ -24,7 +26,27 @@ class _PlaylistComponentState extends State<PlaylistComponent> {
       padding: EdgeInsets.all(5),
       child: MaterialButton(
         onPressed: (){
-          log("pressed");
+          showModalBottomSheet<dynamic>(context: context,
+              // shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
+              isScrollControlled: true,
+              builder: (BuildContext bc) {
+                return Wrap(
+                    children: <Widget>[
+                      Container(
+                        height: height * 0.95,
+                        child: Container(
+                          decoration: new BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: new BorderRadius.only(
+                                  topLeft: const Radius.circular(25.0),
+                                  topRight: const Radius.circular(25.0))),
+                          child: PlaylistTrackModal(givenPlaylist: widget.givenPlaylist,),
+                        ),
+                      )
+                    ]
+                );
+              }
+          );
         },
         child: Column(
           children: [
@@ -36,7 +58,7 @@ class _PlaylistComponentState extends State<PlaylistComponent> {
                 borderRadius: BorderRadius.circular(CORNERRADIUSBUTTON),
                 child: Image.network("${widget.givenPlaylist.playlistImage}",
                   height: 120,
-                  // width: 120,
+                  width: 120,
                 ),
               ),
             ),

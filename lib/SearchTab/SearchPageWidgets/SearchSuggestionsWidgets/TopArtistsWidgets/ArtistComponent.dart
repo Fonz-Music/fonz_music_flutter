@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:fonz_music_flutter/GlobalComponents/FrontEnd/FrontEndConstants.dart';
 import 'package:fonz_music_flutter/GlobalComponents/Objects/Artist.dart';
 
+import 'ArtistTrackModal.dart';
+
 class ArtistComponent extends StatefulWidget {
 
   ArtistComponent({Key key, this.givenArtist}) : super(key: key);
@@ -25,7 +27,27 @@ class _ArtistComponentState extends State<ArtistComponent> {
       padding: EdgeInsets.all(5),
       child: MaterialButton(
         onPressed: (){
-          log("pressed");
+          showModalBottomSheet<dynamic>(context: context,
+              // shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
+              isScrollControlled: true,
+              builder: (BuildContext bc) {
+                return Wrap(
+                    children: <Widget>[
+                      Container(
+                        height: height * 0.95,
+                        child: Container(
+                          decoration: new BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: new BorderRadius.only(
+                                  topLeft: const Radius.circular(25.0),
+                                  topRight: const Radius.circular(25.0))),
+                          child: ArtistTrackModal(givenArtist: widget.givenArtist,),
+                        ),
+                      )
+                    ]
+                );
+              }
+          );
         },
         child: Column(
           children: [
@@ -37,6 +59,7 @@ class _ArtistComponentState extends State<ArtistComponent> {
                 borderRadius: BorderRadius.circular(250),
                 child: Image.network("${widget.givenArtist.artistImage}",
                   height: 80,
+
                 ),
               ),
             ),

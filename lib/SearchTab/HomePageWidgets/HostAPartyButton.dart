@@ -79,13 +79,9 @@ class _HostAPartyButtonState extends State<HostAPartyButton> {
                             )
                           ]
                       );
-                      return Wrap(children:[CreateAccountPrompt()]);
                    }
                   );
-                  // Navigator.of(context).push(PageRouteBuilder(
-                  //     opaque: false,
-                  //     pageBuilder: (BuildContext context, _, __) =>
-                  //         CreateAccountPrompt()));
+
                 }
                 else {
                   currentTab = 0;

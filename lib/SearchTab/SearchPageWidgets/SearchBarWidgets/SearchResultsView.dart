@@ -127,6 +127,7 @@ class _SearchResultsViewState extends State<SearchResultsView> {
         if (snapshot.hasData) {
           if (!isSearching) {
             return Container(
+              padding: EdgeInsets.all(10),
               child: ListView.builder(
                   itemCount: 10,
                   itemBuilder: (context, i) {
