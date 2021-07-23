@@ -2,8 +2,9 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:fonz_music_flutter/GlobalComponents/FrontEnd/FrontEndConstants.dart';
-import 'package:fonz_music_flutter/GlobalComponents/FrontEnd/FrontEndFunctions.dart';
 import 'package:fonz_music_flutter/GlobalComponents/Objects/Track.dart';
+
+import 'TopSongComponent.dart';
 
 class TopSongsView extends StatefulWidget {
   @override
@@ -53,14 +54,14 @@ class _TopSongsViewState extends State<TopSongsView> {
             children: [
               Row(
                 children: [
-                  TopSongComponent(tempTracks[0]),
-                  TopSongComponent(tempTracks[1]),
+                  TopSongComponent(track: tempTracks[0]),
+                  TopSongComponent(track: tempTracks[1]),
                 ],
               ),
               Row(
                 children: [
-                  TopSongComponent(tempTracks[2]),
-                  TopSongComponent(tempTracks[3]),
+                  TopSongComponent(track: tempTracks[2]),
+                  TopSongComponent(track: tempTracks[3]),
                 ],
               ),
             ],
@@ -69,88 +70,4 @@ class _TopSongsViewState extends State<TopSongsView> {
       ],
     );
   }
-
-  Widget TopSongComponent(Track track) {
-    final size = MediaQuery.of(context).size;
-    final width = size.width;
-    final height = size.height;
-
-    return Container(
-      padding: EdgeInsets.all(5),
-      child: MaterialButton(
-        onPressed: () {
-          log("pressed");
-        },
-        child: Container(
-          width: width * 0.4,
-          height: 50,
-
-          decoration: BoxDecoration(
-            boxShadow: [
-              BoxShadow(
-                color: Colors.grey.withOpacity(0.5),
-                spreadRadius: 2,
-                blurRadius: 4,
-                offset: Offset(3, 3), // changes position of shadow
-              ),
-            ],
-            color: determineColorThemeText(),
-            borderRadius: BorderRadius.circular(CORNERRADIUSBUTTON),
-          ),
-          child: Row(
-            children: [
-              Container(
-              // *---------------Use variable taken from Library selection for album url-----*
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(CORNERRADIUSBUTTON),
-                  child: Image.network("${track.imageLink}",
-                    height: 50,
-                  ),
-                ),
-              ),
-              Container(
-                padding: EdgeInsets.fromLTRB(10, 10, 0, 0),
-                child: Column(
-                  children: [
-                     SizedBox(
-                       width: width * 0.25,
-                       child: Text(
-                            "${track.title}",
-                            style: TextStyle(
-                              fontFamily: FONZFONTTWO,
-                              fontSize: HEADINGSIX,
-                              color: determineColorThemeTextInverse(),
-                            ),
-                            textAlign: TextAlign.left,
-                            softWrap: false,
-                            maxLines: 1,
-                            overflow: TextOverflow.fade,
-                          ),
-                     ),
-
-                     SizedBox(
-                       width: width * 0.25,
-                       child: Text(
-                    // *---------------Use variable taken from Library selection for artist--------*
-                          // removes the brackets from the string
-                            "${convertArtistArrayToString(track.artist.toString())}",
-                            style: TextStyle(
-                              fontFamily: FONZFONTONE,
-                              fontSize: HEADINGSEVEN,
-                              color: determineColorThemeTextInverse(),
-                            ),
-                            textAlign: TextAlign.left,
-                          ),
-                     ),
-
-                  ]
-                ),
-              )
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
 }

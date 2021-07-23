@@ -137,6 +137,10 @@ const FONZFONTFOUR = 'MuseoSans-700';
 
 const CORNERRADIUSBUTTON = 3.0;
 
+// ---------------------------Component Sizes-----------------------------------
+
+const COMPONENTWIDTH = 0.95;
+
 // ---------------------------Swipe Speed---------------------------------------
 
 const SWIPESPEED = 650;

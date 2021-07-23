@@ -48,7 +48,7 @@ class _ActiveSongViewState extends State<ActiveSongView> {
                 color: determineColorThemeBackground(),
                 borderRadius: BorderRadius.circular(CORNERRADIUSBUTTON),
               ),
-              width: width * 0.95,
+              width: width * COMPONENTWIDTH,
               height: 150,
               child: Column(
                 children: [

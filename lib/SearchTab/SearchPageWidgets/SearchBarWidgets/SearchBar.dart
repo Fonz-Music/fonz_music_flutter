@@ -20,7 +20,7 @@ class _SearchBarState extends State<SearchBar> {
     final width = size.width;
     final height = size.height;
     return Container(
-      width: width * 0.95,
+      width: width * COMPONENTWIDTH,
       padding: EdgeInsets.fromLTRB(0, 20, 0, 20),
       child: Form(
           key: _formKey,
@@ -56,9 +56,9 @@ class _SearchBarState extends State<SearchBar> {
                       color: determineColorThemeTextInverse(),
                     ),
                     decoration: new InputDecoration(
-                      hintText: "search",
+                      hintText: "queue a song",
                       enabledBorder: InputBorder.none,
-                      contentPadding: EdgeInsets.only(left: 15, bottom: 11, top: 11, right: 15),
+                      contentPadding: EdgeInsets.only(left: 0, bottom: 11, top: 11, right: 15),
                     ),
                     controller: _searchController,
                     focusNode: _focusNode,

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:fonz_music_flutter/GlobalComponents/FrontEnd/FrontEndConstants.dart';
+import 'package:fonz_music_flutter/SearchTab/SearchPageWidgets/SearchSuggestionsWidgets/TopArtistsWidgets/TopArtistsView.dart';
 
+import 'TopPlaylistsWidgets/TopPlaylistsView.dart';
 import 'TopSongsWidgets/TopSongsView.dart';
 
 class SongSuggestionsView extends StatefulWidget {
@@ -33,6 +35,8 @@ class _SongSuggestionsViewState extends State<SongSuggestionsView> {
             Column(
               children: [
                 TopSongsView(),
+                TopArtistsView(),
+                TopPlaylistsView()
               ],
             ),
 
