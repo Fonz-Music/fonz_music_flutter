@@ -63,7 +63,7 @@ class _HomeDecisionPageState extends State<HomeDecisionPage> {
               child: Padding(
                 padding: EdgeInsets.fromLTRB(20, 30, 0, 0),
                 child: new Text(
-                  "search",
+                  "queue",
                   style: TextStyle(
                     fontFamily: FONZFONTTWO,
                     fontSize: HEADINGTHREE,

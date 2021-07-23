@@ -4,14 +4,14 @@ import 'package:fonz_music_flutter/ApiFunctions/GuestApi/GuestSpotifyApi.dart';
 
 import '../GlobalVariables.dart';
 // search bar widget
-class Post {
+class Track {
   String title;
   List<String> artist;
   String trackID;
   String imageLink;
   // String songUrl;
 
-  Post(this.title, this.artist, this.trackID, this.imageLink);
+  Track(this.title, this.artist, this.trackID, this.imageLink);
   Future<Map> queueSpotify() async {
     var getHostResponse;
     // attempts to queue a song to spotify and throws an error if incomplete

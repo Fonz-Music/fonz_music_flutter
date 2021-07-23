@@ -40,7 +40,7 @@ class _SettingsPageState extends State<SettingsPage> {
           child: Column(
             children: [
               Spacer(),
-              Image(image: AssetImage("assets/fonzIcons/mountainProfile.png"), width: width),
+              Image(image: AssetImage("assets/fonzIcons/mountainProfileLarger.png"), width: width,),
             ],
           ),
           opacity: 0.4,
