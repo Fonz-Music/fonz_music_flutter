@@ -14,6 +14,7 @@ import 'package:fonz_music_flutter/SearchTab/HomePageWidgets/HostAPartyButton.da
 import 'package:fonz_music_flutter/SearchTab/HomePageWidgets/JoinAPartyButton.dart';
 import 'package:fonz_music_flutter/SearchTab/HomePageWidgets/HomePageResponses/JoinSuccessfulCircle.dart';
 import 'package:fonz_music_flutter/SearchTab/HomePageWidgets/TapYourPhoneAmber.dart';
+import 'package:fonz_music_flutter/main.dart';
 
 import 'HomePageWidgets/BuyACoasterHomeButton.dart';
 import 'HomePageWidgets/HomePageResponses/CoasterHasNoHost.dart';
@@ -153,8 +154,9 @@ class _HomeDecisionPageState extends State<HomeDecisionPage> {
               Row(
                 children: [
                   Spacer(),
-                  ConnectSpotifyHomePageButton(notifyParent: refresh),
-                  Spacer(),
+                  DetermineIfSpotifyHomeButtonShown(),
+
+
                   BuyACoasterHomeButton(),
                   Spacer(),
                 ],
@@ -168,6 +170,22 @@ class _HomeDecisionPageState extends State<HomeDecisionPage> {
         ),
       );
     }
+  }
+
+
+  Widget DetermineIfSpotifyHomeButtonShown() {
+    if (!connectedToSpotify) {
+      return  Row(
+        children: [
+          ConnectSpotifyHomePageButton(notifyParent: refresh),
+          Container(
+            width: 30,
+            child: Spacer(),
+          ),
+        ],
+      );
+  }
+    else return Container();
   }
 
 
