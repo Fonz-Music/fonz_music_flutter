@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:fonz_music_flutter/GlobalComponents/FrontEnd/FrontEndConstants.dart';
 import 'package:fonz_music_flutter/MainTabs/SearchTab.dart';
 
+import 'ActiveSongWidgets/ActiveSongView.dart';
 import 'SearchBarWidgets/SearchBar.dart';
+import 'SearchSuggestionsWidgets/SongSuggestionsView.dart';
 
 class SearchPage extends StatefulWidget {
 
@@ -22,7 +24,7 @@ class _SearchPageState extends State<SearchPage> {
     final width = size.width;
     final height = size.height;
 
-    return Container(
+    return SingleChildScrollView(
       child: Column(
           children: [
             Row(
@@ -63,6 +65,8 @@ class _SearchPageState extends State<SearchPage> {
               ],
             ),
             SearchBar(),
+            ActiveSongView(),
+            SongSuggestionsView()
 
           ]
       ),

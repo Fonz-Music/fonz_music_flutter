@@ -29,8 +29,15 @@ class _SearchBarState extends State<SearchBar> {
 
 
             decoration: BoxDecoration(
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.5),
+                  spreadRadius: 2,
+                  blurRadius: 4,
+                  offset: Offset(3, 3), // changes position of shadow
+                ),
+              ],
               color: determineColorThemeBackground(),
-              // border: Border.all(color: Colors.grey),
               borderRadius: BorderRadius.circular(CORNERRADIUSBUTTON),
             ),
             child: Row(
@@ -42,19 +49,15 @@ class _SearchBarState extends State<SearchBar> {
                 ),
                 Container(
                   width: width * 0.8,
-                  // decoration: BoxDecoration(
-                  //   border: Border.all(color: Colors.grey),
-                  //   borderRadius: BorderRadius.circular(CORNERRADIUSBUTTON),
-                  // ),
                   child: TextFormField(
+                    style: TextStyle(
+                      fontFamily: FONZFONTTWO,
+                      fontSize: HEADINGFIVE,
+                      color: determineColorThemeTextInverse(),
+                    ),
                     decoration: new InputDecoration(
-
                       hintText: "search",
-                      border: InputBorder.none,
-                      focusedBorder: InputBorder.none,
                       enabledBorder: InputBorder.none,
-                      errorBorder: InputBorder.none,
-                      disabledBorder: InputBorder.none,
                       contentPadding: EdgeInsets.only(left: 15, bottom: 11, top: 11, right: 15),
                     ),
                     controller: _searchController,
