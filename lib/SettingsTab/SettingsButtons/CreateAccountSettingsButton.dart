@@ -55,10 +55,26 @@ class _CreateAccountSettingsButtonState extends State<CreateAccountSettingsButto
             color: determineColorThemeBackground()
         ),
         onPressed: () {
-          // showModalBottomSheet(context: context, builder: (BuildContext context) {
-          //   return CreateAccountPrompt();
-          // });
-          // log("pressed sign out");
+          showModalBottomSheet<dynamic>(context: context,
+          isScrollControlled: true,
+          builder: (BuildContext bc) {
+            return Wrap(
+                children: <Widget>[
+                  Container(
+                    height: height * 0.95,
+                    child: Container(
+                      decoration: new BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: new BorderRadius.only(
+                              topLeft: const Radius.circular(25.0),
+                              topRight: const Radius.circular(25.0))),
+                      child: CreateAccountPrompt(),
+                    ),
+                  )
+                ]
+            );
+            return Wrap(children:[CreateAccountPrompt()]);
+          });
           // FirebaseAnalytics().logEvent(name: "userTappedCreateAccountSettings", parameters: {'string': "user"});
         },
 

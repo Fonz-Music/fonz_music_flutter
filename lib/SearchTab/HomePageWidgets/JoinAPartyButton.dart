@@ -28,11 +28,11 @@ class _JoinAPartyButtonState extends State<JoinAPartyButton> {
             padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
             child: NeumorphicButton(
               child: Container(
-                width: 100,
-                height: 100,
+                width: 200,
+                height: 200,
                 child:
                 Container(
-                  padding: const EdgeInsets.all(30),
+                  padding: const EdgeInsets.all(70),
                   child: Image(
                     image: AssetImage("assets/fonzIcons/plusIconAmber.png"),
 
@@ -59,10 +59,10 @@ class _JoinAPartyButtonState extends State<JoinAPartyButton> {
           Padding(
             padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
             child: new Text(
-              "i want to queue a song",
+              "queue a song",
               style: TextStyle(
                 fontFamily: FONZFONTTWO,
-                fontSize: HEADINGFOUR,
+                fontSize: HEADINGTHREE,
                 color: determineColorThemeTextInverse(),
               ),
               textAlign: TextAlign.center,

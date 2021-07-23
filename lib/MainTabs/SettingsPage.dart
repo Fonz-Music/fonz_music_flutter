@@ -7,6 +7,7 @@ import 'package:fonz_music_flutter/HostTab/CoasterDashboardViews/CoasterDashboar
 import 'package:fonz_music_flutter/MainTabs/HostTab.dart';
 import 'package:fonz_music_flutter/SettingsTab/SettingsButtons/BuyACoasterButton.dart';
 import 'package:fonz_music_flutter/SettingsTab/SettingsButtons/ChangeNameButton.dart';
+import 'package:fonz_music_flutter/SettingsTab/SettingsButtons/ConnectSpotifySettingsButton.dart';
 import 'package:fonz_music_flutter/SettingsTab/SettingsButtons/CreateAccountSettingsButton.dart';
 import 'package:fonz_music_flutter/SettingsTab/SettingsButtons/DetermineAmountSongRequests.dart';
 import 'package:fonz_music_flutter/SettingsTab/SettingsButtons/ManageSpotifyButton.dart';
@@ -106,25 +107,28 @@ class _SettingsPageState extends State<SettingsPage> {
     );
   }
   Widget DetermineWhichButtonsShown() {
-    if (hasConnectedCoasters && connectedToSpotify) {
+    if (hasAccount && connectedToSpotify) {
       return Column(
         children: [
 
           // change name
           ChangeNameButton(),
-          // sign out
-          SignOutButton(),
           // manage spotify
           ManageSpotifyButton(),
+          // sign out
+          SignOutButton(),
+
         ],
       );
     }
-    else if (hasConnectedCoasters) {
+    else if (hasAccount) {
       return Column(
         children: [
 
           // change name
           ChangeNameButton(),
+          // connect to spotify
+          ConnectSpotifySettingsButton(),
           // sign out
           SignOutButton(),
         ],

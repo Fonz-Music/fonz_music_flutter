@@ -5,20 +5,18 @@ import 'package:firebase_analytics/firebase_analytics.dart';
 
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:fonz_music_flutter/GlobalComponents/FrontEnd/FrontEndConstants.dart';
-import 'package:fonz_music_flutter/GlobalComponents/GlobalFunctions/LaunchShop.dart';
-import 'package:url_launcher/url_launcher.dart';
 
-
-class BuyACoasterButton extends StatefulWidget {
+class ConnectSpotifySettingsButton extends StatefulWidget {
   @override
-  _BuyACoasterButtonState createState() => _BuyACoasterButtonState();
+  _ConnectSpotifySettingsButtonState createState() => _ConnectSpotifySettingsButtonState();
 }
 
-class _BuyACoasterButtonState extends State<BuyACoasterButton> {
+class _ConnectSpotifySettingsButtonState extends State<ConnectSpotifySettingsButton> {
   @override
   Widget build(BuildContext context) {
-
-    final size = MediaQuery.of(context).size;
+    final size = MediaQuery
+        .of(context)
+        .size;
     final width = size.width;
     final height = size.height;
 
@@ -32,13 +30,13 @@ class _BuyACoasterButtonState extends State<BuyACoasterButton> {
               Padding(
                 padding: const EdgeInsets.fromLTRB(0, 0, 20, 0),
                 child: Image(
-                  image: AssetImage("assets/fonzIcons/coasterIconAmber.png"),
+                  image: AssetImage("assets/fonzIcons/spotifyIconAmber.png"),
                   height: 30,
                   width: 30,
                 ),
               ),
               Text(
-                "buy a coaster",
+                "connect to Spotify",
                 style: TextStyle(
                   fontFamily: FONZFONTONE,
                   fontSize: HEADINGFIVE,
@@ -53,9 +51,10 @@ class _BuyACoasterButtonState extends State<BuyACoasterButton> {
             boxShape: NeumorphicBoxShape.rect(),
             color: determineColorThemeBackground()
         ),
-        onPressed: () async {
-          launchShop();
-          FirebaseAnalytics().logEvent(name: "userOpenedBuyCoaster", parameters: {'string': "user"});
+        onPressed: () {
+          log("pressed sign out");
+          FirebaseAnalytics().logEvent(
+              name: "userOpenedManageSpotify", parameters: {'string': "user"});
         },
 
       ),

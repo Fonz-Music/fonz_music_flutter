@@ -7,6 +7,7 @@ import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:fonz_music_flutter/GlobalComponents/FrontEnd/FrontEndConstants.dart';
 import 'package:fonz_music_flutter/GlobalComponents/Objects/CoasterObject.dart';
 import 'package:fonz_music_flutter/MainTabs/SearchTab.dart';
+import 'package:fonz_music_flutter/SearchTab/HomePageWidgets/ConnectSpotifyHomePage.dart';
 
 import 'package:fonz_music_flutter/SearchTab/HomePageWidgets/HomePageResponses/FailPartyJoin.dart';
 import 'package:fonz_music_flutter/SearchTab/HomePageWidgets/HostAPartyButton.dart';
@@ -14,6 +15,7 @@ import 'package:fonz_music_flutter/SearchTab/HomePageWidgets/JoinAPartyButton.da
 import 'package:fonz_music_flutter/SearchTab/HomePageWidgets/HomePageResponses/JoinSuccessfulCircle.dart';
 import 'package:fonz_music_flutter/SearchTab/HomePageWidgets/TapYourPhoneAmber.dart';
 
+import 'HomePageWidgets/BuyACoasterHomeButton.dart';
 import 'HomePageWidgets/HomePageResponses/CoasterHasNoHost.dart';
 
 bool pressedNfcButtonToJoinPartu = false;
@@ -148,8 +150,19 @@ class _HomeDecisionPageState extends State<HomeDecisionPage> {
         height: height * 0.7,
         child: Column(
           children: [
-              HostAPartyButton(notifyParent: widget.notifyParent,),
-              Spacer(),
+              Row(
+                children: [
+                  Spacer(),
+                  ConnectSpotifyHomePageButton(notifyParent: refresh),
+                  Spacer(),
+                  BuyACoasterHomeButton(),
+                  Spacer(),
+                ],
+              ),
+              // HostAPartyButton(notifyParent: widget.notifyParent,),
+              Container(
+                  height: height * 0.1,
+                  child: Spacer()),
               JoinAPartyButton(notifyParent: refresh),
           ],
         ),
