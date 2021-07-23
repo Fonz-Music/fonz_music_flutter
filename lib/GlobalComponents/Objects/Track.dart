@@ -9,9 +9,10 @@ class Track {
   List<String> artist;
   String trackID;
   String imageLink;
-  // String songUrl;
+  String songUrl = "";
 
   Track(this.title, this.artist, this.trackID, this.imageLink);
+  Track.withUrl(this.title, this.artist, this.trackID, this.imageLink, this.songUrl);
   Future<Map> queueSpotify() async {
     var getHostResponse;
     // attempts to queue a song to spotify and throws an error if incomplete

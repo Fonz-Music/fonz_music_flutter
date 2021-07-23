@@ -125,6 +125,8 @@ const HEADINGTWO = 40.0;
 const HEADINGTHREE = 24.0;
 const HEADINGFOUR = 24.0;
 const HEADINGFIVE = 18.0;
+const HEADINGSIX = 14.0;
+const HEADINGSEVEN = 10.0;
 
 const FONZFONTONE = 'MuseoSans-100';
 const FONZFONTTWO = 'MuseoSans-300';

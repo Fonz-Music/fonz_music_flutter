@@ -20,7 +20,7 @@ class _SearchBarState extends State<SearchBar> {
     final width = size.width;
     final height = size.height;
     return Container(
-      width: width * 0.9,
+      width: width * 0.95,
       padding: EdgeInsets.fromLTRB(0, 20, 0, 20),
       child: Form(
           key: _formKey,
