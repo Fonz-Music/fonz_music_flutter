@@ -4,6 +4,7 @@
 import 'dart:developer';
 
 import 'package:fonz_music_flutter/ApiFunctions/GuestApi/GuestGetCoasterApi.dart';
+import 'package:fonz_music_flutter/GlobalComponents/GlobalVariables.dart';
 import 'package:fonz_music_flutter/GlobalComponents/Objects/CoasterObject.dart';
 import 'package:fonz_music_flutter/NfcFunctions/GuestNfcFunctions.dart';
 
@@ -36,6 +37,7 @@ Future<CoasterObject> scanForCoasterDetails() async {
       hostCoasterDetails.hostName = hostDetails["body"]["displayName"];
       hostCoasterDetails.coasterName = hostDetails["body"]["coasterName"];
       hostCoasterDetails.sessionId = hostDetails["body"]["sessionId"];
+      hostSessionIdGlobal = hostDetails["body"]["sessionId"];
       log("stored coaster ");
     }
   }

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:fonz_music_flutter/GlobalComponents/FrontEnd/FrontEndConstants.dart';
 import 'package:fonz_music_flutter/SearchTab/HomePageDecision.dart';
+import 'package:fonz_music_flutter/SearchTab/NewSearchPage.dart';
 import 'package:fonz_music_flutter/SearchTab/SearchPage.dart';
 
 bool connectedToAHost = false;
@@ -21,17 +22,25 @@ class SearchTab extends StatefulWidget {
 class _SearchTabState extends State<SearchTab> {
 
   PageController _searchTabController = PageController(
-    initialPage: 0,
+    initialPage: 1,
   );
 
   @override
   Widget build(BuildContext context) {
 
+    final size = MediaQuery.of(context).size;
+    final width = size.width;
+
     return Stack(
       children:[
         DetermineSearchTabBackgroundColor(),
         Opacity(
-          child: Image(image: AssetImage("assets/fonzIcons/mountainProfile.png")),
+          child: Column(
+            children: [
+              Spacer(),
+              Image(image: AssetImage("assets/fonzIcons/mountainProfile.png"), width: width),
+            ],
+          ),
           opacity: 0.4,
         ),
         PageView(
@@ -40,7 +49,7 @@ class _SearchTabState extends State<SearchTab> {
           scrollDirection: Axis.vertical,
           children: [
             HomeDecisionPage(controller: _searchTabController, currentTab: widget.currentTab, notifyParent: widget.notifyParent),
-            SearchPage()
+            NewSearchPage()
           ],
         ),
       ]

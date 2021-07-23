@@ -37,7 +37,12 @@ class _HostTabState extends State<HostTab> {
       children:[
         DetermineHostTabBackgroundColor(),
         Opacity(
-            child: Image(image: AssetImage("assets/fonzIcons/mountainProfile.png")),
+          child: Column(
+            children: [
+              Spacer(),
+              Image(image: AssetImage("assets/fonzIcons/mountainProfile.png"), width: width),
+            ],
+          ),
           opacity: 0.4,
         ),
         PageView(
