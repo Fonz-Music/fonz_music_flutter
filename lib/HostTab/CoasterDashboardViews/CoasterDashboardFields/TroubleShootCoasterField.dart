@@ -45,6 +45,7 @@ class _TroubleShootCoasterFieldState extends State<TroubleShootCoasterField> {
       backgroundColor: determineColorThemeBackground(),
       title:
       Container(
+        width: width * 0.8,
         color: LILAC,
         padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
         child: Row(

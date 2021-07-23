@@ -62,7 +62,7 @@ class _HostSetupPageState extends State<HostSetupPage> {
                   style: TextStyle(
                     fontFamily: FONZFONTTWO,
                     fontSize: HEADINGTHREE,
-                    color: determineColorThemeText(),
+                    color: determineColorThemeTextInverse(),
                   ),
                   textAlign: TextAlign.left,
                 ),

@@ -4,6 +4,7 @@ import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:fonz_music_flutter/GlobalComponents/FrontEnd/FrontEndConstants.dart';
+import 'package:fonz_music_flutter/SettingsTab/SettingsFields/RenameDisplayNameField.dart';
 
 class ChangeNameButton extends StatefulWidget {
   @override
@@ -49,10 +50,18 @@ class _ChangeNameButtonState extends State<ChangeNameButton> {
             boxShape: NeumorphicBoxShape.rect(),
             color: determineColorThemeBackground()
         ),
-        onPressed: () {
-          log("pressed sign out");
+        onPressed: () async {
+
+          await showDialog(
+              context: context,
+              builder: (popupContext) {
+                return RenameDisplayNameField(popupContext: popupContext);
+              }
+          );
           FirebaseAnalytics().logEvent(name: "userChangedName", parameters: {'string': "user"});
+          // widget.notifyParent();
         },
+
 
       ),
     );

@@ -16,6 +16,9 @@ import 'package:fonz_music_flutter/SettingsTab/SettingsButtons/SignOutButton.dar
 import '../main.dart';
 
 class SettingsPage extends StatefulWidget {
+
+  SettingsPage({Key key,  this.notifyParent}) : super(key: key);
+  Function notifyParent;
   @override
   _SettingsPageState createState() => _SettingsPageState();
 }
@@ -98,7 +101,7 @@ class _SettingsPageState extends State<SettingsPage> {
                 Spacer()
               ],
             ),
-            DetermineWhichButtonsShown(),
+            DetermineWhichButtonsShown(widget.notifyParent),
             // determine # of song queues
             // DetermineAmountSongRequests()
         ]
@@ -106,7 +109,7 @@ class _SettingsPageState extends State<SettingsPage> {
       ]
     );
   }
-  Widget DetermineWhichButtonsShown() {
+  Widget DetermineWhichButtonsShown(notifyParent) {
     if (hasAccount && connectedToSpotify) {
       return Column(
         children: [
@@ -114,9 +117,9 @@ class _SettingsPageState extends State<SettingsPage> {
           // change name
           ChangeNameButton(),
           // manage spotify
-          ManageSpotifyButton(),
+          ManageSpotifyButton(notifyParent: notifyParent),
           // sign out
-          SignOutButton(),
+          SignOutButton(notifyParent: notifyParent),
 
         ],
       );
@@ -130,7 +133,7 @@ class _SettingsPageState extends State<SettingsPage> {
           // connect to spotify
           ConnectSpotifySettingsButton(),
           // sign out
-          SignOutButton(),
+          SignOutButton(notifyParent: notifyParent),
         ],
       );
     }

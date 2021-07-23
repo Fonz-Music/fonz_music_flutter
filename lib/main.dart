@@ -110,8 +110,8 @@ class FonzMusicApp extends StatelessWidget {
 }
 
 int currentTab = 1;
-bool connectedToSpotify = false;
-bool hasConnectedCoasters = false;
+bool connectedToSpotify = true;
+bool hasConnectedCoasters = true;
 bool hasAccount = true;
 
 class MyHomePage extends StatefulWidget {
@@ -144,7 +144,7 @@ class _MyHomePageState extends State<MyHomePage> {
     List<Widget> _children = [
       HostTab(),
       SearchTab(currentTab: currentTab, notifyParent: refresh),
-      SettingsPage()
+      SettingsPage(notifyParent: refresh,)
     ];
 
 

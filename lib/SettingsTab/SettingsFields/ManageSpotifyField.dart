@@ -2,22 +2,22 @@ import 'dart:developer';
 
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
-import 'package:fonz_music_flutter/ApiFunctions/HostApi/CoasterManagementApi.dart';
 import 'package:fonz_music_flutter/GlobalComponents/FrontEnd/FrontEndConstants.dart';
 
-class DisconnectCoasterField extends StatefulWidget {
 
-  DisconnectCoasterField({Key key, this.coasterUid, this.popupContext, this.coasterName, this.notifyParent}) : super(key: key);
+
+
+class ManageSpotifyField extends StatefulWidget {
+
+  ManageSpotifyField({Key key,  this.popupContext,  this.notifyParent}) : super(key: key);
   final popupContext;
-  final coasterUid;
-  final coasterName;
   final Function() notifyParent;
 
   @override
-  _DisconnectCoasterFieldState createState() => _DisconnectCoasterFieldState();
+  _ManageSpotifyFieldState createState() => _ManageSpotifyFieldState();
 }
 
-class _DisconnectCoasterFieldState extends State<DisconnectCoasterField> {
+class _ManageSpotifyFieldState extends State<ManageSpotifyField> {
 
 
   @override
@@ -44,14 +44,14 @@ class _DisconnectCoasterFieldState extends State<DisconnectCoasterField> {
       title:
       Container(
         width: width * 0.8,
-        color: LILAC,
+        color: AMBER,
         padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
         child: Row(
           children: [
             Padding(
               padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
               child: Text(
-                '${(widget.coasterName)}',
+                'your Spotify',
                 style: TextStyle(
                   fontFamily: FONZFONTONE,
                   fontSize: HEADINGFIVE,
@@ -70,7 +70,7 @@ class _DisconnectCoasterFieldState extends State<DisconnectCoasterField> {
                   width: 30,
                   child: Image(
                     image: AssetImage(
-                        "assets/lightGreyIcons/coasterIconLightGrey.png"),
+                        getSpotifyIconLight()),
                   ),
                 ),
               ),
@@ -85,7 +85,7 @@ class _DisconnectCoasterFieldState extends State<DisconnectCoasterField> {
 
           padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
           child: Text(
-            'are you sure you wanna disconnect your coaster?',
+            'do you wanna disconnect from Spotify?',
             style: TextStyle(
               fontFamily: FONZFONTONE,
               fontSize: HEADINGFIVE,
@@ -108,7 +108,7 @@ class _DisconnectCoasterFieldState extends State<DisconnectCoasterField> {
                       size: 18,
                       color: Colors.white,
                     ),
-                    color: LILAC,
+                    color: AMBER,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(CORNERRADIUSBUTTON),
                     ),
@@ -128,19 +128,16 @@ class _DisconnectCoasterFieldState extends State<DisconnectCoasterField> {
                       size: 18,
                       color: Colors.white,
                     ),
-                    color: LILAC,
+                    color: AMBER,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(CORNERRADIUSBUTTON),
                     ),
                     onPressed: () async{
-                      log("issue first ");
-                      await CoasterManagementApi.disconnectCoaster(widget.coasterUid);
-                      log("issue after await ");
-                      // coasterActive = !coasterActive;
-                      log("here? ");
-                      // updatePageCoasterDashboard = true;
-                      // tells firebase that the host disconnected the coaster
-                      FirebaseAnalytics().logEvent(name: "hostDisconnectedCoaster", parameters: {'string':"host" });
+
+
+
+
+
                       widget.notifyParent();
                       Navigator.pop(widget.popupContext);
                     },

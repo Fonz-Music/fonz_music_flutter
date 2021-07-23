@@ -5,11 +5,16 @@ import 'package:firebase_analytics/firebase_analytics.dart';
 
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:fonz_music_flutter/GlobalComponents/FrontEnd/FrontEndConstants.dart';
+import 'package:fonz_music_flutter/SettingsTab/SettingsFields/SignOutField.dart';
 
 
 
 
 class SignOutButton extends StatefulWidget {
+
+  SignOutButton({Key key,  this.notifyParent}) : super(key: key);
+  Function notifyParent;
+
   @override
   _SignOutButtonState createState() => _SignOutButtonState();
 }
@@ -53,10 +58,20 @@ class _SignOutButtonState extends State<SignOutButton> {
             boxShape: NeumorphicBoxShape.rect(),
             color: determineColorThemeBackground()
         ),
-        onPressed: () {
-          log("pressed sign out");
-          FirebaseAnalytics().logEvent(name: "userSignedOut", parameters: {'string': "user"});
+        onPressed: () async {
+
+          await showDialog(
+              context: context,
+              builder: (popupContext) {
+                return SignOutField(popupContext: popupContext, notifyParent: widget.notifyParent);
+              }
+          );
+          // widget.notifyParent();
         },
+        // onPressed: () {
+        //   log("pressed sign out");
+        //   FirebaseAnalytics().logEvent(name: "userSignedOut", parameters: {'string': "user"});
+        // },
 
       ),
     );

@@ -23,40 +23,61 @@ determineColorThemeTextInverse() {
   if (darkMode) return const Color(0xFFFFFFFF);
   else return const Color(0xFF474747);
 }
-
+// ----------------------------- Coaster Icon -----------------------------------
 getCoasterIcon() {
   if (darkMode) return "assets/lightGreyIcons/coasterIconLightGrey.png";
   else return "assets/darkGreyIcons/coasterIconDarkGrey.png";
 }
+getCoasterIconLight() {
+  return "assets/lightGreyIcons/coasterIconLightGrey.png";
 
+}
+getCoasterIconDark() {
+ return "assets/darkGreyIcons/coasterIconDarkGrey.png";
+}
+// ----------------------------- Fonz Icon -----------------------------------
 getFonzLogoIcon() {
   if (darkMode) return "assets/darkGreyIcons/fonzLogoDarkGreyF.png";
   else return "assets/lightGreyIcons/fonzLogoLightGreyF.png";
 }
+// ----------------------------- Queue Icon -----------------------------------
 getQueueIcon() {
   if (darkMode) return "assets/darkGreyIcons/queueIconDarkGrey.png";
   else return "assets/lightGreyIcons/queueIconLightGrey.png";
 }
+// ----------------------------- Edit Icon -----------------------------------
 getEditIcon() {
   if (darkMode) return "assets/lightGreyIcons/editIconLightGrey.png";
   else return "assets/darkGreyIcons/editIconDarkGrey.png";
 }
+getEditIconInverse() {
+  if (darkMode) return "assets/darkGreyIcons/editIconDarkGrey.png";
+  else return "assets/lightGreyIcons/editIconLightGrey.png";
+}
+getEditIconLight() {
+ return "assets/lightGreyIcons/editIconLightGrey.png";
+}
+getEditIconDark() {
+  return "assets/darkGreyIcons/editIconDarkGrey.png";
+}
+// ----------------------------- Disable Icon -----------------------------------
 getDisableIcon() {
   if (darkMode) return "assets/lightGreyIcons/disableIconLightGrey.png";
   else return "assets/darkGreyIcons/disableIconDarkGrey.png";
 }
+// ----------------------------- Pause Icon -----------------------------------
 getPauseIcon() {
   if (darkMode) return "assets/lightGreyIcons/pauseIconLightGrey.png";
   else return "assets/darkGreyIcons/pauseIconDarkGrey.png";
 }
-// getRockOnIcon() {
-//   if (darkMode) return "assets/darkGreyIcons/rockOnIconDarkGrey.png";
-//   else return "assets/lightGreyIcons/rockOnIconLightGrey.png";
-// }
+// ----------------------------- Spotify Icon -----------------------------------
 getSpotifyIcon() {
   // return "assets/fonzIcons/SpotifyBlack.png";
   if (darkMode) return "assets/darkGreyIcons/spotifyIconDarkGrey.png";
   else return "assets/lightGreyIcons/spotifyIconLightGrey.png";
+}
+getSpotifyIconLight() {
+  return "assets/lightGreyIcons/spotifyIconLightGrey.png";
 }
 
 // -------------------Colors-------------------------------------

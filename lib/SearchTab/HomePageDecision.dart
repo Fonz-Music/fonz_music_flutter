@@ -155,8 +155,6 @@ class _HomeDecisionPageState extends State<HomeDecisionPage> {
                 children: [
                   Spacer(),
                   DetermineIfSpotifyHomeButtonShown(),
-
-
                   BuyACoasterHomeButton(),
                   Spacer(),
                 ],
@@ -185,7 +183,9 @@ class _HomeDecisionPageState extends State<HomeDecisionPage> {
         ],
       );
   }
-    else return Container();
+    else return Container(
+      width: 0,
+    );
   }
 
 
