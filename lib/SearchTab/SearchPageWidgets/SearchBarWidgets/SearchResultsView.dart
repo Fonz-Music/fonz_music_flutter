@@ -9,6 +9,8 @@ import 'package:fonz_music_flutter/GlobalComponents/FrontEnd/FrontEndConstants.d
 import 'package:fonz_music_flutter/GlobalComponents/GlobalVariables.dart';
 import 'package:fonz_music_flutter/GlobalComponents/Objects/Track.dart';
 
+import '../TrackButton.dart';
+
 
 class SearchResultsView extends StatefulWidget {
   SearchResultsView({Key key}) : super(key: key);
@@ -22,6 +24,30 @@ class _SearchResultsViewState extends State<SearchResultsView> {
   Future<List<Track>> _search;
   bool isSearching = false;
   bool isLoading = false;
+
+  var tempTracks = [
+    Track("Boyfriend", [" Big Time Rush"], "1rKBOL9kJfX1Y4C3QaOvRH", "https://i.scdn.co/image/ab67616d0000b27350acd1f66ebd5b84630c7129"),
+    Track.withUrl("Is It True", ["Tame Impala"], "6RZmhpvukfyeSURhf4kZ0d", "https://i.scdn.co/image/ab67616d0000b27358267bd34420a00d5cf83a49", "https://open.spotify.com/track/6RZmhpvukfyeSURhf4kZ0d"),
+    Track.withUrl("The Spirit Of Radio", ["Rush"], "4e9hUiLsN4mx61ARosFi7p", "https://i.scdn.co/image/ab67616d0000b27306c0d7ebcabad0c39b566983", "https://open.spotify.com/track/4e9hUiLsN4mx61ARosFi7p"),
+    Track.withUrl("Limelight", ["Rush"], "0K6yUnIKNsFtfIpTgGtcHm", "https://i.scdn.co/image/ab67616d0000b27372833c1ae3343cbfb4617073", "https://open.spotify.com/track/0K6yUnIKNsFtfIpTgGtcHm"),
+    Track("Boyfriend", [" Big Time Rush"], "1rKBOL9kJfX1Y4C3QaOvRH", "https://i.scdn.co/image/ab67616d0000b27350acd1f66ebd5b84630c7129"),
+    Track.withUrl("Is It True", ["Tame Impala"], "6RZmhpvukfyeSURhf4kZ0d", "https://i.scdn.co/image/ab67616d0000b27358267bd34420a00d5cf83a49", "https://open.spotify.com/track/6RZmhpvukfyeSURhf4kZ0d"),
+    Track.withUrl("The Spirit Of Radio", ["Rush"], "4e9hUiLsN4mx61ARosFi7p", "https://i.scdn.co/image/ab67616d0000b27306c0d7ebcabad0c39b566983", "https://open.spotify.com/track/4e9hUiLsN4mx61ARosFi7p"),
+    Track.withUrl("Limelight", ["Rush"], "0K6yUnIKNsFtfIpTgGtcHm", "https://i.scdn.co/image/ab67616d0000b27372833c1ae3343cbfb4617073", "https://open.spotify.com/track/0K6yUnIKNsFtfIpTgGtcHm"),
+    Track("Boyfriend", [" Big Time Rush"], "1rKBOL9kJfX1Y4C3QaOvRH", "https://i.scdn.co/image/ab67616d0000b27350acd1f66ebd5b84630c7129"),
+    Track.withUrl("Is It True", ["Tame Impala"], "6RZmhpvukfyeSURhf4kZ0d", "https://i.scdn.co/image/ab67616d0000b27358267bd34420a00d5cf83a49", "https://open.spotify.com/track/6RZmhpvukfyeSURhf4kZ0d"),
+    Track.withUrl("The Spirit Of Radio", ["Rush"], "4e9hUiLsN4mx61ARosFi7p", "https://i.scdn.co/image/ab67616d0000b27306c0d7ebcabad0c39b566983", "https://open.spotify.com/track/4e9hUiLsN4mx61ARosFi7p"),
+    Track.withUrl("Limelight", ["Rush"], "0K6yUnIKNsFtfIpTgGtcHm", "https://i.scdn.co/image/ab67616d0000b27372833c1ae3343cbfb4617073", "https://open.spotify.com/track/0K6yUnIKNsFtfIpTgGtcHm"),
+    Track("Boyfriend", [" Big Time Rush"], "1rKBOL9kJfX1Y4C3QaOvRH", "https://i.scdn.co/image/ab67616d0000b27350acd1f66ebd5b84630c7129"),
+    Track.withUrl("Is It True", ["Tame Impala"], "6RZmhpvukfyeSURhf4kZ0d", "https://i.scdn.co/image/ab67616d0000b27358267bd34420a00d5cf83a49", "https://open.spotify.com/track/6RZmhpvukfyeSURhf4kZ0d"),
+    Track.withUrl("The Spirit Of Radio", ["Rush"], "4e9hUiLsN4mx61ARosFi7p", "https://i.scdn.co/image/ab67616d0000b27306c0d7ebcabad0c39b566983", "https://open.spotify.com/track/4e9hUiLsN4mx61ARosFi7p"),
+    Track.withUrl("Limelight", ["Rush"], "0K6yUnIKNsFtfIpTgGtcHm", "https://i.scdn.co/image/ab67616d0000b27372833c1ae3343cbfb4617073", "https://open.spotify.com/track/0K6yUnIKNsFtfIpTgGtcHm"),
+    Track("Boyfriend", [" Big Time Rush"], "1rKBOL9kJfX1Y4C3QaOvRH", "https://i.scdn.co/image/ab67616d0000b27350acd1f66ebd5b84630c7129"),
+    Track.withUrl("Is It True", ["Tame Impala"], "6RZmhpvukfyeSURhf4kZ0d", "https://i.scdn.co/image/ab67616d0000b27358267bd34420a00d5cf83a49", "https://open.spotify.com/track/6RZmhpvukfyeSURhf4kZ0d"),
+    Track.withUrl("The Spirit Of Radio", ["Rush"], "4e9hUiLsN4mx61ARosFi7p", "https://i.scdn.co/image/ab67616d0000b27306c0d7ebcabad0c39b566983", "https://open.spotify.com/track/4e9hUiLsN4mx61ARosFi7p"),
+    Track.withUrl("Limelight", ["Rush"], "0K6yUnIKNsFtfIpTgGtcHm", "https://i.scdn.co/image/ab67616d0000b27372833c1ae3343cbfb4617073", "https://open.spotify.com/track/0K6yUnIKNsFtfIpTgGtcHm"),
+
+  ];
 
   List<Track> getItems(SpotifySearchResponse response) {
     var tracks = response.tracks.items;
@@ -121,45 +147,57 @@ class _SearchResultsViewState extends State<SearchResultsView> {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: _result,
-      builder: (BuildContext context, AsyncSnapshot snapshot) {
-        if (snapshot.hasData) {
-          if (!isSearching) {
-            return Container(
-              padding: EdgeInsets.all(10),
-              child: ListView.builder(
-                  itemCount: 10,
-                  itemBuilder: (context, i) {
-                    return TrackResultRow(snapshot.data.items[i],
-                            () => print(snapshot.data.items[i].name));
-                  }),
+
+    final size = MediaQuery.of(context).size;
+    final width = size.width;
+    final height = size.height;
+
+    // return FutureBuilder(
+    //   future: _result,
+    //   builder: (BuildContext context, AsyncSnapshot snapshot) {
+    //     if (snapshot.hasData) {
+    //       if (!isSearching) {
+            return SizedBox(
+              height: height,
+              // padding: EdgeInsets.all(10),
+              child: Flexible(
+                child: ListView.builder(
+                    // itemCount: 10,
+                    // itemBuilder: (context, i) {
+                    //   return TrackResultRow(snapshot.data.items[i],
+                    //           () => print(snapshot.data.items[i].name));
+                    // }),
+                itemCount: tempTracks.length,
+        itemBuilder: (context, i) {
+                  return TrackButton(givenTrack: tempTracks[i]);
+        }),
+              ),
             );
-          } else {
-            return FutureBuilder(
-              future: _search,
-              initialData: CircularProgressIndicator(),
-              builder: (BuildContext context, AsyncSnapshot snapshot) {
-                if (snapshot.hasData) {
-                  return Container(
-                    child: ListView.builder(itemBuilder: (context, i) {
-                      return ListTile(
-                        leading: Image.network(snapshot.data[i].imageLink),
-                        title: snapshot.data[i].name,
-                      );
-                    }),
-                  );
-                } else if (snapshot.hasError) {
-                  throw new GenericException(snapshot.error);
-                }
-                return CircularProgressIndicator();
-              },
-            );
-          }
-        } else {
-          return CircularProgressIndicator();
-        }
-      },
-    );
+      //     } else {
+      //       return FutureBuilder(
+      //         future: _search,
+      //         initialData: CircularProgressIndicator(),
+      //         builder: (BuildContext context, AsyncSnapshot snapshot) {
+      //           if (snapshot.hasData) {
+      //             return Container(
+      //               child: ListView.builder(itemBuilder: (context, i) {
+      //                 return ListTile(
+      //                   leading: Image.network(snapshot.data[i].imageLink),
+      //                   title: snapshot.data[i].name,
+      //                 );
+      //               }),
+      //             );
+      //           } else if (snapshot.hasError) {
+      //             throw new GenericException(snapshot.error);
+      //           }
+      //           return CircularProgressIndicator();
+      //         },
+      //       );
+      //     }
+      //   } else {
+      //     return CircularProgressIndicator();
+      //   }
+      // },
+    // );
   }
 }

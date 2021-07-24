@@ -1,9 +1,12 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:fonz_music_flutter/GlobalComponents/FrontEnd/FrontEndConstants.dart';
 import 'package:fonz_music_flutter/MainTabs/SearchTab.dart';
 
 import 'SearchPageWidgets/ActiveSongWidgets/ActiveSongView.dart';
 import 'SearchPageWidgets/SearchBarWidgets/SearchBar.dart';
+import 'SearchPageWidgets/SearchBarWidgets/SearchResultsView.dart';
 import 'SearchPageWidgets/SearchSuggestionsWidgets/SongSuggestionsView.dart';
 
 class SearchPage extends StatefulWidget {
@@ -23,6 +26,12 @@ class _SearchPageState extends State<SearchPage> {
     final size = MediaQuery.of(context).size;
     final width = size.width;
     final height = size.height;
+
+    refresh() {
+      setState(() {
+        log("resetting search page");
+      });
+    }
 
     return SingleChildScrollView(
       child: Column(
@@ -65,12 +74,33 @@ class _SearchPageState extends State<SearchPage> {
                 )
               ],
             ),
-            SearchBar(),
-            ActiveSongView(),
-            SongSuggestionsView()
+            SearchBar(notifyParent: refresh),
+
+            Stack(
+              children: [
+                Column(
+                  children: [
+
+                    ActiveSongView(),
+                    SongSuggestionsView()
+                  ],
+                ),
+                DetermineIfResultsAreShown()
+              ],
+            )
+
 
           ]
       ),
     );
   }
+
+  Widget DetermineIfResultsAreShown() {
+    if (searchingSong) {
+      return
+          SearchResultsView();
+    }
+    else return SizedBox(height: 0,);
+  }
+
 }
