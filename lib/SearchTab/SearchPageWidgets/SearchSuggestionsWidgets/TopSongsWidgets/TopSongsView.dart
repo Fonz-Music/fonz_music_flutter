@@ -48,17 +48,23 @@ class _TopSongsViewState extends State<TopSongsView> {
         ),
         Container(
           padding: const EdgeInsets.fromLTRB(0, 5, 0, 5),
-          // width: width * 0.95,
+          width: width,
           // height: 150,
           child: Column(
+            // mainAxisAlignment: MainAxisAlignment.center,
+            // mainAxisSize: MainAxisSize.min,
             children: [
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                mainAxisSize: MainAxisSize.min,
                 children: [
                   TopSongComponent(track: tempTracks[0]),
                   TopSongComponent(track: tempTracks[1]),
                 ],
               ),
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                mainAxisSize: MainAxisSize.min,
                 children: [
                   TopSongComponent(track: tempTracks[2]),
                   TopSongComponent(track: tempTracks[3]),

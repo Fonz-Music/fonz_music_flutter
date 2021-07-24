@@ -54,7 +54,7 @@ class _FailPartyJoinState extends State<FailPartyJoin> {
           Padding(
             padding: EdgeInsets.fromLTRB(20, 10, 20, 0),
             child: new Text(
-              "${widget.errorMessage}, press to try again",
+              "${widget.errorMessage}",
               style: TextStyle(
                 fontFamily: FONZFONTTWO,
                 fontSize: HEADINGFOUR,

@@ -5,9 +5,10 @@ import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:fonz_music_flutter/GlobalComponents/FrontEnd/FrontEndConstants.dart';
 import 'package:fonz_music_flutter/SearchTab/HomePageDecision.dart';
 import 'package:fonz_music_flutter/SearchTab/SearchPageWidgets/NewSearchPage.dart';
-import 'package:fonz_music_flutter/SearchTab/SearchPageWidgets/SearchPage.dart';
+import 'package:fonz_music_flutter/SearchTab/SearchPage.dart';
 
 bool connectedToAHost = true;
+
 
 class SearchTab extends StatefulWidget {
 
@@ -21,15 +22,17 @@ class SearchTab extends StatefulWidget {
 
 class _SearchTabState extends State<SearchTab> {
 
-  PageController _searchTabController = PageController(
-    initialPage: 1,
-  );
+
 
   @override
   Widget build(BuildContext context) {
 
     final size = MediaQuery.of(context).size;
     final width = size.width;
+
+    PageController _searchTabController = PageController(
+      initialPage: determinePageBasedOnHostConnection(),
+    );
 
     return Stack(
       children:[
@@ -56,6 +59,11 @@ class _SearchTabState extends State<SearchTab> {
         ),
       ]
     );
+  }
+
+  int determinePageBasedOnHostConnection() {
+    if (connectedToAHost) return 1;
+    else return 0;
   }
 
   Widget DetermineSearchTabBackgroundColor() {

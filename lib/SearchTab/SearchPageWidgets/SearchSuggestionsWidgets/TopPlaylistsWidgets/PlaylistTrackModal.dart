@@ -49,11 +49,13 @@ class _PlaylistTrackModalState extends State<PlaylistTrackModal> {
 
     return Container(
       height: height * 0.9,
+      color: determineColorThemeBackground(),
       child: Column(
         children: [
           Container(
             padding: EdgeInsets.all(10),
             color: AMBER,
+            height: height * 0.15,
             child: Row(
               children: [
                 Container(
@@ -63,14 +65,15 @@ class _PlaylistTrackModalState extends State<PlaylistTrackModal> {
 
                     borderRadius: BorderRadius.circular(CORNERRADIUSBUTTON),
                     child: Image.network("${widget.givenPlaylist.playlistImage}",
-                      height: 75,
-                      width: 75,
+                      height: height * 0.1,
+                      // width: height * 0.1,
                       // width: 120,
                     ),
                   ),
                 ),
                 Column(
                   children: [
+                    Spacer(),
                     SizedBox(
                       width: width * 0.6,
                       child: Text(
@@ -99,19 +102,20 @@ class _PlaylistTrackModalState extends State<PlaylistTrackModal> {
                         textAlign: TextAlign.left,
                       ),
                     ),
+                    Spacer()
                   ],
                 )
               ],
             )
           ),
           Container(
-            color: determineColorThemeBackground(),
+
             child: Column(
               children: [
                 Row(
                   children: [
                     Padding(
-                      padding: EdgeInsets.fromLTRB(20, 30, 0, 30),
+                      padding: EdgeInsets.fromLTRB(20, 20, 0, 20),
                       child: new Text(
                         "songs",
                         style: TextStyle(
@@ -126,7 +130,7 @@ class _PlaylistTrackModalState extends State<PlaylistTrackModal> {
                   ],
                 ),
                 SizedBox(
-                  height: height * 0.7,
+                  height: height * 0.65,
                   child: Flexible(
                     child: ListView.separated(
                       scrollDirection: Axis.vertical,

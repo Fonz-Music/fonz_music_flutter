@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:fonz_music_flutter/GlobalComponents/FrontEnd/FrontEndConstants.dart';
 
+import '../../HomePageDecision.dart';
+
 class CoasterHasNoHost extends StatefulWidget {
 
 
@@ -72,7 +74,7 @@ class _CoasterHasNoHostState extends State<CoasterHasNoHost> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 16.0),
+            padding: const EdgeInsets.symmetric(vertical: 5.0),
             child:
             Center(
               child: FlatButton(
@@ -80,6 +82,8 @@ class _CoasterHasNoHostState extends State<CoasterHasNoHost> {
 
                     Timer(Duration(milliseconds: SUCCESSPAGELENGTH), () {
                       // move tab selected to 0
+                      launchedNfcToJoinParty = false;
+                      pressedNfcButtonToJoinPartu = false;
                       widget.tabSelected = 0;
                       widget.notifyParent();
                     });
@@ -97,6 +101,36 @@ class _CoasterHasNoHostState extends State<CoasterHasNoHost> {
                   ),
                 ),
                 color: LILAC,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(3.0),
+                ),
+              ),
+            ),
+
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 5.0),
+            child:
+            Center(
+              child: FlatButton(
+                onPressed: () async {
+
+                  launchedNfcToJoinParty = false;
+                  pressedNfcButtonToJoinPartu = false;
+                  widget.notifyParent();
+                  // Timer(Duration(seconds: 1),
+                  //         () => widget.loginCallback());
+                },
+                child: Text(
+                  'no thanks',
+                  style: TextStyle(
+                    fontFamily: FONZFONTTWO,
+                    fontWeight: FontWeight.w800,
+                    fontSize: 20,
+                    color: LILAC,
+                  ),
+                ),
+                color: DARKERGREY,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(3.0),
                 ),

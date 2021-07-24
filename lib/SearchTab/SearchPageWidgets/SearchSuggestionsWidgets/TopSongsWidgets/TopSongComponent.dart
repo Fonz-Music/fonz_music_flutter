@@ -22,7 +22,7 @@ class _TopSongComponentState extends State<TopSongComponent> {
     final height = size.height;
 
     return Container(
-      padding: EdgeInsets.all(5),
+      padding: EdgeInsets.fromLTRB(0,5,0,5),
       child: MaterialButton(
         onPressed: () {
           log("pressed");
@@ -59,7 +59,7 @@ class _TopSongComponentState extends State<TopSongComponent> {
                 child: Column(
                     children: [
                       SizedBox(
-                        width: width * 0.25,
+                        width: width * 0.22,
                         child: Text(
                           "${widget.track.title}",
                           style: TextStyle(
@@ -75,7 +75,7 @@ class _TopSongComponentState extends State<TopSongComponent> {
                       ),
 
                       SizedBox(
-                        width: width * 0.25,
+                        width: width * 0.22,
                         child: Text(
                           // *---------------Use variable taken from Library selection for artist--------*
                           // removes the brackets from the string

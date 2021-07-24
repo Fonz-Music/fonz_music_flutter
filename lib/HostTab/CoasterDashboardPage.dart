@@ -181,14 +181,14 @@ class _CoasterDashboardPageState extends State<CoasterDashboardPage> {
       }
       else {
         return Container(
-          height: height * 0.55,
+          height: height * 0.7,
           child: Stack(
 
             children: [
               Column(
                 children: [
                   Container(
-                    height: height * 0.55,
+                    height: height * 0.7,
                     decoration: BoxDecoration(
                       color: determineColorThemeBackground(),
                       borderRadius: BorderRadius.circular(10)

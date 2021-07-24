@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:fonz_music_flutter/GlobalComponents/FrontEnd/FrontEndConstants.dart';
 import 'package:fonz_music_flutter/MainTabs/SearchTab.dart';
 
-import 'ActiveSongWidgets/ActiveSongView.dart';
-import 'SearchBarWidgets/SearchBar.dart';
-import 'SearchSuggestionsWidgets/SongSuggestionsView.dart';
+import 'SearchPageWidgets/ActiveSongWidgets/ActiveSongView.dart';
+import 'SearchPageWidgets/SearchBarWidgets/SearchBar.dart';
+import 'SearchPageWidgets/SearchSuggestionsWidgets/SongSuggestionsView.dart';
 
 class SearchPage extends StatefulWidget {
 
@@ -46,6 +46,7 @@ class _SearchPageState extends State<SearchPage> {
                   onPressed: () {
                     widget.controller.animateToPage(0,
                         duration: Duration(seconds: 1), curve: Curves.easeInOutCirc);
+
                     connectedToAHost = false;
                     widget.notifyParent();
                   },

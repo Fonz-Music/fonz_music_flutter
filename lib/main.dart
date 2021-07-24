@@ -100,6 +100,7 @@ determineWhichVerion(var version, var versionResponse) {
 }
 
 class FonzMusicApp extends StatelessWidget {
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -113,6 +114,7 @@ int currentTab = 1;
 bool connectedToSpotify = true;
 bool hasConnectedCoasters = true;
 bool hasAccount = true;
+
 
 class MyHomePage extends StatefulWidget {
 
@@ -159,6 +161,8 @@ class _MyHomePageState extends State<MyHomePage> {
           bottomNavigationBar: BottomNavigationBar(
             currentIndex: currentTab,
             selectedItemColor: AMBER,
+            unselectedItemColor: determineColorThemeTextInverse(),
+            backgroundColor: determineColorThemeBackground(),
             onTap: onTabTapped,// this will be set when a new tab is tapped
             items: [
               BottomNavigationBarItem(

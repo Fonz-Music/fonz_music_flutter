@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 
 bool darkMode;
 
+
 // const Color THEMECOLOR = const Color(0xFFFFFF);
 
 // Determines if the color should be white or black

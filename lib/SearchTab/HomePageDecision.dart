@@ -125,6 +125,13 @@ class _HomeDecisionPageState extends State<HomeDecisionPage> {
             FirebaseAnalytics().logEvent(name: "guestTappedUnownedCoaster", parameters: {'string': "guest"});
             return CoasterHasNoHost(tabSelected: widget.currentTab, notifyParent: widget.notifyParent );
           }
+          else if (hostCoasterDetails.statusCode == 0) {
+            FirebaseAnalytics().logEvent(name: "guestDoesntSupportNfc", parameters: {'string': "guest"});
+            return FailPartyJoin(
+              errorMessage: "your phone doesn't support NFC",
+              errorImage: getDisableIcon(),
+            );
+          }
           else {
             return Container(
               child: FailPartyJoin(

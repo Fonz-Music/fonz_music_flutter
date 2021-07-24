@@ -50,11 +50,13 @@ class _ArtistTrackModalState extends State<ArtistTrackModal> {
 
     return Container(
       height: height * 0.9,
+      color: determineColorThemeBackground(),
       child: Column(
         children: [
           Container(
               padding: EdgeInsets.all(10),
               color: AMBER,
+              height: height * 0.15,
               child: Row(
                 children: [
                   Container(
@@ -64,13 +66,14 @@ class _ArtistTrackModalState extends State<ArtistTrackModal> {
 
                       borderRadius: BorderRadius.circular(CORNERRADIUSBUTTON),
                       child: Image.network("${widget.givenArtist.artistImage}",
-                        height: 75,
-                        width: 75,
+                        height: height * 0.1,
+                        // width: height * 0.1,
                       ),
                     ),
                   ),
                   Column(
                     children: [
+                      Spacer(),
                       SizedBox(
                         width: width * 0.6,
                         child: Text(
@@ -99,6 +102,7 @@ class _ArtistTrackModalState extends State<ArtistTrackModal> {
                           textAlign: TextAlign.left,
                         ),
                       ),
+                      Spacer(),
                     ],
                   )
                 ],
@@ -111,7 +115,7 @@ class _ArtistTrackModalState extends State<ArtistTrackModal> {
                 Row(
                   children: [
                     Padding(
-                      padding: EdgeInsets.fromLTRB(20, 30, 0, 30),
+                      padding: EdgeInsets.fromLTRB(20, 20, 0, 20),
                       child: new Text(
                         "songs",
                         style: TextStyle(
@@ -126,7 +130,7 @@ class _ArtistTrackModalState extends State<ArtistTrackModal> {
                   ],
                 ),
                 SizedBox(
-                  height: height * 0.7,
+                  height: height * 0.65,
                   child: Flexible(
                     child: ListView.separated(
                       scrollDirection: Axis.vertical,
