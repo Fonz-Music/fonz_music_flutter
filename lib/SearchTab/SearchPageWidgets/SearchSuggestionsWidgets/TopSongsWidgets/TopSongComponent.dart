@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:fonz_music_flutter/GlobalComponents/FrontEnd/FrontEndConstants.dart';
 import 'package:fonz_music_flutter/GlobalComponents/FrontEnd/FrontEndFunctions.dart';
 import 'package:fonz_music_flutter/GlobalComponents/Objects/Track.dart';
+import 'package:fonz_music_flutter/SearchTab/SearchPageWidgets/SearchFunctions/QueueSongLaunchNFc.dart';
 
 class TopSongComponent extends StatefulWidget {
 
@@ -25,10 +26,10 @@ class _TopSongComponentState extends State<TopSongComponent> {
       padding: EdgeInsets.fromLTRB(0,5,0,5),
       child: MaterialButton(
         onPressed: () {
-          log("pressed");
+          queueSongLaunchNfc();
         },
         child: Container(
-          width: width * 0.4,
+          width: width * 0.37,
           height: 50,
 
           decoration: BoxDecoration(
@@ -86,6 +87,9 @@ class _TopSongComponentState extends State<TopSongComponent> {
                             color: determineColorThemeTextInverse(),
                           ),
                           textAlign: TextAlign.left,
+                          softWrap: false,
+                          maxLines: 1,
+                          overflow: TextOverflow.fade,
                         ),
                       ),
 
