@@ -30,18 +30,19 @@ class _CreateAccountViewState extends State<CreateAccountView> {
           color: DARKERGREY,
         ),
         Opacity(
-          child: Column(
-            children: [
+          child: Container(
+            child:
 
               Image(
                 image: AssetImage("assets/fonzIcons/peoplePartyingBackdrop.jpg"),
-                // width: width,
-                // height: height * 0.95,
-                fit: BoxFit.fitHeight,
+                width: width,
+                // height: height * 0.9,
+                fit: BoxFit.fill,
 
+              //
               ),
               // Spacer(),
-            ],
+
           ),
           opacity: 0.4,
         ),
@@ -88,6 +89,7 @@ class _CreateAccountViewState extends State<CreateAccountView> {
       children: [
         Spacer(),
         MaterialButton(
+            padding: EdgeInsets.fromLTRB(0, 10, 10, 20),
           child: Text(
             "sign in",
             style: new TextStyle(
@@ -96,6 +98,7 @@ class _CreateAccountViewState extends State<CreateAccountView> {
                 fontWeight: FontWeight.w300,
                 color: Colors.white,
                 decoration: determineIfSignInButtonHasUnderline(),
+                decorationThickness: 3.0,
                 decorationColor: AMBER
             ),
             textAlign: TextAlign.center,
@@ -110,6 +113,7 @@ class _CreateAccountViewState extends State<CreateAccountView> {
           }
         ),
         MaterialButton(
+            padding: EdgeInsets.fromLTRB(10, 10, 0, 20),
             child: Text(
               "sign up",
               style: new TextStyle(
@@ -118,6 +122,7 @@ class _CreateAccountViewState extends State<CreateAccountView> {
                   fontWeight: FontWeight.w300,
                   color: Colors.white,
                   decoration: determineIfSignUpButtonHasUnderline(),
+                  decorationThickness: 3.0,
                   decorationColor: AMBER
               ),
               textAlign: TextAlign.center,

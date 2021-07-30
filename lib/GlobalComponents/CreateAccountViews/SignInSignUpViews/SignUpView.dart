@@ -316,7 +316,11 @@ class _SignUpViewState extends State<SignUpView> {
                         });
 
                       },
+                      side: BorderSide(
+                        color: Colors.white
+                      ),
                       activeColor: AMBER,
+                      checkColor: Colors.white,
                     ),
                     Text(
                       "i agree to Fonz Music's email policy",
@@ -341,6 +345,9 @@ class _SignUpViewState extends State<SignUpView> {
                         });
                       },
                       activeColor: AMBER,
+                      side: BorderSide(
+                          color: Colors.white
+                      ),
                     ),
                     Text(
                       "i agree to Fonz Music's privacy policy",
