@@ -109,6 +109,12 @@ class _HomeDecisionPageState extends State<HomeDecisionPage> {
             widget.controller.animateToPage(1,
                 duration: Duration(seconds: 1), curve: Curves.easeInOutCirc);
             connectedToAHost = true;
+
+            widget.notifyParent();
+          });
+          Timer(Duration(seconds: 5), () {
+            launchedNfcToJoinParty = false;
+            pressedNfcButtonToJoinPartu = false;
           });
 
           return Container(

@@ -14,6 +14,7 @@ Future<CoasterObject> scanForCoasterDetails() async {
   CoasterObject hostCoasterDetails = CoasterObject("hostName", "coasterName", "sessionId", "coasterUid");
   // get uid from coaster
   String uidFromScannedCoaster = await GuestNfcFunctions.readNfcToJoinParty();
+  uidFromScannedCoaster = "045EDE1AE66C80";
   if (uidFromScannedCoaster.length > 20) {
     hostCoasterDetails.statusCode = 0;
   }
@@ -32,17 +33,20 @@ Future<CoasterObject> scanForCoasterDetails() async {
     if (hostDetails["responseCode"] == 200) {
       log("getting this far");
       // if there is no host
-      if (hostDetails["body"]["displayName"] == null) {
+      if (hostDetails["body"].coaster.name == null) {
         hostCoasterDetails.statusCode = 600;
       }
       // if there is a host, set it
       else {
         hostCoasterDetails.coasterUid = uidFromScannedCoaster;
-        hostCoasterDetails.hostName = hostDetails["body"]["displayName"];
-        hostCoasterDetails.coasterName = hostDetails["body"]["coasterName"];
-        hostCoasterDetails.sessionId = hostDetails["body"]["sessionId"];
-        hostSessionIdGlobal = hostDetails["body"]["sessionId"];
+        // hostCoasterDetails.hostName = hostDetails["body"].coaster.name;
+        hostCoasterDetails.hostName = "host";
+        hostCoasterDetails.coasterName = hostDetails["body"].coaster.name;
+        hostCoasterDetails.sessionId = hostDetails["body"].session.sessionId;
+        hostSessionIdGlobal = hostDetails["body"].session.sessionId;
+        print("details are " + hostCoasterDetails.coasterName.toString());
         log("stored coaster ");
+
       }
     }
   }

@@ -1,5 +1,6 @@
 import 'dart:developer';
 import 'dart:io';
+import 'dart:convert';
 import 'package:dio/dio.dart';
 
 import '../ApiConstants.dart';
@@ -14,6 +15,7 @@ class GuestGetCoasterApi {
     log("im getting called ");
     String endpoint = address + guest + coaster + uid;
     String token = "";
+    token = tempToken;
     // await FirebaseAuth.instance.currentUser.getIdToken();
     log("endpoint: " + endpoint);
 
@@ -29,6 +31,8 @@ class GuestGetCoasterApi {
     if (response.statusCode == 200) {
 //      log('success got coasters');
       log("success");
+      log("resp is " + response.data.toString());
+      response.data = GetHostCoasterDecoder.fromJson(response.data);
     } else {
       log("error ");
       log('error with response code ${response.statusCode} and body '
@@ -42,3 +46,70 @@ class GuestGetCoasterApi {
       "body": response.data};
   }
 }
+
+
+// get single owned coaster
+
+class CoasterDecoder {
+
+  String name;
+  String coasterId;
+  bool active;
+  String userId;
+
+  CoasterDecoder({
+    this.name,
+    this.userId,
+    this.coasterId,
+    this.active});
+
+  CoasterDecoder.fromJson(Map<String, dynamic> json) {
+    coasterId = json['coasterId'];
+    name = json['name'];
+    active = json['active'];
+    userId = json['userId'];
+  }
+}
+
+
+class SessionDecoder {
+
+  String provider;
+  String sessionId;
+  bool active;
+  String userId;
+
+  SessionDecoder({
+    this.provider,
+    this.userId,
+    this.sessionId,
+    this.active});
+
+  SessionDecoder.fromJson(Map<String, dynamic> json) {
+    sessionId = json['sessionId'];
+    provider = json['provider'];
+    active = json['active'];
+    userId = json['userId'];
+  }
+}
+class GetHostCoasterDecoder {
+
+  var coaster;
+  var session;
+
+  GetHostCoasterDecoder({
+    this.coaster,
+    this.session,
+    });
+
+  GetHostCoasterDecoder.fromJson(Map<String, dynamic> json) {
+    coaster = json['coaster'];
+    session = json['session'];
+
+    coaster = CoasterDecoder.fromJson(json['coaster']);
+    session = SessionDecoder.fromJson(json['session']);
+
+  }
+}
+
+

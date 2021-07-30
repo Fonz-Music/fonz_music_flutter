@@ -1,10 +1,14 @@
+import 'dart:developer';
+
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
+import 'package:fonz_music_flutter/ApiFunctions/GuestApi/GuestGetCoasterApi.dart';
 import 'package:fonz_music_flutter/GlobalComponents/FrontEnd/FrontEndConstants.dart';
 import 'package:fonz_music_flutter/GlobalComponents/GlobalFunctions/LaunchShop.dart';
 import 'package:fonz_music_flutter/MainTabs/CreateAccountPrompt.dart';
 import 'package:fonz_music_flutter/MainTabs/HostTab.dart';
+import 'package:fonz_music_flutter/SearchTab/HomePageWidgets/scanForCoasterDetails.dart';
 import 'package:fonz_music_flutter/SettingsTab/SettingsButtons/CreateAccountSettingsButton.dart';
 
 import '../../main.dart';
@@ -54,7 +58,11 @@ class _BuyACoasterHomeButtonState extends State<BuyACoasterHomeButton> {
                   color: determineColorThemeBackground()
               ),
               onPressed: () async {
-                launchShop();
+                // var coasterDets = await GuestGetCoasterApi.getCoasterDetails("045EDE1AE66C80");
+                // GetHostCoasterDecoder coaster = coasterDets["body"];
+                // log("coaster dets are " + coaster.coaster.coasterId.toString());
+                scanForCoasterDetails();
+                // launchShop();
                 FirebaseAnalytics().logEvent(name: "userOpenedBuyCoaster", parameters: {'string': "user", "tab": "search"});
               },
 
