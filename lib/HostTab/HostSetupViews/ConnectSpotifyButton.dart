@@ -17,6 +17,7 @@ class ConnectSpotifyButton extends StatefulWidget {
 
   final Function() notifyParent;
 
+
   @override
   _ConnectSpotifyButtonState createState() => _ConnectSpotifyButtonState();
 }
@@ -24,63 +25,106 @@ class ConnectSpotifyButton extends StatefulWidget {
 class _ConnectSpotifyButtonState extends State<ConnectSpotifyButton> {
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
-            child: NeumorphicButton(
-              child: Container(
-                width: 100,
-                height: 100,
-                child:
-                Container(
-                  padding: const EdgeInsets.all(30),
-                  child: Image(
-                    image: AssetImage("assets/fonzIcons/spotifyIconGreen.png"),
 
+    final size = MediaQuery.of(context).size;
+    final width = size.width;
+    final height = size.height;
+
+    return Opacity(
+      opacity: determineSpotifyOpacity(),
+      child: Center(
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
+              child: NeumorphicButton(
+                child: Container(
+                  width: determineSpotifyCircleSize(),
+                  height: determineSpotifyCircleSize(),
+                  child:
+                  Container(
+                    padding: EdgeInsets.all(determineeSpotifyInternalPaddingSize()),
+                    child: Image(
+                      image: AssetImage("assets/fonzIcons/spotifyIconGreen.png"),
+                    ),
                   ),
                 ),
-              ),
-              style: NeumorphicStyle(
-                  shape: NeumorphicShape.flat,
-                  boxShape: NeumorphicBoxShape.circle(),
-                  border: NeumorphicBorder(width: 2, color: SPOTIFYGREEN),
-                  color: determineColorThemeBackground()
-              ),
-              onPressed: () async {
-                if (!hasAccount) {
-                    showModalBottomSheet(context: context, builder: (BuildContext context) {
-                      return CreateAccountPrompt();
-                    });
-                }
-                else {
-                  // link to spotify
-                  connectedToSpotify = true;
-                  widget.notifyParent();
-                }
+                style: NeumorphicStyle(
+                    shape: NeumorphicShape.flat,
+                    boxShape: NeumorphicBoxShape.circle(),
+                    border: NeumorphicBorder(width: 2, color: SPOTIFYGREEN),
+                    color: determineColorThemeBackground()
+                ),
+                onPressed: () async {
+                  if (!connectedToSpotify) {
+                    if (!hasAccount) {
+                      showModalBottomSheet<dynamic>(context: context,
+                          isScrollControlled: true,
+                          builder: (BuildContext bc) {
+                            return Wrap(
+                                children: <Widget>[
+                                  Container(
+                                    height: height * 0.95,
+                                    child: Container(
+                                      decoration: new BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius: new BorderRadius.only(
+                                              topLeft: const Radius.circular(
+                                                  25.0),
+                                              topRight: const Radius.circular(
+                                                  25.0))),
+                                      child: CreateAccountPrompt(),
+                                    ),
+                                  )
+                                ]
+                            );
+                          });
+                    }
+                    else {
+                      // link to spotify
+                      connectedToSpotify = true;
+                      widget.notifyParent();
+                    }
+                  }
 
-                FirebaseAnalytics().logEvent(name: "userTappedConnectToSpotifyHost", parameters: {'user': "host"});
-              },
+                  FirebaseAnalytics().logEvent(name: "userTappedConnectToSpotifyHost", parameters: {'user': "host"});
+                },
 
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
-            child: new Text(
-              "connect your spotify",
-              style: TextStyle(
-                fontFamily: FONZFONTTWO,
-                fontSize: HEADINGFOUR,
-                color: determineColorThemeTextInverse(),
               ),
-              textAlign: TextAlign.center,
             ),
-          )
-        ],
+            Padding(
+              padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
+              child: new Text(
+                "connect your spotify",
+                style: TextStyle(
+                  fontFamily: FONZFONTTWO,
+                  fontSize: determineSpotifyTextSize(),
+                  color: determineColorThemeTextInverse(),
+                ),
+                textAlign: TextAlign.center,
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
 
+  determineSpotifyCircleSize() {
+    if (connectedToSpotify) return 50.0;
+    else return 150.0;
+  }
+  determineeSpotifyInternalPaddingSize() {
+    if (connectedToSpotify) return 10.0;
+    else return 40.0;
+  }
+  determineSpotifyTextSize() {
+    if (connectedToSpotify) return HEADINGFIVE;
+    else return HEADINGFOUR;
+  }
+  determineSpotifyOpacity() {
+    if (connectedToSpotify) return 0.4;
+    else return 1.0;
+  }
 
 }

@@ -35,7 +35,7 @@ class _CreateAccountViewState extends State<CreateAccountView> {
 
               Image(
                 image: AssetImage("assets/fonzIcons/peoplePartyingBackdrop.jpg"),
-                width: width,
+                // width: width,
                 // height: height * 0.95,
                 fit: BoxFit.fitHeight,
 

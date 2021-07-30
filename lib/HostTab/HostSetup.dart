@@ -68,6 +68,9 @@ class _HostSetupPageState extends State<HostSetupPage> {
                 ),
               )
           ),
+          // Container(
+          //   height: 40,
+          // ),
           Spacer(),
           HostPageMainBody(),
           Spacer()
@@ -160,8 +163,7 @@ class _HostSetupPageState extends State<HostSetupPage> {
           }
         }
       // }
-    }
-    else {
+    } else {
       if (pressedToConnectFirstCoaster) {
         Timer(Duration(seconds: 15), () {
           pressedToConnectFirstCoaster = false;
@@ -175,34 +177,45 @@ class _HostSetupPageState extends State<HostSetupPage> {
       else {
         return Container(
             height: height * 0.7,
-            child: determineViewBasedOnSpotify(refresh)
+            // child: determineViewBasedOnSpotify(refresh)
+          child: Column(
+            children: [
+              ConnectSpotifyButton(notifyParent: refresh),
+              Container(
+                height: 100,
+              ),
+              ConnectYourFirstCoasterButton(notifyParent: refresh)
+            ],
+          ),
         );
       }
     }
   }
 
-  Widget determineViewBasedOnSpotify (notifyParent) {
-
-    if (!connectedToSpotify) {
-      return Column(
-        children: [
-          ConnectSpotifyButton(notifyParent: notifyParent),
-          Spacer(),
-          ConnectYourFirstCoasterButton(notifyParent: notifyParent)
-        ],
-      );
-
-    }
-    else
-      return Column(
-        children: [
-
-          Spacer(),
-          ConnectYourFirstCoasterButton(notifyParent: notifyParent),
-          Spacer()
-        ],
-      );
-
-    }
+  // Widget determineViewBasedOnSpotify (notifyParent) {
+  //
+  //   if (!connectedToSpotify) {
+  //     return Column(
+  //       children: [
+  //         ConnectSpotifyButton(notifyParent: notifyParent),
+  //         Container(
+  //           height: 100,
+  //         ),
+  //         ConnectYourFirstCoasterButton(notifyParent: notifyParent)
+  //       ],
+  //     );
+  //
+  //   }
+  //   else
+  //     return Column(
+  //       children: [
+  //
+  //         Spacer(),
+  //         ConnectYourFirstCoasterButton(notifyParent: notifyParent),
+  //         Spacer()
+  //       ],
+  //     );
+  //
+  //   }
 
 }
