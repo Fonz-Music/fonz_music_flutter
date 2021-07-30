@@ -56,7 +56,7 @@ class _TopSongsViewState extends State<TopSongsView> {
         Container(
           padding: const EdgeInsets.fromLTRB(0, 0, 0, 5),
           width: width * COMPONENTWIDTH,
-          height: 150,
+          height: 140,
           child: ListView.separated(
             scrollDirection: Axis.horizontal,
             // itemCount: 4,

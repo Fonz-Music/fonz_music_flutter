@@ -14,6 +14,8 @@ class CoasterManagementApi {
   static Future<Map> getOwnedCoasters() async {
     String endpoint = address + host + coasters;
     String token = "";
+    token = tempToken;
+
     // String token = await FirebaseAuth.instance.currentUser.getIdToken();
     //http
     // var response = await http.get(endpoint,
@@ -26,6 +28,7 @@ class CoasterManagementApi {
 
       if (response.statusCode == 200) {
         log('success got coasters');
+        print("data is " + response.data.toString());
       } else {
         // FlutterCrashlytics().log(
         //     'error on "getOwnedCoasters" api call with status of ${response.statusCode} & body of '
@@ -65,6 +68,7 @@ class CoasterManagementApi {
       ) async {
     String endpoint = address + host + coasters + coasterUID;
     String token = "";
+    token = tempToken;
     // String token = await FirebaseAuth.instance.currentUser.getIdToken();
     //http
     // var response = await http.get(endpoint,
@@ -109,50 +113,51 @@ class CoasterManagementApi {
 
   // --------------------------------------------now dio---------------------------------------------------------
   // check to see if coaster is active
-  static Future<bool> checkCoasterActive(
-      String coasterUID,
-      ) async {
-    String endpoint = address + host + coasters + coasterUID;
-    String token = "";
-    // String token = await FirebaseAuth.instance.currentUser.getIdToken();
-    //http
-    // var response = await http.get(endpoint,
-    //     headers: {HttpHeaders.authorizationHeader: 'Bearer $token'});
-    // dio
-    Dio dio = new Dio();
-    dio.options.headers = {HttpHeaders.authorizationHeader: 'Bearer $token'};
-    try {
-      var response = await dio.get(endpoint);
-
-      if (response.statusCode == 200) {
-        log('success got coaster');
-        log(GetSingleOwnedCoasterDecoder
-        // .fromJson(json.decode(response.body))
-            .fromJson(json.decode(response.data))
-            .active
-            .toString());
-        return GetSingleOwnedCoasterDecoder
-        // .fromJson(json.decode(response.body))
-            .fromJson(json.decode(response.data))
-            .active;
-      } else {
-        // FlutterCrashlytics().log(
-        //     'error on "checkCoasterActive" api call with status of ${response.statusCode} & body of '
-        //     // '${response.body}');
-        //         '${response.data}');
-        log('error with response code ${response.statusCode} and body '
-        // '${response.body}');
-            '${response.data}');
-        return null;
-      }
-    } on DioError catch (e) {
-      // FlutterCrashlytics().log(
-      //     'error on "checkCoasterActive" api call with status of ${e.response.statusCode} & body of '
-      //     // '${response.body}');
-      //         '${e.response.data}');
-      return null;
-    }
-  }
+  // static Future<bool> checkCoasterActive(
+  //     String coasterUID,
+  //     ) async {
+  //   String endpoint = address + host + coasters + coasterUID;
+  //   String token = "";
+  //   token = tempToken;
+  //   // String token = await FirebaseAuth.instance.currentUser.getIdToken();
+  //   //http
+  //   // var response = await http.get(endpoint,
+  //   //     headers: {HttpHeaders.authorizationHeader: 'Bearer $token'});
+  //   // dio
+  //   Dio dio = new Dio();
+  //   dio.options.headers = {HttpHeaders.authorizationHeader: 'Bearer $token'};
+  //   try {
+  //     var response = await dio.get(endpoint);
+  //
+  //     if (response.statusCode == 200) {
+  //       log('success got coaster');
+  //       log(GetSingleOwnedCoasterDecoder
+  //       // .fromJson(json.decode(response.body))
+  //           .fromJson(json.decode(response.data))
+  //           .active
+  //           .toString());
+  //       return GetSingleOwnedCoasterDecoder
+  //       // .fromJson(json.decode(response.body))
+  //           .fromJson(json.decode(response.data))
+  //           .active;
+  //     } else {
+  //       // FlutterCrashlytics().log(
+  //       //     'error on "checkCoasterActive" api call with status of ${response.statusCode} & body of '
+  //       //     // '${response.body}');
+  //       //         '${response.data}');
+  //       log('error with response code ${response.statusCode} and body '
+  //       // '${response.body}');
+  //           '${response.data}');
+  //       return null;
+  //     }
+  //   } on DioError catch (e) {
+  //     // FlutterCrashlytics().log(
+  //     //     'error on "checkCoasterActive" api call with status of ${e.response.statusCode} & body of '
+  //     //     // '${response.body}');
+  //     //         '${e.response.data}');
+  //     return null;
+  //   }
+  // }
 
   // --------------------------------------------now dio---------------------------------------------------------
   // add coaster function
@@ -160,6 +165,7 @@ class CoasterManagementApi {
   static Future<Map> addCoaster(String coasterUID) async {
     String endpoint = address + host + coasters + coasterUID;
     String token = "";
+    token = tempToken;
     // String token = await FirebaseAuth.instance.currentUser.getIdToken();
     //    //http
     //     var response = await http.post(endpoint,
@@ -211,6 +217,7 @@ class CoasterManagementApi {
   static Future renameCoaster(String coasterUID, String coasterName) async {
     String endpoint = address + host + coasters + coasterUID;
     String token = "";
+    token = tempToken;
     // String token = await FirebaseAuth.instance.currentUser.getIdToken();
     // http
     // var response = await http.put(
@@ -222,7 +229,7 @@ class CoasterManagementApi {
     Dio dio = new Dio();
     dio.options.headers = {HttpHeaders.authorizationHeader: 'Bearer $token'};
     try {
-      var response = await dio.put(endpoint, data: {'name': coasterName});
+      var response = await dio.put(endpoint, data: {'name': coasterName, 'active': true});
 
       if (response.statusCode == 200) {
         log('success renamed coaster');
@@ -260,10 +267,11 @@ class CoasterManagementApi {
   // --------------------------------------------now dio---------------------------------------------------------
   // disable coaster function - change bool
   // PUT /host/coaster/{coasterUID} body: { paused: true|false, disabled: true|false, name: 'string'}
-  static Future pauseCoaster(String coasterUID, bool paused) async {
-    log("bool is " + paused.runtimeType.toString());
+  static Future pauseCoaster(String coasterUID, bool active) async {
+    log("bool is " + active.runtimeType.toString());
     String endpoint = address + host + coasters + coasterUID;
     String token = "";
+    token = tempToken;
     // String token = await FirebaseAuth.instance.currentUser.getIdToken();
     // http
     // var response = await http.put(endpoint,
@@ -274,7 +282,7 @@ class CoasterManagementApi {
     dio.options.headers = {HttpHeaders.authorizationHeader: 'Bearer $token'};
     try {
       var response =
-      await dio.put(endpoint, data: {"active": paused.toString()});
+      await dio.put(endpoint, data: {"active": active.toString()});
 
       if (response.statusCode == 200) {
         log('success paused coaster');
@@ -308,6 +316,7 @@ class CoasterManagementApi {
       String coasterUID, bool paused, bool disabled, String coasterName) async {
     String endpoint = address + host + coasters + coasterUID;
     String token = "";
+    token = tempToken;
     // String token = await FirebaseAuth.instance.currentUser.getIdToken();
     // http
     // var response = await http.put(endpoint,
@@ -347,6 +356,7 @@ class CoasterManagementApi {
   static Future disconnectCoaster(String coasterUID) async {
     String endpoint = address + host + coasters + coasterUID;
     String token = "";
+    token = tempToken;
     // String token = await FirebaseAuth.instance.currentUser.getIdToken();
     // log(token);
     // http

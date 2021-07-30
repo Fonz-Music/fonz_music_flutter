@@ -34,7 +34,7 @@ class _TopArtistsViewState extends State<TopArtistsView> {
         Row(
           children: [
             Padding(
-              padding: EdgeInsets.fromLTRB(20, 30, 0, 10),
+              padding: EdgeInsets.fromLTRB(20, 10, 0, 10),
               child: new Text(
                 "your favorite artists",
                 style: TextStyle(

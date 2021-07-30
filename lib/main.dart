@@ -111,9 +111,9 @@ class FonzMusicApp extends StatelessWidget {
 }
 
 int currentTab = 1;
-bool connectedToSpotify = false;
-bool hasConnectedCoasters = false;
-bool hasAccount = false;
+bool connectedToSpotify = true;
+bool hasConnectedCoasters = true;
+bool hasAccount = true;
 
 
 class MyHomePage extends StatefulWidget {
@@ -155,6 +155,7 @@ class _MyHomePageState extends State<MyHomePage> {
        DefaultTabController(
         length: 3,
         child: Scaffold(
+          resizeToAvoidBottomInset: false,
           backgroundColor: Colors.transparent,
           body: _children[currentTab], // new
           // body: ,

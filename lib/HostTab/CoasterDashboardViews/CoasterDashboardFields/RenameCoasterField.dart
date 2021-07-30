@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:fonz_music_flutter/ApiFunctions/HostApi/CoasterManagementApi.dart';
 import 'package:fonz_music_flutter/GlobalComponents/FrontEnd/FrontEndConstants.dart';
 
+import '../CoasterDashboardView.dart';
+
 class RenameCoasterField extends StatefulWidget {
 
   RenameCoasterField({Key key, this.coasterUid, this.popupContext, this.coasterName}) : super(key: key);
@@ -150,6 +152,7 @@ class _RenameCoasterFieldState extends State<RenameCoasterField> {
                               // updatePageCoasterDashboard = true;
                               // tells firebase that the host changed the coaster name
                               FirebaseAnalytics().logEvent(name: "hostChangedCoasterName", parameters: {'string':"host" });
+                              updatePageCoasterDashboard = true;
                               Navigator.pop(widget.popupContext);
                             },
                             child: Icon(

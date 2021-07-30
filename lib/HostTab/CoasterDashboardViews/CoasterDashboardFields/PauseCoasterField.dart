@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:fonz_music_flutter/ApiFunctions/HostApi/CoasterManagementApi.dart';
 import 'package:fonz_music_flutter/GlobalComponents/FrontEnd/FrontEndConstants.dart';
 
+import '../CoasterDashboardView.dart';
+
 class PauseCoasterField extends StatefulWidget {
 
   PauseCoasterField({Key key, this.coasterUid, this.popupContext, this.active, this.coasterName, this.notifyParent}) : super(key: key);
@@ -144,6 +146,7 @@ class _PauseCoasterFieldState extends State<PauseCoasterField> {
                         // updatePageCoasterDashboard = true;
                         // tells firebase that the host paused the coaster
                         FirebaseAnalytics().logEvent(name: "hostPausedCoaster", parameters: {'string':"host" });
+                        updatePageCoasterDashboard = true;
                         widget.notifyParent();
                         Navigator.pop(widget.popupContext);
                       },

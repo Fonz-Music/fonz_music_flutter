@@ -185,6 +185,10 @@ class _HomeDecisionPageState extends State<HomeDecisionPage> {
     }
   }
 
+  Widget DetermineIfHomeButtonsShow() {
+
+  }
+
 
   Widget DetermineIfSpotifyHomeButtonShown() {
     if (!connectedToSpotify) {

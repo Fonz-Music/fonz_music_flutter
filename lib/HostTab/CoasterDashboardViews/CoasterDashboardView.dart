@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:fonz_music_flutter/ApiFunctions/HostApi/CoasterManagementApi.dart';
 import 'package:fonz_music_flutter/GlobalComponents/FrontEnd/FrontEndConstants.dart';
 import 'package:fonz_music_flutter/HostTab/CoasterDashboardViews/CoasterDashboardButtons/DisconnectCoasterButton.dart';
 import 'package:fonz_music_flutter/HostTab/CoasterDashboardViews/CoasterDashboardButtons/PauseCoasterButton.dart';
@@ -37,36 +38,12 @@ class _CoasterDashboardViewState extends State<CoasterDashboardView> {
     // if already has previous coasters loaded
     if (coasterDashboardResult != null && !updatePageCoasterDashboard) {
       log("prevous value used");
+      print("coaster dash result is " + coasterDashboardResult.toString());
     }
     // else load in coasters
     else {
-      // coasterDashboardResult = await CoasterManagementApi.getOwnedCoasters();
-      coasterDashboardResult = { "responseCode": 200, "body": {
-        "quantity": 10,
-        "coasters": [
-          {
-            "name": "portable1",
-            "active": true,
-            "coasterId": "0434E31AE66C80",
-            "paused": false,
-            "userId": "IjqUDP5RJ9WGnJYlZXArKFbH7962"
-          },
-          {
-            "active": true,
-            "name": "den2",
-            'userId': 'IjqUDP5RJ9WGnJYlZXArKFbH7962',
-            "coasterId": "0437E81AE66C81",
-            "paused": true
-          },
-          {
-            'active': true,
-            "coasterId": "045EDE1AE66C80",
-            "name": "adidas",
-            "userId": 'IjqUDP5RJ9WGnJYlZXArKFbH7962',
-            "paused": false
-          },
+      coasterDashboardResult = await CoasterManagementApi.getOwnedCoasters();
 
-        ]}};
       log("getting new value");
     }
     updatePageCoasterDashboard = false;
