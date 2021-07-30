@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:fonz_music_flutter/GlobalComponents/CreateAccountViews/CreateAccountView.dart';
 import 'package:fonz_music_flutter/GlobalComponents/FrontEnd/FrontEndConstants.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:fonz_music_flutter/HostTab/CoasterDashboardViews/CoasterDashboardView.dart';
@@ -24,90 +25,101 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends State<SettingsPage> {
+
+
+
   @override
   Widget build(BuildContext context) {
-
-    final size = MediaQuery.of(context).size;
+    final size = MediaQuery
+        .of(context)
+        .size;
     final width = size.width;
     final height = size.height;
 
-    return Stack(
-      children: [
-         Container(
-          color: determineColorThemeBackground(),
-         ),
-        Opacity(
-          child: Column(
-            children: [
-              Spacer(),
-              Image(image: AssetImage("assets/fonzIcons/mountainProfileLarger.png"), width: width,),
-            ],
-          ),
-          opacity: 0.4,
-        ),
-        Column(
+    if (hasAccount) {
+      return Stack(
           children: [
+            Container(
+              color: determineColorThemeBackground(),
+            ),
+            Opacity(
+              child: Column(
+                children: [
+                  Spacer(),
+                  Image(image: AssetImage(
+                      "assets/fonzIcons/mountainProfileLarger.png"),
+                    width: width,),
+                ],
+              ),
+              opacity: 0.4,
+            ),
+            Column(
+                children: [
 
 
-           Container(
-             width: width,
-              padding: EdgeInsets.fromLTRB(0, 0, 0, 20),
-              child: Padding(
-                padding: EdgeInsets.fromLTRB(20, 30, 0, 0),
-                child: new Text(
-                  "settings",
-                  style: TextStyle(
-                    fontFamily: FONZFONTTWO,
-                    fontSize: HEADINGTHREE,
-                    color: determineColorThemeTextInverse(),
+                  Container(
+                      width: width,
+                      padding: EdgeInsets.fromLTRB(0, 0, 0, 20),
+                      child: Padding(
+                        padding: EdgeInsets.fromLTRB(20, 30, 0, 0),
+                        child: new Text(
+                          "settings",
+                          style: TextStyle(
+                            fontFamily: FONZFONTTWO,
+                            fontSize: HEADINGTHREE,
+                            color: determineColorThemeTextInverse(),
+                          ),
+                          textAlign: TextAlign.left,
+                        ),
+                      )
                   ),
-                  textAlign: TextAlign.left,
-                ),
-              )
-          ),
-            Row(
-              children: [
-                Padding(
-                  padding: EdgeInsets.fromLTRB(20, 30, 0, 10),
-                  child: new Text(
-                    "shop",
-                    style: TextStyle(
-                      fontFamily: FONZFONTTWO,
-                      fontSize: HEADINGFIVE,
-                      color: determineColorThemeTextInverse(),
-                    ),
-                    textAlign: TextAlign.left,
+                  Row(
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.fromLTRB(20, 30, 0, 10),
+                        child: new Text(
+                          "shop",
+                          style: TextStyle(
+                            fontFamily: FONZFONTTWO,
+                            fontSize: HEADINGFIVE,
+                            color: determineColorThemeTextInverse(),
+                          ),
+                          textAlign: TextAlign.left,
+                        ),
+                      ),
+                      Spacer()
+                    ],
                   ),
-                ),
-                Spacer()
-              ],
+                  // buy a coaster
+                  BuyACoasterButton(),
+                  Row(
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.fromLTRB(20, 30, 0, 10),
+                        child: new Text(
+                          "account",
+                          style: TextStyle(
+                            fontFamily: FONZFONTTWO,
+                            fontSize: HEADINGFIVE,
+                            color: determineColorThemeTextInverse(),
+                          ),
+                          textAlign: TextAlign.left,
+                        ),
+                      ),
+                      Spacer()
+                    ],
+                  ),
+                  DetermineWhichButtonsShown(widget.notifyParent),
+                  // determine # of song queues
+                  // DetermineAmountSongRequests()
+                ]
             ),
-            // buy a coaster
-            BuyACoasterButton(),
-            Row(
-              children: [
-                Padding(
-                  padding: EdgeInsets.fromLTRB(20, 30, 0, 10),
-                  child: new Text(
-                    "account",
-                    style: TextStyle(
-                      fontFamily: FONZFONTTWO,
-                      fontSize: HEADINGFIVE,
-                      color: determineColorThemeTextInverse(),
-                    ),
-                    textAlign: TextAlign.left,
-                  ),
-                ),
-                Spacer()
-              ],
-            ),
-            DetermineWhichButtonsShown(widget.notifyParent),
-            // determine # of song queues
-            // DetermineAmountSongRequests()
-        ]
-        ),
-      ]
-    );
+          ]
+      );
+    }
+    else {
+      return CreateAccountView();
+    }
   }
   Widget DetermineWhichButtonsShown(notifyParent) {
     if (hasAccount && connectedToSpotify) {

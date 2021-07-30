@@ -24,6 +24,10 @@ class ConnectSpotifyHomePageButton extends StatefulWidget {
 class _ConnectSpotifyHomePageButtonState extends State<ConnectSpotifyHomePageButton> {
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    final width = size.width;
+    final height = size.height;
+
     return Center(
       child: Column(
         children: [
@@ -50,9 +54,25 @@ class _ConnectSpotifyHomePageButtonState extends State<ConnectSpotifyHomePageBut
               ),
               onPressed: () async {
                 if (!hasAccount) {
-                  showModalBottomSheet(context: context, builder: (BuildContext context) {
-                    return CreateAccountPrompt();
-                  });
+                  showModalBottomSheet<dynamic>(context: context,
+                      isScrollControlled: true,
+                      builder: (BuildContext bc) {
+                        return Wrap(
+                            children: <Widget>[
+                              Container(
+                                height: height * 0.95,
+                                child: Container(
+                                  decoration: new BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: new BorderRadius.only(
+                                          topLeft: const Radius.circular(25.0),
+                                          topRight: const Radius.circular(25.0))),
+                                  child: CreateAccountPrompt(),
+                                ),
+                              )
+                            ]
+                        );
+                      });
                 }
                 else {
                   // link to spotify

@@ -73,7 +73,6 @@ class _CreateAccountSettingsButtonState extends State<CreateAccountSettingsButto
                   )
                 ]
             );
-            return Wrap(children:[CreateAccountPrompt()]);
           });
           // FirebaseAnalytics().logEvent(name: "userTappedCreateAccountSettings", parameters: {'string': "user"});
         },

@@ -24,40 +24,63 @@ class _CreateAccountViewState extends State<CreateAccountView> {
         .size;
     final width = size.width;
     final height = size.height;
-    return Container(
-        // height: height * .9,
-        padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
-//        height: height ,
-        child: Center(
+    return Stack(
+      children: [
+        Container(
+          color: DARKERGREY,
+        ),
+        Opacity(
           child: Column(
+            children: [
+
+              Image(
+                image: AssetImage("assets/fonzIcons/peoplePartyingBackdrop.jpg"),
+                width: width,
+                // height: height * 0.95,
+                fit: BoxFit.fitHeight,
+
+              ),
+              // Spacer(),
+            ],
+          ),
+          opacity: 0.4,
+        ),
+        Container(
+            // height: height * .9,
+            padding: EdgeInsets.fromLTRB(20, 40, 20, 0),
+//        height: height ,
+            child: Center(
+              child: Column(
 //                    height: height * .5,
 //            width: width * .75,
-              children:[
-                // Spacer(),
-            Container(
-              padding: EdgeInsets.all(5),
-              height: 80,
-              width: 40,
-              child: Image(
-                image: AssetImage("assets/fonzIcons/fonzLogoGradiant.png"),
+                  children:[
+                    // Spacer(),
+                Container(
+                  padding: EdgeInsets.all(5),
+                  height: 80,
+                  width: 40,
+                  child: Image(
+                    image: AssetImage("assets/fonzIcons/fonzLogoGradiant.png"),
+                  ),
+                ),
+                ToggleSignInSignOut(),
+                Container(
+                  height: height * .72,
+                  // width: width * .72,
+                  child: PageView(
+                  controller: _emailController,
+                  scrollDirection: Axis.horizontal,
+                  children: [SignInView(), SignUpView()],
+
               ),
-            ),
-            ToggleSignInSignOut(),
-            Container(
-              height: height * .72,
-              // width: width * .72,
-              child: PageView(
-              controller: _emailController,
-              scrollDirection: Axis.horizontal,
-              children: [SignInView(), SignUpView()],
 
-          ),
-
-            ),
-                Spacer(),
-              ]
-          )
-        ));
+                ),
+                    Spacer(),
+                  ]
+              )
+            )),
+      ],
+    );
   }
 
   Widget ToggleSignInSignOut() {
@@ -71,7 +94,7 @@ class _CreateAccountViewState extends State<CreateAccountView> {
                 fontFamily: FONZFONTONE,
                 fontSize: 16.0,
                 fontWeight: FontWeight.w300,
-                color: determineColorThemeTextInverse(),
+                color: Colors.white,
                 decoration: determineIfSignInButtonHasUnderline(),
                 decorationColor: AMBER
             ),
@@ -93,7 +116,7 @@ class _CreateAccountViewState extends State<CreateAccountView> {
                   fontFamily: FONZFONTONE,
                   fontSize: 16.0,
                   fontWeight: FontWeight.w300,
-                  color: determineColorThemeTextInverse(),
+                  color: Colors.white,
                   decoration: determineIfSignUpButtonHasUnderline(),
                   decorationColor: AMBER
               ),

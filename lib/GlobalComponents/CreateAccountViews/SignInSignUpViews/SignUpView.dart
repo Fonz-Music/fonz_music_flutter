@@ -29,7 +29,7 @@ class _SignUpViewState extends State<SignUpView> {
           ShowEmailInputSignUp(),
           ShowPasswordInputSignUp(),
           ShowConfirmPasswordInputSignUp(),
-          OrAppleOrGoogle(),
+          // OrAppleOrGoogle(),
           AgreeToPolicies(),
           ShowSignUpButton(),
         ],
@@ -46,7 +46,7 @@ class _SignUpViewState extends State<SignUpView> {
       height: 50,
       child: Neumorphic(
         style: NeumorphicStyle(
-            color: determineColorThemeBackground(),
+            color: Colors.white,
             shadowDarkColor: determineColorThemeTextInverse()
         ),
         child: TextFormField(
@@ -56,7 +56,7 @@ class _SignUpViewState extends State<SignUpView> {
           style: TextStyle(
             fontFamily: FONZFONTTWO,
             fontSize: HEADINGFIVE,
-            color: determineColorThemeTextInverse(),
+            color: DARKERGREY,
           ),
           decoration: InputDecoration(
             hintText: "display name",
@@ -86,7 +86,7 @@ class _SignUpViewState extends State<SignUpView> {
         height: 50,
         child: Neumorphic(
           style: NeumorphicStyle(
-            color: determineColorThemeBackground(),
+            color: Colors.white,
               shadowDarkColor: determineColorThemeTextInverse()
           ),
           child: TextFormField(
@@ -96,7 +96,7 @@ class _SignUpViewState extends State<SignUpView> {
             style: TextStyle(
               fontFamily: FONZFONTTWO,
               fontSize: HEADINGFIVE,
-              color: determineColorThemeTextInverse(),
+              color: DARKERGREY,
             ),
             decoration: InputDecoration(
               hintText: "email",
@@ -125,7 +125,7 @@ class _SignUpViewState extends State<SignUpView> {
       height: 50,
       child: Neumorphic(
         style: NeumorphicStyle(
-          color: determineColorThemeBackground(),
+          color: Colors.white,
             shadowDarkColor: determineColorThemeTextInverse()
         ),
         child: TextFormField(
@@ -135,7 +135,7 @@ class _SignUpViewState extends State<SignUpView> {
           style: TextStyle(
             fontFamily: FONZFONTTWO,
             fontSize: HEADINGFIVE,
-            color: determineColorThemeTextInverse(),
+            color: DARKERGREY,
           ),
           decoration: InputDecoration(
             hintText: "password",
@@ -163,7 +163,7 @@ class _SignUpViewState extends State<SignUpView> {
       height: 50,
       child: Neumorphic(
         style: NeumorphicStyle(
-          color: determineColorThemeBackground(),
+          color: Colors.white,
           shadowDarkColor: determineColorThemeTextInverse()
         ),
         child: TextFormField(
@@ -173,7 +173,7 @@ class _SignUpViewState extends State<SignUpView> {
           style: TextStyle(
             fontFamily: FONZFONTTWO,
             fontSize: HEADINGFIVE,
-            color: determineColorThemeTextInverse(),
+            color: DARKERGREY,
           ),
           decoration: InputDecoration(
             hintText: "confirm password",
@@ -244,7 +244,7 @@ class _SignUpViewState extends State<SignUpView> {
                 style: TextStyle(
                   fontFamily: FONZFONTTWO,
                   fontSize: HEADINGFIVE,
-                  color: determineColorThemeTextInverse(),
+                  color: Colors.white,
                 ),
               ),
             ),
@@ -323,7 +323,7 @@ class _SignUpViewState extends State<SignUpView> {
                       style: TextStyle(
                           fontFamily: FONZFONTONE,
                           fontSize: 12,
-                          color: determineColorThemeTextInverse()),
+                          color: Colors.white),
                     ),
                   ]
               ),
@@ -347,7 +347,7 @@ class _SignUpViewState extends State<SignUpView> {
                       style: TextStyle(
                           fontFamily: FONZFONTONE,
                           fontSize: 12,
-                          color: determineColorThemeTextInverse()),
+                          color: Colors.white),
                     ),
                   ]
               ),

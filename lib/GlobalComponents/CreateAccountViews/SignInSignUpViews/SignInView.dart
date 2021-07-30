@@ -26,7 +26,7 @@ class _SignInViewState extends State<SignInView> {
         ShowEmailInputSignIn(),
         ShowPasswordInputSignIn(),
         ShowForgotPasswordButton(),
-        OrAppleOrGoogle(),
+        // OrAppleOrGoogle(),
         ShowSignInButton(),
 
       ]),
@@ -42,7 +42,7 @@ class _SignInViewState extends State<SignInView> {
       height: 50,
       child: Neumorphic(
         style: NeumorphicStyle(
-            color: determineColorThemeBackground(),
+            color: Colors.white,
             shadowDarkColor: determineColorThemeTextInverse()
         ),
         child: TextFormField(
@@ -52,7 +52,7 @@ class _SignInViewState extends State<SignInView> {
           style: TextStyle(
             fontFamily: FONZFONTTWO,
             fontSize: HEADINGFIVE,
-            color: determineColorThemeTextInverse(),
+            color: DARKERGREY,
           ),
           decoration: InputDecoration(
             hintText: "email",
@@ -81,7 +81,7 @@ class _SignInViewState extends State<SignInView> {
       height: 50,
       child: Neumorphic(
         style: NeumorphicStyle(
-            color: determineColorThemeBackground(),
+            color: Colors.white,
             shadowDarkColor: determineColorThemeTextInverse()
         ),
         child: TextFormField(
@@ -91,7 +91,7 @@ class _SignInViewState extends State<SignInView> {
           style: TextStyle(
             fontFamily: FONZFONTTWO,
             fontSize: HEADINGFIVE,
-            color: determineColorThemeTextInverse(),
+            color: DARKERGREY,
           ),
           decoration: InputDecoration(
             hintText: "password",
@@ -167,7 +167,7 @@ class _SignInViewState extends State<SignInView> {
                       fontFamily: FONZFONTONE,
                       fontSize: 14.0,
                       fontWeight: FontWeight.w300,
-                      color: determineColorThemeTextInverse()),
+                      color: Colors.white),
                   textAlign: TextAlign.center,
                 ),
           ),
@@ -200,7 +200,7 @@ class _SignInViewState extends State<SignInView> {
                 style: TextStyle(
                   fontFamily: FONZFONTTWO,
                   fontSize: HEADINGFIVE,
-                  color: determineColorThemeTextInverse(),
+                  color: Colors.white,
                 ),
               ),
             ),

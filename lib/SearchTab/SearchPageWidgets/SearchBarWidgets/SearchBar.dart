@@ -95,8 +95,8 @@ class _SearchBarState extends State<SearchBar> {
   }
 
   determineSearchWidthBasedOnEditing() {
-    if (isEditing) return 0.65;
-    else return 0.8;
+    if (isEditing) return 0.7;
+    else return 0.85;
   }
 
   Widget DetermineIfCancelShows() {

@@ -7,7 +7,7 @@ import 'package:fonz_music_flutter/SearchTab/HomePageDecision.dart';
 import 'package:fonz_music_flutter/SearchTab/SearchPageWidgets/NewSearchPage.dart';
 import 'package:fonz_music_flutter/SearchTab/SearchPage.dart';
 
-bool connectedToAHost = true;
+bool connectedToAHost = false;
 
 
 class SearchTab extends StatefulWidget {
