@@ -117,8 +117,9 @@ class _HomeDecisionPageState extends State<HomeDecisionPage> {
         }
         // if unsuccessful
         else {
-          Timer(Duration(seconds: 10), () {
+          Timer(Duration(seconds: 5), () {
             launchedNfcToJoinParty = false;
+            pressedNfcButtonToJoinPartu = false;
             refresh();
           });
           if (hostCoasterDetails.statusCode == 600) {
@@ -169,7 +170,8 @@ class _HomeDecisionPageState extends State<HomeDecisionPage> {
               // HostAPartyButton(notifyParent: widget.notifyParent,),
               Container(
                   height: height * 0.1,
-                  child: Spacer()),
+                  // child: Spacer()
+              ),
               JoinAPartyButton(notifyParent: refresh),
           ],
         ),
@@ -185,7 +187,7 @@ class _HomeDecisionPageState extends State<HomeDecisionPage> {
           ConnectSpotifyHomePageButton(notifyParent: refresh),
           Container(
             width: 30,
-            child: Spacer(),
+
           ),
         ],
       );
