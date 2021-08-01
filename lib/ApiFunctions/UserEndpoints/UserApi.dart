@@ -20,7 +20,7 @@ class UserApi {
     // add auth token
     dio.options.headers = {HttpHeaders.authorizationHeader: 'Bearer $token'};
     // execute endpoint
-    var response = await dio.post(endpoint, data: {email: email, password: password});
+    var response = await dio.put(endpoint, data: {email: email, password: password});
     log(response.statusCode.toString());
 
     if (response.statusCode == 200) {

@@ -191,7 +191,7 @@ class _HomeDecisionPageState extends State<HomeDecisionPage> {
 
 
   Widget DetermineIfSpotifyHomeButtonShown() {
-    if (!connectedToSpotify) {
+    if (!userAttributes.getConnectedToSpotify()) {
       return  Row(
         children: [
           ConnectSpotifyHomePageButton(notifyParent: refresh),

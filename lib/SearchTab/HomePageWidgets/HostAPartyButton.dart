@@ -59,7 +59,7 @@ class _HostAPartyButtonState extends State<HostAPartyButton> {
                   color: determineColorThemeBackground()
               ),
               onPressed: () async {
-                if (!hasAccount) {
+                if (!userAttributes.getHasAccount()) {
                   showModalBottomSheet<dynamic>(context: context,
                       // shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
                    isScrollControlled: true,

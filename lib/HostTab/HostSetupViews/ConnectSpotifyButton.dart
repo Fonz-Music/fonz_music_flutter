@@ -56,8 +56,8 @@ class _ConnectSpotifyButtonState extends State<ConnectSpotifyButton> {
                     color: determineColorThemeBackground()
                 ),
                 onPressed: () async {
-                  if (!connectedToSpotify) {
-                    if (!hasAccount) {
+                  if (!userAttributes.getConnectedToSpotify()) {
+                    if (!userAttributes.getHasAccount()) {
                       showModalBottomSheet<dynamic>(context: context,
                           isScrollControlled: true,
                           builder: (BuildContext bc) {
@@ -82,7 +82,8 @@ class _ConnectSpotifyButtonState extends State<ConnectSpotifyButton> {
                     }
                     else {
                       // link to spotify
-                      connectedToSpotify = true;
+                      userAttributes.setConnectedToSpotify(true);
+                      // connectedToSpotify = true;
                       widget.notifyParent();
                     }
                   }
@@ -111,19 +112,19 @@ class _ConnectSpotifyButtonState extends State<ConnectSpotifyButton> {
   }
 
   determineSpotifyCircleSize() {
-    if (connectedToSpotify) return 50.0;
+    if (userAttributes.getConnectedToSpotify()) return 50.0;
     else return 150.0;
   }
   determineeSpotifyInternalPaddingSize() {
-    if (connectedToSpotify) return 10.0;
+    if (userAttributes.getConnectedToSpotify()) return 10.0;
     else return 40.0;
   }
   determineSpotifyTextSize() {
-    if (connectedToSpotify) return HEADINGFIVE;
+    if (userAttributes.getConnectedToSpotify()) return HEADINGFIVE;
     else return HEADINGFOUR;
   }
   determineSpotifyOpacity() {
-    if (connectedToSpotify) return 0.4;
+    if (userAttributes.getConnectedToSpotify()) return 0.4;
     else return 1.0;
   }
 

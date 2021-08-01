@@ -16,9 +16,18 @@ class CoreUserAttributes {
     log("setting attributes");
     // Create local preferences
     SharedPreferences localPreferences = await SharedPreferences.getInstance();
-    _connectedToSpotify = localPreferences.getBool("_connectedToSpotify");
-    _hasConnectedCoasters = localPreferences.getBool("_hasConnectedCoasters");
-    _hasAccount = localPreferences.getBool("_hasAccount");
+    final spotifyBoolFromStorage = localPreferences.getBool("_connectedToSpotify");
+    if (spotifyBoolFromStorage != null) {
+      _connectedToSpotify = spotifyBoolFromStorage;
+    }
+    final coastersBoolFromStorage = localPreferences.getBool("_hasConnectedCoasters");
+    if (coastersBoolFromStorage != null) {
+      _hasConnectedCoasters = coastersBoolFromStorage;
+    }
+    final accountBoolFromStorage = localPreferences.getBool("_hasAccount");
+    if (accountBoolFromStorage != null) {
+      _hasAccount = accountBoolFromStorage;
+    }
   }
 
   bool getHasAccount() {

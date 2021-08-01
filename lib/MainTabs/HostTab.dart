@@ -59,7 +59,7 @@ class _HostTabState extends State<HostTab> {
   }
 
   determineInitalPage() {
-    if (connectedToSpotify && hasConnectedCoasters) {
+    if (userAttributes.getConnectedToSpotify() && userAttributes.getHasConnectedCoasters()) {
       return 1;
     }
     else return 0;
@@ -71,7 +71,7 @@ class _HostTabState extends State<HostTab> {
     final width = size.width;
     final height = size.height;
 
-    if (hasConnectedCoasters && connectedToSpotify) {
+    if (userAttributes.getHasConnectedCoasters() && userAttributes.getConnectedToSpotify()) {
       return Container(
         height: height,
         width: width,

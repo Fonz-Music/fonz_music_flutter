@@ -56,7 +56,7 @@ class _ConnectYourFirstCoasterButtonState extends State<ConnectYourFirstCoasterB
                     color: LILAC
                 ),
                 onPressed: () async {
-                  if (connectedToSpotify) {
+                  if (userAttributes.getConnectedToSpotify()) {
                     pressedToConnectFirstCoaster = true;
                     widget.notifyParent();
 
@@ -138,19 +138,19 @@ class _ConnectYourFirstCoasterButtonState extends State<ConnectYourFirstCoasterB
 
 
   determineFirstCoasterCircleSize() {
-    if (!connectedToSpotify) return 50.0;
+    if (!userAttributes.getConnectedToSpotify()) return 50.0;
     else return 150.0;
   }
   determineFirstCoasterInternalPaddingSize() {
-    if (!connectedToSpotify) return 10.0;
+    if (!userAttributes.getConnectedToSpotify()) return 10.0;
     else return 40.0;
   }
   determineFirstCoasterTextSize() {
-    if (!connectedToSpotify) return HEADINGFIVE;
+    if (!userAttributes.getConnectedToSpotify()) return HEADINGFIVE;
     else return HEADINGFOUR;
   }
   determineFirstCoasterOpacity() {
-    if (!connectedToSpotify) return 0.4;
+    if (!userAttributes.getConnectedToSpotify()) return 0.4;
     else return 1.0;
   }
 

@@ -124,7 +124,8 @@ class _NameYourFirstCoasterState extends State<NameYourFirstCoaster> {
                                 await CoasterManagementApi.renameCoaster(firstConnectedCoasterDetails.coasterUid,
                                     newCoasterName);
                                 Timer(Duration(milliseconds: SUCCESSPAGELENGTH), () {
-                                  hasConnectedCoasters = true;
+                                  userAttributes.setHasConnectedCoasters(true);
+                                  // hasConnectedCoasters = true;
                                   widget.controller.animateToPage(1,
                                       duration: Duration(seconds: 1), curve: Curves.easeInOutCirc);
                                 });

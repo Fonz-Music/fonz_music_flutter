@@ -229,7 +229,8 @@ class _SignUpViewState extends State<SignUpView> {
             final updateUser = await UserApi.updateUserAccount(_email, _password, _displayName, agreedToPolicy, agreedToEmail);
             if (updateUser["responseCode"] == 200) {
               // set hasAccount to true
-              hasAccount = true;
+              userAttributes.setHasAccount(true);
+              // hasAccount = true;
 
               // pop modal
 

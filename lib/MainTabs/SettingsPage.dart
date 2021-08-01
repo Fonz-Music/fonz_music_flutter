@@ -36,7 +36,7 @@ class _SettingsPageState extends State<SettingsPage> {
     final width = size.width;
     final height = size.height;
 
-    if (hasAccount) {
+    if (userAttributes.getHasAccount()) {
       return Stack(
           children: [
             Container(
@@ -122,7 +122,7 @@ class _SettingsPageState extends State<SettingsPage> {
     }
   }
   Widget DetermineWhichButtonsShown(notifyParent) {
-    if (hasAccount && connectedToSpotify) {
+    if (userAttributes.getHasAccount() && userAttributes.getConnectedToSpotify()) {
       return Column(
         children: [
 
@@ -136,7 +136,7 @@ class _SettingsPageState extends State<SettingsPage> {
         ],
       );
     }
-    else if (hasAccount) {
+    else if (userAttributes.getHasAccount()) {
       return Column(
         children: [
 

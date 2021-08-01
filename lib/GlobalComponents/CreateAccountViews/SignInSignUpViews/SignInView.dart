@@ -150,7 +150,7 @@ class _SignInViewState extends State<SignInView> {
             final signInResp = await AuthApi.signInUser(_email, _password);
             if (signInResp["responseCode"] == 200) {
               // set hasAccount to true
-              hasAccount = true;
+              userAttributes.setHasAccount(true);
               // check if user has spotify
 
               // check if user has coasters

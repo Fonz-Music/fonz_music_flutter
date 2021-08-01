@@ -53,7 +53,7 @@ class _ConnectSpotifyHomePageButtonState extends State<ConnectSpotifyHomePageBut
                   color: determineColorThemeBackground()
               ),
               onPressed: () async {
-                if (!hasAccount) {
+                if (!userAttributes.getHasAccount()) {
                   showModalBottomSheet<dynamic>(context: context,
                       isScrollControlled: true,
                       builder: (BuildContext bc) {
@@ -76,7 +76,8 @@ class _ConnectSpotifyHomePageButtonState extends State<ConnectSpotifyHomePageBut
                 }
                 else {
                   // link to spotify
-                  connectedToSpotify = true;
+                  userAttributes.setConnectedToSpotify(true);
+                  // connectedToSpotify = true;
                   widget.notifyParent();
                 }
 
