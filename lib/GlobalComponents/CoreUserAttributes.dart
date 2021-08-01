@@ -36,39 +36,35 @@ class CoreUserAttributes {
   bool getHasAccount() {
     return _hasAccount;
   }
-  setHasAccount(bool bool) async {
-
-    log("changing has acc to " + bool.toString());
-    _hasAccount = bool;
+  setHasAccount(bool boolie) async {
+    this._hasAccount = boolie;
     // Create local preferences
     SharedPreferences localPreferences = await SharedPreferences.getInstance();
     // store in preferences
-    localPreferences.setBool("_hasAccount", bool);
+    localPreferences.setBool("_hasAccount", boolie);
 
   }
 
   bool getHasConnectedCoasters() {
     return _hasConnectedCoasters;
   }
-  setHasConnectedCoasters(bool bool) async {
-    log("changing has coaster to " + bool.toString());
-    _hasConnectedCoasters = bool;
+  setHasConnectedCoasters(bool boolie) async {
+    this._hasConnectedCoasters = boolie;
     // Create local preferences
     SharedPreferences localPreferences = await SharedPreferences.getInstance();
     // store in preferences
-    localPreferences.setBool("_hasConnectedCoasters", bool);
+    localPreferences.setBool("_hasConnectedCoasters", boolie);
   }
 
   bool getConnectedToSpotify() {
     return _connectedToSpotify;
   }
-  setConnectedToSpotify(bool bool) async {
-    log("changing has spot to " + bool.toString());
-    _connectedToSpotify = bool;
+  setConnectedToSpotify(bool boolie) async {
+    this._connectedToSpotify = boolie;
     // Create local preferences
     SharedPreferences localPreferences = await SharedPreferences.getInstance();
     // store in preferences
-    localPreferences.setBool("_connectedToSpotify", bool);
+    localPreferences.setBool("_connectedToSpotify", boolie);
   }
   determineIfUserConnectedToSpotify() {
     // get music providers

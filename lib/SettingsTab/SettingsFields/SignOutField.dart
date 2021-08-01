@@ -114,21 +114,10 @@ class _SignOutFieldState extends State<SignOutField> {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(CORNERRADIUSBUTTON),
                     ),
-                    onPressed: () async {
-                      log("signing out");
-                      await userAttributes.setHasAccount(false);
-                      await userAttributes.setHasConnectedCoasters(false);
-                      await userAttributes.setConnectedToSpotify(false);
+                    onPressed: () {
 
-                      // Create storage
-                      final storage = new FlutterSecureStorage();
-                      // delete accessToken
-                      await storage.delete(key: "accessToken");
-                      // delete refreshToken
-                      await storage.delete(key: "refreshToken");
-                      await widget.notifyParent();
-                      Navigator.pop(
-                          widget.popupContext);
+                      widget.notifyParent();
+                      Navigator.pop(widget.popupContext);
                     },
                   ),
                 ),
@@ -147,12 +136,17 @@ class _SignOutFieldState extends State<SignOutField> {
                       borderRadius: BorderRadius.circular(CORNERRADIUSBUTTON),
                     ),
                     onPressed: () async{
+                      log("signing out");
+                      await userAttributes.setHasAccount(false);
+                      await userAttributes.setHasConnectedCoasters(false);
+                      await userAttributes.setConnectedToSpotify(false);
 
-
-
-
-
-
+                      // Create storage
+                      final storage = new FlutterSecureStorage();
+                      // delete accessToken
+                      await storage.delete(key: "accessToken");
+                      // delete refreshToken
+                      await storage.delete(key: "refreshToken");
 
                       widget.notifyParent();
                       Navigator.pop(widget.popupContext);
