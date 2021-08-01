@@ -5,10 +5,12 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:fonz_music_flutter/ApiFunctions/GetVersionApi.dart';
+import 'package:fonz_music_flutter/GlobalComponents/GlobalVariables.dart';
 import 'package:fonz_music_flutter/MainTabs/HostTab.dart';
 import 'package:fonz_music_flutter/MainTabs/SearchTab.dart';
 import 'package:fonz_music_flutter/MainTabs/SettingsPage.dart';
 import 'package:package_info/package_info.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'GlobalComponents/FrontEnd/FrontEndConstants.dart';
 import 'MustUpdateApp.dart';
@@ -111,9 +113,7 @@ class FonzMusicApp extends StatelessWidget {
 }
 
 int currentTab = 1;
-bool connectedToSpotify = true;
-bool hasConnectedCoasters = true;
-bool hasAccount = true;
+CoreUserAttributes userAttributes = CoreUserAttributes();
 
 
 class MyHomePage extends StatefulWidget {
@@ -132,6 +132,19 @@ class _MyHomePageState extends State<MyHomePage> {
   //   length: 3,
   //   initialIndex: 0,
   // );
+
+  SharedPreferences localPreferences;
+
+  @override
+  void initState() {
+    super.initState();
+    SharedPreferences.getInstance().then((prefs) {
+      setState(() {
+        localPreferences = prefs;
+        userAttributes.setAttributes();
+      } );
+    });
+  }
 
   refresh() {
     setState(() {});
