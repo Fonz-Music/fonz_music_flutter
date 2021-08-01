@@ -3,6 +3,8 @@ import 'dart:developer';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
+import 'package:fonz_music_flutter/ApiFunctions/ApiConstants.dart';
+import 'package:fonz_music_flutter/ApiFunctions/AuthMethods.dart';
 import 'package:fonz_music_flutter/ApiFunctions/GuestApi/GuestGetCoasterApi.dart';
 import 'package:fonz_music_flutter/GlobalComponents/FrontEnd/FrontEndConstants.dart';
 import 'package:fonz_music_flutter/GlobalComponents/GlobalFunctions/LaunchShop.dart';
@@ -58,10 +60,10 @@ class _BuyACoasterHomeButtonState extends State<BuyACoasterHomeButton> {
                   color: determineColorThemeBackground()
               ),
               onPressed: () async {
-                // var coasterDets = await GuestGetCoasterApi.getCoasterDetails("045EDE1AE66C80");
-                // GetHostCoasterDecoder coaster = coasterDets["body"];
-                // log("coaster dets are " + coaster.coaster.coasterId.toString());
-                scanForCoasterDetails();
+
+                final tokenHere = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwczovL2FwaS5mb256bXVzaWMuY29tL2F1dGgiLCJleHAiOjE0Mjg0MTUxMTAsInVzZXJJZCI6ImIyZTliYTQ3LWI4OTgtNGE1OS1iYzI1LTU0YTVmY2E3YzIzZSIsInN1YiI6ImIyZTliYTQ3LWI4OTgtNGE1OS1iYzI1LTU0YTVmY2E3YzIzZSIsImVtYWlsIjoiZGlhcm11aWRtY2dAcG0ubWUiLCJlbWFpbFZlcmlmaWVkIjpmYWxzZSwiaWF0IjoxNjI3MjE1NTExfQ.4HIeWpEU5okJSiWIhyGXdNIoN9BrxM-ur0mluFqmyGQ";
+
+                getUserIdFromAccessToken(tempToken);
                 // launchShop();
                 FirebaseAnalytics().logEvent(name: "userOpenedBuyCoaster", parameters: {'string': "user", "tab": "search"});
               },

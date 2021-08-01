@@ -40,7 +40,8 @@ class _AddCoasterButtonState extends State<AddCoasterButton> {
               // firstConnectedCoasterDetails
               // check to see if that coaster is ours and if its already connected
               // CHECK COASTER
-              Map checkCoasterResponse = await GuestGetCoasterApi.getCoasterDetails(coasterDetails[0]);
+              // Map checkCoasterResponse = await GuestGetCoasterApi.getCoasterDetails(coasterDetails[0]);
+              Map checkCoasterResponse = await GuestGetCoasterApi.getCoasterDetails("0407041AE66C85");
 
               if (coasterDetails[1].length < 25) {
                 log(coasterDetails[1].length.toString());

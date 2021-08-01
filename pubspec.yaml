@@ -37,7 +37,10 @@ dependencies:
   package_info: ^0.4.0+16
 #  to launch urls in app
   url_launcher: ^6.0.7
-
+#  android version of keystore for access token + refresh
+  flutter_secure_storage: ^4.2.1
+#  android version of userDefaults for saving hasAccount, hasSpot, & hasConnectedCoasters
+  shared_preferences: ^2.0.6
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.

@@ -357,11 +357,6 @@ class CoasterManagementApi {
     String endpoint = address + host + coasters + coasterUID;
     String token = "";
     token = tempToken;
-    // String token = await FirebaseAuth.instance.currentUser.getIdToken();
-    // log(token);
-    // http
-    // var response = await http.delete(endpoint,
-    //     headers: {HttpHeaders.authorizationHeader: 'Bearer $token'});
     // dio
     Dio dio = new Dio();
     dio.options.headers = {HttpHeaders.authorizationHeader: 'Bearer $token'};
@@ -386,6 +381,7 @@ class CoasterManagementApi {
       //     'error on "disconnectCoaster" api call with status of ${e.response.statusCode} & body of '
       //     // '${response.body}');
       //         '${e.response.data}');
+      print("error is " + e.toString());
       return {
         "responseCode": e.response.statusCode,
         "message": e.response.statusMessage,
