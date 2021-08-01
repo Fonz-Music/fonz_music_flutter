@@ -2,7 +2,11 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
+import 'package:fonz_music_flutter/ApiFunctions/UserEndpoints/AuthApi.dart';
 import 'package:fonz_music_flutter/GlobalComponents/FrontEnd/FrontEndConstants.dart';
+import 'package:fonz_music_flutter/HostTab/CoasterDashboardViews/CoasterDashboardView.dart';
+
+import '../../../main.dart';
 
 
 final _signInKey = GlobalKey<FormState>();
@@ -17,6 +21,7 @@ class _SignInViewState extends State<SignInView> {
   String _email;
   String _password;
   String _errorMessage;
+  bool errorOnPage = false;
 
   @override
   Widget build(BuildContext context) {
@@ -142,11 +147,24 @@ class _SignInViewState extends State<SignInView> {
           ),
           onPressed: () async {
             log("pressed sign in");
-            // signInUser(
-            //   _email,
-            //   _password,
-            //   _signInKey,
-            // );
+            final signInResp = await AuthApi.signInUser(_email, _password);
+            if (signInResp["responseCode"] == 200) {
+              // set hasAccount to true
+              hasAccount = true;
+              // check if user has spotify
+
+              // check if user has coasters
+              updatePageCoasterDashboard = true;
+              // pop modal
+
+            }
+            else {
+              errorOnPage = true;
+              _errorMessage = signInResp["body"];
+              if (_errorMessage == "") {
+                _errorMessage = "something went wrong :/";
+              }
+            }
           },
         ),
       ),

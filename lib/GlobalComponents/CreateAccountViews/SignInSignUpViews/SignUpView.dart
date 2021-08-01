@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:fonz_music_flutter/ApiFunctions/UserEndpoints/UserApi.dart';
 import 'package:fonz_music_flutter/GlobalComponents/FrontEnd/FrontEndConstants.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
+
+import '../../../main.dart';
 
 final _signUpKey = GlobalKey<FormState>();
 
@@ -18,6 +21,7 @@ class _SignUpViewState extends State<SignUpView> {
   String _password;
   String _confirmPassword;
   String _errorMessage;
+  bool errorOnPage = false;
 
   @override
   Widget build(BuildContext context) {
@@ -222,9 +226,21 @@ class _SignUpViewState extends State<SignUpView> {
             ),
           ),
           onPressed: () async {
-//            log("email input" + _email);
-//            log("pass input" + _password);
-//             await signUpUser(_email, _password, _signUpKey);
+            final updateUser = await UserApi.updateUserAccount(_email, _password, _displayName, agreedToPolicy, agreedToEmail);
+            if (updateUser["responseCode"] == 200) {
+              // set hasAccount to true
+              hasAccount = true;
+
+              // pop modal
+
+            }
+            else {
+              errorOnPage = true;
+              _errorMessage = updateUser["body"];
+              if (_errorMessage == "") {
+                _errorMessage = "something went wrong :/";
+              }
+            }
           },
         ),
       ),

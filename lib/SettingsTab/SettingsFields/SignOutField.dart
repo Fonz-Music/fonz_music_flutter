@@ -138,6 +138,8 @@ class _SignOutFieldState extends State<SignOutField> {
 
 
 
+
+
                       widget.notifyParent();
                       Navigator.pop(widget.popupContext);
                     },
