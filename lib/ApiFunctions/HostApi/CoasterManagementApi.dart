@@ -16,10 +16,6 @@ class CoasterManagementApi {
     String token = "";
     token = tempToken;
 
-    // String token = await FirebaseAuth.instance.currentUser.getIdToken();
-    //http
-    // var response = await http.get(endpoint,
-    //     headers: {HttpHeaders.authorizationHeader: 'Bearer $token'});
     // dio
     Dio dio = new Dio();
     dio.options.headers = {HttpHeaders.authorizationHeader: 'Bearer $token'};
@@ -490,7 +486,6 @@ class AddCoasterDecoder {
 }
 
 // edit coaster decoder
-// ask jay about params
 
 class EditCoasterDecoder {
   int status;
