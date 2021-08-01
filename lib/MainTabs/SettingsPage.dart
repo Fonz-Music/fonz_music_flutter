@@ -109,7 +109,7 @@ class _SettingsPageState extends State<SettingsPage> {
                       Spacer()
                     ],
                   ),
-                  DetermineWhichButtonsShown(widget.notifyParent),
+                  DetermineWhichButtonsShown(),
                   // determine # of song queues
                   // DetermineAmountSongRequests()
                 ]
@@ -121,7 +121,7 @@ class _SettingsPageState extends State<SettingsPage> {
       return CreateAccountView();
     }
   }
-  Widget DetermineWhichButtonsShown(notifyParent) {
+  Widget DetermineWhichButtonsShown() {
     if (userAttributes.getHasAccount() && userAttributes.getConnectedToSpotify()) {
       return Column(
         children: [
@@ -129,9 +129,9 @@ class _SettingsPageState extends State<SettingsPage> {
           // change name
           ChangeNameButton(),
           // manage spotify
-          ManageSpotifyButton(notifyParent: notifyParent),
+          ManageSpotifyButton(notifyParent: widget.notifyParent),
           // sign out
-          SignOutButton(notifyParent: notifyParent),
+          SignOutButton(notifyParent: widget.notifyParent),
 
         ],
       );
@@ -145,7 +145,7 @@ class _SettingsPageState extends State<SettingsPage> {
           // connect to spotify
           ConnectSpotifySettingsButton(),
           // sign out
-          SignOutButton(notifyParent: notifyParent),
+          SignOutButton(notifyParent: widget.notifyParent),
         ],
       );
     }

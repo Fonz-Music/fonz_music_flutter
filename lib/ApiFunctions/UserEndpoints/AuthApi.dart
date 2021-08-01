@@ -49,7 +49,7 @@ class AuthApi {
     // dio
     Dio dio = new Dio();
     try {
-      var response = await dio.post(endpoint, data: {email: email, password: password});
+      var response = await dio.post(endpoint, data: {"email": email, "password": password});
       log(response.statusCode.toString());
 
       if (response.statusCode == 200) {

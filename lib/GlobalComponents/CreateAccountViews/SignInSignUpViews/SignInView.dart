@@ -12,16 +12,55 @@ import '../../../main.dart';
 final _signInKey = GlobalKey<FormState>();
 
 class SignInView extends StatefulWidget {
+
+  SignInView({Key key, this.popupContext, this.notifyParent}) : super(key: key);
+
+  final popupContext;
+  final Function() notifyParent;
+
   @override
   _SignInViewState createState() => _SignInViewState();
 }
 
 class _SignInViewState extends State<SignInView> {
 
-  String _email;
-  String _password;
-  String _errorMessage;
+  String _email = "";
+  String _password= "";
+  String _errorMessage ="";
   bool errorOnPage = false;
+
+  bool determineIfSignInButtonDisabled() {
+    bool emailValid = false;
+
+    if (_email != null) {
+      emailValid = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(_email);
+    }
+
+    if (emailValid && _email != "" && _password != "") {
+      return true;
+    }
+    else {
+      _errorMessage ="";
+      if (_email.length < 3) {
+        _errorMessage += "please enter your email\n";
+      }
+      else {
+        if (!emailValid) {
+          _errorMessage += "email is not valid\n";
+        }
+      }
+      if (_password.length < 3){
+        _errorMessage += "please enter your password\n";
+      }
+      else {
+        if (_password.length < 12) {
+          _errorMessage += "password must be atleast 12 characters\n";
+        }
+      }
+      errorOnPage = true;
+      return false;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,6 +69,7 @@ class _SignInViewState extends State<SignInView> {
       child: Column(children: [
         ShowEmailInputSignIn(),
         ShowPasswordInputSignIn(),
+        ShowUserError(),
         ShowForgotPasswordButton(),
         // OrAppleOrGoogle(),
         ShowSignInButton(),
@@ -108,7 +148,6 @@ class _SignInViewState extends State<SignInView> {
             setState(() {
               _password = value;
             });
-            print(_password);
           },
           validator: (value) =>
           value.isEmpty ? 'Password can\'t be empty' : null,
@@ -146,25 +185,39 @@ class _SignInViewState extends State<SignInView> {
             ),
           ),
           onPressed: () async {
-            log("pressed sign in");
-            final signInResp = await AuthApi.signInUser(_email, _password);
-            if (signInResp["statusCode"] == 200) {
-              // set hasAccount to true
-              userAttributes.setHasAccount(true);
-              // check if user has spotify
+            if (determineIfSignInButtonDisabled()) {
+              log("pressed sign in");
+              print("email is " + _email);
+              final signInResp = await AuthApi.signInUser(_email, _password);
+              log("resp was " + signInResp["statusCode"].toString());
+              log("resp was " + signInResp["body"].toString());
+              if (signInResp["statusCode"] == 200) {
+                log("was 200, now settting ");
+                // set hasAccount to true
+                userAttributes.setHasAccount(true);
+                // check if user has spotify
+                userAttributes.determineIfUserConnectedToSpotify();
 
-              // check if user has coasters
-              updatePageCoasterDashboard = true;
-              // pop modal
+                // check if user has coasters
+                updatePageCoasterDashboard = true;
+                // pop modal
+                widget.notifyParent();
+                Navigator.pop(widget.popupContext);
 
-            }
-            else {
-              errorOnPage = true;
-              _errorMessage = signInResp["body"];
-              if (_errorMessage == "") {
-                _errorMessage = "something went wrong :/";
+              }
+              else {
+                errorOnPage = true;
+                _errorMessage += signInResp["body"];
+                if (_errorMessage == "") {
+                  _errorMessage += "something went wrong :/";
+                }
+                setState(() {});
               }
             }
+            else {
+              setState(() {});
+            }
+
           },
         ),
       ),
@@ -200,6 +253,27 @@ class _SignInViewState extends State<SignInView> {
           },
         )
     );
+  }
+
+  Widget ShowUserError() {
+
+    if (errorOnPage) {
+      return Padding(
+          padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
+          child: Text(
+            "$_errorMessage ",
+            style: new TextStyle(
+                fontFamily: FONZFONTONE,
+                fontSize: HEADINGFIVE,
+                fontWeight: FontWeight.w300,
+                color: Colors.red),
+            textAlign: TextAlign.center,
+          ),
+      );
+    }
+    else {
+      return Container(height: 0,);
+    }
   }
 
 

@@ -28,6 +28,9 @@ class CoreUserAttributes {
     if (accountBoolFromStorage != null) {
       _hasAccount = accountBoolFromStorage;
     }
+    log("spot is " + _connectedToSpotify.toString());
+    log("coasters is " + _hasConnectedCoasters.toString());
+    log("account is " + _hasAccount.toString());
   }
 
   bool getHasAccount() {
@@ -35,6 +38,7 @@ class CoreUserAttributes {
   }
   setHasAccount(bool bool) async {
 
+    log("changing has acc to " + bool.toString());
     _hasAccount = bool;
     // Create local preferences
     SharedPreferences localPreferences = await SharedPreferences.getInstance();
@@ -47,6 +51,7 @@ class CoreUserAttributes {
     return _hasConnectedCoasters;
   }
   setHasConnectedCoasters(bool bool) async {
+    log("changing has coaster to " + bool.toString());
     _hasConnectedCoasters = bool;
     // Create local preferences
     SharedPreferences localPreferences = await SharedPreferences.getInstance();
@@ -58,6 +63,7 @@ class CoreUserAttributes {
     return _connectedToSpotify;
   }
   setConnectedToSpotify(bool bool) async {
+    log("changing has spot to " + bool.toString());
     _connectedToSpotify = bool;
     // Create local preferences
     SharedPreferences localPreferences = await SharedPreferences.getInstance();

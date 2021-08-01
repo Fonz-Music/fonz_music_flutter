@@ -8,7 +8,7 @@
 // import 'package:fonz_music_flutter/ApiFunctions/UserTopArtistsResponse.dart';
 // import 'package:fonz_music_flutter/ApiFunctions/UserTopTracksResponse.dart';
 // import 'package:fonz_music_flutter/GlobalComponents/ExceptionHandling.dart';
-// import 'package:fonz_music_flutter/GlobalComponents/GlobalVariables.dart';
+// import 'package:fonz_music_flutter/GlobalComponents/CoreUserAttributes.dart';
 // import 'package:fonz_music_flutter/GlobalComponents/Objects/Track.dart';
 // import 'package:http/http.dart';
 //

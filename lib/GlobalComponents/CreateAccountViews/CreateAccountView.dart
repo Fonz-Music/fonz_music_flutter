@@ -12,6 +12,12 @@ bool onSignUp = true;
 
 
 class CreateAccountView extends StatefulWidget {
+
+  CreateAccountView({Key key, this.popupContext, this.notifyParent}) : super(key: key);
+
+  final popupContext;
+  final Function() notifyParent;
+
   @override
   _CreateAccountViewState createState() => _CreateAccountViewState();
 }
@@ -71,7 +77,10 @@ class _CreateAccountViewState extends State<CreateAccountView> {
                   child: PageView(
                   controller: _emailController,
                   scrollDirection: Axis.horizontal,
-                  children: [SignInView(), SignUpView()],
+                  children: [
+                    SignInView(popupContext: widget.popupContext,notifyParent: widget.notifyParent,),
+                    SignUpView(popupContext: widget.popupContext,notifyParent: widget.notifyParent)
+                  ],
 
               ),
 

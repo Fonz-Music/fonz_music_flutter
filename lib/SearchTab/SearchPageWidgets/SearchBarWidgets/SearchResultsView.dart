@@ -6,7 +6,7 @@ import 'package:fonz_music_flutter/ApiFunctions/SpotifySuggestionInterpreter.dar
 import 'package:fonz_music_flutter/ApiFunctions/UserTopTracksResponse.dart';
 import 'package:fonz_music_flutter/GlobalComponents/ExceptionHandling.dart';
 import 'package:fonz_music_flutter/GlobalComponents/FrontEnd/FrontEndConstants.dart';
-import 'package:fonz_music_flutter/GlobalComponents/GlobalVariables.dart';
+import 'package:fonz_music_flutter/GlobalComponents/CoreUserAttributes.dart';
 import 'package:fonz_music_flutter/GlobalComponents/Objects/Track.dart';
 
 import '../TrackButton.dart';

@@ -4,7 +4,7 @@
 import 'dart:developer';
 
 import 'package:fonz_music_flutter/ApiFunctions/GuestApi/GuestGetCoasterApi.dart';
-import 'package:fonz_music_flutter/GlobalComponents/GlobalVariables.dart';
+import 'package:fonz_music_flutter/GlobalComponents/CoreUserAttributes.dart';
 import 'package:fonz_music_flutter/GlobalComponents/Objects/CoasterObject.dart';
 import 'package:fonz_music_flutter/NfcFunctions/GuestNfcFunctions.dart';
 

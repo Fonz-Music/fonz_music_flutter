@@ -2,7 +2,7 @@ import 'package:fonz_music_flutter/ApiFunctions/ApiConstants.dart';
 import 'package:fonz_music_flutter/ApiFunctions/GuestApi/GuestGetCoasterApi.dart';
 import 'package:fonz_music_flutter/ApiFunctions/GuestApi/GuestSpotifyApi.dart';
 
-import '../GlobalVariables.dart';
+import '../CoreUserAttributes.dart';
 // search bar widget
 class Track {
   String title;

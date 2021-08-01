@@ -73,7 +73,7 @@ class _ConnectSpotifyButtonState extends State<ConnectSpotifyButton> {
                                                   25.0),
                                               topRight: const Radius.circular(
                                                   25.0))),
-                                      child: CreateAccountPrompt(),
+                                      child: CreateAccountPrompt(popupContext: context),
                                     ),
                                   )
                                 ]

@@ -5,7 +5,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:fonz_music_flutter/ApiFunctions/GetVersionApi.dart';
-import 'package:fonz_music_flutter/GlobalComponents/GlobalVariables.dart';
+import 'package:fonz_music_flutter/GlobalComponents/CoreUserAttributes.dart';
 import 'package:fonz_music_flutter/MainTabs/HostTab.dart';
 import 'package:fonz_music_flutter/MainTabs/SearchTab.dart';
 import 'package:fonz_music_flutter/MainTabs/SettingsPage.dart';
@@ -139,14 +139,16 @@ class _MyHomePageState extends State<MyHomePage> {
   void initState() {
     super.initState();
     SharedPreferences.getInstance().then((prefs) {
+      localPreferences = prefs;
+      userAttributes.setAttributes();
       setState(() {
-        localPreferences = prefs;
-        userAttributes.setAttributes();
+
       } );
     });
   }
 
-  refresh() {
+  refresh() async {
+    await userAttributes.setAttributes();
     setState(() {});
   }
 

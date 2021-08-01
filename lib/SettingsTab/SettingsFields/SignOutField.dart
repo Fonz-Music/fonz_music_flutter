@@ -2,7 +2,9 @@ import 'dart:developer';
 
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:fonz_music_flutter/GlobalComponents/FrontEnd/FrontEndConstants.dart';
+import 'package:fonz_music_flutter/main.dart';
 
 
 
@@ -112,7 +114,19 @@ class _SignOutFieldState extends State<SignOutField> {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(CORNERRADIUSBUTTON),
                     ),
-                    onPressed: () {
+                    onPressed: () async {
+                      log("signing out");
+                      await userAttributes.setHasAccount(false);
+                      await userAttributes.setHasConnectedCoasters(false);
+                      await userAttributes.setConnectedToSpotify(false);
+
+                      // Create storage
+                      final storage = new FlutterSecureStorage();
+                      // delete accessToken
+                      await storage.delete(key: "accessToken");
+                      // delete refreshToken
+                      await storage.delete(key: "refreshToken");
+                      await widget.notifyParent();
                       Navigator.pop(
                           widget.popupContext);
                     },

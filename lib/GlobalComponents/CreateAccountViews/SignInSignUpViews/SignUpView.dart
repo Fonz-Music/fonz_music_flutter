@@ -8,6 +8,12 @@ import '../../../main.dart';
 final _signUpKey = GlobalKey<FormState>();
 
 class SignUpView extends StatefulWidget {
+
+  SignUpView({Key key, this.popupContext, this.notifyParent}) : super(key: key);
+
+  final popupContext;
+  final Function() notifyParent;
+
   @override
   _SignUpViewState createState() => _SignUpViewState();
 }
@@ -16,12 +22,54 @@ class _SignUpViewState extends State<SignUpView> {
 
   bool agreedToEmail = false;
   bool agreedToPolicy = false;
-  String _email;
-  String _displayName;
-  String _password;
-  String _confirmPassword;
-  String _errorMessage;
+  String _email = "";
+  String _displayName = "";
+  String _password = "";
+  String _confirmPassword = "";
+  String _errorMessage = "";
   bool errorOnPage = false;
+
+  bool determineIfSignUpButtonDisabled() {
+    bool emailValid = false;
+
+    if (_email != null) {
+      emailValid = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(_email);
+    }
+
+    if (emailValid && _email != "" && _password != "" && _displayName != "" && _confirmPassword != "" && _confirmPassword != _password && agreedToPolicy) {
+      return true;
+    }
+    else {
+      _errorMessage ="";
+      if (_email.length < 3) {
+        _errorMessage += "please enter your email\n";
+      }
+      else {
+        if (!emailValid) {
+          _errorMessage += "email is not valid\n";
+        }
+      }
+      if (_password.length < 3){
+        _errorMessage += "please enter your password\n";
+      }
+      else {
+        if (_password.length < 12) {
+          _errorMessage += "password must be atleast 12 characters\n";
+        }
+      }
+      if (_displayName.length < 3){
+        _errorMessage += "please enter your display name\n";
+      }
+      if (_confirmPassword.length < 3){
+        _errorMessage += "please confirm your password\n";
+      }
+      else if (_confirmPassword != _password) {
+        _errorMessage += "your passwords do not match\n";
+      }
+      errorOnPage = true;
+      return false;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,6 +81,7 @@ class _SignUpViewState extends State<SignUpView> {
           ShowEmailInputSignUp(),
           ShowPasswordInputSignUp(),
           ShowConfirmPasswordInputSignUp(),
+          ShowUserError(),
           // OrAppleOrGoogle(),
           AgreeToPolicies(),
           ShowSignUpButton(),
@@ -151,7 +200,6 @@ class _SignUpViewState extends State<SignUpView> {
             setState(() {
               _password = value;
             });
-            print(_password);
           },
           validator: (value) =>
           value.isEmpty ? 'Password can\'t be empty' : null,
@@ -189,7 +237,6 @@ class _SignUpViewState extends State<SignUpView> {
             setState(() {
               _confirmPassword = value;
             });
-            print(_confirmPassword);
           },
           validator: (value) =>
           value.isEmpty ? 'Password can\'t be empty' : null,
@@ -197,6 +244,27 @@ class _SignUpViewState extends State<SignUpView> {
         ),
       ),
     );
+  }
+
+  Widget ShowUserError() {
+
+    if (errorOnPage) {
+      return Padding(
+        padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
+        child: Text(
+          "$_errorMessage ",
+          style: new TextStyle(
+              fontFamily: FONZFONTONE,
+              fontSize: HEADINGFIVE,
+              fontWeight: FontWeight.w300,
+              color: Colors.red),
+          textAlign: TextAlign.center,
+        ),
+      );
+    }
+    else {
+      return Container(height: 0,);
+    }
   }
 
   Widget ShowSignUpButton() {
@@ -226,21 +294,32 @@ class _SignUpViewState extends State<SignUpView> {
             ),
           ),
           onPressed: () async {
-            final updateUser = await UserApi.updateUserAccount(_email, _password, _displayName, agreedToPolicy, agreedToEmail);
-            if (updateUser["statusCode"] == 200) {
-              // set hasAccount to true
-              userAttributes.setHasAccount(true);
-              // hasAccount = true;
+            if (determineIfSignUpButtonDisabled()) {
+              final updateUser = await UserApi.updateUserAccount(_email, _password, _displayName, agreedToPolicy, agreedToEmail);
+              if (updateUser["statusCode"] == 200) {
+                // set hasAccount to true
+                userAttributes.setHasAccount(true);
+                // hasAccount = true;
 
-              // pop modal
+                // pop modal
+                widget.notifyParent();
+                Navigator.pop(widget.popupContext);
 
+
+              }
+              else {
+                errorOnPage = true;
+                _errorMessage += updateUser["body"];
+                if (_errorMessage == "") {
+                  _errorMessage += "something went wrong :/";
+                }
+                setState(() {});
+              }
             }
             else {
-              errorOnPage = true;
-              _errorMessage = updateUser["body"];
-              if (_errorMessage == "") {
-                _errorMessage = "something went wrong :/";
-              }
+              setState(() {
+
+              });
             }
           },
         ),
