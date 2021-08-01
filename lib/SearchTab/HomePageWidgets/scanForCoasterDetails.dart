@@ -25,19 +25,17 @@ Future<CoasterObject> scanForCoasterDetails() async {
         uidFromScannedCoaster.toUpperCase());
     // for debug
     log("resp from api " + hostDetails.toString());
-    log("resp code " + hostDetails["responseCode"].toString());
+    log("resp code " + hostDetails["statusCode"].toString());
 
     // sets status code
-    hostCoasterDetails.setStatusCode(hostDetails["responseCode"]);
+    hostCoasterDetails.setStatusCode(hostDetails["statusCode"]);
     // if successful, set info
-    if (hostDetails["responseCode"] == 200) {
+    if (hostDetails["statusCode"] == 200) {
       log("getting this far");
       // if there is no host
-      if (hostDetails["body"].coaster.name == null) {
-        hostCoasterDetails.statusCode = 600;
-      }
+
       // if there is a host, set it
-      else {
+      // else {
         hostCoasterDetails.coasterUid = uidFromScannedCoaster;
         // hostCoasterDetails.hostName = hostDetails["body"].coaster.name;
         hostCoasterDetails.hostName = "host";
@@ -47,7 +45,10 @@ Future<CoasterObject> scanForCoasterDetails() async {
         print("details are " + hostCoasterDetails.coasterName.toString());
         log("stored coaster ");
 
-      }
+      // }
+    }
+    else if (hostDetails["statusCode"] == 403 && hostDetails["code"] == "COASTER_NO_HOST") {
+      hostCoasterDetails.statusCode = 600;
     }
   }
 

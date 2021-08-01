@@ -1,5 +1,7 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:fonz_music_flutter/ApiFunctions/UserEndpoints/AuthApi.dart';
 
 Future<String> getJWTAndCheckIfExpired() async {
 
@@ -13,6 +15,7 @@ Future<String> getJWTAndCheckIfExpired() async {
   // check its not empty
   if (accessToken != null && accessToken != "") {
     isValid = checkIfTokenValid(accessToken);
+    print("accessToken valid: " + isValid.toString());
   }
   // check if its valid OR if accessToken is nil
   if (!isValid) {
@@ -22,13 +25,19 @@ Future<String> getJWTAndCheckIfExpired() async {
     if (refreshToken != null && refreshToken != "" && accessToken != null && accessToken != "") {
         String userId = getUserIdFromAccessToken(accessToken);
 
+        print("refreshing token");
         // refresh token endpoint
+      var refreshEndpointResp = await AuthApi.refreshAccessToken(userId, refreshToken);
+      accessToken = refreshEndpointResp["body"].accessToken;
 
     }
     // if no account, create an anon account
     else {
-
+      print("creating anon acc");
+      log("creating acc anon");
       // create anon account endpoint
+      var createAnonEndpointResp = await AuthApi.createAnonAccount();
+      accessToken = createAnonEndpointResp["body"].accessToken;
 
     }
   }

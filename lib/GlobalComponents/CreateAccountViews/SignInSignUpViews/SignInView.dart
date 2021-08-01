@@ -148,7 +148,7 @@ class _SignInViewState extends State<SignInView> {
           onPressed: () async {
             log("pressed sign in");
             final signInResp = await AuthApi.signInUser(_email, _password);
-            if (signInResp["responseCode"] == 200) {
+            if (signInResp["statusCode"] == 200) {
               // set hasAccount to true
               userAttributes.setHasAccount(true);
               // check if user has spotify

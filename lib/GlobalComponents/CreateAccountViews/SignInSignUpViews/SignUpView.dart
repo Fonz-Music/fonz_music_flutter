@@ -227,7 +227,7 @@ class _SignUpViewState extends State<SignUpView> {
           ),
           onPressed: () async {
             final updateUser = await UserApi.updateUserAccount(_email, _password, _displayName, agreedToPolicy, agreedToEmail);
-            if (updateUser["responseCode"] == 200) {
+            if (updateUser["statusCode"] == 200) {
               // set hasAccount to true
               userAttributes.setHasAccount(true);
               // hasAccount = true;

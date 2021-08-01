@@ -13,7 +13,16 @@ class AuthApi {
     String endpoint = address + auth + register + "anonymous";
     // dio
     Dio dio = new Dio();
+    try {
 
+    }
+    on DioError catch (e) {
+      return {
+        "statusCode": e.response.statusCode,
+        "code": e.response.data["code"],
+        "body": e.response.data["message"]
+      };
+    }
       var response = await dio.post(endpoint);
       log(response.statusCode.toString());
 
@@ -29,7 +38,7 @@ class AuthApi {
         await storage.write(key: "refreshToken", value: createAnonDecoded.refreshToken);
       }
     log("status code of create Anon account is " + response.statusCode.toString());
-    return {"responseCode": response.statusCode, "statusMessage": response.statusMessage,
+    return {"statusCode": response.statusCode, "code": response.statusMessage,
       "body": response.data};
 
   }
@@ -39,24 +48,33 @@ class AuthApi {
     String endpoint = address + auth + "login";
     // dio
     Dio dio = new Dio();
+    try {
+      var response = await dio.post(endpoint, data: {email: email, password: password});
+      log(response.statusCode.toString());
 
-    var response = await dio.post(endpoint, data: {email: email, password: password});
-    log(response.statusCode.toString());
-
-    if (response.statusCode == 200) {
-      // to return data
-      final signInDecoded = SignInUserDecoder.fromJson(response.data);
-      response.data = signInDecoded;
-      // Create storage
-      final storage = new FlutterSecureStorage();
-      // store accessToken
-      await storage.write(key: "accessToken", value: signInDecoded.accessToken);
-      // store refreshToken
-      await storage.write(key: "refreshToken", value: signInDecoded.refreshToken);
+      if (response.statusCode == 200) {
+        // to return data
+        final signInDecoded = SignInUserDecoder.fromJson(response.data);
+        response.data = signInDecoded;
+        // Create storage
+        final storage = new FlutterSecureStorage();
+        // store accessToken
+        await storage.write(key: "accessToken", value: signInDecoded.accessToken);
+        // store refreshToken
+        await storage.write(key: "refreshToken", value: signInDecoded.refreshToken);
+      }
+      log("status code of sign in is " + response.statusCode.toString());
+      return {"statusCode": response.statusCode, "code": response.statusMessage,
+        "body": response.data};
     }
-    log("status code of sign in is " + response.statusCode.toString());
-    return {"responseCode": response.statusCode, "statusMessage": response.statusMessage,
-      "body": response.data};
+    on DioError catch (e) {
+      return {
+        "statusCode": e.response.statusCode,
+        "code": e.response.data["code"],
+        "body": e.response.data["message"]
+      };
+    }
+
 
   }
 
@@ -65,24 +83,68 @@ class AuthApi {
     String endpoint = address + auth + "register";
     // dio
     Dio dio = new Dio();
+    try {
+      var response = await dio.post(endpoint, data: {email: email, password: password});
+      log(response.statusCode.toString());
 
-    var response = await dio.post(endpoint, data: {email: email, password: password});
-    log(response.statusCode.toString());
-
-    if (response.statusCode == 200) {
-      // to return data
-      final signInDecoded = SignInUserDecoder.fromJson(response.data);
-      response.data = signInDecoded;
-      // Create storage
-      final storage = new FlutterSecureStorage();
-      // store accessToken
-      await storage.write(key: "accessToken", value: signInDecoded.accessToken);
-      // store refreshToken
-      await storage.write(key: "refreshToken", value: signInDecoded.refreshToken);
+      if (response.statusCode == 200) {
+        // to return data
+        final signInDecoded = SignInUserDecoder.fromJson(response.data);
+        response.data = signInDecoded;
+        // Create storage
+        final storage = new FlutterSecureStorage();
+        // store accessToken
+        await storage.write(key: "accessToken", value: signInDecoded.accessToken);
+        // store refreshToken
+        await storage.write(key: "refreshToken", value: signInDecoded.refreshToken);
+      }
+      log("status code of register account is " + response.statusCode.toString());
+      return {"statusCode": response.statusCode, "code": response.statusMessage,
+        "body": response.data};
     }
-    log("status code of register account is " + response.statusCode.toString());
-    return {"responseCode": response.statusCode, "statusMessage": response.statusMessage,
-      "body": response.data};
+    on DioError catch (e) {
+      return {
+        "statusCode": e.response.statusCode,
+        "code": e.response.data["code"],
+        "body": e.response.data["message"]
+      };
+    }
+
+
+  }
+
+  // register user, should NOT be used
+  static Future<Map> refreshAccessToken(String userId, String refreshToken) async {
+    String endpoint = address + auth + "register";
+    // dio
+    Dio dio = new Dio();
+
+    try {
+      var response = await dio.post(endpoint, data: {userId: userId, refreshToken: refreshToken});
+      log(response.statusCode.toString());
+
+      if (response.statusCode == 200) {
+        // to return data
+        final signInDecoded = SignInUserDecoder.fromJson(response.data);
+        response.data = signInDecoded;
+        // Create storage
+        final storage = new FlutterSecureStorage();
+        // store accessToken
+        await storage.write(key: "accessToken", value: signInDecoded.accessToken);
+
+      }
+      log("status code of register account is " + response.statusCode.toString());
+      return {"statusCode": response.statusCode, "code": response.statusMessage,
+        "body": response.data};
+    }
+    on DioError catch (e) {
+      return {
+        "statusCode": e.response.statusCode,
+        "code": e.response.data["code"],
+        "body": e.response.data["message"]
+      };
+    }
+
 
   }
 

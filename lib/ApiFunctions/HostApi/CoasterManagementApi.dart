@@ -36,8 +36,8 @@ class CoasterManagementApi {
         return null;
       }
       return {
-        "responseCode": response.statusCode,
-        "message":
+        "statusCode": response.statusCode,
+        "code":
         // response.body};
         response.statusMessage,
         "body": response.data
@@ -48,8 +48,8 @@ class CoasterManagementApi {
       //     // '${response.body}');
       //         '${e.response.data}');
       return {
-        "responseCode": e.response.statusCode,
-        "message": e.response.statusMessage,
+        "statusCode": e.response.statusCode,
+        "code": e.response.statusMessage,
         "body": e.response.data
       };
     }
@@ -88,8 +88,8 @@ class CoasterManagementApi {
 //      return null;
       }
       return {
-        "responseCode": response.statusCode,
-        "message":
+        "statusCode": response.statusCode,
+        "code":
         // response.body};
         response.statusMessage,
         "body": response.data
@@ -100,8 +100,8 @@ class CoasterManagementApi {
       //     // '${response.body}');
       //         '${e.response.data}');
       return {
-        "responseCode": e.response.statusCode,
-        "message": e.response.statusMessage,
+        "statusCode": e.response.statusCode,
+        "code": e.response.statusMessage,
         "body": e.response.data
       };
     }
@@ -188,8 +188,8 @@ class CoasterManagementApi {
         log(response.data);
       }
       return {
-        "responseCode": response.statusCode,
-        "message":
+        "statusCode": response.statusCode,
+        "code":
         // response.body};
         response.statusMessage,
         "body": response.data
@@ -200,8 +200,8 @@ class CoasterManagementApi {
       //     // '${response.body}');
       //         '${e.response.data}');
       return {
-        "responseCode": e.response.statusCode,
-        "message": e.response.statusMessage,
+        "statusCode": e.response.statusCode,
+        "code": e.response.statusMessage,
         "body": e.response.data
       };
     }
@@ -253,8 +253,8 @@ class CoasterManagementApi {
       //     // '${response.body}');
       //         '${e.response.data}');
       return {
-        "responseCode": e.response.statusCode,
-        "message": e.response.statusMessage,
+        "statusCode": e.response.statusCode,
+        "code": e.response.statusMessage,
         "body": e.response.data
       };
     }
@@ -298,8 +298,8 @@ class CoasterManagementApi {
       //     // '${response.body}');
       //         '${e.response.data}');
       return {
-        "responseCode": e.response.statusCode,
-        "message": e.response.statusMessage,
+        "statusCode": e.response.statusCode,
+        "code": e.response.statusMessage,
         "body": e.response.data
       };
     }
@@ -379,8 +379,8 @@ class CoasterManagementApi {
       //         '${e.response.data}');
       print("error is " + e.toString());
       return {
-        "responseCode": e.response.statusCode,
-        "message": e.response.statusMessage,
+        "statusCode": e.response.statusCode,
+        "code": e.response.statusMessage,
         "body": e.response.data
       };
     }

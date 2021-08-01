@@ -32,7 +32,7 @@ class GuestSpotifyApi {
       log(response.data.toString());
       log("success");
       return {
-        "responseCode": response.statusCode,
+        "statusCode": response.statusCode,
         "message":
             // response.body};
             response.statusMessage,
@@ -42,7 +42,7 @@ class GuestSpotifyApi {
       log("issue " + e.response.data);
       log("dailure");
       return {
-        "responseCode": e.response.statusCode,
+        "statusCode": e.response.statusCode,
         "message": e.response.statusMessage,
         "body": e.response.data
       };
@@ -75,21 +75,21 @@ class GuestSpotifyApi {
       if (response.statusCode == 200) {
         log("success");
         return {
-          "responseCode": response.statusCode,
+          "statusCode": response.statusCode,
           "message": response.statusMessage,
           "body": response.data
         };
       } else {
         log("not 200");
         return {
-          "responseCode": response.statusCode,
+          "statusCode": response.statusCode,
           "message": response.statusMessage,
           "body": response.data
         };
       }
     } on DioError catch (e) {
       return {
-        "responseCode": e.response.statusCode,
+        "statusCode": e.response.statusCode,
         "message": e.response.statusMessage,
         "body": e.response.data
       };

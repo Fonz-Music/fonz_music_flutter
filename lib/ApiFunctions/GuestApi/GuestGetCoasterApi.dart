@@ -2,6 +2,7 @@ import 'dart:developer';
 import 'dart:io';
 import 'dart:convert';
 import 'package:dio/dio.dart';
+import 'package:fonz_music_flutter/ApiFunctions/AuthMethods.dart';
 
 import '../ApiConstants.dart';
 // import 'package:http/http.dart' as http;
@@ -15,7 +16,7 @@ class GuestGetCoasterApi {
     log("im getting called ");
     String endpoint = address + guest + coaster + uid;
     String token = "";
-    token = tempToken;
+    token = await getJWTAndCheckIfExpired();
     // await FirebaseAuth.instance.currentUser.getIdToken();
     log("endpoint: " + endpoint);
 
@@ -23,27 +24,40 @@ class GuestGetCoasterApi {
     Dio dio = new Dio();
 
     dio.options.headers = {HttpHeaders.authorizationHeader: 'Bearer $token'};
-    var response = await dio.get(endpoint);
+
     log("dio works");
-    //http
-    // var response = await http.get(endpoint,
-    //     headers: {HttpHeaders.authorizationHeader: 'Bearer $token'});
-    if (response.statusCode == 200) {
+    try {
+      var response = await dio.get(endpoint);
+      if (response.statusCode == 200) {
 //      log('success got coasters');
-      log("success");
-      log("resp is " + response.data.toString());
-      response.data = GetHostCoasterDecoder.fromJson(response.data);
-    } else {
-      log("error ");
-      log('error with response code ${response.statusCode} and body '
-      // ' ${response.body}');
-          ' ${response.data}');
-      return null;
+        log("success");
+        log("resp is " + response.data.toString());
+        response.data = GetHostCoasterDecoder.fromJson(response.data);
+      } else {
+        log("error ");
+        log('error with response code ${response.statusCode} and body '
+        // ' ${response.body}');
+            ' ${response.data}');
+        return null;
+      }
+      // log("response message " + response.statusMessage);
+      // log("response code " + response.statusCode.toString());
+      return {"statusCode": response.statusCode, "code": response.statusMessage,
+        "body": response.data};
     }
-    // log("response message " + response.statusMessage);
-    // log("response code " + response.statusCode.toString());
-    return {"responseCode": response.statusCode, "statusMessage": response.statusMessage,
-      "body": response.data};
+    on DioError catch (e) {
+      // log("this is msg " + e.response.statusMessage.toString());
+      // log("this is status " + e.response.statusCode.toString());
+      //
+      // log("this is mssg" + e.response.data["message"].toString());
+      // print("this is mssg" + e.response.data["code"].toString());
+      return {
+        "statusCode": e.response.statusCode,
+        "code": e.response.data["code"],
+        "body": e.response.data["message"]
+      };
+    }
+
   }
 }
 
