@@ -14,15 +14,6 @@ class AuthApi {
     // dio
     Dio dio = new Dio();
     try {
-
-    }
-    on DioError catch (e) {
-      return {
-        "statusCode": e.response.statusCode,
-        "code": e.response.data["code"],
-        "body": e.response.data["message"]
-      };
-    }
       var response = await dio.post(endpoint);
       log(response.statusCode.toString());
 
@@ -37,9 +28,18 @@ class AuthApi {
         // store refreshToken
         await storage.write(key: "refreshToken", value: createAnonDecoded.refreshToken);
       }
-    log("status code of create Anon account is " + response.statusCode.toString());
-    return {"statusCode": response.statusCode, "code": response.statusMessage,
-      "body": response.data};
+      log("status code of create Anon account is " + response.statusCode.toString());
+      return {"statusCode": response.statusCode, "code": response.statusMessage,
+        "body": response.data};
+    }
+    on DioError catch (e) {
+      return {
+        "statusCode": e.response.statusCode,
+        "code": e.response.data["code"],
+        "body": e.response.data["message"]
+      };
+    }
+
 
   }
 
