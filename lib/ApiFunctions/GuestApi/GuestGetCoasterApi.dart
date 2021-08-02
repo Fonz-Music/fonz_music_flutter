@@ -52,7 +52,7 @@ class GuestGetCoasterApi {
       // log("this is mssg" + e.response.data["message"].toString());
       // print("this is mssg" + e.response.data["code"].toString());
       return {
-        "statusCode": e.response.statusCode,
+        "statusCode": e.response.data["status"],
         "code": e.response.data["code"],
         "body": e.response.data["message"]
       };

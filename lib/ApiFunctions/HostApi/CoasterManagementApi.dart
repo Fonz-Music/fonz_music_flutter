@@ -379,9 +379,9 @@ class CoasterManagementApi {
       //         '${e.response.data}');
       print("error is " + e.toString());
       return {
-        "statusCode": e.response.statusCode,
-        "code": e.response.statusMessage,
-        "body": e.response.data
+        "statusCode": e.response.data["status"],
+        "code": e.response.data["code"],
+        "body": e.response.data["body"]
       };
     }
   }

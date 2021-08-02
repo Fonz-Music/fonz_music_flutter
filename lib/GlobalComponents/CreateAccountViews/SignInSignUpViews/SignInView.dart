@@ -194,9 +194,9 @@ class _SignInViewState extends State<SignInView> {
               if (signInResp["statusCode"] == 200) {
                 log("was 200, now settting ");
                 // set hasAccount to true
-                userAttributes.setHasAccount(true);
+                await userAttributes.setHasAccount(true);
                 // check if user has spotify
-                userAttributes.determineIfUserConnectedToSpotify();
+                await userAttributes.determineIfUserConnectedToSpotify();
 
                 // check if user has coasters
                 updatePageCoasterDashboard = true;
@@ -213,6 +213,9 @@ class _SignInViewState extends State<SignInView> {
                 }
                 setState(() {});
               }
+
+              // widget.notifyParent();
+              // Navigator.pop(widget.popupContext);
             }
             else {
               setState(() {});

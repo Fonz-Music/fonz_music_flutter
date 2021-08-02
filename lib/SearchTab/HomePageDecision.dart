@@ -194,7 +194,7 @@ class _HomeDecisionPageState extends State<HomeDecisionPage> {
     if (!userAttributes.getConnectedToSpotify()) {
       return  Row(
         children: [
-          ConnectSpotifyHomePageButton(notifyParent: refresh),
+          ConnectSpotifyHomePageButton(notifyParent: widget.notifyParent),
           Container(
             width: 30,
 

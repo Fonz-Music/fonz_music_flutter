@@ -7,7 +7,7 @@ import 'SignInSignUpViews/SignInView.dart';
 import 'SignInSignUpViews/SignUpView.dart';
 
 PageController _emailController = PageController(initialPage: 1);
-bool onSignUp = true;
+bool onSignIn = false;
 
 
 
@@ -107,7 +107,7 @@ class _CreateAccountViewState extends State<CreateAccountView> {
                 fontWeight: FontWeight.w300,
                 color: Colors.white,
                 decoration: determineIfSignInButtonHasUnderline(),
-                decorationThickness: 3.0,
+                decorationThickness: determineSignInButtonThickness(),
                 decorationColor: AMBER
             ),
             textAlign: TextAlign.center,
@@ -117,7 +117,7 @@ class _CreateAccountViewState extends State<CreateAccountView> {
             //     duration: Duration(milliseconds: 500), curve: Curves.easeIn);
             _emailController.jumpToPage(0);
             setState(() {
-              onSignUp = false;
+              onSignIn = true;
             });
           }
         ),
@@ -141,7 +141,7 @@ class _CreateAccountViewState extends State<CreateAccountView> {
               //     duration: Duration(milliseconds: 500), curve: Curves.easeIn);
               _emailController.jumpToPage(1);
               setState(() {
-                onSignUp = true;
+                onSignIn = false;
               });
             }
         ),
@@ -157,12 +157,17 @@ class _CreateAccountViewState extends State<CreateAccountView> {
   //   else return Colors.transparent;
   // }
   determineIfSignInButtonHasUnderline() {
-    if (!onSignUp) {
+    if (onSignIn) {
       return TextDecoration.underline;
     }
     else return TextDecoration.none;
   }
-
+  determineSignInButtonThickness() {
+    if (!onSignIn) {
+      return 0.0;
+    }
+    else return 3.0;
+  }
 
   // determineIfSignUpButtonHasUnderline() {
   //   if (_emailController == 1) {
@@ -171,7 +176,7 @@ class _CreateAccountViewState extends State<CreateAccountView> {
   //   else return Colors.transparent;
   // }
   determineIfSignUpButtonHasUnderline() {
-    if (onSignUp) {
+    if (!onSignIn) {
       return TextDecoration.underline;
     }
     else return TextDecoration.none;

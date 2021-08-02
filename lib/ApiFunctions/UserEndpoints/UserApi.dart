@@ -42,7 +42,7 @@ class UserApi {
     }
     on DioError catch (e) {
       return {
-        "statusCode": e.response.statusCode,
+        "statusCode": e.response.data["status"],
         "code": e.response.data["code"],
         "body": e.response.data["message"]
       };

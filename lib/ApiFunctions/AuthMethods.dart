@@ -14,6 +14,7 @@ Future<String> getJWTAndCheckIfExpired() async {
   String accessToken = await storage.read(key: "accessToken");
   // check its not empty
   if (accessToken != null && accessToken != "") {
+    log("accessToken is " + accessToken);
     isValid = checkIfTokenValid(accessToken);
     print("accessToken valid: " + isValid.toString());
   }
@@ -21,6 +22,7 @@ Future<String> getJWTAndCheckIfExpired() async {
   if (!isValid) {
     // fetch accessToken from keystore
     String refreshToken = await storage.read(key: "refreshToken");
+    log("refreshToken is " + refreshToken);
     // check if user already has account (check for refresh + access)
     if (refreshToken != null && refreshToken != "" && accessToken != null && accessToken != "") {
         String userId = getUserIdFromAccessToken(accessToken);

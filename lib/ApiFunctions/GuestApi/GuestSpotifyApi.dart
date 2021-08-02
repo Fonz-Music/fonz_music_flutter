@@ -42,9 +42,9 @@ class GuestSpotifyApi {
       log("issue " + e.response.data);
       log("dailure");
       return {
-        "statusCode": e.response.statusCode,
-        "message": e.response.statusMessage,
-        "body": e.response.data
+        "statusCode": e.response.data["status"],
+        "code": e.response.data["code"],
+        "body": e.response.data["body"]
       };
     }
   }
@@ -89,9 +89,9 @@ class GuestSpotifyApi {
       }
     } on DioError catch (e) {
       return {
-        "statusCode": e.response.statusCode,
-        "message": e.response.statusMessage,
-        "body": e.response.data
+        "statusCode": e.response.data["status"],
+        "code": e.response.data["code"],
+        "body": e.response.data["body"]
       };
     }
 

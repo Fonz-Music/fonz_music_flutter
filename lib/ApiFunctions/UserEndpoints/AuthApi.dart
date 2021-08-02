@@ -34,7 +34,7 @@ class AuthApi {
     }
     on DioError catch (e) {
       return {
-        "statusCode": e.response.statusCode,
+        "statusCode": e.response.data["status"],
         "code": e.response.data["code"],
         "body": e.response.data["message"]
       };
@@ -68,8 +68,10 @@ class AuthApi {
         "body": response.data};
     }
     on DioError catch (e) {
+      log("status code " +e.response.data["statusCode"].toString());
+      log("status code " +e.response.toString());
       return {
-        "statusCode": e.response.statusCode,
+        "statusCode": e.response.data["status"],
         "code": e.response.data["code"],
         "body": e.response.data["message"]
       };
@@ -84,7 +86,7 @@ class AuthApi {
     // dio
     Dio dio = new Dio();
     try {
-      var response = await dio.post(endpoint, data: {email: email, password: password});
+      var response = await dio.post(endpoint, data: {"email": email, "password": password});
       log(response.statusCode.toString());
 
       if (response.statusCode == 200) {
@@ -104,7 +106,7 @@ class AuthApi {
     }
     on DioError catch (e) {
       return {
-        "statusCode": e.response.statusCode,
+        "statusCode": e.response.data["status"],
         "code": e.response.data["code"],
         "body": e.response.data["message"]
       };
@@ -115,7 +117,7 @@ class AuthApi {
 
   // register user, should NOT be used
   static Future<Map> refreshAccessToken(String userId, String refreshToken) async {
-    String endpoint = address + auth + "register";
+    String endpoint = address + auth + "refresh";
     // dio
     Dio dio = new Dio();
 
@@ -138,8 +140,11 @@ class AuthApi {
         "body": response.data};
     }
     on DioError catch (e) {
+      log("status code " +e.response.toString());
+      log("status code " +e.response.data["status"].toString());
+
       return {
-        "statusCode": e.response.statusCode,
+        "statusCode": e.response.data["status"],
         "code": e.response.data["code"],
         "body": e.response.data["message"]
       };

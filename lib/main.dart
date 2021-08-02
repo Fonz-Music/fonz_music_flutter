@@ -148,7 +148,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   refresh() async {
-    // await userAttributes.setAttributes();
+    await userAttributes.setAttributes();
     setState(() {});
   }
 

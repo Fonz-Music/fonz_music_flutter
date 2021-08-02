@@ -67,7 +67,7 @@ class _ConnectSpotifyHomePageButtonState extends State<ConnectSpotifyHomePageBut
                                       borderRadius: new BorderRadius.only(
                                           topLeft: const Radius.circular(25.0),
                                           topRight: const Radius.circular(25.0))),
-                                  child: CreateAccountPrompt(popupContext: context),
+                                  child: CreateAccountPrompt(popupContext: context, notifyParent: widget.notifyParent,),
                                 ),
                               )
                             ]
