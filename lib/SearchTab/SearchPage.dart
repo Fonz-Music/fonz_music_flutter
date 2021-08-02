@@ -53,7 +53,7 @@ class _SearchPageState extends State<SearchPage> {
             return
               Stack(
                 children: [
-                  DisplayQueueSongResponses(),
+
                   Column(
                       children: [
                         Row(
@@ -109,7 +109,7 @@ class _SearchPageState extends State<SearchPage> {
 
                       ]
                   ),
-
+                  DisplayQueueSongResponses(),
                 ],
               );
           }
