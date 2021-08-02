@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fonz_music_flutter/ApiFunctions/GuestApi/GuestSpotifyApi.dart';
 import 'package:fonz_music_flutter/GlobalComponents/FrontEnd/FrontEndConstants.dart';
 import 'package:fonz_music_flutter/GlobalComponents/FrontEnd/FrontEndFunctions.dart';
+import 'package:fonz_music_flutter/SearchTab/HomePageDecision.dart';
 
 
 class ActiveSongComponent extends StatefulWidget {
@@ -24,15 +25,17 @@ class _ActiveSongComponentState extends State<ActiveSongComponent> {
     final width = size.width;
     final height = size.height;
 
+
+
     return Container(
       padding: EdgeInsets.fromLTRB(0,5,0,5),
-      width: width * 0.7,
+      width: width * 0.8,
       height: 120,
 
       child: Row(
         children: [
           Container(
-            padding: EdgeInsets.fromLTRB(15, 0, 15, 0),
+            padding: EdgeInsets.fromLTRB(0, 0, 15, 0),
             // *---------------Use variable taken from Library selection for album url-----*
             child: ClipRRect(
               borderRadius: BorderRadius.circular(CORNERRADIUSBUTTON),
@@ -84,7 +87,7 @@ class _ActiveSongComponentState extends State<ActiveSongComponent> {
                     child: Text(
                       // *---------------Use variable taken from Library selection for artist--------*
                       // removes the brackets from the string
-                      "playing with 's fonz",
+                      "playing with ${hostCoasterDetails.hostName}'s fonz",
                       style: TextStyle(
                         fontFamily: FONZFONTONE,
                         fontSize: HEADINGSIX,
@@ -99,7 +102,7 @@ class _ActiveSongComponentState extends State<ActiveSongComponent> {
                   Spacer()
                 ]
             ),
-          )
+          ),
         ],
       ),
     );

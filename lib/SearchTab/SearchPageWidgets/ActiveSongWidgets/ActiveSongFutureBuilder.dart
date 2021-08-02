@@ -6,6 +6,8 @@ import 'package:fonz_music_flutter/GlobalComponents/CoreUserAttributes.dart';
 import 'package:fonz_music_flutter/GlobalComponents/Objects/Track.dart';
 import 'package:fonz_music_flutter/SearchTab/SearchPageWidgets/ActiveSongWidgets/ActiveSongComponent.dart';
 
+import 'NoActiveSongComponent.dart';
+
 class ActiveSongFutureBuilder extends StatefulWidget {
   @override
   _ActiveSongFutureBuilderState createState() => _ActiveSongFutureBuilderState();
@@ -21,22 +23,43 @@ class _ActiveSongFutureBuilderState extends State<ActiveSongFutureBuilder> {
 
   @override
   Widget build(BuildContext context) {
+
+    final size = MediaQuery.of(context).size;
+    final width = size.width;
+    final height = size.height;
+
     return Container(
       child: FutureBuilder(
           future: getTopSong(),
           builder: (BuildContext context, AsyncSnapshot snapshot) {
             if (snapshot.connectionState != ConnectionState.done) {
               return Container(
-                child: Text("no song active"),
+                child: NoActiveSongComponent(),
               );
             }
-            else if (snapshot.data.trackName == null || snapshot.data.trackName == "" ) {
+            else if (snapshot.data == null || snapshot.data.trackName == "" ) {
               log("data is " + snapshot.data.toString());
-              return Container(child: ActiveSongComponent(track: snapshot.data));
+              return MaterialButton(
+                onPressed: () {
+                  setState(() {});
+                },
+                  child: Container(
+                      width: width,
+                      child: ActiveSongComponent(track: snapshot.data)
+                  )
+              );
 
             }
             else {
-              return Container(child: ActiveSongComponent(track: snapshot.data));
+              return
+                MaterialButton(
+                  onPressed: () {
+                    setState(() {});
+                  },
+                  child: Container(
+                    width: width,
+                    child: ActiveSongComponent(track: snapshot.data))
+                );
             }
 
           }

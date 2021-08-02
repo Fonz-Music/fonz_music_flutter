@@ -81,6 +81,10 @@ getSpotifyIconLight() {
   return "assets/lightGreyIcons/spotifyIconLightGrey.png";
 }
 
+getSpotifyIconAmber() {
+  return "assets/fonzIcons/spotifyIconAmber.png";
+}
+
 // -------------------Colors-------------------------------------
 
 const Color AMBER =

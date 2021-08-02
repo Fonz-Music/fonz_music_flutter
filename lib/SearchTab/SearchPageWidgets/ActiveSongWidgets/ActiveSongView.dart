@@ -50,7 +50,7 @@ class _ActiveSongViewState extends State<ActiveSongView> {
                 borderRadius: BorderRadius.circular(CORNERRADIUSBUTTON),
               ),
               width: width * COMPONENTWIDTH,
-              height: 150,
+              height: 140,
               child: ActiveSongFutureBuilder()
               ),
     ]
