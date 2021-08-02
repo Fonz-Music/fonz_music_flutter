@@ -85,23 +85,23 @@ class GuestNfcFunctions {
 
   // potential vulnerablity. We do not cross reference the uid scanned to make sure
   // its the same coaster or even ASSOCIATED with the same account.
-  // static Future<String> readHostNFCForQueue() async {
-  //   String returnMessage = "";
-  //   bool _isNFCSupported = await NFC.isNDEFSupported;
-  //   try {q
-  //     if (_isNFCSupported) {
-  //         var uidFromScannedCoaster = await _scanForUidOnAndroid();
-  //         returnMessage = "success";
-  //     } else {
-  //       log("device does not support");
-  //       returnMessage = "this device does not support NFC";
-  //     }
-  //   }
-  //   catch (e) {
-  //     returnMessage = "this coaster is not registered by Fonz or the guest quit the NFC prompt";
-  //   }
-  //   return returnMessage;
-  // }
+  static Future<String> readHostNFCForQueue() async {
+    String returnMessage = "";
+    bool _isNFCSupported = await NFC.isNDEFSupported;
+    try {
+      if (_isNFCSupported) {
+          var uidFromScannedCoaster = await _scanForUidOnAndroid();
+          returnMessage = "success";
+      } else {
+        log("device does not support");
+        returnMessage = "this device does not support NFC";
+      }
+    }
+    catch (e) {
+      returnMessage = "this coaster is not registered by Fonz or the guest quit the NFC prompt";
+    }
+    return returnMessage;
+  }
 
   // scanns for and checks for the uid on android
   static Future<String> _scanForUidOnAndroid() async {

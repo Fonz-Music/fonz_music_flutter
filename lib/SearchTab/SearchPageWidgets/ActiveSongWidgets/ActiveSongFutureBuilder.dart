@@ -5,6 +5,7 @@ import 'package:fonz_music_flutter/ApiFunctions/GuestApi/GuestSpotifyApi.dart';
 import 'package:fonz_music_flutter/GlobalComponents/CoreUserAttributes.dart';
 import 'package:fonz_music_flutter/GlobalComponents/Objects/Track.dart';
 import 'package:fonz_music_flutter/SearchTab/SearchPageWidgets/ActiveSongWidgets/ActiveSongComponent.dart';
+import 'package:fonz_music_flutter/SearchTab/SearchPageWidgets/ActiveSongWidgets/ActiveSongView.dart';
 
 import 'NoActiveSongComponent.dart';
 
@@ -16,9 +17,14 @@ class ActiveSongFutureBuilder extends StatefulWidget {
 class _ActiveSongFutureBuilderState extends State<ActiveSongFutureBuilder> {
 
   Future<ActiveSongDecoder> getTopSong() async {
-    final activeSong = await GuestSpotifyApi.fetchActiveSong(hostSessionIdGlobal);
-    log("active song is " + activeSong["body"].toString());
-    return activeSong["body"];
+    if (activeSongNowPlaying == null || updateActiveSong) {
+      final fetchedActiveSong = await GuestSpotifyApi.fetchActiveSong(hostSessionIdGlobal);
+      activeSongNowPlaying = fetchedActiveSong["body"];
+      log("active song is " + activeSongNowPlaying.toString());
+      updateActiveSong = false;
+    }
+
+    return activeSongNowPlaying;
   }
 
   @override
@@ -41,6 +47,7 @@ class _ActiveSongFutureBuilderState extends State<ActiveSongFutureBuilder> {
               log("data is " + snapshot.data.toString());
               return MaterialButton(
                 onPressed: () {
+                  updateActiveSong = true;
                   setState(() {});
                 },
                   child: Container(
@@ -54,6 +61,7 @@ class _ActiveSongFutureBuilderState extends State<ActiveSongFutureBuilder> {
               return
                 MaterialButton(
                   onPressed: () {
+                    updateActiveSong = true;
                     setState(() {});
                   },
                   child: Container(

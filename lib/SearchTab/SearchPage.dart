@@ -1,15 +1,20 @@
+import 'dart:async';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:fonz_music_flutter/ApiFunctions/GuestApi/GuestSpotifyApi.dart';
 import 'package:fonz_music_flutter/GlobalComponents/CoreUserAttributes.dart';
 import 'package:fonz_music_flutter/GlobalComponents/FrontEnd/FrontEndConstants.dart';
+import 'package:fonz_music_flutter/HostTab/TapYourPhoneLilac.dart';
 import 'package:fonz_music_flutter/MainTabs/SearchTab.dart';
 
 import 'SearchPageWidgets/ActiveSongWidgets/ActiveSongView.dart';
 import 'SearchPageWidgets/SearchBarWidgets/SearchBar.dart';
 import 'SearchPageWidgets/SearchBarWidgets/SearchResultsView.dart';
 import 'SearchPageWidgets/SearchSuggestionsWidgets/SongSuggestionsView.dart';
+
+var pressedToLaunchQueueNfc = ValueNotifier<bool>(false);
+var responseCodeFromQueue = ValueNotifier<String>("");
 
 class SearchPage extends StatefulWidget {
 
@@ -36,65 +41,124 @@ class _SearchPageState extends State<SearchPage> {
     }
 
     return SingleChildScrollView(
-      child: Column(
+      child:
+      ValueListenableBuilder<String>(
+          valueListenable: responseCodeFromQueue,
+          builder:  (context, value, child) {
+            return
+              Stack(
+                children: [
+                  DisplayQueueSongResponses(),
+                  Column(
+                      children: [
+                        Row(
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.fromLTRB(20, 30, 0, 0),
+                              child: new Text(
+                                "search",
+                                style: TextStyle(
+                                  fontFamily: FONZFONTTWO,
+                                  fontSize: HEADINGTHREE,
+                                  color: Colors.white,
+                                ),
+                                textAlign: TextAlign.left,
+                              ),
+                            ),
+                            Spacer(),
+                            TextButton(
+                              onPressed: () {
+                                GuestSpotifyApi.fetchActiveSong(
+                                    hostSessionIdGlobal);
+                                // widget.controller.animateToPage(0,
+                                //     duration: Duration(seconds: 1), curve: Curves.easeInOutCirc);
+                                //
+                                // connectedToAHost = false;
+                                // widget.notifyParent();
+                              },
+                              child: Padding(
+                                padding: EdgeInsets.fromLTRB(20, 30, 20, 0),
+                                child: new Text(
+                                  "leave party",
+                                  style: TextStyle(
+                                    fontFamily: FONZFONTTWO,
+                                    fontSize: HEADINGFIVE,
+                                    color: Colors.black,
+                                  ),
+                                  textAlign: TextAlign.center,
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
+                        SearchBar(notifyParent: refresh),
+
+                        ValueListenableBuilder<bool>(
+                            valueListenable: pressedToLaunchQueueNfc,
+                            builder: (context, value, child) {
+                              return
+                                WaitForNfcToQueue();
+                            }
+                        ),
+
+
+                      ]
+                  ),
+
+                ],
+              );
+          }
+      ),
+    );
+  }
+
+  Widget DisplayQueueSongResponses() {
+
+    final size = MediaQuery.of(context).size;
+    final width = size.width;
+
+    if (responseCodeFromQueue.value != "") {
+      Timer(Duration(seconds: 3), () {
+        responseCodeFromQueue.value = "";
+        // setState(() {
+        //
+        // });
+      });
+      return
+        Center(
+          child: Container(
+            color: Colors.red,
+            width: width * COMPONENTWIDTH,
+            padding: EdgeInsets.fromLTRB(0, 40, 0, 0),
+            child: Text(responseCodeFromQueue.value),
+          ),
+        );
+    }
+    else return Container(
+      height: 0,
+    );
+  }
+
+  Widget WaitForNfcToQueue() {
+    if (!pressedToLaunchQueueNfc.value) {
+
+      return
+        Stack(
           children: [
-            Row(
+            Column(
               children: [
-                Padding(
-                  padding: EdgeInsets.fromLTRB(20, 30, 0, 0),
-                  child: new Text(
-                    "search",
-                    style: TextStyle(
-                      fontFamily: FONZFONTTWO,
-                      fontSize: HEADINGTHREE,
-                      color: Colors.white,
-                    ),
-                    textAlign: TextAlign.left,
-                  ),
-                ),
-                Spacer(),
-                TextButton(
-                  onPressed: () {
-                    GuestSpotifyApi.fetchActiveSong(hostSessionIdGlobal);
-                    // widget.controller.animateToPage(0,
-                    //     duration: Duration(seconds: 1), curve: Curves.easeInOutCirc);
-                    //
-                    // connectedToAHost = false;
-                    // widget.notifyParent();
-                  },
-                  child: Padding(
-                    padding: EdgeInsets.fromLTRB(20, 30, 20, 0),
-                    child: new Text(
-                      "leave party",
-                      style: TextStyle(
-                        fontFamily: FONZFONTTWO,
-                        fontSize: HEADINGFIVE,
-                        color: Colors.black,
-                      ),
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
-                )
+
+                ActiveSongView(),
+                SongSuggestionsView()
               ],
             ),
-            SearchBar(notifyParent: refresh),
-
-            Stack(
-              children: [
-                Column(
-                  children: [
-
-                    ActiveSongView(),
-                    SongSuggestionsView()
-                  ],
-                ),
-                DetermineIfResultsAreShown()
-              ],
-            )
-
-
-          ]
-      ),
+            DetermineIfResultsAreShown()
+          ],
+        );
+    }
+    else return Container(
+      // height: 0,
+      child: TapYourPhoneLilac(),
     );
   }
 

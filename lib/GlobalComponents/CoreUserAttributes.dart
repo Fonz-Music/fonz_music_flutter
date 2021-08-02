@@ -2,10 +2,13 @@
 
 import 'dart:developer';
 
+import 'package:fonz_music_flutter/ApiFunctions/GuestApi/GuestSpotifyApi.dart';
 import 'package:fonz_music_flutter/ApiFunctions/HostApi/HostSpotifyApi.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 var hostSessionIdGlobal = "";
+ActiveSongDecoder activeSongNowPlaying;
+var updateActiveSong = true;
 
 class CoreUserAttributes {
   bool _connectedToSpotify = false;
