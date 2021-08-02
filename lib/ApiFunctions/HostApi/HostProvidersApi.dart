@@ -64,6 +64,7 @@ class HostProvidersApi {
     }
 
   }
+
 }
 
 class ProviderDecoder {

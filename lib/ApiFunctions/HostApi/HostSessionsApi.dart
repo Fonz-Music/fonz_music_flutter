@@ -28,11 +28,11 @@ class HostSessionsApi {
 //      log('success got coasters');
         log("success");
         log("resp is " + response.data.toString());
-        GetAllSessionsDecoder sessionsResponse = GetAllSessionsDecoder.fromJson(response.data);
+        List sessionsResponse = response.data;
         response.data = sessionsResponse;
-        log("sessions length " + sessionsResponse.sessions.length.toString());
+        log("sessions length " + sessionsResponse.length.toString());
         // check if there aren't sessions
-        if (sessionsResponse.sessions.length == 0 ) {
+        if (sessionsResponse.length == 0 ) {
           // create session if there are none
           await createSession();
         }
@@ -40,7 +40,7 @@ class HostSessionsApi {
           // store sessionId in local storage
           SharedPreferences localPreferences = await SharedPreferences.getInstance();
           // store in preferences
-          localPreferences.setString("userAccountSessionId", sessionsResponse.sessions[0].sessionId);
+          localPreferences.setString("userAccountSessionId", sessionsResponse[0]["sessionId"]);
 
         }
       } else {
@@ -171,6 +171,39 @@ class HostSessionsApi {
       //
       // log("this is mssg" + e.response.data["message"].toString());
       // print("this is mssg" + e.response.data["code"].toString());
+      return {
+        "statusCode": e.response.data["status"],
+        "code": e.response.data["code"],
+        "body": e.response.data["message"]
+      };
+    }
+
+  }
+  static Future<Map> updateSessionWithProviderId(String sessionId, String providerId) async {
+    String endpoint = address + host + session + sessionId;
+    String token = await getJWTAndCheckIfExpired();
+    log("endpoint: " + endpoint);
+
+    // dio
+    Dio dio = new Dio();
+    dio.options.headers = {HttpHeaders.authorizationHeader: 'Bearer $token'};
+    try {
+      var response = await dio.put(endpoint, data: {"providerId": providerId, "active": true});
+      if (response.statusCode == 200) {
+        log("success");
+      } else {
+        log("error ");
+        log('error with response code ${response.statusCode} and body '
+        // ' ${response.body}');
+            ' ${response.data}');
+        return null;
+      }
+      log("response message " + response.statusMessage);
+      log("response code " + response.statusCode.toString());
+      return {"statusCode": response.statusCode, "code": response.statusMessage,
+        "body": response.data};
+    }
+    on DioError catch (e) {
       return {
         "statusCode": e.response.data["status"],
         "code": e.response.data["code"],
