@@ -70,6 +70,61 @@ class HostSessionsApi {
 
   }
 
+  static Future<Map> getSession(String sessionId) async {
+    log("im getting called ");
+    String endpoint = address + host + session + sessionId;
+    String token = await getJWTAndCheckIfExpired();
+    // await FirebaseAuth.instance.currentUser.getIdToken();
+    log("endpoint: " + endpoint);
+
+    // dio
+    Dio dio = new Dio();
+
+    dio.options.headers = {HttpHeaders.authorizationHeader: 'Bearer $token'};
+
+    log("dio works");
+    try {
+      var response = await dio.get(endpoint);
+      if (response.statusCode == 200) {
+//      log('success got coasters');
+        log("success");
+        log("resp is " + response.data.toString());
+        // convert return data to createSessionDecoder
+        final getSessionDecoder = SessionDecoder.fromJson(response.data);
+        // return session info
+        response.data = getSessionDecoder;
+        // store sessionId in local storage
+        SharedPreferences localPreferences = await SharedPreferences.getInstance();
+        // store in preferences
+        localPreferences.setString("userAccountSessionId", getSessionDecoder.sessionId);
+
+      } else {
+        log("error ");
+        log('error with response code ${response.statusCode} and body '
+        // ' ${response.body}');
+            ' ${response.data}');
+        return null;
+      }
+      // log("response message " + response.statusMessage);
+      // log("response code " + response.statusCode.toString());
+      return {"statusCode": response.statusCode, "code": response.statusMessage,
+        "body": response.data};
+    }
+    on DioError catch (e) {
+      // log("this is msg " + e.response.statusMessage.toString());
+      // log("this is status " + e.response.statusCode.toString());
+      //
+      // log("this is mssg" + e.response.data["message"].toString());
+      // print("this is mssg" + e.response.data["code"].toString());
+      return {
+        "statusCode": e.response.data["status"],
+        "code": e.response.data["code"],
+        "body": e.response.data["message"]
+      };
+    }
+
+  }
+
   static Future<Map> createSession() async {
     log("im getting called ");
     String endpoint = address + host + session;
