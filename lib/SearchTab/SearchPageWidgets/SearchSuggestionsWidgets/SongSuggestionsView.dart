@@ -1,11 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:fonz_music_flutter/GlobalComponents/FrontEnd/FrontEndConstants.dart';
+import 'package:fonz_music_flutter/SearchTab/SearchPageWidgets/SearchSuggestionsWidgets/ConnectSpotifySearchPage.dart';
 import 'package:fonz_music_flutter/SearchTab/SearchPageWidgets/SearchSuggestionsWidgets/TopArtistsWidgets/TopArtistsView.dart';
 
+import '../../../main.dart';
 import 'TopPlaylistsWidgets/TopPlaylistsView.dart';
 import 'TopSongsWidgets/TopSongsView.dart';
 
 class SongSuggestionsView extends StatefulWidget {
+
+  SongSuggestionsView({Key key, @required this.notifyParent}) : super(key: key);
+
+  final Function() notifyParent;
+
   @override
   _SongSuggestionsViewState createState() => _SongSuggestionsViewState();
 }
@@ -26,7 +33,7 @@ class _SongSuggestionsViewState extends State<SongSuggestionsView> {
 
           children: [
             Container(
-              height: height,
+              height: determineSongSugsHeight(),
               decoration: BoxDecoration(
                   color: determineColorThemeBackground(),
                   borderRadius: BorderRadius.circular(10)
@@ -34,6 +41,7 @@ class _SongSuggestionsViewState extends State<SongSuggestionsView> {
             ),
             Column(
               children: [
+                DetermineIfSpotifyButtonShown(),
                 TopSongsView(),
                 TopArtistsView(),
                 TopPlaylistsView()
@@ -45,4 +53,21 @@ class _SongSuggestionsViewState extends State<SongSuggestionsView> {
       ),
     );
   }
+
+  Widget DetermineIfSpotifyButtonShown() {
+
+    if (!userAttributes.getConnectedToSpotify()) {
+      return ConnectSpotifySearchPageButton(notifyParent: widget.notifyParent);
+    }
+    else return Container(height: 0);
+  }
+
+  double determineSongSugsHeight() {
+
+    if (!userAttributes.getConnectedToSpotify()) {
+      return 830.0;
+    }
+    else return 780.0;
+  }
+
 }

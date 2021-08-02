@@ -84,6 +84,9 @@ getSpotifyIconLight() {
 getSpotifyIconAmber() {
   return "assets/fonzIcons/spotifyIconAmber.png";
 }
+getSpotifyIconWhite() {
+  return "assets/fonzIcons/spotifyIconWhite.png";
+}
 
 // -------------------Colors-------------------------------------
 

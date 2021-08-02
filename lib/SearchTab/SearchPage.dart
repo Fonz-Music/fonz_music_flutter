@@ -130,7 +130,7 @@ class _SearchPageState extends State<SearchPage> {
               children: [
 
                 ActiveSongView(),
-                SongSuggestionsView()
+                SongSuggestionsView(notifyParent: widget.notifyParent,)
               ],
             ),
             DetermineIfResultsAreShown()

@@ -56,87 +56,87 @@ class _ArtistTrackModalState extends State<ArtistTrackModal> {
       ValueListenableBuilder<String>(
           valueListenable: responseCodeFromQueue,
           builder:  (context, value, child) {
-      return
-        Stack(
-          children: [
-            Container(
-      height: height * 0.9,
-      color: determineColorThemeBackground(),
-      child: Column(
-        children: [
-          Container(
-              padding: EdgeInsets.all(10),
-              color: AMBER,
-              height: height * 0.15,
-              child: Row(
-                children: [
-                  Container(
-                    padding: EdgeInsets.all(10),
-                    // *---------------Use variable taken from Library selection for album url-----*
-                    child: ClipRRect(
-
-                      borderRadius: BorderRadius.circular(CORNERRADIUSBUTTON),
-                      child: Image.network("${widget.givenArtist.artistImage}",
-                        height: height * 0.1,
-                        // width: height * 0.1,
-                      ),
-                    ),
-                  ),
-                  Column(
-                    children: [
-                      Spacer(),
-                      SizedBox(
-                        width: width * 0.6,
-                        child: Text(
-                          // *---------------Use variable taken from Library selection for artist--------*
-                          // removes the brackets from the string
-                          "${widget.givenArtist.artistName}",
-                          style: TextStyle(
-                            fontFamily: FONZFONTTWO,
-                            fontSize: HEADINGFOUR,
-                            color: Colors.white,
-                          ),
-                          textAlign: TextAlign.left,
-                        ),
-                      ),
-                      SizedBox(
-                        width: width * 0.6,
-                        child: Text(
-                          // *---------------Use variable taken from Library selection for artist--------*
-                          // removes the brackets from the string
-                          "artist",
-                          style: TextStyle(
-                            fontFamily: FONZFONTONE,
-                            fontSize: HEADINGFIVE,
-                            color: Colors.white,
-                          ),
-                          textAlign: TextAlign.left,
-                        ),
-                      ),
-                      Spacer(),
-                    ],
-                  )
-                ],
-              )
-          ),
-          ValueListenableBuilder<bool>(
-              valueListenable: pressedToLaunchQueueNfc,
-              builder: (context, value, child) {
-                return
-                  ShowArtistSongsOrPromptNfc();
-              }
-          ),
-        ],
-      ),
-    ),
-            Column(
+          return
+            Stack(
               children: [
-                DisplayQueueSongResponses(context),
-                Spacer()
+                Container(
+                  height: height * 0.9,
+                  color: determineColorThemeBackground(),
+                  child: Column(
+                    children: [
+                      Container(
+                          padding: EdgeInsets.all(10),
+                          color: AMBER,
+                          height: height * 0.15,
+                          child: Row(
+                            children: [
+                              Container(
+                                padding: EdgeInsets.all(10),
+                                // *---------------Use variable taken from Library selection for album url-----*
+                                child: ClipRRect(
+
+                                  borderRadius: BorderRadius.circular(CORNERRADIUSBUTTON),
+                                  child: Image.network("${widget.givenArtist.artistImage}",
+                                    height: height * 0.1,
+                                    // width: height * 0.1,
+                                  ),
+                                ),
+                              ),
+                              Column(
+                                children: [
+                                  Spacer(),
+                                  SizedBox(
+                                    width: width * 0.6,
+                                    child: Text(
+                                      // *---------------Use variable taken from Library selection for artist--------*
+                                      // removes the brackets from the string
+                                      "${widget.givenArtist.artistName}",
+                                      style: TextStyle(
+                                        fontFamily: FONZFONTTWO,
+                                        fontSize: HEADINGFOUR,
+                                        color: Colors.white,
+                                      ),
+                                      textAlign: TextAlign.left,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: width * 0.6,
+                                    child: Text(
+                                      // *---------------Use variable taken from Library selection for artist--------*
+                                      // removes the brackets from the string
+                                      "artist",
+                                      style: TextStyle(
+                                        fontFamily: FONZFONTONE,
+                                        fontSize: HEADINGFIVE,
+                                        color: Colors.white,
+                                      ),
+                                      textAlign: TextAlign.left,
+                                    ),
+                                  ),
+                                  Spacer(),
+                                ],
+                              )
+                            ],
+                          )
+                      ),
+                      ValueListenableBuilder<bool>(
+                          valueListenable: pressedToLaunchQueueNfc,
+                          builder: (context, value, child) {
+                            return
+                              ShowArtistSongsOrPromptNfc();
+                          }
+                      ),
+                    ],
+                  ),
+                ),
+                Column(
+                  children: [
+                    DisplayQueueSongResponses(context),
+                    Spacer()
+                  ],
+                ),
               ],
-            ),
-          ],
-        );
+            );
           }
       );
   }

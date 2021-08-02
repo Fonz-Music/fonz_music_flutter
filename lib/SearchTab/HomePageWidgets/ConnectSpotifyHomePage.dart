@@ -76,7 +76,7 @@ class _ConnectSpotifyHomePageButtonState extends State<ConnectSpotifyHomePageBut
                 }
                 else {
                   // link to spotify
-                  userAttributes.setConnectedToSpotify(true);
+                  // userAttributes.setConnectedToSpotify(true);
                   // connectedToSpotify = true;
                   widget.notifyParent();
                 }

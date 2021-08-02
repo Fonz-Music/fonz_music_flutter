@@ -55,88 +55,88 @@ class _PlaylistTrackModalState extends State<PlaylistTrackModal> {
       ValueListenableBuilder<String>(
           valueListenable: responseCodeFromQueue,
           builder:  (context, value, child) {
-      return
-        Stack(
-          children: [
-      Container(
-      height: height * 0.9,
-      color: determineColorThemeBackground(),
-      child: Column(
-        children: [
-          Container(
-            padding: EdgeInsets.all(10),
-            color: AMBER,
-            height: height * 0.15,
-            child: Row(
+          return
+            Stack(
               children: [
                 Container(
-                  padding: EdgeInsets.all(10),
-                  // *---------------Use variable taken from Library selection for album url-----*
-                  child: ClipRRect(
+                height: height * 0.9,
+                color: determineColorThemeBackground(),
+                child: Column(
+                  children: [
+                    Container(
+                      padding: EdgeInsets.all(10),
+                      color: AMBER,
+                      height: height * 0.15,
+                      child: Row(
+                        children: [
+                          Container(
+                            padding: EdgeInsets.all(10),
+                            // *---------------Use variable taken from Library selection for album url-----*
+                            child: ClipRRect(
 
-                    borderRadius: BorderRadius.circular(CORNERRADIUSBUTTON),
-                    child: Image.network("${widget.givenPlaylist.playlistImage}",
-                      height: height * 0.1,
-                      // width: height * 0.1,
-                      // width: 120,
+                              borderRadius: BorderRadius.circular(CORNERRADIUSBUTTON),
+                              child: Image.network("${widget.givenPlaylist.playlistImage}",
+                                height: height * 0.1,
+                                // width: height * 0.1,
+                                // width: 120,
+                              ),
+                            ),
+                          ),
+                          Column(
+                            children: [
+                              Spacer(),
+                              SizedBox(
+                                width: width * 0.6,
+                                child: Text(
+                                  // *---------------Use variable taken from Library selection for artist--------*
+                                  // removes the brackets from the string
+                                  "${widget.givenPlaylist.playlistName}",
+                                  style: TextStyle(
+                                    fontFamily: FONZFONTTWO,
+                                    fontSize: HEADINGFOUR,
+                                    color: Colors.white,
+                                  ),
+                                  textAlign: TextAlign.left,
+                                ),
+                              ),
+                              SizedBox(
+                                width: width * 0.6,
+                                child: Text(
+                                  // *---------------Use variable taken from Library selection for artist--------*
+                                  // removes the brackets from the string
+                                  "${widget.givenPlaylist.amountOfTracks.toString()} tracks",
+                                  style: TextStyle(
+                                    fontFamily: FONZFONTONE,
+                                    fontSize: HEADINGFIVE,
+                                    color: Colors.white,
+                                  ),
+                                  textAlign: TextAlign.left,
+                                ),
+                              ),
+                              Spacer()
+                            ],
+                          )
+                        ],
+                      )
                     ),
-                  ),
+                    ValueListenableBuilder<bool>(
+                        valueListenable: pressedToLaunchQueueNfc,
+                        builder: (context, value, child) {
+                          return
+                            ShowPlaylistSongsOrPromptNfc();
+                        }
+                    ),
+
+                  ],
                 ),
+              ),
                 Column(
                   children: [
-                    Spacer(),
-                    SizedBox(
-                      width: width * 0.6,
-                      child: Text(
-                        // *---------------Use variable taken from Library selection for artist--------*
-                        // removes the brackets from the string
-                        "${widget.givenPlaylist.playlistName}",
-                        style: TextStyle(
-                          fontFamily: FONZFONTTWO,
-                          fontSize: HEADINGFOUR,
-                          color: Colors.white,
-                        ),
-                        textAlign: TextAlign.left,
-                      ),
-                    ),
-                    SizedBox(
-                      width: width * 0.6,
-                      child: Text(
-                        // *---------------Use variable taken from Library selection for artist--------*
-                        // removes the brackets from the string
-                        "${widget.givenPlaylist.amountOfTracks.toString()} tracks",
-                        style: TextStyle(
-                          fontFamily: FONZFONTONE,
-                          fontSize: HEADINGFIVE,
-                          color: Colors.white,
-                        ),
-                        textAlign: TextAlign.left,
-                      ),
-                    ),
+                    DisplayQueueSongResponses(context),
                     Spacer()
                   ],
-                )
+                ),
               ],
-            )
-          ),
-          ValueListenableBuilder<bool>(
-              valueListenable: pressedToLaunchQueueNfc,
-              builder: (context, value, child) {
-                return
-                  ShowPlaylistSongsOrPromptNfc();
-              }
-          ),
-
-        ],
-      ),
-    ),
-      Column(
-        children: [
-          DisplayQueueSongResponses(context),
-          Spacer()
-        ],
-      ),
-            ],
             );
           }
       );
