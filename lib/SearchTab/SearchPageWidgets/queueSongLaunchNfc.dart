@@ -12,6 +12,7 @@ import '../SearchPage.dart';
 
 queueSongLaunchNfc(Track trackToQueue) async {
   log("going to queue " + trackToQueue.title);
+  songAddedToQueue = trackToQueue.title;
   pressedToLaunchQueueNfc.value = true;
   var uidFromTap = await GuestNfcFunctions.readHostNFCForQueue();
   if (uidFromTap == hostCoasterDetails.coasterUid) {
