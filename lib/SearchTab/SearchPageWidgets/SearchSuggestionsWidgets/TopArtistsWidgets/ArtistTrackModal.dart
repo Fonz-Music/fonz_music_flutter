@@ -3,7 +3,11 @@ import 'package:fonz_music_flutter/GlobalComponents/FrontEnd/FrontEndConstants.d
 import 'package:fonz_music_flutter/GlobalComponents/Objects/Artist.dart';
 
 import 'package:fonz_music_flutter/GlobalComponents/Objects/Track.dart';
+import 'package:fonz_music_flutter/HostTab/TapYourPhoneLilac.dart';
 import 'package:fonz_music_flutter/SearchTab/SearchPageWidgets/TrackButton.dart';
+
+import '../../../SearchPage.dart';
+import '../DetermineQueueSongResps.dart';
 
 class ArtistTrackModal extends StatefulWidget {
 
@@ -48,7 +52,14 @@ class _ArtistTrackModalState extends State<ArtistTrackModal> {
     final width = size.width;
     final height = size.height;
 
-    return Container(
+    return
+      ValueListenableBuilder<String>(
+          valueListenable: responseCodeFromQueue,
+          builder:  (context, value, child) {
+      return
+        Stack(
+          children: [
+            Container(
       height: height * 0.9,
       color: determineColorThemeBackground(),
       child: Column(
@@ -108,48 +119,86 @@ class _ArtistTrackModalState extends State<ArtistTrackModal> {
                 ],
               )
           ),
-          Container(
-            color: determineColorThemeBackground(),
-            child: Column(
-              children: [
-                Row(
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.fromLTRB(20, 20, 0, 20),
-                      child: new Text(
-                        "songs",
-                        style: TextStyle(
-                          fontFamily: FONZFONTTWO,
-                          fontSize: HEADINGFIVE,
-                          color: determineColorThemeTextInverse(),
-                        ),
-                        textAlign: TextAlign.left,
-                      ),
-                    ),
-                    Spacer()
-                  ],
-                ),
-                SizedBox(
-                  height: height * 0.65,
-                  child: Flexible(
-                    child: ListView.separated(
-                      scrollDirection: Axis.vertical,
-                      itemCount: tempTracks.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        return TrackButton(givenTrack: tempTracks[index],);
-                      },
-                      separatorBuilder: (BuildContext context,
-                          int index) => const Divider(
-                        color: Colors.transparent,
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
+          ValueListenableBuilder<bool>(
+              valueListenable: pressedToLaunchQueueNfc,
+              builder: (context, value, child) {
+                return
+                  ShowArtistSongsOrPromptNfc();
+              }
           ),
         ],
       ),
+    ),
+            Column(
+              children: [
+                DisplayQueueSongResponses(context),
+                Spacer()
+              ],
+            ),
+          ],
+        );
+          }
+      );
+  }
+
+  Widget ShowArtistSongsOrPromptNfc() {
+
+    final size = MediaQuery.of(context).size;
+    final width = size.width;
+    final height = size.height;
+
+    if (!pressedToLaunchQueueNfc.value) {
+
+      return
+        Container(
+          color: determineColorThemeBackground(),
+          child: Column(
+            children: [
+              Row(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(20, 20, 0, 20),
+                    child: new Text(
+                      "songs",
+                      style: TextStyle(
+                        fontFamily: FONZFONTTWO,
+                        fontSize: HEADINGFIVE,
+                        color: determineColorThemeTextInverse(),
+                      ),
+                      textAlign: TextAlign.left,
+                    ),
+                  ),
+                  Spacer()
+                ],
+              ),
+              SizedBox(
+                height: height * 0.65,
+                child: Column(
+                  children: [
+                    Flexible(
+                      child: ListView.separated(
+                        scrollDirection: Axis.vertical,
+                        itemCount: tempTracks.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          return TrackButton(givenTrack: tempTracks[index],);
+                        },
+                        separatorBuilder: (BuildContext context,
+                            int index) => const Divider(
+                          color: Colors.transparent,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        );
+    }
+    else return Container(
+      // height: 0,
+      child: TapYourPhoneLilac(),
     );
   }
+
 }

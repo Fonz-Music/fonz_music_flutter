@@ -15,6 +15,7 @@ import 'package:fonz_music_flutter/SearchTab/SearchPageWidgets/QueueSongResponse
 import 'SearchPageWidgets/ActiveSongWidgets/ActiveSongView.dart';
 import 'SearchPageWidgets/SearchBarWidgets/SearchBar.dart';
 import 'SearchPageWidgets/SearchBarWidgets/SearchResultsView.dart';
+import 'SearchPageWidgets/SearchSuggestionsWidgets/DetermineQueueSongResps.dart';
 import 'SearchPageWidgets/SearchSuggestionsWidgets/SongSuggestionsView.dart';
 
 var pressedToLaunchQueueNfc = ValueNotifier<bool>(false);
@@ -109,7 +110,7 @@ class _SearchPageState extends State<SearchPage> {
 
                       ]
                   ),
-                  DisplayQueueSongResponses(),
+                  DisplayQueueSongResponses(context),
                 ],
               );
           }
@@ -117,56 +118,7 @@ class _SearchPageState extends State<SearchPage> {
     );
   }
 
-  Widget DisplayQueueSongResponses() {
 
-    final size = MediaQuery.of(context).size;
-    final width = size.width;
-
-    if (responseCodeFromQueue.value != "") {
-      Timer(Duration(seconds: 3), () {
-        responseCodeFromQueue.value = "";
-        // setState(() {
-        //
-        // });
-      });
-      return
-        Container(
-          padding: EdgeInsets.fromLTRB(0, 30, 0, 0),
-          child: Center(
-            child: Container(
-              // color: Colors.red,
-              width: width * COMPONENTWIDTH,
-              height: 60,
-
-              child: DetermineQueueSongResponses(),
-            ),
-          ),
-        );
-    }
-    else return Container(
-      height: 0,
-    );
-  }
-
-  Widget DetermineQueueSongResponses() {
-
-    final size = MediaQuery.of(context).size;
-    final width = size.width;
-
-    if (responseCodeFromQueue.value == "QUEUE_SUCCESS") {
-      return QueueSongSuccess();
-    }
-    else if (responseCodeFromQueue.value == "QUEUED_BUT_DELAYED") {
-      return QueuedButDelayed();
-    }
-    else if (responseCodeFromQueue.value == "QUEUE_FAILURE") {
-      return QueueSongFail();
-    }
-    else if (responseCodeFromQueue.value == "NOT_SAME_COASTER") {
-      return QueueFailNotSameCoaster();
-    }
-    else return QueueSongFail();
-  }
 
   Widget WaitForNfcToQueue() {
     if (!pressedToLaunchQueueNfc.value) {
