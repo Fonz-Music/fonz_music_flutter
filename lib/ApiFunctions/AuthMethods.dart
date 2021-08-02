@@ -22,11 +22,11 @@ Future<String> getJWTAndCheckIfExpired() async {
   if (!isValid) {
     // fetch accessToken from keystore
     String refreshToken = await storage.read(key: "refreshToken");
-    log("refreshToken is " + refreshToken);
+
     // check if user already has account (check for refresh + access)
     if (refreshToken != null && refreshToken != "" && accessToken != null && accessToken != "") {
         String userId = getUserIdFromAccessToken(accessToken);
-
+        log("refreshToken is " + refreshToken);
         print("refreshing token");
         // refresh token endpoint
       var refreshEndpointResp = await AuthApi.refreshAccessToken(userId, refreshToken);
