@@ -1,6 +1,8 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:fonz_music_flutter/ApiFunctions/GuestApi/GuestSpotifyApi.dart';
+import 'package:fonz_music_flutter/GlobalComponents/CoreUserAttributes.dart';
 import 'package:fonz_music_flutter/GlobalComponents/FrontEnd/FrontEndConstants.dart';
 import 'package:fonz_music_flutter/MainTabs/SearchTab.dart';
 
@@ -53,11 +55,12 @@ class _SearchPageState extends State<SearchPage> {
                 Spacer(),
                 TextButton(
                   onPressed: () {
-                    widget.controller.animateToPage(0,
-                        duration: Duration(seconds: 1), curve: Curves.easeInOutCirc);
-
-                    connectedToAHost = false;
-                    widget.notifyParent();
+                    GuestSpotifyApi.fetchActiveSong(hostSessionIdGlobal);
+                    // widget.controller.animateToPage(0,
+                    //     duration: Duration(seconds: 1), curve: Curves.easeInOutCirc);
+                    //
+                    // connectedToAHost = false;
+                    // widget.notifyParent();
                   },
                   child: Padding(
                     padding: EdgeInsets.fromLTRB(20, 30, 20, 0),

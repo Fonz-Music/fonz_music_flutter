@@ -88,7 +88,7 @@ class GuestNfcFunctions {
   // static Future<String> readHostNFCForQueue() async {
   //   String returnMessage = "";
   //   bool _isNFCSupported = await NFC.isNDEFSupported;
-  //   try {
+  //   try {q
   //     if (_isNFCSupported) {
   //         var uidFromScannedCoaster = await _scanForUidOnAndroid();
   //         returnMessage = "success";

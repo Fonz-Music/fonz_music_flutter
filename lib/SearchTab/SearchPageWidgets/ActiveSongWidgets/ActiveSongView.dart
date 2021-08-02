@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:fonz_music_flutter/GlobalComponents/FrontEnd/FrontEndConstants.dart';
+import 'package:fonz_music_flutter/SearchTab/SearchPageWidgets/ActiveSongWidgets/ActiveSongFutureBuilder.dart';
 
 class ActiveSongView extends StatefulWidget {
   @override
@@ -50,13 +51,9 @@ class _ActiveSongViewState extends State<ActiveSongView> {
               ),
               width: width * COMPONENTWIDTH,
               height: 150,
-              child: Column(
-                children: [
-
-                ],
+              child: ActiveSongFutureBuilder()
               ),
-            ),
-          ],
+    ]
         );
   }
 }

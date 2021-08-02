@@ -9,9 +9,6 @@ import '../ApiConstants.dart';
 import '../AuthMethods.dart';
 // import 'package:http/http.dart' as http;
 
-// TODO: remove this when spotify integration complete
-String token =
-    'BQC8xt_VTy69SLUEX56X0mLzK-mtcNYbpVRLpj6yFGrcfTxAuST8FsOf7Xz0pDTJIdWreUNnJjL0CbR4lqwFaMFpND4hHpk1J_jrICRUaJ7mcpMQWM3wkyhMW0E76ef25Wt_mTjr8LvUeacA91IxawHnkMC4oDqf1JUozauZD8ADYpy8UjHIGTl2IrRgP6x7OuVOdES81YFIMq2ZtQVNGr45dKch8GOS8cp_QnG_vv1Vj4JN9pJIqlGfsX4oD2q3v693h6LTCfhQUFbBWRhmua_aOMSAxhW1a1BU2R3JHeKy';
 
 class GuestSpotifyApi {
   // --------------------------------------------now dio---------------------------------------------------------
@@ -99,6 +96,48 @@ class GuestSpotifyApi {
 
     return returnToUser;
   }
+
+  static Future<Map> fetchActiveSong(String sessionId) async {
+    log("Session id " + sessionId);
+    String endpoint =
+        address + guest + sessionId + '/' + spotify + "state";
+    log(endpoint);
+    // fetch token
+    String token = await getJWTAndCheckIfExpired();
+    // await FirebaseAuth.instance.currentUser.getIdToken();
+
+    // dio
+    Dio dio = new Dio();
+    dio.options.headers = {HttpHeaders.authorizationHeader: 'Bearer $token'};
+    log("about to get resp inside active song");
+    try {
+      var response = await dio.get(endpoint);
+      log(response.data.toString());
+      if (response.statusCode == 200 ) {
+        log("success");
+        final activeSongDecoded = ActiveSongDecoder.fromJson(response.data);
+        response.data = activeSongDecoded;
+
+      }
+
+      return {
+        "statusCode": response.statusCode,
+        "message":
+        // response.body};
+        response.statusMessage,
+        "body": response.data
+      };
+    } on DioError catch (e) {
+      log("issue " + e.response.data);
+      log("dailure");
+      return {
+        "statusCode": e.response.data["status"],
+        "code": e.response.data["code"],
+        "body": e.response.data["body"]
+      };
+    }
+  }
+
 //
 //   static Future<UserTopArtistsResponse> getUserTopArtists() async {
 //     Dio dio = new Dio();
@@ -142,3 +181,29 @@ class GuestSpotifyApi {
 //     }
 //   }
 }
+
+
+// create anon account decoder
+class ActiveSongDecoder {
+  String artistName;
+  String trackName;
+  // Images images;
+
+  // ActiveSongDecoder({this.artistName, this.trackName, this.images});
+  ActiveSongDecoder({this.artistName, this.trackName});
+
+  ActiveSongDecoder.fromJson(Map<String, dynamic> json) {
+    artistName = json['artistName'];
+    trackName = json['trackName'];
+    // images = Images.fromJson(json['images']);
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['artistName'] = this.artistName;
+    data['trackName'] = this.trackName;
+    // data['images'] = this.images;
+    return data;
+  }
+}
+
