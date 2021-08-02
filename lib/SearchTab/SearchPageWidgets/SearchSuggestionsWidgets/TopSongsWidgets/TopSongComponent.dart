@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:fonz_music_flutter/GlobalComponents/FrontEnd/FrontEndConstants.dart';
 import 'package:fonz_music_flutter/GlobalComponents/FrontEnd/FrontEndFunctions.dart';
 import 'package:fonz_music_flutter/GlobalComponents/Objects/Track.dart';
-import 'package:fonz_music_flutter/SearchTab/SearchPageWidgets/SearchFunctions/QueueSongLaunchNFc.dart';
+// import 'package:fonz_music_flutter/SearchTab/SearchPageWidgets/SearchFunctions/QueueSongLaunchNFc.dart';
 
 class TopSongComponent extends StatefulWidget {
 
@@ -26,7 +26,7 @@ class _TopSongComponentState extends State<TopSongComponent> {
       padding: EdgeInsets.fromLTRB(0,5,0,5),
       child: MaterialButton(
         onPressed: () {
-          queueSongLaunchNfc();
+          // queueSongLaunchNfc();
         },
         child: Container(
           width: width * 0.37,

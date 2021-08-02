@@ -6,6 +6,7 @@ import 'package:fonz_music_flutter/ApiFunctions/UserTopArtistsResponse.dart';
 import 'package:fonz_music_flutter/ApiFunctions/UserTopTracksResponse.dart';
 import 'package:fonz_music_flutter/GlobalComponents/ExceptionHandling.dart';
 import '../ApiConstants.dart';
+import '../AuthMethods.dart';
 // import 'package:http/http.dart' as http;
 
 // TODO: remove this when spotify integration complete
@@ -20,7 +21,8 @@ class GuestSpotifyApi {
     String endpoint =
         address + guest + sessionId + '/' + spotify + searchTerm + term;
     log(endpoint);
-    String token = "";
+    // fetch token
+    String token = await getJWTAndCheckIfExpired();
     // await FirebaseAuth.instance.currentUser.getIdToken();
 
     // dio
@@ -52,8 +54,8 @@ class GuestSpotifyApi {
   // --------------------------------------------now dio---------------------------------------------------------
 
   static Future<Map> queueTrackSpotify(String trackId, String sessionId) async {
-    var token = "";
-    // await FirebaseAuth.instance.currentUser.getIdToken();
+    // fetch token
+    String token = await getJWTAndCheckIfExpired();
     var endpoint = address +
         guest +
         sessionId +
@@ -97,46 +99,46 @@ class GuestSpotifyApi {
 
     return returnToUser;
   }
-
-  static Future<UserTopArtistsResponse> getUserTopArtists() async {
-    Dio dio = new Dio();
-    try {
-      dio.options.headers = {
-        HttpHeaders.authorizationHeader: 'Bearer $token',
-      };
-      Response response =
-          await dio.get('https://api.spotify.com/v1/me/top/artists');
-      if (response.statusCode == 200) {
-        UserTopArtistsResponse.fromJson(json.decode(response.data.toString()));
-      } else {
-        log(response.statusCode.toString());
-        log(response.statusMessage);
-        log(response.data.toString());
-        throw new SpotifyException(SpotifyExceptionTypes.ARTISTS);
-      }
-    } on SpotifyException catch (e) {
-      rethrow;
-    }
-  }
-
-  static Future<UserTopTracksResponse> getUserTopTracks() async {
-    Dio dio = new Dio();
-    dio.options.headers = {
-      HttpHeaders.authorizationHeader: 'Bearer $token',
-    };
-    try {
-      Response response =
-          await dio.get('https://api.spotify.com/v1/me/top/tracks');
-      if (response.statusCode == 200) {
-        UserTopTracksResponse.fromJson(json.decode(response.data.toString()));
-      } else {
-        log(response.statusCode.toString());
-        log(response.statusMessage);
-        log(response.data.toString());
-        throw new SpotifyException(SpotifyExceptionTypes.TRACKS);
-      }
-    } on SpotifyException catch (e) {
-      rethrow;
-    }
-  }
+//
+//   static Future<UserTopArtistsResponse> getUserTopArtists() async {
+//     Dio dio = new Dio();
+//     try {
+//       dio.options.headers = {
+//         HttpHeaders.authorizationHeader: 'Bearer $token',
+//       };
+//       Response response =
+//           await dio.get('https://api.spotify.com/v1/me/top/artists');
+//       if (response.statusCode == 200) {
+//         UserTopArtistsResponse.fromJson(json.decode(response.data.toString()));
+//       } else {
+//         log(response.statusCode.toString());
+//         log(response.statusMessage);
+//         log(response.data.toString());
+//         throw new SpotifyException(SpotifyExceptionTypes.ARTISTS);
+//       }
+//     } on SpotifyException catch (e) {
+//       rethrow;
+//     }
+//   }
+//
+//   static Future<UserTopTracksResponse> getUserTopTracks() async {
+//     Dio dio = new Dio();
+//     dio.options.headers = {
+//       HttpHeaders.authorizationHeader: 'Bearer $token',
+//     };
+//     try {
+//       Response response =
+//           await dio.get('https://api.spotify.com/v1/me/top/tracks');
+//       if (response.statusCode == 200) {
+//         UserTopTracksResponse.fromJson(json.decode(response.data.toString()));
+//       } else {
+//         log(response.statusCode.toString());
+//         log(response.statusMessage);
+//         log(response.data.toString());
+//         throw new SpotifyException(SpotifyExceptionTypes.TRACKS);
+//       }
+//     } on SpotifyException catch (e) {
+//       rethrow;
+//     }
+//   }
 }

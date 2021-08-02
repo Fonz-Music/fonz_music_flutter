@@ -97,10 +97,17 @@ class _SearchPageState extends State<SearchPage> {
 
   Widget DetermineIfResultsAreShown() {
     if (searchingSong) {
+
       return
-          SearchResultsView();
+        ValueListenableBuilder<String>(
+          valueListenable: searchSong,
+          builder:  (context, value, child) {
+            return
+              SearchResultsView();
+          }
+        );
     }
-    else return SizedBox(height: 0,);
+    else return Container(height: 0,);
   }
 
 }

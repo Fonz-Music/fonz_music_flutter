@@ -5,6 +5,7 @@ import 'package:fonz_music_flutter/GlobalComponents/FrontEnd/FrontEndConstants.d
 
 var searchingSong = false;
 var isEditing = false;
+var searchSong = ValueNotifier<String>("");
 
 class SearchBar extends StatefulWidget {
   SearchBar({Key key, this.notifyParent}) : super(key: key);
@@ -33,7 +34,7 @@ class _SearchBarState extends State<SearchBar> {
         child: Row(
           children: [
             Form(
-              onChanged: (){
+              onChanged: () {
                 searchingSong = true;
                 log("should be true");
                 if (!isEditing) {
@@ -69,6 +70,11 @@ class _SearchBarState extends State<SearchBar> {
                       Container(
                         width: width * determineSearchWidthBasedOnEditing(),
                         child: TextFormField(
+                          onChanged: (value) {
+                            setState(() {
+                              searchSong.value = value;
+                            });
+                          },
                           style: TextStyle(
                             fontFamily: FONZFONTTWO,
                             fontSize: HEADINGFIVE,

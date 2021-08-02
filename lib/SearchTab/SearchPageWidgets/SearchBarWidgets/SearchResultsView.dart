@@ -10,6 +10,7 @@ import 'package:fonz_music_flutter/GlobalComponents/CoreUserAttributes.dart';
 import 'package:fonz_music_flutter/GlobalComponents/Objects/Track.dart';
 
 import '../TrackButton.dart';
+import 'SearchBar.dart';
 
 
 class SearchResultsView extends StatefulWidget {
@@ -20,8 +21,9 @@ class SearchResultsView extends StatefulWidget {
 }
 
 class _SearchResultsViewState extends State<SearchResultsView> {
-  final Future<UserTopTracksResponse> _result = GuestSpotifyApi.getUserTopTracks();
+
   Future<List<Track>> _search;
+  Future<Map> _result;
   bool isSearching = false;
   bool isLoading = false;
 
@@ -84,12 +86,18 @@ class _SearchResultsViewState extends State<SearchResultsView> {
     var searchResponse;
     log("resp from search " + response.toString());
     // if (response.statusCode == 200) {
-    if (response["responseCode"] == 200) {
+    if (response["statusCode"] == 200) {
       log("spotiy code: 200");
-      searchResponse = SpotifySearchResponse.fromJson(response["body"]);
+      // searchResponse = SpotifySearchResultsResponse.fromJson(response["searchResults"]);
+      // var body = SpotifyBodySearchResponse.fromJson(searchResults.toJson());
+      // searchResponse = SpotifySearchResponse.fromJson(body.toJson());
+      searchResponse = SpotifySearchResponse.fromJson(response["body"]["searchResults"]["body"]);
+
+      log("resp from search " + searchResponse.toString());
 
       log("search presp " + searchResponse.toString());
       var tracks = await searchResponse.tracks.items;
+      // var tracks = await searchResponse.
       List<Track> list = [];
       try {
         for (var i in tracks) {
@@ -99,6 +107,7 @@ class _SearchResultsViewState extends State<SearchResultsView> {
           List<String> listArtistString = [];
           listArtist.forEach((e) => {listArtistString.add(e.name)});
           var post = new Track(i.name, listArtistString, i.id, albumArt);
+          // log("post is " + post.title.toString());
           list.add(post);
         }
         return list;
@@ -141,63 +150,77 @@ class _SearchResultsViewState extends State<SearchResultsView> {
   @override
   void initState() {
     // TODO: implement initState and fill in term
-    _search = search('term');
+
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
 
+    _search = search(searchSong.value);
+
     final size = MediaQuery.of(context).size;
     final width = size.width;
     final height = size.height;
 
-    // return FutureBuilder(
-    //   future: _result,
-    //   builder: (BuildContext context, AsyncSnapshot snapshot) {
-    //     if (snapshot.hasData) {
-    //       if (!isSearching) {
-            return SizedBox(
-              height: height,
-              // padding: EdgeInsets.all(10),
-              child: Flexible(
-                child: ListView.builder(
-                    // itemCount: 10,
-                    // itemBuilder: (context, i) {
-                    //   return TrackResultRow(snapshot.data.items[i],
-                    //           () => print(snapshot.data.items[i].name));
-                    // }),
-                itemCount: tempTracks.length,
-        itemBuilder: (context, i) {
-                  return TrackButton(givenTrack: tempTracks[i]);
-        }),
+    return
+          Stack(
+            children: [
+              Center(
+                child: Container(
+                  height: height * 0.72,
+                  width: width * COMPONENTWIDTH,
+                  decoration: BoxDecoration(
+                      color: determineColorThemeBackground(),
+                      borderRadius: BorderRadius.circular(10)
+                  ),
+                ),
               ),
-            );
-      //     } else {
-      //       return FutureBuilder(
-      //         future: _search,
-      //         initialData: CircularProgressIndicator(),
-      //         builder: (BuildContext context, AsyncSnapshot snapshot) {
-      //           if (snapshot.hasData) {
-      //             return Container(
-      //               child: ListView.builder(itemBuilder: (context, i) {
-      //                 return ListTile(
-      //                   leading: Image.network(snapshot.data[i].imageLink),
-      //                   title: snapshot.data[i].name,
-      //                 );
-      //               }),
-      //             );
-      //           } else if (snapshot.hasError) {
-      //             throw new GenericException(snapshot.error);
-      //           }
-      //           return CircularProgressIndicator();
-      //         },
-      //       );
-      //     }
-      //   } else {
-      //     return CircularProgressIndicator();
-      //   }
-      // },
+              FutureBuilder(
+                future: _search,
+                builder: (BuildContext context, AsyncSnapshot snapshot) {
+                  if (snapshot.hasData) {
+                    // if (!isSearching) {
+                      return SizedBox(
+                        height: height * 0.7,
+                        // padding: EdgeInsets.all(10),
+                        child: Flex(
+                          direction: Axis.vertical,
+                          children:[ Flexible(
+                            child: ListView.builder(
+                              scrollDirection: Axis.vertical,
+                                itemCount: snapshot.data.length,
+                                itemBuilder: (context, i) {
+                                  return TrackButton(givenTrack: snapshot.data[i]);
+                                  // () => print(snapshot.data.items[i].name));
+                                }),
+                          ),
+                  ]
+                        ),
+                      );
+                  }
+                  else {
+                    return Center(
+                        child: Column(
+                            children: [
+                              Container(
+                                height: height * 0.2,
+                              ),
+                              CircularProgressIndicator(
+                                color: AMBER,
+                              ),
+
+                            ]
+                        )
+                    );
+                  }
+                },
+              ),
+            ],
+          );
+    //   },
+    //   // child:
+    //
     // );
   }
 }

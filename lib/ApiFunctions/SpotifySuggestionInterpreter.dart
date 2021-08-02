@@ -1,5 +1,51 @@
 // Generated decoder for the spotify search response
 
+class SpotifySearchResultsResponse {
+  SpotifyBodySearchResponse _searchResults;
+
+  SpotifySearchResultsResponse({SpotifyBodySearchResponse tracks}) {
+    this._searchResults = tracks;
+  }
+  // Tracks get tracks => _tracks;
+  // set tracks(Tracks tracks) => _tracks = tracks;
+
+  SpotifySearchResultsResponse.fromJson(Map<String, dynamic> json) {
+    _searchResults =
+    json['searchResults'] != null ? new SpotifyBodySearchResponse.fromJson(json['searchResults']) : null;
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    if (this._searchResults != null) {
+      data['searchResults'] = this._searchResults.toJson();
+    }
+    return data;
+  }
+}
+
+class SpotifyBodySearchResponse {
+  SpotifySearchResponse _body;
+
+  SpotifyBodySearchResponse({SpotifySearchResponse tracks}) {
+    this._body = tracks;
+  }
+  // Tracks get tracks => tracks;
+  // set tracks(Tracks tracks) => _body = tracks;
+
+  SpotifyBodySearchResponse.fromJson(Map<String, dynamic> json) {
+    _body =
+    json['body'] != null ? new SpotifySearchResponse.fromJson(json['body']) : null;
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    if (this._body != null) {
+      data['body'] = this._body.toJson();
+    }
+    return data;
+  }
+}
+
 class SpotifySearchResponse {
   Tracks _tracks;
 

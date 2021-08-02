@@ -5,7 +5,6 @@ import 'package:fonz_music_flutter/GlobalComponents/FrontEnd/FrontEndConstants.d
 import 'package:fonz_music_flutter/GlobalComponents/FrontEnd/FrontEndFunctions.dart';
 import 'package:fonz_music_flutter/GlobalComponents/Objects/Track.dart';
 
-import 'SearchFunctions/QueueSongLaunchNFc.dart';
 
 class TrackButton extends StatefulWidget {
 
@@ -28,7 +27,8 @@ class _TrackButtonState extends State<TrackButton> {
       // padding: EdgeInsets.all(5),
       child: MaterialButton(
         onPressed: () {
-          queueSongLaunchNfc();
+          log("pressed");
+          // queueSongLaunchNfc();
         },
         child: Container(
           width: width * 0.9,
