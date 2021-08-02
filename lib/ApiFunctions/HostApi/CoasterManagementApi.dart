@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 
 import '../ApiConstants.dart';
+import '../AuthMethods.dart';
 
 class CoasterManagementApi {
 
@@ -13,8 +14,7 @@ class CoasterManagementApi {
   // GET /host/coasters/
   static Future<Map> getOwnedCoasters() async {
     String endpoint = address + host + coasters;
-    String token = "";
-    token = tempToken;
+    String token = await getJWTAndCheckIfExpired();
 
     // dio
     Dio dio = new Dio();
@@ -63,12 +63,7 @@ class CoasterManagementApi {
       String coasterUID,
       ) async {
     String endpoint = address + host + coasters + coasterUID;
-    String token = "";
-    token = tempToken;
-    // String token = await FirebaseAuth.instance.currentUser.getIdToken();
-    //http
-    // var response = await http.get(endpoint,
-    //     headers: {HttpHeaders.authorizationHeader: 'Bearer $token'});
+    String token = await getJWTAndCheckIfExpired();
     // dio
     Dio dio = new Dio();
     dio.options.headers = {HttpHeaders.authorizationHeader: 'Bearer $token'};
@@ -113,8 +108,7 @@ class CoasterManagementApi {
   //     String coasterUID,
   //     ) async {
   //   String endpoint = address + host + coasters + coasterUID;
-  //   String token = "";
-  //   token = tempToken;
+  //   String token = await getJWTAndCheckIfExpired();
   //   // String token = await FirebaseAuth.instance.currentUser.getIdToken();
   //   //http
   //   // var response = await http.get(endpoint,
@@ -160,13 +154,7 @@ class CoasterManagementApi {
   // /host/coaster/{coasterUID}
   static Future<Map> addCoaster(String coasterUID) async {
     String endpoint = address + host + coasters + coasterUID;
-    String token = "";
-    token = tempToken;
-    // String token = await FirebaseAuth.instance.currentUser.getIdToken();
-    //    //http
-    //     var response = await http.post(endpoint,
-    //         headers: {HttpHeaders.authorizationHeader: 'Bearer $token'},
-    //         body: coasterUID);
+    String token = await getJWTAndCheckIfExpired();
     // dio
     Dio dio = new Dio();
     dio.options.headers = {HttpHeaders.authorizationHeader: 'Bearer $token'};
@@ -212,15 +200,7 @@ class CoasterManagementApi {
   // rename coaster function - include name as param
   static Future renameCoaster(String coasterUID, String coasterName) async {
     String endpoint = address + host + coasters + coasterUID;
-    String token = "";
-    token = tempToken;
-    // String token = await FirebaseAuth.instance.currentUser.getIdToken();
-    // http
-    // var response = await http.put(
-    //   endpoint,
-    //   headers: {HttpHeaders.authorizationHeader: 'Bearer $token'},
-    //   body: {'name': coasterName},
-    // );
+    String token = await getJWTAndCheckIfExpired();
     // dio
     Dio dio = new Dio();
     dio.options.headers = {HttpHeaders.authorizationHeader: 'Bearer $token'};
@@ -266,8 +246,7 @@ class CoasterManagementApi {
   static Future pauseCoaster(String coasterUID, bool active) async {
     log("bool is " + active.runtimeType.toString());
     String endpoint = address + host + coasters + coasterUID;
-    String token = "";
-    token = tempToken;
+    String token = await getJWTAndCheckIfExpired();
     // String token = await FirebaseAuth.instance.currentUser.getIdToken();
     // http
     // var response = await http.put(endpoint,
@@ -311,8 +290,7 @@ class CoasterManagementApi {
   static Future<String> editCoaster(
       String coasterUID, bool paused, bool disabled, String coasterName) async {
     String endpoint = address + host + coasters + coasterUID;
-    String token = "";
-    token = tempToken;
+    String token = await getJWTAndCheckIfExpired();
     // String token = await FirebaseAuth.instance.currentUser.getIdToken();
     // http
     // var response = await http.put(endpoint,
@@ -351,8 +329,7 @@ class CoasterManagementApi {
   // DELETE /host/coaster/{coasterUID}
   static Future disconnectCoaster(String coasterUID) async {
     String endpoint = address + host + coasters + coasterUID;
-    String token = "";
-    token = tempToken;
+    String token = await getJWTAndCheckIfExpired();
     // dio
     Dio dio = new Dio();
     dio.options.headers = {HttpHeaders.authorizationHeader: 'Bearer $token'};

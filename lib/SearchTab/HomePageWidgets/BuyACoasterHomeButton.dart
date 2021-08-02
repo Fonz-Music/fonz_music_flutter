@@ -63,7 +63,8 @@ class _BuyACoasterHomeButtonState extends State<BuyACoasterHomeButton> {
 
                 final tokenHere = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwczovL2FwaS5mb256bXVzaWMuY29tL2F1dGgiLCJleHAiOjE0Mjg0MTUxMTAsInVzZXJJZCI6ImIyZTliYTQ3LWI4OTgtNGE1OS1iYzI1LTU0YTVmY2E3YzIzZSIsInN1YiI6ImIyZTliYTQ3LWI4OTgtNGE1OS1iYzI1LTU0YTVmY2E3YzIzZSIsImVtYWlsIjoiZGlhcm11aWRtY2dAcG0ubWUiLCJlbWFpbFZlcmlmaWVkIjpmYWxzZSwiaWF0IjoxNjI3MjE1NTExfQ.4HIeWpEU5okJSiWIhyGXdNIoN9BrxM-ur0mluFqmyGQ";
 
-                getUserIdFromAccessToken(tempToken);
+                userAttributes.setConnectedToSpotify(false);
+                // getUserIdFromAccessToken(tempToken);
                 // launchShop();
                 FirebaseAnalytics().logEvent(name: "userOpenedBuyCoaster", parameters: {'string': "user", "tab": "search"});
               },

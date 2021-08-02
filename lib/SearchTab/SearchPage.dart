@@ -74,13 +74,11 @@ class _SearchPageState extends State<SearchPage> {
                             Spacer(),
                             TextButton(
                               onPressed: () {
-                                GuestSpotifyApi.fetchActiveSong(
-                                    hostSessionIdGlobal);
-                                // widget.controller.animateToPage(0,
-                                //     duration: Duration(seconds: 1), curve: Curves.easeInOutCirc);
-                                //
-                                // connectedToAHost = false;
-                                // widget.notifyParent();
+                                widget.controller.animateToPage(0,
+                                    duration: Duration(seconds: 1), curve: Curves.easeInOutCirc);
+
+                                connectedToAHost = false;
+                                widget.notifyParent();
                               },
                               child: Padding(
                                 padding: EdgeInsets.fromLTRB(20, 30, 20, 0),

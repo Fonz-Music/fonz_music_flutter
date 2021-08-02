@@ -5,6 +5,7 @@ import 'package:firebase_analytics/firebase_analytics.dart';
 
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:fonz_music_flutter/GlobalComponents/FrontEnd/FrontEndConstants.dart';
+import 'package:fonz_music_flutter/GlobalComponents/GlobalFunctions/ConnectSpotify.dart';
 import 'package:fonz_music_flutter/MainTabs/CreateAccountPrompt.dart';
 
 import '../../../main.dart';
@@ -83,7 +84,7 @@ class _ConnectSpotifySearchPageButtonState extends State<ConnectSpotifySearchPag
             ],
           ),
         ),
-        onPressed: () {
+        onPressed: () async {
           if (!userAttributes.getHasAccount()) {
             showModalBottomSheet<dynamic>(context: context,
                 isScrollControlled: true,
@@ -106,10 +107,9 @@ class _ConnectSpotifySearchPageButtonState extends State<ConnectSpotifySearchPag
                 });
           }
           else {
+            await connectSpotify();
             // link to spotify
-            // userAttributes.setConnectedToSpotify(true);
-            // connectedToSpotify = true;
-            // widget.notifyParent();
+            widget.notifyParent();
           }
           FirebaseAnalytics().logEvent(
               name: "userOpenedManageSpotify", parameters: {'string': "user"});
