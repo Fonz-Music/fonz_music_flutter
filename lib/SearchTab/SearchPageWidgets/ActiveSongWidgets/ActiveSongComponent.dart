@@ -30,7 +30,7 @@ class _ActiveSongComponentState extends State<ActiveSongComponent> {
     return Container(
       padding: EdgeInsets.fromLTRB(0,5,0,5),
       width: width * 0.8,
-      height: 120,
+      height: 140,
 
       child: Row(
         children: [

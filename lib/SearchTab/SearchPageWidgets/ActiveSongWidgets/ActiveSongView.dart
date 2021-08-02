@@ -51,7 +51,29 @@ class _ActiveSongViewState extends State<ActiveSongView> {
               ),
               width: width * COMPONENTWIDTH,
               height: 140,
-              child: ActiveSongFutureBuilder()
+              child: Stack(
+                children: [
+                  Row(
+                    children: [
+                      Spacer(),
+                      Column(
+                        children: [
+                          Container(
+                          padding: EdgeInsets.fromLTRB(0, 5, 10, 0),
+                            child: Icon(
+                              Icons.refresh,
+                              color: AMBER,
+                              size: 20,
+                            ),
+                          ),
+                          Spacer(),
+                        ],
+                      )
+                    ],
+                  ),
+                  ActiveSongFutureBuilder(),
+                ],
+              )
               ),
     ]
         );
