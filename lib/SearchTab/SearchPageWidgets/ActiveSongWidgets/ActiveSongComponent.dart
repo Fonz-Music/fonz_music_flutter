@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fonz_music_flutter/ApiFunctions/GuestApi/GuestSpotifyApi.dart';
 import 'package:fonz_music_flutter/GlobalComponents/FrontEnd/FrontEndConstants.dart';
 import 'package:fonz_music_flutter/GlobalComponents/FrontEnd/FrontEndFunctions.dart';
 
@@ -6,7 +7,7 @@ import 'package:fonz_music_flutter/GlobalComponents/FrontEnd/FrontEndFunctions.d
 class ActiveSongComponent extends StatefulWidget {
 
   ActiveSongComponent({Key key, this.track}) : super(key: key);
-  final track;
+  ActiveSongDecoder track;
 
   @override
   _ActiveSongComponentState createState() => _ActiveSongComponentState();
@@ -28,40 +29,30 @@ class _ActiveSongComponentState extends State<ActiveSongComponent> {
       width: width * 0.7,
       height: 120,
 
-      decoration: BoxDecoration(
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.5),
-            spreadRadius: 2,
-            blurRadius: 4,
-            offset: Offset(3, 3), // changes position of shadow
-          ),
-        ],
-        color: determineColorThemeText(),
-        borderRadius: BorderRadius.circular(CORNERRADIUSBUTTON),
-      ),
       child: Row(
         children: [
           Container(
+            padding: EdgeInsets.fromLTRB(15, 0, 15, 0),
             // *---------------Use variable taken from Library selection for album url-----*
             child: ClipRRect(
               borderRadius: BorderRadius.circular(CORNERRADIUSBUTTON),
-              child: Image.network("${widget.track.imageLink}",
-                height: 80,
+              child: Image.network("${widget.track.images[0]["url"]}",
+                height: 100,
               ),
             ),
           ),
           Container(
-            padding: EdgeInsets.fromLTRB(10, 10, 0, 0),
+            // padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
             child: Column(
                 children: [
+                  Spacer(),
                   SizedBox(
                     width: width * 0.5,
                     child: Text(
-                      "${widget.track.title}",
+                      "${widget.track.trackName}",
                       style: TextStyle(
                         fontFamily: FONZFONTTWO,
-                        fontSize: HEADINGFIVE,
+                        fontSize: HEADINGFOUR,
                         color: determineColorThemeTextInverse(),
                       ),
                       textAlign: TextAlign.left,
@@ -76,7 +67,24 @@ class _ActiveSongComponentState extends State<ActiveSongComponent> {
                     child: Text(
                       // *---------------Use variable taken from Library selection for artist--------*
                       // removes the brackets from the string
-                      "${convertArtistArrayToString(widget.track.artist.toString())}",
+                      "${convertArtistArrayToString(widget.track.artistName.toString())}",
+                      style: TextStyle(
+                        fontFamily: FONZFONTONE,
+                        fontSize: HEADINGFIVE,
+                        color: determineColorThemeTextInverse(),
+                      ),
+                      textAlign: TextAlign.left,
+                      softWrap: false,
+                      maxLines: 1,
+                      overflow: TextOverflow.fade,
+                    ),
+                  ),
+                  SizedBox(
+                    width: width * 0.5,
+                    child: Text(
+                      // *---------------Use variable taken from Library selection for artist--------*
+                      // removes the brackets from the string
+                      "playing with 's fonz",
                       style: TextStyle(
                         fontFamily: FONZFONTONE,
                         fontSize: HEADINGSIX,
@@ -88,24 +96,7 @@ class _ActiveSongComponentState extends State<ActiveSongComponent> {
                       overflow: TextOverflow.fade,
                     ),
                   ),
-                  SizedBox(
-                    width: width * 0.5,
-                    child: Text(
-                      // *---------------Use variable taken from Library selection for artist--------*
-                      // removes the brackets from the string
-                      "playing on 's fonz",
-                      style: TextStyle(
-                        fontFamily: FONZFONTONE,
-                        fontSize: HEADINGSEVEN,
-                        color: determineColorThemeTextInverse(),
-                      ),
-                      textAlign: TextAlign.left,
-                      softWrap: false,
-                      maxLines: 1,
-                      overflow: TextOverflow.fade,
-                    ),
-                  ),
-
+                  Spacer()
                 ]
             ),
           )

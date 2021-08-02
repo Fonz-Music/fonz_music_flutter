@@ -116,6 +116,7 @@ class GuestSpotifyApi {
       if (response.statusCode == 200 ) {
         log("success");
         final activeSongDecoded = ActiveSongDecoder.fromJson(response.data);
+        log("images is " + activeSongDecoded.images[0]["url"].toString());
         response.data = activeSongDecoded;
 
       }
@@ -187,21 +188,70 @@ class GuestSpotifyApi {
 class ActiveSongDecoder {
   String artistName;
   String trackName;
-  // Images images;
+  List images;
 
-  // ActiveSongDecoder({this.artistName, this.trackName, this.images});
-  ActiveSongDecoder({this.artistName, this.trackName});
+  ActiveSongDecoder({this.artistName, this.trackName, this.images});
+  // ActiveSongDecoder({this.artistName, this.trackName});
 
   ActiveSongDecoder.fromJson(Map<String, dynamic> json) {
     artistName = json['artistName'];
     trackName = json['trackName'];
-    // images = Images.fromJson(json['images']);
+    images = json['images'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['artistName'] = this.artistName;
     data['trackName'] = this.trackName;
+    data['images'] = this.images;
+    return data;
+  }
+}
+//
+// // create anon account decoder
+// class ImageActiveSongDecoder {
+//   ImageUrlActiveSongDecoder images;
+//   // String trackName;
+//   // Images images;
+//
+//   // ActiveSongDecoder({this.artistName, this.trackName, this.images});
+//   ImageActiveSongDecoder({this.images});
+//
+//   ImageActiveSongDecoder.fromJson(Map<String, dynamic> json) {
+//     images = ImageUrlActiveSongDecoder.fromJson(json['images']);
+//     // trackName = json['trackName'];
+//     // images = Images.fromJson(json['images']);
+//   }
+//
+//   Map<String, dynamic> toJson() {
+//     final Map<String, dynamic> data = new Map<String, dynamic>();
+//     data['url'] = this.url;
+//     // data['trackName'] = this.trackName;
+//     // data['images'] = this.images;
+//     return data;
+//   }
+// }
+
+
+// create anon account decoder
+class ImageUrlActiveSongDecoder {
+  String url;
+  // String trackName;
+  // Images images;
+
+  // ActiveSongDecoder({this.artistName, this.trackName, this.images});
+  ImageUrlActiveSongDecoder({this.url});
+
+  ImageUrlActiveSongDecoder.fromJson(Map<String, dynamic> json) {
+    url = json['url'];
+    // trackName = json['trackName'];
+    // images = Images.fromJson(json['images']);
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['url'] = this.url;
+    // data['trackName'] = this.trackName;
     // data['images'] = this.images;
     return data;
   }

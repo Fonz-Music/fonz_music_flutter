@@ -13,8 +13,9 @@ class ActiveSongFutureBuilder extends StatefulWidget {
 
 class _ActiveSongFutureBuilderState extends State<ActiveSongFutureBuilder> {
 
-  Future<Track> getTopSong() async {
+  Future<ActiveSongDecoder> getTopSong() async {
     final activeSong = await GuestSpotifyApi.fetchActiveSong(hostSessionIdGlobal);
+    log("active song is " + activeSong["body"].toString());
     return activeSong["body"];
   }
 
@@ -24,16 +25,20 @@ class _ActiveSongFutureBuilderState extends State<ActiveSongFutureBuilder> {
       child: FutureBuilder(
           future: getTopSong(),
           builder: (BuildContext context, AsyncSnapshot snapshot) {
-            if (snapshot.hasData) {
+            if (snapshot.connectionState != ConnectionState.done) {
+              return Container(
+                child: Text("no song active"),
+              );
+            }
+            else if (snapshot.data.trackName == null || snapshot.data.trackName == "" ) {
               log("data is " + snapshot.data.toString());
               return Container(child: ActiveSongComponent(track: snapshot.data));
 
             }
             else {
-              return Container(
-                child: Text("no song active"),
-              );
+              return Container(child: ActiveSongComponent(track: snapshot.data));
             }
+
           }
       ),
     );
