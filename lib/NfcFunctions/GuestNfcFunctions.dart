@@ -91,7 +91,7 @@ class GuestNfcFunctions {
     try {
       if (_isNFCSupported) {
           var uidFromScannedCoaster = await _scanForUidOnAndroid();
-          returnMessage = "success";
+          returnMessage = uidFromScannedCoaster;
       } else {
         log("device does not support");
         returnMessage = "this device does not support NFC";

@@ -36,7 +36,7 @@ class _SearchBarState extends State<SearchBar> {
             Form(
               onChanged: () {
                 searchingSong = true;
-                log("should be true");
+                // log("should be true");
                 if (!isEditing) {
                   widget.notifyParent();
                   isEditing = true;
@@ -82,6 +82,7 @@ class _SearchBarState extends State<SearchBar> {
                           ),
                           decoration: new InputDecoration(
                             hintText: "queue a song",
+                            border: InputBorder.none,
                             enabledBorder: InputBorder.none,
                             contentPadding: EdgeInsets.only(left: 0, bottom: 11, top: 11, right: 15),
                           ),
@@ -101,8 +102,8 @@ class _SearchBarState extends State<SearchBar> {
   }
 
   determineSearchWidthBasedOnEditing() {
-    if (isEditing) return 0.7;
-    else return 0.85;
+    if (isEditing) return 0.65;
+    else return 0.82;
   }
 
   Widget DetermineIfCancelShows() {

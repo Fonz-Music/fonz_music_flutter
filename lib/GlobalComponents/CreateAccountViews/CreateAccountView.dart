@@ -30,66 +30,71 @@ class _CreateAccountViewState extends State<CreateAccountView> {
         .size;
     final width = size.width;
     final height = size.height;
-    return Stack(
-      children: [
-        Container(
-          color: DARKERGREY,
-        ),
-        Opacity(
-          child: Container(
-            child:
-
-              Image(
-                image: AssetImage("assets/fonzIcons/peoplePartyingBackdrop.jpg"),
-                width: width,
-                // height: height * 0.9,
-                fit: BoxFit.fill,
-
-              //
-              ),
-              // Spacer(),
-
+    return SizedBox(
+      height: height * 0.95,
+      child: Stack(
+        children: [
+          Container(
+            color: DARKERGREY,
           ),
-          opacity: 0.4,
-        ),
-        Container(
-            // height: height * .9,
-            padding: EdgeInsets.fromLTRB(20, 40, 20, 0),
+          Opacity(
+            child: SizedBox(
+              height: height,
+              child:
+
+                Image(
+                  image: AssetImage("assets/fonzIcons/peoplePartyingBackdrop.jpg"),
+                  // width: width,
+                  // height: height * 0.9,
+                  fit: BoxFit.fill,
+                  // fit: BoxFit.fitHeight,
+
+                //
+                ),
+                // Spacer(),
+
+            ),
+            opacity: 0.4,
+          ),
+          Container(
+              // height: height * .9,
+              padding: EdgeInsets.fromLTRB(20, 40, 20, 0),
 //        height: height ,
-            child: Center(
-              child: Column(
+              child: Center(
+                child: Column(
 //                    height: height * .5,
 //            width: width * .75,
-                  children:[
-                    // Spacer(),
-                Container(
-                  padding: EdgeInsets.all(5),
-                  height: 80,
-                  width: 40,
-                  child: Image(
-                    image: AssetImage("assets/fonzIcons/fonzLogoGradiant.png"),
+                    children:[
+                      // Spacer(),
+                  Container(
+                    padding: EdgeInsets.all(5),
+                    height: 80,
+                    width: 40,
+                    child: Image(
+                      image: AssetImage("assets/fonzIcons/fonzLogoGradiant.png"),
+                    ),
                   ),
-                ),
-                ToggleSignInSignOut(),
-                Container(
-                  height: height * .72,
-                  // width: width * .72,
-                  child: PageView(
-                  controller: _emailController,
-                  scrollDirection: Axis.horizontal,
-                  children: [
-                    SignInView(popupContext: widget.popupContext,notifyParent: widget.notifyParent,),
-                    SignUpView(popupContext: widget.popupContext,notifyParent: widget.notifyParent)
-                  ],
-
-              ),
+                  ToggleSignInSignOut(),
+                  Container(
+                    height: height * .7,
+                    // width: width * .72,
+                    child: PageView(
+                    controller: _emailController,
+                    scrollDirection: Axis.horizontal,
+                    children: [
+                      SignInView(popupContext: widget.popupContext,notifyParent: widget.notifyParent,),
+                      SignUpView(popupContext: widget.popupContext,notifyParent: widget.notifyParent)
+                    ],
 
                 ),
-                    Spacer(),
-                  ]
-              )
-            )),
-      ],
+
+                  ),
+                      Spacer(),
+                    ]
+                )
+              )),
+        ],
+      ),
     );
   }
 

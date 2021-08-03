@@ -93,8 +93,8 @@ class _HomeDecisionPageState extends State<HomeDecisionPage> {
       log("being rebuilt");
     }
 
-    log("pressed nfc " + pressedNfcButtonToJoinPartu.toString());
-    log("the code is " + hostCoasterDetails.statusCode.toString());
+    // log("pressed nfc " + pressedNfcButtonToJoinPartu.toString());
+    // log("the code is " + hostCoasterDetails.statusCode.toString());
 
     if (launchedNfcToJoinParty) {
 

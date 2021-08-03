@@ -177,16 +177,16 @@ class _PlaylistTrackModalState extends State<PlaylistTrackModal> {
                 child: Column(
                   children: [
                     Flexible(
-                      child: ListView.separated(
+                      child: ListView.builder(
                         scrollDirection: Axis.vertical,
                         itemCount: tempTracks.length,
                         itemBuilder: (BuildContext context, int index) {
                           return TrackButton(givenTrack: tempTracks[index],);
                         },
-                        separatorBuilder: (BuildContext context,
-                            int index) => const Divider(
-                          color: Colors.transparent,
-                        ),
+                        // separatorBuilder: (BuildContext context,
+                        //     int index) => const Divider(
+                        //   color: Colors.transparent,
+                        // ),
                       ),
                     ),
                   ],

@@ -25,7 +25,7 @@ class _TrackButtonState extends State<TrackButton> {
     final height = size.height;
 
     return Container(
-      // padding: EdgeInsets.all(5),
+      padding: EdgeInsets.fromLTRB(0, 1, 0, 1),
       child: MaterialButton(
         onPressed: () {
           FocusScope.of(context).unfocus();

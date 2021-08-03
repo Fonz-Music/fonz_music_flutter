@@ -57,7 +57,8 @@ class _TopSongsViewState extends State<TopSongsView> {
           padding: const EdgeInsets.fromLTRB(0, 0, 0, 5),
           width: width * COMPONENTWIDTH,
           height: 140,
-          child: ListView.separated(
+          child: ListView.builder(
+
             scrollDirection: Axis.horizontal,
             // itemCount: 4,
             itemCount: tempTracks.length ~/2,
@@ -68,27 +69,30 @@ class _TopSongsViewState extends State<TopSongsView> {
                 // mainAxisAlignment: MainAxisAlignment.center,
                 // mainAxisSize: MainAxisSize.min,
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      TopSongComponent(track: tempTracks[index]),
-                      // TopSongComponent(track: tempTracks[1]),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      TopSongComponent(track: tempTracks[index + tempTracks.length ~/2]),
-                      // TopSongComponent(track: tempTracks[3]),
-                    ],
-                  ),
+                  TopSongComponent(track: tempTracks[index]),
+                  TopSongComponent(track: tempTracks[index + tempTracks.length ~/2]),
+                  // Row(
+                  //
+                  //   // mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  //   mainAxisSize: MainAxisSize.min,
+                  //   children: [
+                  //
+                  //     // TopSongComponent(track: tempTracks[1]),
+                  //   ],
+                  // ),
+                  // Row(
+                  //   mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  //   mainAxisSize: MainAxisSize.min,
+                  //   children: [
+                  //     TopSongComponent(track: tempTracks[index + tempTracks.length ~/2]),
+                  //     // TopSongComponent(track: tempTracks[3]),
+                  //   ],
+                  // ),
                 ],
               );
             },
-            separatorBuilder: (BuildContext context,
-                int index) => const Divider(),
+            // separatorBuilder: (BuildContext context,
+            //     int index) =>  Container()
           ),
         ),
       ],

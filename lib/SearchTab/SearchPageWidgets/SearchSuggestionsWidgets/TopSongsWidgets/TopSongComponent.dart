@@ -25,14 +25,15 @@ class _TopSongComponentState extends State<TopSongComponent> {
     final height = size.height;
 
     return Container(
+      width: width * 0.45,
       padding: EdgeInsets.fromLTRB(0,5,0,5),
       child: MaterialButton(
         onPressed: () {
           queueSongLaunchNfc(widget.track);
         },
         child: Container(
-          width: width * 0.37,
-          height: 50,
+          width: width * 0.45,
+          height: width * .13,
 
           decoration: BoxDecoration(
             boxShadow: [
@@ -49,20 +50,22 @@ class _TopSongComponentState extends State<TopSongComponent> {
           child: Row(
             children: [
               Container(
+                height: width * .13,
+                width: width * .13,
                 // *---------------Use variable taken from Library selection for album url-----*
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(CORNERRADIUSBUTTON),
                   child: Image.network("${widget.track.imageLink}",
-                    height: 50,
+
                   ),
                 ),
               ),
               Container(
-                padding: EdgeInsets.fromLTRB(10, 10, 0, 0),
+                padding: EdgeInsets.fromLTRB(5, 10, 0, 0),
                 child: Column(
                     children: [
                       SizedBox(
-                        width: width * 0.22,
+                        width: width * 0.2,
                         child: Text(
                           "${widget.track.title}",
                           style: TextStyle(
@@ -78,7 +81,7 @@ class _TopSongComponentState extends State<TopSongComponent> {
                       ),
 
                       SizedBox(
-                        width: width * 0.22,
+                        width: width * 0.2,
                         child: Text(
                           // *---------------Use variable taken from Library selection for artist--------*
                           // removes the brackets from the string

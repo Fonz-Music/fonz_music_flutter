@@ -15,6 +15,8 @@ queueSongLaunchNfc(Track trackToQueue) async {
   songAddedToQueue = trackToQueue.title;
   pressedToLaunchQueueNfc.value = true;
   var uidFromTap = await GuestNfcFunctions.readHostNFCForQueue();
+  log("uid from tap is " + uidFromTap);
+  log("uid from host coaster " + hostCoasterDetails.coasterUid);
   if (uidFromTap == hostCoasterDetails.coasterUid) {
     var queueTrackResponse = await GuestSpotifyApi.queueTrackSpotify(trackToQueue.trackID, hostSessionIdGlobal);
     if (queueTrackResponse["statusCode"] == 200) {

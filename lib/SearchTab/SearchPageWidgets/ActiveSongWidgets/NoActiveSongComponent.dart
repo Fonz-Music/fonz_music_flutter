@@ -35,7 +35,7 @@ class NoActiveSongComponent extends StatelessWidget {
                 children: [
                   Spacer(),
                   SizedBox(
-                    width: width * 0.5,
+                    width: width * 0.4,
                     child: Text(
                       "${hostCoasterDetails.hostName} is not actively playing Spotify",
                       style: TextStyle(
