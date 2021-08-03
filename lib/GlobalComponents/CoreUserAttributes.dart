@@ -3,6 +3,7 @@
 import 'dart:developer';
 
 import 'package:fonz_music_flutter/ApiFunctions/GuestApi/GuestSpotifyApi.dart';
+import 'package:fonz_music_flutter/ApiFunctions/HostApi/CoasterManagementApi.dart';
 import 'package:fonz_music_flutter/ApiFunctions/HostApi/HostProvidersApi.dart';
 import 'package:fonz_music_flutter/ApiFunctions/HostApi/HostSpotifyApi.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -59,6 +60,19 @@ class CoreUserAttributes {
     // store in preferences
     localPreferences.setBool("_hasConnectedCoasters", boolie);
   }
+  determineIfUserHasCoasters() async {
+    // get music providers
+
+    var coasters = await CoasterManagementApi.getOwnedCoasters();
+
+    // checks how many providers & updates accordingly
+    if (coasters["body"]["quantity"] > 0) {
+      setHasConnectedCoasters(true);
+    }
+    else {
+      setHasConnectedCoasters(false);
+    }
+  }
 
   bool getConnectedToSpotify() {
     return _connectedToSpotify;
@@ -76,7 +90,7 @@ class CoreUserAttributes {
     var musicProviders = await HostProvidersApi.getMusicProviders();
 
     // checks how many providers & updates accordingly
-    if (musicProviders["body"].count > 0 && musicProviders["body"][0].providerId != "") {
+    if (musicProviders["body"].length > 0 && musicProviders["body"][0]["providerId"] != "") {
       setConnectedToSpotify(true);
     }
     else {

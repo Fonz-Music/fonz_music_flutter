@@ -118,7 +118,7 @@ class _SettingsPageState extends State<SettingsPage> {
       );
     }
     else {
-      return CreateAccountView();
+      return CreateAccountView(notifyParent: widget.notifyParent,);
     }
   }
   Widget DetermineWhichButtonsShown() {
