@@ -52,13 +52,14 @@ class _ArtistComponentState extends State<ArtistComponent> {
         child: Column(
           children: [
             Container(
-              padding: EdgeInsets.all(10),
+              padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
               // *---------------Use variable taken from Library selection for album url-----*
               child: ClipRRect(
 
                 borderRadius: BorderRadius.circular(250),
                 child: Image.network("${widget.givenArtist.artistImage}",
-                  height: 80,
+                  height: width * 0.2,
+                  width: width * 0.2,
 
                 ),
               ),

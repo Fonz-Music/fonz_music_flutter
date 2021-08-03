@@ -51,14 +51,14 @@ class _PlaylistComponentState extends State<PlaylistComponent> {
         child: Column(
           children: [
             Container(
-              padding: EdgeInsets.all(10),
+              padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
               // *---------------Use variable taken from Library selection for album url-----*
               child: ClipRRect(
 
                 borderRadius: BorderRadius.circular(CORNERRADIUSBUTTON),
                 child: Image.network("${widget.givenPlaylist.playlistImage}",
-                  height: 120,
-                  width: 120,
+                  height: width * 0.3,
+                  width: width * 0.3,
                 ),
               ),
             ),

@@ -100,7 +100,7 @@ class _SignUpViewState extends State<SignUpView> {
       child: Neumorphic(
         style: NeumorphicStyle(
             color: Colors.white,
-            shadowDarkColor: determineColorThemeTextInverse()
+            shadowDarkColor: SHADOWGREY,
         ),
         child: TextFormField(
           maxLines: 1,

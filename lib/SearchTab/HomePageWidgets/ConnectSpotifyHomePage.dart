@@ -29,78 +29,82 @@ class _ConnectSpotifyHomePageButtonState extends State<ConnectSpotifyHomePageBut
     final width = size.width;
     final height = size.height;
 
-    return Center(
-      child: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
-            child: NeumorphicButton(
-              child: Container(
-                width: 50,
-                height: 50,
-                child:
-                Container(
-                  padding: const EdgeInsets.all(10),
-                  child: Image(
-                    image: AssetImage("assets/fonzIcons/spotifyIconGreen.png"),
+    return SizedBox(
+      width: width * 0.45,
+      child: Center(
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
+              child: NeumorphicButton(
+                child: Container(
+                  width: 50,
+                  height: 50,
+                  child:
+                  Container(
+                    padding: const EdgeInsets.all(10),
+                    child: Image(
+                      image: AssetImage("assets/fonzIcons/spotifyIconGreen.png"),
 
+                    ),
                   ),
                 ),
-              ),
-              style: NeumorphicStyle(
-                  shape: NeumorphicShape.flat,
-                  boxShape: NeumorphicBoxShape.circle(),
-                  border: NeumorphicBorder(width: 2, color: SPOTIFYGREEN),
-                  color: determineColorThemeBackground()
-              ),
-              onPressed: () async {
-                if (!userAttributes.getHasAccount()) {
-                  showModalBottomSheet<dynamic>(context: context,
-                      isScrollControlled: true,
-                      builder: (BuildContext bc) {
-                        return Wrap(
-                            children: <Widget>[
-                              Container(
-                                height: height * 0.95,
-                                child: Container(
-                                  decoration: new BoxDecoration(
-                                      color: Colors.white,
-                                      borderRadius: new BorderRadius.only(
-                                          topLeft: const Radius.circular(25.0),
-                                          topRight: const Radius.circular(25.0))),
-                                  child: CreateAccountPrompt(popupContext: context, notifyParent: widget.notifyParent,),
-                                ),
-                              )
-                            ]
-                        );
-                      });
-                }
-                else {
-                  await connectSpotify();
-                  // link to spotify
-                  // userAttributes.setConnectedToSpotify(true);
-                  // connectedToSpotify = true;
-                  widget.notifyParent();
-                }
+                style: NeumorphicStyle(
+                    shape: NeumorphicShape.flat,
+                    boxShape: NeumorphicBoxShape.circle(),
+                    border: NeumorphicBorder(width: 2, color: SPOTIFYGREEN),
+                    color: determineColorThemeBackground(),
+                  shadowDarkColor: SHADOWGREY
+                ),
+                onPressed: () async {
+                  if (!userAttributes.getHasAccount()) {
+                    showModalBottomSheet<dynamic>(context: context,
+                        isScrollControlled: true,
+                        builder: (BuildContext bc) {
+                          return Wrap(
+                              children: <Widget>[
+                                Container(
+                                  height: height * 0.95,
+                                  child: Container(
+                                    decoration: new BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius: new BorderRadius.only(
+                                            topLeft: const Radius.circular(25.0),
+                                            topRight: const Radius.circular(25.0))),
+                                    child: CreateAccountPrompt(popupContext: context, notifyParent: widget.notifyParent,),
+                                  ),
+                                )
+                              ]
+                          );
+                        });
+                  }
+                  else {
+                    await connectSpotify();
+                    // link to spotify
+                    // userAttributes.setConnectedToSpotify(true);
+                    // connectedToSpotify = true;
+                    widget.notifyParent();
+                  }
 
-                FirebaseAnalytics().logEvent(name: "userTappedConnectToSpotifyHost", parameters: {'user': "host"});
-              },
+                  FirebaseAnalytics().logEvent(name: "userTappedConnectToSpotifyHost", parameters: {'user': "host"});
+                },
 
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
-            child: new Text(
-              "connect your spotify",
-              style: TextStyle(
-                fontFamily: FONZFONTONE,
-                fontSize: HEADINGFIVE,
-                color: determineColorThemeTextInverse(),
               ),
-              textAlign: TextAlign.center,
             ),
-          )
-        ],
+            Padding(
+              padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
+              child: new Text(
+                "connect your spotify",
+                style: TextStyle(
+                  fontFamily: FONZFONTTWO,
+                  fontSize: HEADINGSIX,
+                  color: determineColorThemeTextInverse(),
+                ),
+                textAlign: TextAlign.center,
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

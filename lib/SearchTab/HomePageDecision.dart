@@ -196,7 +196,7 @@ class _HomeDecisionPageState extends State<HomeDecisionPage> {
         children: [
           ConnectSpotifyHomePageButton(notifyParent: widget.notifyParent),
           Container(
-            width: 30,
+            // width: 30,
 
           ),
         ],

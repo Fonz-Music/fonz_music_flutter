@@ -51,7 +51,7 @@ class _SearchBarState extends State<SearchBar> {
                   decoration: BoxDecoration(
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.grey.withOpacity(0.5),
+                        color: SHADOWGREY,
                         spreadRadius: 2,
                         blurRadius: 4,
                         offset: Offset(3, 3), // changes position of shadow
@@ -65,7 +65,7 @@ class _SearchBarState extends State<SearchBar> {
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Icon(Icons.search,
-                        color: determineColorThemeTextInverse(),),
+                        color: LIGHTERGREY,),
                       ),
                       Container(
                         width: width * determineSearchWidthBasedOnEditing(),
@@ -75,6 +75,7 @@ class _SearchBarState extends State<SearchBar> {
                               searchSong.value = value;
                             });
                           },
+
                           style: TextStyle(
                             fontFamily: FONZFONTTWO,
                             fontSize: HEADINGFIVE,
@@ -82,6 +83,12 @@ class _SearchBarState extends State<SearchBar> {
                           ),
                           decoration: new InputDecoration(
                             hintText: "queue a song",
+                            hintStyle: TextStyle(
+                              fontFamily: FONZFONTTWO,
+                              fontSize: HEADINGFIVE,
+                              color: LIGHTERGREY,
+                            ),
+                            fillColor: determineColorThemeTextInverse(),
                             border: InputBorder.none,
                             enabledBorder: InputBorder.none,
                             contentPadding: EdgeInsets.only(left: 0, bottom: 11, top: 11, right: 15),

@@ -28,10 +28,11 @@ class _JoinSuccessfulCircleState extends State<JoinSuccessfulCircle> {
                 child:
                 Container(
                   padding: const EdgeInsets.all(30),
-                  child: Image(
-                    image: AssetImage("assets/darkGreyIcons/queueIconDarkGrey.png"),
-
-                  ),
+                  child: Icon(
+                    Icons.check,
+                    color: SUCCESSGREEN,
+                    size: 30
+                  )
                 ),
               ),
               style: NeumorphicStyle(
@@ -43,7 +44,7 @@ class _JoinSuccessfulCircleState extends State<JoinSuccessfulCircle> {
             ),
           ),
           Padding(
-            padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
+            padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
             child: new Text(
               "successfully connected to ${widget.coasterHostName}'s coaster ${widget.connectedCoasterName}",
               style: TextStyle(

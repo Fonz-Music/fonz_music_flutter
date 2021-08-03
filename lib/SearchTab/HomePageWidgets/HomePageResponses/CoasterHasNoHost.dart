@@ -50,7 +50,7 @@ class _CoasterHasNoHostState extends State<CoasterHasNoHost> {
             ),
           ),
           Padding(
-            padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
+            padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
             child: new Text(
               "this coaster doesn't have a host!",
               style: TextStyle(
@@ -62,7 +62,7 @@ class _CoasterHasNoHostState extends State<CoasterHasNoHost> {
             ),
           ),
           Padding(
-            padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+            padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
             child: new Text(
               "would you like to connect?",
               style: TextStyle(
