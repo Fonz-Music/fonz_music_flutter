@@ -3,6 +3,7 @@
 import 'dart:developer';
 
 import 'package:fonz_music_flutter/ApiFunctions/GuestApi/GuestSpotifyApi.dart';
+import 'package:fonz_music_flutter/ApiFunctions/HostApi/HostProvidersApi.dart';
 import 'package:fonz_music_flutter/ApiFunctions/HostApi/HostSpotifyApi.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -69,17 +70,18 @@ class CoreUserAttributes {
     // store in preferences
     localPreferences.setBool("_connectedToSpotify", boolie);
   }
-  determineIfUserConnectedToSpotify() {
+  determineIfUserConnectedToSpotify() async {
     // get music providers
-    // var musicProviders = HostSpotifyApi()
+
+    var musicProviders = await HostProvidersApi.getMusicProviders();
 
     // checks how many providers & updates accordingly
-    // if (musicProviders.count > 0 && musicProviders[0].providerId != "") {
-    //   setConnectedToSpotify(true);
-    // }
-    // else {
-    //   setConnectedToSpotify(false);
-    // }
+    if (musicProviders["body"].count > 0 && musicProviders["body"][0].providerId != "") {
+      setConnectedToSpotify(true);
+    }
+    else {
+      setConnectedToSpotify(false);
+    }
   }
 
 

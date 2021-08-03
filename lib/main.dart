@@ -4,14 +4,19 @@ import 'dart:io';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:fonz_music_flutter/ApiFunctions/GetVersionApi.dart';
 import 'package:fonz_music_flutter/GlobalComponents/CoreUserAttributes.dart';
+import 'package:fonz_music_flutter/GlobalComponents/GlobalFunctions/ConnectSpotify.dart';
 import 'package:fonz_music_flutter/MainTabs/HostTab.dart';
 import 'package:fonz_music_flutter/MainTabs/SearchTab.dart';
 import 'package:fonz_music_flutter/MainTabs/SettingsPage.dart';
 import 'package:package_info/package_info.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:uni_links/uni_links.dart';
 
+import 'ApiFunctions/HostApi/HostProvidersApi.dart';
+import 'ApiFunctions/HostApi/HostSessionsApi.dart';
 import 'GlobalComponents/FrontEnd/FrontEndConstants.dart';
 import 'MustUpdateApp.dart';
 
@@ -26,6 +31,7 @@ void main() async {
   FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
 
   // runApp(MyApp());
+  await initUniLinks();
 
   PackageInfo packageInfo = await PackageInfo.fromPlatform();
 
@@ -53,6 +59,24 @@ void main() async {
 
 
   runApp(FonzMusicApp());
+}
+
+Future<void> initUniLinks() async {
+  // Platform messages may fail, so we use a try/catch PlatformException.
+  try {
+    final initialLink = await getInitialUri();
+    String initialUri = initialLink.toString();
+    log("init link is " + initialUri);
+    if (initialUri.contains("spotify")){
+      log("addign spot");
+      await linkSpotifyOnCallback();
+    }
+    // Parse the link and warn the user, if it is not correct,
+    // but keep in mind it could be `null`.
+  } on PlatformException {
+    // Handle exception by warning the user their action did not succeed
+    // return?
+  }
 }
 
 determineWhichVerion(var version, var versionResponse) {
