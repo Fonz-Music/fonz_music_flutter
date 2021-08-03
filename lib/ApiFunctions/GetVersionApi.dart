@@ -16,33 +16,34 @@ class GetVersionApi {
 
     // dio
     Dio dio = new Dio();
-
-    // dio.options.headers = {HttpHeaders.authorizationHeader: 'Bearer $token'};
-    var response = await dio.get(endpoint);
-    log("dio works");
-    var returnVersion;
-    //http
-    // var response = await http.get(endpoint,
-    //     headers: {HttpHeaders.authorizationHeader: 'Bearer $token'});
-    if (response.statusCode == 200) {
-//      log('success got coasters');
-      log("success");
-      returnVersion = response.data["minimumAppVersion"];
-      log("type is " + returnVersion.runtimeType.toString());
-    } else {
-
-      // FlutterCrashlytics().log(
-      //     'error on "getOwnedCoasters" api call with status of ${response.statusCode} & body of'
-      //         ' ${response.data}');
-      log("error ");
-      log('error with response code ${response.statusCode} and body '
-      // ' ${response.body}');
-          ' ${response.data}');
-      return null;
+    try {
+      var response = await dio.get(endpoint);
+      log("dio works");
+      var returnVersion;
+      if (response.statusCode == 200) {
+        log("success");
+        returnVersion = response.data["minimumAppVersion"];
+        log("type is " + returnVersion.runtimeType.toString());
+      } else {
+        log("error ");
+        log('error with response code ${response.statusCode} and body '
+        // ' ${response.body}');
+            ' ${response.data}');
+        return null;
+      }
+      log("response message " + response.statusMessage);
+      log("response data " + response.data.toString());
+      log("response code " + response.statusCode.toString());
+      return returnVersion;
     }
-    log("response message " + response.statusMessage);
-    log("response data " + response.data.toString());
-    log("response code " + response.statusCode.toString());
-    return returnVersion;
+    on DioError catch (e) {
+      // log("this is msg " + e.response.statusMessage.toString());
+      // log("this is status " + e.response.statusCode.toString());
+      //
+      // log("this is mssg" + e.response.data["message"].toString());
+      // print("this is mssg" + e.response.data["code"].toString());
+      return "NO_INTERNET";
+    }
+
   }
 }

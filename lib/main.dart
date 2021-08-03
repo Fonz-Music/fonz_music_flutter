@@ -44,8 +44,15 @@ void main() async {
 
   var versionResponse = await GetVersionApi.sendVersion(platform);
 
-  // determineWhichVerion(version, versionResponse);
-  runApp(FonzMusicApp());
+  if (versionResponse == "NO_INTERNET") {
+    log("thre is no wifi");
+  }
+  else {
+    determineWhichVerion(version, versionResponse);
+  }
+
+
+  // runApp(FonzMusicApp());
 }
 
 determineWhichVerion(var version, var versionResponse) {

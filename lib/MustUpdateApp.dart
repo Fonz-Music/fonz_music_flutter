@@ -34,10 +34,21 @@ class MustUpdateApp extends StatelessWidget {
                 Spacer(),
                 Container(
 
-                  height: height,
-                  padding: EdgeInsets.fromLTRB(20, height * .4, 20, 0),
+                  // height: height,
+                  // padding: EdgeInsets.fromLTRB(20, height * .2, 20, 0),
                   child: Column(
                     children: [
+                      Padding(
+                        padding: EdgeInsets.fromLTRB(0, 0, 0, 40),
+                        child: Container(
+                          // padding: EdgeInsets.fromLTRB(20, 0, 20, 40),
+                          height: 120,
+                          width: 70,
+                          child: Image(
+                            image: AssetImage("assets/fonzIcons/fonzLogoGradiant.png"),
+                          ),
+                        ),
+                      ),
                       Padding(
                         padding: const EdgeInsets.only(bottom: 25),
                         child: Text(
@@ -58,6 +69,7 @@ class MustUpdateApp extends StatelessWidget {
 
 
                               child: TextButton(
+
                                 onPressed: () async {
 
 
@@ -80,6 +92,7 @@ class MustUpdateApp extends StatelessWidget {
                                   textAlign: TextAlign.center,
                                 ),
                                 style: TextButton.styleFrom(
+                                  // backgroundColor: determineColorThemeBackground(),
                                   primary: AMBER,
                                   shape: const BeveledRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(5)),
                                   ),
@@ -92,6 +105,7 @@ class MustUpdateApp extends StatelessWidget {
                     ],
                   ),
                 ),
+                Spacer()
               ],
             ),
           ],
