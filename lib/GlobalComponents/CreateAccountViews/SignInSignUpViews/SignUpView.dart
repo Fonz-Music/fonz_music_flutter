@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:fonz_music_flutter/ApiFunctions/UserEndpoints/UserApi.dart';
 import 'package:fonz_music_flutter/GlobalComponents/FrontEnd/FrontEndConstants.dart';
@@ -34,9 +36,10 @@ class _SignUpViewState extends State<SignUpView> {
 
     if (_email != null) {
       emailValid = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(_email);
+      print("email is " + emailValid.toString());
     }
 
-    if (emailValid && _email != "" && _password != "" && _displayName != "" && _confirmPassword != "" && _confirmPassword != _password && agreedToPolicy) {
+    if (emailValid && _email != "" && _password != "" && _displayName != "" && _confirmPassword != "" && _confirmPassword == _password && agreedToPolicy) {
       return true;
     }
     else {
@@ -65,6 +68,9 @@ class _SignUpViewState extends State<SignUpView> {
       }
       else if (_confirmPassword != _password) {
         _errorMessage += "your passwords do not match\n";
+      }
+      else {
+        log("not sure what is the issue is ");
       }
       errorOnPage = true;
       return false;
@@ -300,7 +306,9 @@ class _SignUpViewState extends State<SignUpView> {
             ),
           ),
           onPressed: () async {
+            log("pressed button");
             if (determineIfSignUpButtonDisabled()) {
+              log("not disabled button");
               final updateUser = await UserApi.updateUserAccount(_email, _password, _displayName, agreedToPolicy, agreedToEmail);
               if (updateUser["statusCode"] == 200) {
                 // set hasAccount to true

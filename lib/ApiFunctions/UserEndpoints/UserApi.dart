@@ -26,13 +26,16 @@ class UserApi {
       if (response.statusCode == 200) {
         // to return data
         final updateUserDecoded = UpdateAccountDecoder.fromJson(response.data);
+        log("resp data is " + response.data.toString());
+        log("resp msg is " + response.statusMessage.toString());
         response.data = updateUserDecoded;
+
         // Create local preferences
         SharedPreferences localPreferences = await SharedPreferences.getInstance();
         // store email
-        localPreferences.setString("userEmail", updateUserDecoded.email);
+        localPreferences.setString("userEmail", email);
         // store displayName
-        localPreferences.setString("userDisplayName", updateUserDecoded.displayName);
+        localPreferences.setString("userDisplayName", displayName);
 
 
       }
