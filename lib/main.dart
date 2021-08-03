@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fonz_music_flutter/ApiFunctions/GetVersionApi.dart';
 import 'package:fonz_music_flutter/GlobalComponents/CoreUserAttributes.dart';
+import 'package:fonz_music_flutter/GlobalComponents/GlobalFunctions/CheckCoasterDeepLink.dart';
 import 'package:fonz_music_flutter/GlobalComponents/GlobalFunctions/ConnectSpotify.dart';
 import 'package:fonz_music_flutter/MainTabs/HostTab.dart';
 import 'package:fonz_music_flutter/MainTabs/SearchTab.dart';
@@ -70,6 +71,12 @@ Future<void> initUniLinks() async {
     if (initialUri.contains("spotify")){
       log("addign spot");
       await linkSpotifyOnCallback();
+    }
+    if (initialUri.contains("04")) {
+      var uriSplit = initialUri.split("/");
+      String coasterUid = uriSplit[uriSplit.length - 1];
+      log("uid is " + coasterUid);
+      await checkCoasterDeepLink(coasterUid);
     }
     // Parse the link and warn the user, if it is not correct,
     // but keep in mind it could be `null`.
