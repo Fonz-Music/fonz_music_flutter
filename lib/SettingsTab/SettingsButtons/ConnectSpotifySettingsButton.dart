@@ -49,7 +49,9 @@ class _ConnectSpotifySettingsButtonState extends State<ConnectSpotifySettingsBut
         style: NeumorphicStyle(
             shape: NeumorphicShape.flat,
             boxShape: NeumorphicBoxShape.rect(),
-            color: determineColorThemeBackground()
+            color: determineColorThemeBackground(),
+            shadowDarkColor: determineLightShadowRoundButton(),
+            shadowLightColor: determineLightShadowRoundButton()
         ),
         onPressed: () {
           log("pressed sign out");

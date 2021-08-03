@@ -50,7 +50,9 @@ class _NameYourFirstCoasterState extends State<NameYourFirstCoaster> {
                   shape: NeumorphicShape.flat,
                   boxShape: NeumorphicBoxShape.circle(),
                   border: NeumorphicBorder(width: 2, color: Colors.white),
-                  color: LILAC
+                  color: LILAC,
+                  shadowDarkColor: determineLightShadowRoundButton(),
+                  shadowLightColor: determineLightShadowRoundButton()
               ),
 
             ),

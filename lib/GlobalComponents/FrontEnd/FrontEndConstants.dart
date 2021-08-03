@@ -24,6 +24,13 @@ determineColorThemeTextInverse() {
   if (darkMode) return const Color(0xFFFFFFFF);
   else return const Color(0xFF474747);
 }
+
+// Determines if the color should be white or black
+determineLightShadowRoundButton() {
+  if (darkMode) return DARKERGREY;
+  else return LIGHTERGREY;
+}
+
 // ----------------------------- Coaster Icon -----------------------------------
 getCoasterIcon() {
   if (darkMode) return "assets/lightGreyIcons/coasterIconLightGrey.png";

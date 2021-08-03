@@ -43,7 +43,9 @@ class _JoinAPartyButtonState extends State<JoinAPartyButton> {
                   shape: NeumorphicShape.flat,
                   boxShape: NeumorphicBoxShape.circle(),
                   border: NeumorphicBorder(width: 2, color: AMBER),
-                  color: determineColorThemeBackground()
+                  color: determineColorThemeBackground(),
+                  shadowDarkColor: determineLightShadowRoundButton(),
+                  shadowLightColor: determineLightShadowRoundButton()
               ),
               onPressed: () async {
                 pressedNfcButtonToJoinPartu = true;

@@ -53,7 +53,9 @@ class _ConnectYourFirstCoasterButtonState extends State<ConnectYourFirstCoasterB
                     shape: NeumorphicShape.flat,
                     boxShape: NeumorphicBoxShape.circle(),
                     border: NeumorphicBorder(width: 2, color: Colors.white),
-                    color: LILAC
+                    color: LILAC,
+                    shadowDarkColor: determineLightShadowRoundButton(),
+                    shadowLightColor: determineLightShadowRoundButton()
                 ),
                 onPressed: () async {
                   if (userAttributes.getConnectedToSpotify()) {

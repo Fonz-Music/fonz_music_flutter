@@ -62,10 +62,12 @@ class _SearchBarState extends State<SearchBar> {
                   ),
                   child: Row(
                     children: <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
+                      Container(
+                        padding:  EdgeInsets.fromLTRB(10, 5, 5, 0),
                         child: Icon(Icons.search,
-                        color: LIGHTERGREY,),
+                        color: LIGHTERGREY,
+                        size: 20,
+                        ),
                       ),
                       Container(
                         width: width * determineSearchWidthBasedOnEditing(),
@@ -85,7 +87,7 @@ class _SearchBarState extends State<SearchBar> {
                             hintText: "queue a song",
                             hintStyle: TextStyle(
                               fontFamily: FONZFONTTWO,
-                              fontSize: HEADINGFIVE,
+                              fontSize: HEADINGSIX,
                               color: LIGHTERGREY,
                             ),
                             fillColor: determineColorThemeTextInverse(),

@@ -43,7 +43,9 @@ class _FailPartyJoinState extends State<FailPartyJoin> {
                   shape: NeumorphicShape.flat,
                   boxShape: NeumorphicBoxShape.circle(),
                   border: NeumorphicBorder(width: 2, color: Colors.red),
-                  color: determineColorThemeBackground()
+                  color: determineColorThemeBackground(),
+                  shadowDarkColor: determineLightShadowRoundButton(),
+                  shadowLightColor: determineLightShadowRoundButton()
               ),
               onPressed: () async {
                 hostCoasterDetails = await scanForCoasterDetails();

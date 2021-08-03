@@ -45,7 +45,9 @@ class _CoasterHasNoHostState extends State<CoasterHasNoHost> {
                   shape: NeumorphicShape.flat,
                   boxShape: NeumorphicBoxShape.circle(),
                   border: NeumorphicBorder(width: 2, color: LILAC),
-                  color: determineColorThemeBackground()
+                  color: determineColorThemeBackground(),
+                  shadowDarkColor: determineLightShadowRoundButton(),
+                  shadowLightColor: determineLightShadowRoundButton()
               ),
             ),
           ),

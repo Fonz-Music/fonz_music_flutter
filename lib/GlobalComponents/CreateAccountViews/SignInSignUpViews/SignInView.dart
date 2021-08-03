@@ -88,7 +88,8 @@ class _SignInViewState extends State<SignInView> {
       child: Neumorphic(
         style: NeumorphicStyle(
             color: Colors.white,
-            shadowDarkColor: determineColorThemeTextInverse()
+            shadowDarkColor: SHADOWGREY,
+            shadowLightColor: SHADOWGREY
         ),
         child: TextFormField(
           maxLines: 1,
@@ -127,7 +128,8 @@ class _SignInViewState extends State<SignInView> {
       child: Neumorphic(
         style: NeumorphicStyle(
             color: Colors.white,
-            shadowDarkColor: determineColorThemeTextInverse()
+            shadowDarkColor: SHADOWGREY,
+            shadowLightColor: SHADOWGREY
         ),
         child: TextFormField(
           maxLines: 1,
@@ -165,7 +167,7 @@ class _SignInViewState extends State<SignInView> {
     return new Padding(
       padding: EdgeInsets.fromLTRB(0.0, 20.0, 0.0, 20.0),
       child: SizedBox(
-        height: 40.0,
+        height: 50.0,
         width: width * 0.7,
         child: NeumorphicButton(
           // shape: new RoundedRectangleBorder(
@@ -173,6 +175,8 @@ class _SignInViewState extends State<SignInView> {
           // ),
           style: NeumorphicStyle(
             color: AMBER,
+              shadowDarkColor: SHADOWGREY,
+              shadowLightColor: SHADOWGREY
           ),
           child: Center(
             child: new Text(

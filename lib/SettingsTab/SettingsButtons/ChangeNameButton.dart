@@ -48,7 +48,9 @@ class _ChangeNameButtonState extends State<ChangeNameButton> {
         style: NeumorphicStyle(
             shape: NeumorphicShape.flat,
             boxShape: NeumorphicBoxShape.rect(),
-            color: determineColorThemeBackground()
+            color: determineColorThemeBackground(),
+            shadowDarkColor: determineLightShadowRoundButton(),
+            shadowLightColor: determineLightShadowRoundButton()
         ),
         onPressed: () async {
 

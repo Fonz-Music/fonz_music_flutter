@@ -73,7 +73,9 @@ class _DetermineAmountSongRequestsState extends State<DetermineAmountSongRequest
                       style: NeumorphicStyle(
                           shape: NeumorphicShape.flat,
                           boxShape: NeumorphicBoxShape.rect(),
-                          color: determineColorThemeBackground()
+                          color: determineColorThemeBackground(),
+                          shadowDarkColor: determineLightShadowRoundButton(),
+                          shadowLightColor: determineLightShadowRoundButton()
                       ),
                       onPressed: () {
                         log("pressed sign out");
@@ -111,7 +113,9 @@ class _DetermineAmountSongRequestsState extends State<DetermineAmountSongRequest
                       style: NeumorphicStyle(
                           shape: NeumorphicShape.flat,
                           boxShape: NeumorphicBoxShape.rect(),
-                          color: determineColorThemeBackground()
+                          color: determineColorThemeBackground(),
+                          shadowDarkColor: determineLightShadowRoundButton(),
+                          shadowLightColor: determineLightShadowRoundButton()
                       ),
                       onPressed: () {
                         log("pressed sign out");
@@ -149,7 +153,9 @@ class _DetermineAmountSongRequestsState extends State<DetermineAmountSongRequest
                       style: NeumorphicStyle(
                           shape: NeumorphicShape.flat,
                           boxShape: NeumorphicBoxShape.rect(),
-                          color: determineColorThemeBackground()
+                          color: determineColorThemeBackground(),
+                          shadowDarkColor: determineLightShadowRoundButton(),
+                          shadowLightColor: determineLightShadowRoundButton()
                       ),
                       onPressed: () {
                         log("pressed sign out");

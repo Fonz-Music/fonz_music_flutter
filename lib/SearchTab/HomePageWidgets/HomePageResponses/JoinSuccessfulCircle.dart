@@ -27,11 +27,11 @@ class _JoinSuccessfulCircleState extends State<JoinSuccessfulCircle> {
                 height: 100,
                 child:
                 Container(
-                  padding: const EdgeInsets.all(30),
+                  padding: const EdgeInsets.all(20),
                   child: Icon(
                     Icons.check,
                     color: SUCCESSGREEN,
-                    size: 30
+                    size: 50
                   )
                 ),
               ),
@@ -39,7 +39,9 @@ class _JoinSuccessfulCircleState extends State<JoinSuccessfulCircle> {
                   shape: NeumorphicShape.flat,
                   boxShape: NeumorphicBoxShape.circle(),
                   border: NeumorphicBorder(width: 2, color: SUCCESSGREEN),
-                  color: determineColorThemeBackground()
+                  color: determineColorThemeBackground(),
+                  shadowDarkColor: determineLightShadowRoundButton(),
+                  shadowLightColor: determineLightShadowRoundButton()
               ),
             ),
           ),

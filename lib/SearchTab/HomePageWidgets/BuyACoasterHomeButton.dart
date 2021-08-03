@@ -63,7 +63,9 @@ class _BuyACoasterHomeButtonState extends State<BuyACoasterHomeButton> {
                     shape: NeumorphicShape.flat,
                     boxShape: NeumorphicBoxShape.circle(),
                     border: NeumorphicBorder(width: 2, color: LILAC),
-                    color: determineColorThemeBackground()
+                    color: determineColorThemeBackground(),
+                    shadowDarkColor: determineLightShadowRoundButton(),
+                    shadowLightColor: determineLightShadowRoundButton()
                 ),
                 onPressed: () async {
 

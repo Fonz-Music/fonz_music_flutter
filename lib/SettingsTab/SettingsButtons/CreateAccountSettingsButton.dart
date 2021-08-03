@@ -52,7 +52,9 @@ class _CreateAccountSettingsButtonState extends State<CreateAccountSettingsButto
         style: NeumorphicStyle(
             shape: NeumorphicShape.flat,
             boxShape: NeumorphicBoxShape.rect(),
-            color: determineColorThemeBackground()
+            color: determineColorThemeBackground(),
+            shadowDarkColor: determineLightShadowRoundButton(),
+            shadowLightColor: determineLightShadowRoundButton()
         ),
         onPressed: () {
           showModalBottomSheet<dynamic>(context: context,

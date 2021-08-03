@@ -54,7 +54,8 @@ class _ConnectSpotifyHomePageButtonState extends State<ConnectSpotifyHomePageBut
                     boxShape: NeumorphicBoxShape.circle(),
                     border: NeumorphicBorder(width: 2, color: SPOTIFYGREEN),
                     color: determineColorThemeBackground(),
-                  shadowDarkColor: SHADOWGREY
+                    shadowDarkColor: determineLightShadowRoundButton(),
+                    shadowLightColor: determineLightShadowRoundButton()
                 ),
                 onPressed: () async {
                   if (!userAttributes.getHasAccount()) {
