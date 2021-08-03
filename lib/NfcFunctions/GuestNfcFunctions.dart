@@ -108,7 +108,7 @@ class GuestNfcFunctions {
     String coasterUid;
     Stream<NDEFMessage> _stream;
 
-    _stream = NFC.readNDEF(alertMessage: 'Looking for a Fonz!', once: true);
+    _stream = NFC.readNDEF(alertMessage: 'Looking for a Fonz!', once: false);
     _stream.handleError((error) {
       if (error is NFCUserCanceledSessionException) {
         log("user canceled session ");

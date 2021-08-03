@@ -65,8 +65,10 @@ void main() async {
 Future<void> initUniLinks() async {
   // Platform messages may fail, so we use a try/catch PlatformException.
   try {
-    final initialLink = await getInitialUri();
-    String initialUri = initialLink.toString();
+    final initialLink = await getInitialLink();
+    log("init link is " + initialLink.toString());
+    final initialLinkUri = await getInitialUri();
+    String initialUri = initialLinkUri.toString();
     log("init link is " + initialUri);
     if (initialUri.contains("spotify")){
       log("addign spot");
