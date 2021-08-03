@@ -67,7 +67,7 @@ class _CoasterDashboardViewState extends State<CoasterDashboardView> {
     final height = size.height;
 
     return Container(
-      height: height * .6,
+      height: height * .55,
       width: width * .9,
 
       padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
