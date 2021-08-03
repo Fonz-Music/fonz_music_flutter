@@ -165,14 +165,7 @@ class _HomeDecisionPageState extends State<HomeDecisionPage> {
         height: height * 0.7,
         child: Column(
           children: [
-              Row(
-                children: [
-                  Spacer(),
-                  DetermineIfSpotifyHomeButtonShown(),
-                  BuyACoasterHomeButton(),
-                  Spacer(),
-                ],
-              ),
+              DetermineIfHomeButtonsShow(),
               // HostAPartyButton(notifyParent: widget.notifyParent,),
               Container(
                   height: height * 0.1,
@@ -186,7 +179,20 @@ class _HomeDecisionPageState extends State<HomeDecisionPage> {
   }
 
   Widget DetermineIfHomeButtonsShow() {
-
+    if (!userAttributes.getHasConnectedCoasters()) {
+      return
+        Row(
+          children: [
+            Spacer(),
+            DetermineIfSpotifyHomeButtonShown(),
+            BuyACoasterHomeButton(),
+            Spacer(),
+          ],
+        );
+    }
+    else return Container(
+      height: 0,
+    );
   }
 
 

@@ -38,7 +38,7 @@ class _ChangeNameButtonState extends State<ChangeNameButton> {
                 "change your name",
                 style: TextStyle(
                   fontFamily: FONZFONTONE,
-                  fontSize: HEADINGFIVE,
+                  fontSize: HEADINGSIX,
                   color: determineColorThemeTextInverse(),
                 ),
               ),

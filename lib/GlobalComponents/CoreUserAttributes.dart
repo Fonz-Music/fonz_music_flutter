@@ -16,6 +16,7 @@ class CoreUserAttributes {
   bool _connectedToSpotify = false;
   bool _hasConnectedCoasters = false;
   bool _hasAccount = false;
+  String _userSpotifyId = "spotify account";
 
   setAttributes() async {
     log("setting attributes");
@@ -32,6 +33,10 @@ class CoreUserAttributes {
     final accountBoolFromStorage = localPreferences.getBool("_hasAccount");
     if (accountBoolFromStorage != null) {
       _hasAccount = accountBoolFromStorage;
+    }
+    final spotifyIdFromStorage = localPreferences.getString("spotifyDisplayName");
+    if (spotifyIdFromStorage != null) {
+      _userSpotifyId = spotifyIdFromStorage;
     }
     log("spot is " + _connectedToSpotify.toString());
     log("coasters is " + _hasConnectedCoasters.toString());
@@ -98,5 +103,8 @@ class CoreUserAttributes {
     }
   }
 
+  String getSpotifyId() {
+    return _userSpotifyId;
+  }
 
 }

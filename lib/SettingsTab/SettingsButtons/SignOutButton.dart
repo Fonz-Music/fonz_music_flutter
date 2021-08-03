@@ -46,7 +46,7 @@ class _SignOutButtonState extends State<SignOutButton> {
                 "sign out",
                 style: TextStyle(
                   fontFamily: FONZFONTONE,
-                  fontSize: HEADINGFIVE,
+                  fontSize: HEADINGSIX,
                   color: determineColorThemeTextInverse(),
                 ),
               ),

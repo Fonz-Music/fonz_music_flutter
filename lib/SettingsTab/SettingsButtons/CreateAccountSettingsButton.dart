@@ -42,7 +42,7 @@ class _CreateAccountSettingsButtonState extends State<CreateAccountSettingsButto
                 "create account",
                 style: TextStyle(
                   fontFamily: FONZFONTONE,
-                  fontSize: HEADINGFIVE,
+                  fontSize: HEADINGSIX,
                   color: determineColorThemeTextInverse(),
                 ),
               ),

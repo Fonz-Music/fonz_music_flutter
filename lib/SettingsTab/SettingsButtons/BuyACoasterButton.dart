@@ -41,7 +41,7 @@ class _BuyACoasterButtonState extends State<BuyACoasterButton> {
                 "buy a coaster",
                 style: TextStyle(
                   fontFamily: FONZFONTONE,
-                  fontSize: HEADINGFIVE,
+                  fontSize: HEADINGSIX,
                   color: determineColorThemeTextInverse(),
                 ),
               ),

@@ -39,7 +39,7 @@ class _ConnectSpotifySettingsButtonState extends State<ConnectSpotifySettingsBut
                 "connect to Spotify",
                 style: TextStyle(
                   fontFamily: FONZFONTONE,
-                  fontSize: HEADINGFIVE,
+                  fontSize: HEADINGSIX,
                   color: determineColorThemeTextInverse(),
                 ),
               ),
