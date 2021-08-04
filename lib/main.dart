@@ -51,6 +51,11 @@ void main() async {
 
   var versionResponse = await GetVersionApi.sendVersion(platform);
 
+  // Create local preferences
+  SharedPreferences localPreferences = await SharedPreferences.getInstance();
+  // store in preferences
+  localPreferences.setBool("YourApplicationInstance", true);
+
   // if (versionResponse == "NO_INTERNET") {
   //   log("thre is no wifi");
   // }

@@ -123,9 +123,7 @@ class GuestNfcFunctions {
       return null;
     });
     NDEFMessage record = await _stream.first;
-    // i believe this is proper way to retrieve the uid from the library.
-    // check docs otherwise:
-    //
+
     coasterUid = record.id;
     log("uid from id " + record.id.toString());
     log("getting caught here");

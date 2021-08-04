@@ -43,7 +43,7 @@ class _ActiveSongFutureBuilderState extends State<ActiveSongFutureBuilder> {
                 child: NoActiveSongComponent(),
               );
             }
-            else if (snapshot.data == null || snapshot.data.trackName == "" ) {
+            else if (snapshot.data == null || snapshot.data.images[0] == null ) {
               log("data is " + snapshot.data.toString());
               return MaterialButton(
                 onPressed: () {
@@ -52,7 +52,7 @@ class _ActiveSongFutureBuilderState extends State<ActiveSongFutureBuilder> {
                 },
                   child: Container(
                       width: width,
-                      child: ActiveSongComponent(track: snapshot.data)
+                      child: NoActiveSongComponent()
                   )
               );
 

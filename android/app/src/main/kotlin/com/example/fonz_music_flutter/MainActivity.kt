@@ -18,7 +18,8 @@ import android.os.Bundle;
 import android.nfc.NfcAdapter
 import android.app.PendingIntent
 
-
+import io.flutter.plugins.GeneratedPluginRegistrant
+import android.app.Application
 
 
 class MainActivity: FlutterActivity() {
@@ -26,75 +27,39 @@ class MainActivity: FlutterActivity() {
     private val SPOTIFYCHANNEL = "SpotifySignIn"
     private val SHARECHANNEL = "ShareSheet"
     private val INSTAGRAMCHANNEL = "ShareOnInstagram"
+    var YourApplicationInstance = false
 
-//    public val intentFiltersArray = Array<IntentFilter> = intentFiltersArray()
-//    public val techListsArray = Array<String> = techListsArray()
+    @Override
+    override protected fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
 
-////    @Override
-//    override protected fun onCreate(savedInstanceState: Bundle?) {
-//    println("on create")
-////        super.onCreate(savedInstanceState)
-////        val intent: Intent = getIntent()
-////        val action: String = intent.getAction().toString()
-////        val type: String = intent.getType().toString()
-////        if (action != null && type != null) {
-////            processIntent(intent)
-////        }
-//    val intent = Intent(this, javaClass).apply {
-//        addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
-//    }
-//    var pendingIntent: PendingIntent = PendingIntent.getActivity(this, 0, intent, 0)
-//
-//    val ndef = IntentFilter(NfcAdapter.ACTION_NDEF_DISCOVERED).apply {
-//        try {
-//            addDataType("*/*")    /* Handles all MIME based dispatches.
-//                                 You should specify only the ones that you need. */
-//        } catch (e: IntentFilter.MalformedMimeTypeException) {
-//            throw RuntimeException("fail", e)
-//        }
-//    }
-//
-//    val intentFiltersArray = arrayOf(ndef)
-//    val techListsArray = arrayOf(arrayOf<String>(NfcF::class.java.name))
-//}
-//    public override fun onPause() {
-//        super.onPause()
-//        adapter.disableForegroundDispatch(this)
-//    }
-//
-//    public override fun onResume() {
-//        super.onResume()
-//        adapter.enableForegroundDispatch(this, pendingIntent, intentFiltersArray, techListsArray)
-//    }
-//
-//    public override fun onNewIntent(intent: Intent) {
-//        val tagFromIntent: Tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG)
-//        //do something with tagFromIntent
-//    }
+        val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE) ?: return
+        YourApplicationInstance = sharedPref.getBoolean("YourApplicationInstance", false)
 
 
+        if (!YourApplicationInstance) {
+            // Run your thread or do something else you want to do only once.
+            val intent: Intent = getIntent()
+            val action: String = intent.getAction().toString()
+            val type: String = intent.getType().toString()
+            if (intent == null) {
+                GeneratedPluginRegistrant.registerWith(FlutterEngine(applicationContext))
+//            configureFlutterEngine(flutterEngine)
+            }
+            // Set the wasCalled flag to true to not run this code again
+            // if onCreate() is called a second time.
+            YourApplicationInstance = true;
+        }
+//        val isEnabled = Settings.System.getInt(this.getApplicationContext().getContentResolver(), Settings.System.AIRPLANE_MODE_ON, 0) === 1
 
-//    override protected fun onNewIntent(intent: Intent) {
-//        println("on new intent")
-//        super.onNewIntent(intent)
-////        super.onCreate(savedInstanceState)
-//        val intent: Intent = getIntent()
-//        val action: String = intent.getAction().toString()
-//        val type: String = intent.getType().toString()
-//        if (action != null && type != null) {
-//            processIntent(intent)
-//        }
-//    }
-//
-//    private fun processIntent(checkIntent: Intent) {
-//        // Check if intent has the action of a discovered NFC tag
-//        // with NDEF formatted contents
-//        if (checkIntent.action == NfcAdapter.ACTION_NDEF_DISCOVERED) {
-//            // Retrieve the raw NDEF message from the tag
-//            val rawMessages = checkIntent.getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES)
-//            // ...
-//        }
-//    }
+    }
+    override fun onNewIntent(intent: Intent) {
+        super.onNewIntent(intent)
+        if (intent == null) {
+            GeneratedPluginRegistrant.registerWith(FlutterEngine(applicationContext))
+//            configureFlutterEngine(flutterEngine)
+        }
+    }
 
     override fun configureFlutterEngine(@NonNull flutterEngine: FlutterEngine) {
         super.configureFlutterEngine(flutterEngine)
@@ -184,18 +149,9 @@ class MainActivity: FlutterActivity() {
 
 
 
-//    override fun onCreate(savedInstanceState: Bundle) {
-//        // ...
-//        if (intent != null) {
-//            processIntent(intent)
-//        }
-//    }
-//    override fun onNewIntent(intent: Intent) {
-//        super.onNewIntent(intent)
-//        if (intent != null) {
-////            processIntent(intent)
-//        }
-//    }
+
+
+
 
 }
 
