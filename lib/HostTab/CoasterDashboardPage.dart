@@ -86,7 +86,7 @@ class _CoasterDashboardPageState extends State<CoasterDashboardPage> {
     }
 
     log("pressed nfc in dashboard  " + pressedToConnectNewCoaster.toString());
-    log("the code in dashboard is " + newConnectedCoasterDetails.statusCode.toString());
+    log("the code in dashboard is " + newConnectedCoasterDetails.coasterUid.toString());
 
     if (launchedNfcForNewCoaster) {
 

@@ -105,7 +105,7 @@ class _HostSetupPageState extends State<HostSetupPage> {
 
 
           // writes url + uid on coaster
-          if (needToRewriteFirstCoaster) {
+          if (firstConnectedCoasterDetails.needToEncodeCoaster) {
             // tells user they need to connect to their account
             if (!pressedToConnectFirstCoaster){
               Timer(Duration(milliseconds: 2000), () async {
@@ -120,7 +120,8 @@ class _HostSetupPageState extends State<HostSetupPage> {
             else {
               Timer(Duration(milliseconds: 0), () async {
                 await HostNfcFunctions.writeNFC(firstConnectedCoasterDetails.coasterUid);
-                needToRewriteFirstCoaster = false;
+                firstConnectedCoasterDetails.setEncodeCoaster(false);
+                // needToRewriteFirstCoaster = false;
                 pressedToConnectFirstCoaster = true;
                 setState(() {});
               });

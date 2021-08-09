@@ -8,7 +8,7 @@ import 'package:fonz_music_flutter/GlobalComponents/Objects/CoasterObject.dart';
 import 'package:fonz_music_flutter/NfcFunctions/HostNfcFunctions.dart';
 
 
-Future<CoasterObject> addCoasterDashboardPage() async {
+Future<CoasterObject> addCoaster() async {
   
   var coasterResponse = CoasterObject("", "", "", "");
   
@@ -64,6 +64,7 @@ Future<CoasterObject> addCoasterDashboardPage() async {
     coasterResponse.setStatusCode(403);
   }
 
+  return coasterResponse;
 
 }
 

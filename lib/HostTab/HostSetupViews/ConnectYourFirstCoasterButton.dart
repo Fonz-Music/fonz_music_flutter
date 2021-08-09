@@ -12,6 +12,7 @@ import 'package:fonz_music_flutter/NfcFunctions/HostNfcFunctions.dart';
 
 
 import '../../main.dart';
+import '../HostFunctions.dart';
 import '../HostSetup.dart';
 
 
@@ -62,54 +63,7 @@ class _ConnectYourFirstCoasterButtonState extends State<ConnectYourFirstCoasterB
                     pressedToConnectFirstCoaster = true;
                     widget.notifyParent();
 
-                    var coasterDetails = await HostNfcFunctions
-                        .readCoasterUid();
-                    // firstConnectedCoasterDetails
-                    // check to see if that coaster is ours and if its already connected
-                    // CHECK COASTER
-                    Map checkCoasterResponse = await GuestGetCoasterApi
-                        .getCoasterDetails(coasterDetails[0]);
-
-                    if (coasterDetails[1].length < 25) {
-                      log(coasterDetails[1].length.toString());
-                      needToRewriteFirstCoaster = true;
-                    }
-
-                    log(coasterDetails[1].length.toString());
-
-                    firstConnectedCoasterDetails.coasterUid = coasterDetails[0];
-                    firstConnectedCoasterDetails.statusCode =
-                    checkCoasterResponse["responseCode"];
-
-                    if (checkCoasterResponse["responseCode"] == 204) {
-                      // if it is already connected, nav to next page
-
-                      Map addCoasterResponse = await CoasterManagementApi
-                          .addCoaster(coasterDetails[0]);
-                      log("second resp code: " +
-                          addCoasterResponse["responseCode"].toString());
-                      if (addCoasterResponse["responseCode"] != 200) {
-                        // if it is already connected, nav to next page
-                        firstConnectedCoasterDetails.statusCode =
-                        addCoasterResponse["responseCode"];
-                        FirebaseAnalytics().logEvent(name: "hostAddCoasterFail",
-                            parameters: {'string': "host"});
-                      }
-
-                      else {
-                        FirebaseAnalytics().logEvent(name: "hostAddCoaster",
-                            parameters: {'string': "host"});
-                      }
-                    }
-                    else if (checkCoasterResponse["responseCode"] == 200) {
-                      FirebaseAnalytics().logEvent(
-                          name: "hostTappedSomeoneElsesCoaster",
-                          parameters: {'string': "host"});
-                      firstConnectedCoasterDetails.coasterName =
-                      checkCoasterResponse["body"]["name"];
-                      firstConnectedCoasterDetails.hostName =
-                      checkCoasterResponse["body"]["displayName"];
-                    }
+                    firstConnectedCoasterDetails = await addCoaster();
 
                     // firstConnectedCoasterDetails.statusCode = 204;
                     launchedNfcForFirstCoaster = true;

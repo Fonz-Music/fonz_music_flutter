@@ -38,7 +38,9 @@ class _AddCoasterButtonState extends State<AddCoasterButton> {
               widget.notifyParent();
 
 
-              newConnectedCoasterDetails = await addCoasterDashboardPage();
+              newConnectedCoasterDetails = await addCoaster();
+
+              // newConnectedCoasterDetails.updateCoaster(newCoasterDets);
 
               log("returning to parent");
               pressedToConnectNewCoaster = false;
