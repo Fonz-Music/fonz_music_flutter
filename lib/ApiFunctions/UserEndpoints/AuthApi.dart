@@ -124,11 +124,12 @@ class AuthApi {
     try {
       var response = await dio.post(endpoint, data: {userId: userId, refreshToken: refreshToken});
       log(response.statusCode.toString());
-
+      log("data is " + response.data.toString());
       if (response.statusCode == 200) {
         // to return data
         final signInDecoded = SignInUserDecoder.fromJson(response.data);
         response.data = signInDecoded;
+        log("data is " + response.data.toString());
         // Create storage
         final storage = new FlutterSecureStorage();
         // store accessToken

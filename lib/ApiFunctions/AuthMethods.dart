@@ -30,7 +30,7 @@ Future<String> getJWTAndCheckIfExpired() async {
         print("refreshing token");
         // refresh token endpoint
       var refreshEndpointResp = await AuthApi.refreshAccessToken(userId, refreshToken);
-      accessToken = refreshEndpointResp["body"].accessToken;
+      accessToken = refreshEndpointResp["body"]["accessToken"];
 
     }
     // if no account, create an anon account

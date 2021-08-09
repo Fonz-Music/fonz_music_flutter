@@ -20,6 +20,18 @@ import android.app.PendingIntent
 
 import io.flutter.plugins.GeneratedPluginRegistrant
 import android.app.Application
+import android.nfc.tech.NfcB
+
+import android.nfc.tech.NfcA
+
+import android.nfc.tech.NfcF
+
+import android.nfc.tech.NfcV
+
+import android.nfc.Tag
+import android.nfc.tech.MifareUltralight
+import java.io.IOException
+import java.nio.charset.Charset
 
 
 class MainActivity: FlutterActivity() {
@@ -27,42 +39,56 @@ class MainActivity: FlutterActivity() {
     private val SPOTIFYCHANNEL = "SpotifySignIn"
     private val SHARECHANNEL = "ShareSheet"
     private val INSTAGRAMCHANNEL = "ShareOnInstagram"
-    var YourApplicationInstance = false
-
-    @Override
-    override protected fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE) ?: return
-        YourApplicationInstance = sharedPref.getBoolean("YourApplicationInstance", false)
-
-
-        if (!YourApplicationInstance) {
-            // Run your thread or do something else you want to do only once.
-            val intent: Intent = getIntent()
-            val action: String = intent.getAction().toString()
-            val type: String = intent.getType().toString()
-            if (intent == null) {
-                GeneratedPluginRegistrant.registerWith(FlutterEngine(applicationContext))
-//            configureFlutterEngine(flutterEngine)
-            }
-            // Set the wasCalled flag to true to not run this code again
-            // if onCreate() is called a second time.
-            YourApplicationInstance = true;
-        }
-//        val isEnabled = Settings.System.getInt(this.getApplicationContext().getContentResolver(), Settings.System.AIRPLANE_MODE_ON, 0) === 1
-
-    }
-    override fun onNewIntent(intent: Intent) {
-        super.onNewIntent(intent)
-        if (intent == null) {
-            GeneratedPluginRegistrant.registerWith(FlutterEngine(applicationContext))
-//            configureFlutterEngine(flutterEngine)
+//    var YourApplicationInstance = false
+    private var adapter: NfcAdapter? = null
+    private var pendingIntent: PendingIntent? = null
+    private val ndef = IntentFilter(NfcAdapter.ACTION_NDEF_DISCOVERED).apply {
+        try {
+            addDataType("*/*")    /* Handles all MIME based dispatches.
+                                 You should specify only the ones that you need. */
+        } catch (e: IntentFilter.MalformedMimeTypeException) {
+            throw RuntimeException("fail", e)
         }
     }
+
+    private var intentFiltersArray = arrayOf(ndef)
+
+    private var techListsArray = arrayOf(arrayOf<String>(NfcF::class.java.name))
+
+
+    public override fun onPause() {
+        super.onPause()
+//        adapter?.disableForegroundDispatch(this)
+    }
+
+    public override fun onResume() {
+        super.onResume()
+        adapter?.enableForegroundDispatch(this, pendingIntent, intentFiltersArray, techListsArray)
+    }
+
+    public override fun onNewIntent(intent: Intent) {
+        val tagFromIntent: Tag? = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG)
+        //do something with tagFromIntent
+        if (intent == null ) {
+            GeneratedPluginRegistrant.registerWith(FlutterEngine(this))
+        }
+    }
+
 
     override fun configureFlutterEngine(@NonNull flutterEngine: FlutterEngine) {
         super.configureFlutterEngine(flutterEngine)
+
+
+
+        adapter = NfcAdapter.getDefaultAdapter(this)
+        pendingIntent = PendingIntent.getActivity(
+                this, 0, Intent(this, javaClass).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0)
+
+        // Setup an intent filter for all MIME based dispatches
+
+        // Setup an intent filter for all MIME based dispatches
+//        val ndef = IntentFilter(NfcAdapter.ACTION_NDEF_DISCOVERED)
+//        mAdapter?.enableForegroundDispatch(this, pendingIntent, intentFiltersArray, techListsArray)
 
         // sign into spotify
         MethodChannel(flutterEngine.dartExecutor.binaryMessenger, SPOTIFYCHANNEL).setMethodCallHandler {
