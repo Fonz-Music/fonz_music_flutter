@@ -28,7 +28,7 @@ class HostNfcFunctions {
         recordTapped = await _scanForUidOnAndroid();
         log("uid maybe? " + recordTapped.id);
         return [recordTapped.id.toUpperCase(), recordTapped.payload];
-
+        // return recordTapped.id.toUpperCase();
 
 
       } else {

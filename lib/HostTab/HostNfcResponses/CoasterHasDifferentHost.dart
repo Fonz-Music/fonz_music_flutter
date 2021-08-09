@@ -84,7 +84,7 @@ class _CoasterHasDifferentHostState extends State<CoasterHasDifferentHost> {
           Padding(
             padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
             child: new Text(
-              "${widget.coasterHostName}",
+              "${widget.connectedCoasterName}",
               style: TextStyle(
                 fontFamily: FONZFONTTWO,
                 fontSize: HEADINGTHREE,

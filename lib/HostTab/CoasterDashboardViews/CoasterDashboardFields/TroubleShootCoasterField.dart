@@ -137,7 +137,7 @@ class _TroubleShootCoasterFieldState extends State<TroubleShootCoasterField> {
                     onPressed: () async{
 
                       // launch nfc here
-                      needToRewriteNewCoaster = true;
+                      newConnectedCoasterDetails.setEncodeCoaster(true);
                       launchedNfcForNewCoaster = true;
                       pressedToConnectNewCoaster = false;
                       newConnectedCoasterDetails.statusCode = 204;

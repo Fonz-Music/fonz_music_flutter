@@ -18,7 +18,7 @@ import 'TapYourPhoneLilac.dart';
 bool pressedToConnectNewCoaster = false;
 CoasterObject newConnectedCoasterDetails = CoasterObject("", "", "", "");
 bool launchedNfcForNewCoaster = false;
-bool needToRewriteNewCoaster = false;
+
 
 
 class CoasterDashboardPage extends StatefulWidget {
@@ -62,7 +62,9 @@ class _CoasterDashboardPageState extends State<CoasterDashboardPage> {
                 ),
               )
           ),
-          Spacer(),
+          Container(
+            height: height * 0.1
+          ),
           CoasterDashboardMainBody(),
           // Spacer()
         ],
@@ -93,7 +95,7 @@ class _CoasterDashboardPageState extends State<CoasterDashboardPage> {
       if (newConnectedCoasterDetails.statusCode == 204) {
 
         // writes url + uid on coaster
-        if (needToRewriteNewCoaster) {
+        if (newConnectedCoasterDetails.needToEncodeCoaster) {
           // tells user they need to connect to their account
           if (!pressedToConnectNewCoaster){
             Timer(Duration(milliseconds: 2000), () async {
@@ -111,12 +113,16 @@ class _CoasterDashboardPageState extends State<CoasterDashboardPage> {
           else {
             Timer(Duration(milliseconds: 0), () async {
               await HostNfcFunctions.writeNFC(newConnectedCoasterDetails.coasterUid);
-              needToRewriteNewCoaster = false;
+              newConnectedCoasterDetails.setEncodeCoaster(false);
               pressedToConnectNewCoaster = true;
               setState(() {});
             });
             return Container(
                 child: Container(
+                    decoration: BoxDecoration(
+                        color: determineColorThemeBackground(),
+                        borderRadius: BorderRadius.circular(10)
+                    ),
                     padding: EdgeInsets.fromLTRB(20, 0, 20, height * 0.1),
                     child: TapYourPhoneLilac()
                 )
@@ -143,15 +149,23 @@ class _CoasterDashboardPageState extends State<CoasterDashboardPage> {
           refresh();
         });
         // if someone else's coaster
-        if (newConnectedCoasterDetails.statusCode == 200) {
+        if (newConnectedCoasterDetails.statusCode == 403) {
           return Container(
-            padding: EdgeInsets.fromLTRB(20, 0, 20, height * 0.1),
+            decoration: BoxDecoration(
+                color: determineColorThemeBackground(),
+                borderRadius: BorderRadius.circular(10)
+            ),
+            // padding: EdgeInsets.fromLTRB(20, 0, 20, height * 0.1),
             child: CoasterHasDifferentHost(connectedCoasterName: newConnectedCoasterDetails.coasterName, coasterHostName: newConnectedCoasterDetails.hostName,),
           );
         }
         // if your existing coaster
-        else if (newConnectedCoasterDetails.statusCode == 403) {
+        else if (newConnectedCoasterDetails.statusCode == 200) {
           return Container(
+              decoration: BoxDecoration(
+                  color: determineColorThemeBackground(),
+                  borderRadius: BorderRadius.circular(10)
+              ),
             padding: EdgeInsets.fromLTRB(20, 0, 20, height * 0.1),
             child: ThisIsYourCoaster(connectedCoasterName: newConnectedCoasterDetails.coasterName)
           );
@@ -177,39 +191,54 @@ class _CoasterDashboardPageState extends State<CoasterDashboardPage> {
           }
 
         });
-        return TapYourPhoneLilac();
+        return Container(
+          padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+          decoration: BoxDecoration(
+              color: determineColorThemeBackground(),
+              borderRadius: BorderRadius.circular(10)
+          ),
+          child: TapYourPhoneLilac(),
+
+        );
       }
       else {
-        return Container(
-          height: height * 0.65,
-          child: Stack(
-
+        return Expanded(
+          child: Column(
             children: [
-              Column(
-                children: [
-                  Container(
-                    height: height * 0.65,
-                    decoration: BoxDecoration(
-                      color: determineColorThemeBackground(),
-                      borderRadius: BorderRadius.circular(10)
-                    ),
-                  ),
-                ],
-              ),
+              Spacer(),
+              Container(
+                height: height * 0.65,
+                child: Stack(
 
-              Column(
-              children: [
-                Container(
-                    alignment: Alignment.center,
-                    // height: height * 0.7,
-                    child: CoasterDashboardView(notifyParent: refresh,)
-                ),
-                // add new coaster button
-                Spacer(),
-                AddCoasterButton(notifyParent: refresh,)
-              ],
-            ),
+                  children: [
+                    Column(
+                      children: [
+                        Container(
+                          height: height * 0.65,
+                          decoration: BoxDecoration(
+                            color: determineColorThemeBackground(),
+                            borderRadius: BorderRadius.circular(10)
+                          ),
+                        ),
+                      ],
+                    ),
+
+                    Column(
+                    children: [
+                      Container(
+                          alignment: Alignment.center,
+                          // height: height * 0.7,
+                          child: CoasterDashboardView(notifyParent: refresh,)
+                      ),
+                      // add new coaster button
+                      Spacer(),
+                      AddCoasterButton(notifyParent: refresh,)
+                    ],
+                  ),
     ]
+                ),
+              ),
+            ],
           ),
         );
       }
