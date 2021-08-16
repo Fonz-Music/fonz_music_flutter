@@ -1,8 +1,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.fonz_music_flutter">
+    package="com.example.fonz">
 
     <application
-        android:label="fonz_music_flutter"
+        android:name="io.flutter.app.FlutterApplication"
+        android:label="Fonz Music"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
@@ -33,20 +34,20 @@
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <action android:name="android.nfc.action.NDEF_DISCOVERED" />
-                <action android:name="android.nfc.action.TECH_DISCOVERED"/>
+<!--                <action android:name="android.nfc.action.NDEF_DISCOVERED" />-->
+<!--                <action android:name="android.nfc.action.TECH_DISCOVERED"/>-->
                 <category android:name="android.intent.category.LAUNCHER" />
                 <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-                <action android:name="android.intent.action.OPEN_FROM_NFC_URL" />
+<!--                <category android:name="android.intent.category.BROWSABLE" />-->
+<!--                <action android:name="android.intent.action.OPEN_FROM_NFC_URL" />-->
 
-                <data
-                    android:scheme="https"
-                    android:host="www.fonzmusic.com" />
+<!--                <data-->
+<!--                    android:scheme="https"-->
+<!--                    android:host="www.fonzmusic.com" />-->
 
-                <data
-                    android:scheme="fonz-music"
-                    android:host="guest" />
+<!--                <data-->
+<!--                    android:scheme="fonz-music"-->
+<!--                    android:host="guest" />-->
 
             </intent-filter>
             <intent-filter>
@@ -70,12 +71,10 @@
                 <data
                     android:scheme="http"
                     android:host="fonzmusic.com"
-                    android:pathPattern="/android" />
+                    android:pathPattern="/spotify" />
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
-                <action android:name="android.nfc.action.NDEF_DISCOVERED" />
-                <action android:name="android.nfc.action.TECH_DISCOVERED"/>
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
                 <action android:name="android.intent.action.SEND" />
@@ -94,4 +93,8 @@
             android:name="flutterEmbedding"
             android:value="2" />
     </application>
+    <uses-permission android:name="android.permission.NFC" />
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-feature android:name="android.hardware.nfc" android:required="true" android:launchMode="singleTask"/>
+
 </manifest>

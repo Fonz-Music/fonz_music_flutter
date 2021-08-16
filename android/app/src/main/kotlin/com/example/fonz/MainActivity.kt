@@ -1,4 +1,4 @@
-package com.example.fonz_music_flutter
+package com.example.fonz
 
 import androidx.annotation.NonNull
 import io.flutter.embedding.android.FlutterActivity
@@ -40,39 +40,39 @@ class MainActivity: FlutterActivity() {
     private val SHARECHANNEL = "ShareSheet"
     private val INSTAGRAMCHANNEL = "ShareOnInstagram"
 //    var YourApplicationInstance = false
-    private var adapter: NfcAdapter? = null
-    private var pendingIntent: PendingIntent? = null
-    private val ndef = IntentFilter(NfcAdapter.ACTION_NDEF_DISCOVERED).apply {
-        try {
-            addDataType("*/*")    /* Handles all MIME based dispatches.
-                                 You should specify only the ones that you need. */
-        } catch (e: IntentFilter.MalformedMimeTypeException) {
-            throw RuntimeException("fail", e)
-        }
-    }
-
-    private var intentFiltersArray = arrayOf(ndef)
-
-    private var techListsArray = arrayOf(arrayOf<String>(NfcF::class.java.name))
-
-
-    public override fun onPause() {
-        super.onPause()
-//        adapter?.disableForegroundDispatch(this)
-    }
-
-    public override fun onResume() {
-        super.onResume()
-        adapter?.enableForegroundDispatch(this, pendingIntent, intentFiltersArray, techListsArray)
-    }
-
-    public override fun onNewIntent(intent: Intent) {
-        val tagFromIntent: Tag? = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG)
-        //do something with tagFromIntent
-        if (intent == null ) {
-            GeneratedPluginRegistrant.registerWith(FlutterEngine(this))
-        }
-    }
+//    private var adapter: NfcAdapter? = null
+//    private var pendingIntent: PendingIntent? = null
+//    private val ndef = IntentFilter(NfcAdapter.ACTION_NDEF_DISCOVERED).apply {
+//        try {
+//            addDataType("*/*")    /* Handles all MIME based dispatches.
+//                                 You should specify only the ones that you need. */
+//        } catch (e: IntentFilter.MalformedMimeTypeException) {
+//            throw RuntimeException("fail", e)
+//        }
+//    }
+//
+//    private var intentFiltersArray = arrayOf(ndef)
+//
+//    private var techListsArray = arrayOf(arrayOf<String>(NfcF::class.java.name))
+//
+//
+//    public override fun onPause() {
+//        super.onPause()
+////        adapter?.disableForegroundDispatch(this)
+//    }
+//
+//    public override fun onResume() {
+//        super.onResume()
+//        adapter?.enableForegroundDispatch(this, pendingIntent, intentFiltersArray, techListsArray)
+//    }
+//
+//    public override fun onNewIntent(intent: Intent) {
+//        val tagFromIntent: Tag? = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG)
+//        //do something with tagFromIntent
+//        if (intent == null ) {
+//            GeneratedPluginRegistrant.registerWith(FlutterEngine(this))
+//        }
+//    }
 
 
     override fun configureFlutterEngine(@NonNull flutterEngine: FlutterEngine) {
@@ -80,9 +80,9 @@ class MainActivity: FlutterActivity() {
 
 
 
-        adapter = NfcAdapter.getDefaultAdapter(this)
-        pendingIntent = PendingIntent.getActivity(
-                this, 0, Intent(this, javaClass).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0)
+//        adapter = NfcAdapter.getDefaultAdapter(this)
+//        pendingIntent = PendingIntent.getActivity(
+//                this, 0, Intent(this, javaClass).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0)
 
         // Setup an intent filter for all MIME based dispatches
 
@@ -172,12 +172,5 @@ class MainActivity: FlutterActivity() {
         }
 
     }
-
-
-
-
-
-
-
 }
 
