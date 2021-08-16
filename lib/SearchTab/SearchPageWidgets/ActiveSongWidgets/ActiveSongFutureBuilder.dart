@@ -17,7 +17,7 @@ class ActiveSongFutureBuilder extends StatefulWidget {
 
 class _ActiveSongFutureBuilderState extends State<ActiveSongFutureBuilder> {
 
-  Future<ActiveSongDecoder> getTopSong() async {
+  Future<ActiveSongDecoder> getActiveSong() async {
     if (activeSongNowPlaying == null || updateActiveSong) {
       final fetchedActiveSong = await GuestSpotifyApi.fetchActiveSong(hostSessionIdGlobal);
       activeSongNowPlaying = fetchedActiveSong["body"];
@@ -37,7 +37,7 @@ class _ActiveSongFutureBuilderState extends State<ActiveSongFutureBuilder> {
 
     return Container(
       child: FutureBuilder(
-          future: getTopSong(),
+          future: getActiveSong(),
           builder: (BuildContext context, AsyncSnapshot snapshot) {
             if (snapshot.connectionState != ConnectionState.done) {
               return Container(
