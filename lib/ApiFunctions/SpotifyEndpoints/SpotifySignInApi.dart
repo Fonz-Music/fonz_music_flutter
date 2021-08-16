@@ -27,6 +27,7 @@ class SpotifySignInApi {
         // return url
         urlReturn = getSpotifyUrlDecoder.authorizeURL;
       }
+      // log("resp for url call is " + response.data.toString());
       return urlReturn;
     }
     on DioError catch (e) {
