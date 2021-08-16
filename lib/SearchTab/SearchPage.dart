@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:fonz_music_flutter/ApiFunctions/GuestApi/GuestSpotifyApi.dart';
 import 'package:fonz_music_flutter/GlobalComponents/CoreUserAttributes.dart';
 import 'package:fonz_music_flutter/GlobalComponents/FrontEnd/FrontEndConstants.dart';
+import 'package:fonz_music_flutter/GlobalComponents/FrontEnd/TapYourPhoneBlack.dart';
 import 'package:fonz_music_flutter/HostTab/TapYourPhoneLilac.dart';
 import 'package:fonz_music_flutter/MainTabs/SearchTab.dart';
 import 'package:fonz_music_flutter/SearchTab/SearchPageWidgets/QueueSongResponses/QueueFailNotSameCoaster.dart';
@@ -140,10 +141,13 @@ class _SearchPageState extends State<SearchPage> {
           ],
         );
     }
-    else return Container(
-      // height: 0,
-      child: TapYourPhoneLilac(),
-    );
+    else {
+      // Navigator.push
+      return Container(
+        padding: EdgeInsets.fromLTRB(0, 30 , 0, 0),
+        child: TapYourPhoneBlack(),
+      );
+    }
   }
 
 

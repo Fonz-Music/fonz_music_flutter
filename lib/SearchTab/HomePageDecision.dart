@@ -13,7 +13,7 @@ import 'package:fonz_music_flutter/SearchTab/HomePageWidgets/HomePageResponses/F
 import 'package:fonz_music_flutter/SearchTab/HomePageWidgets/HostAPartyButton.dart';
 import 'package:fonz_music_flutter/SearchTab/HomePageWidgets/JoinAPartyButton.dart';
 import 'package:fonz_music_flutter/SearchTab/HomePageWidgets/HomePageResponses/JoinSuccessfulCircle.dart';
-import 'package:fonz_music_flutter/SearchTab/HomePageWidgets/TapYourPhoneAmber.dart';
+import 'package:fonz_music_flutter/GlobalComponents/FrontEnd/TapYourPhoneAmber.dart';
 import 'package:fonz_music_flutter/main.dart';
 
 import 'HomePageWidgets/BuyACoasterHomeButton.dart';
