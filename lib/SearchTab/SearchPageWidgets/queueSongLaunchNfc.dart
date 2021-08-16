@@ -4,6 +4,7 @@ import 'dart:developer';
 
 import 'package:fonz_music_flutter/ApiFunctions/GuestApi/GuestSpotifyApi.dart';
 import 'package:fonz_music_flutter/GlobalComponents/CoreUserAttributes.dart';
+import 'package:fonz_music_flutter/GlobalComponents/GlobalSessionVariables.dart';
 import 'package:fonz_music_flutter/GlobalComponents/Objects/Track.dart';
 import 'package:fonz_music_flutter/NfcFunctions/GuestNfcFunctions.dart';
 import 'package:fonz_music_flutter/SearchTab/HomePageDecision.dart';

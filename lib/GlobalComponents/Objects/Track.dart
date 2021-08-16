@@ -3,6 +3,7 @@ import 'package:fonz_music_flutter/ApiFunctions/GuestApi/GuestGetCoasterApi.dart
 import 'package:fonz_music_flutter/ApiFunctions/GuestApi/GuestSpotifyApi.dart';
 
 import '../CoreUserAttributes.dart';
+import '../GlobalSessionVariables.dart';
 // search bar widget
 class Track {
   String title;

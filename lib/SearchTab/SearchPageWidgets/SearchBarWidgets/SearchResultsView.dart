@@ -8,6 +8,8 @@ import 'package:fonz_music_flutter/ApiFunctions/UserTopTracksResponse.dart';
 import 'package:fonz_music_flutter/GlobalComponents/ExceptionHandling.dart';
 import 'package:fonz_music_flutter/GlobalComponents/FrontEnd/FrontEndConstants.dart';
 import 'package:fonz_music_flutter/GlobalComponents/CoreUserAttributes.dart';
+import 'package:fonz_music_flutter/GlobalComponents/GlobalFunctions/SpotifyResultsFunctions.dart';
+import 'package:fonz_music_flutter/GlobalComponents/GlobalSessionVariables.dart';
 import 'package:fonz_music_flutter/GlobalComponents/Objects/Track.dart';
 
 import '../TrackButton.dart';
@@ -99,22 +101,24 @@ class _SearchResultsViewState extends State<SearchResultsView> {
       log("search presp " + searchResponse.toString());
       var tracks = await searchResponse.tracks.items;
       // var tracks = await searchResponse.
-      List<Track> list = [];
-      try {
-        for (var i in tracks) {
-          var albumArt = i.album.images[0].url;
-          var listArtist = i.artists;
-          var externalUrl = i.externalUrls.spotify;
-          List<String> listArtistString = [];
-          listArtist.forEach((e) => {listArtistString.add(e.name)});
-          var post = new Track(i.name, listArtistString, i.id, albumArt);
-          // log("post is " + post.title.toString());
-          list.add(post);
-        }
-        return list;
-      } catch (e) {
-        throw new GenericException(e);
-      }
+      // List<Track> list = [];
+      List<Track> list = tracksToList(tracks);
+      return list;
+      // try {
+      //   for (var i in tracks) {
+      //     var albumArt = i.album.images[0].url;
+      //     var listArtist = i.artists;
+      //     var externalUrl = i.externalUrls.spotify;
+      //     List<String> listArtistString = [];
+      //     listArtist.forEach((e) => {listArtistString.add(e.name)});
+      //     var post = new Track(i.name, listArtistString, i.id, albumArt);
+      //     // log("post is " + post.title.toString());
+      //     list.add(post);
+      //   }
+      //   return list;
+      // } catch (e) {
+      //   throw new GenericException(e);
+      // }
       // } else if (response.statusCode == 403) {
     } else if (response["responseCode"] == 403) {
       log('Invalid jwt when trying to search spotify');

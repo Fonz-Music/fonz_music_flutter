@@ -6,6 +6,7 @@ import 'package:fonz_music_flutter/MainTabs/SearchTab.dart';
 import 'package:fonz_music_flutter/SearchTab/HomePageDecision.dart';
 
 import '../CoreUserAttributes.dart';
+import '../GlobalSessionVariables.dart';
 
 checkCoasterDeepLink(String uidFromScannedCoaster) async {
   Map hostDetails = await GuestGetCoasterApi.getCoasterDetails(

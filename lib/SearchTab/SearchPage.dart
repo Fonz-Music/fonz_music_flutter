@@ -6,6 +6,7 @@ import 'package:fonz_music_flutter/ApiFunctions/GuestApi/GuestSpotifyApi.dart';
 import 'package:fonz_music_flutter/GlobalComponents/CoreUserAttributes.dart';
 import 'package:fonz_music_flutter/GlobalComponents/FrontEnd/FrontEndConstants.dart';
 import 'package:fonz_music_flutter/GlobalComponents/FrontEnd/TapYourPhoneBlack.dart';
+import 'package:fonz_music_flutter/GlobalComponents/GlobalSessionVariables.dart';
 import 'package:fonz_music_flutter/HostTab/TapYourPhoneLilac.dart';
 import 'package:fonz_music_flutter/MainTabs/SearchTab.dart';
 import 'package:fonz_music_flutter/SearchTab/SearchPageWidgets/QueueSongResponses/QueueFailNotSameCoaster.dart';
@@ -75,6 +76,7 @@ class _SearchPageState extends State<SearchPage> {
                             Spacer(),
                             TextButton(
                               onPressed: () {
+                                log("sessionId is " + hostSessionIdGlobal);
                                 widget.controller.animateToPage(0,
                                     duration: Duration(seconds: 1), curve: Curves.easeInOutCirc);
 
