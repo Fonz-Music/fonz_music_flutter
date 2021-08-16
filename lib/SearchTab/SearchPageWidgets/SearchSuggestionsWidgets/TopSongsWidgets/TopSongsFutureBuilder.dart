@@ -10,29 +10,38 @@ import 'package:fonz_music_flutter/main.dart';
 
 import 'TopSongsView.dart';
 
-class TopSongFutureBuilder extends StatefulWidget {
+class TopSongsFutureBuilder extends StatefulWidget {
   @override
-  _TopSongFutureBuilderState createState() => _TopSongFutureBuilderState();
+  _TopSongsFutureBuilderState createState() => _TopSongsFutureBuilderState();
 }
 
-class _TopSongFutureBuilderState extends State<TopSongFutureBuilder> {
+class _TopSongsFutureBuilderState extends State<TopSongsFutureBuilder> {
 
   Future<List<Track>> getTopSongs() async {
-    if (topSongs == null || updateTopSongs) {
+    if (updateTopSongs) {
+      log("going to get top songs");
       // change to guest depending
-      if (userAttributes.getUserSessionId() != null) {
+      if (userAttributes.getUserSessionId() != "") {
+        log("user has session ");
         final fetchedTopSongs = await SpotifySuggestionsApi.getGuestTopSongs(userAttributes.getUserSessionId());
-        var tracks = SpotifySearchResponse.fromJson(fetchedTopSongs["body"]);
-        topSongs = tracksToList(tracks.tracks.items);
+        log("got top songs");
+        var tracks = Items.fromJson(fetchedTopSongs["body"]);
+        topSongs = tracksToList(tracks);
         log("top songs are " + topSongs.toString());
       }
       else {
+        log("using host creds");
         final fetchedTopSongs = await SpotifySuggestionsApi.getGuestTopSongs(hostSessionIdGlobal);
-        var tracks = SpotifySearchResponse.fromJson(fetchedTopSongs["body"]);
-        if (tracks == null || tracks.tracks.items.length > 0) {
-          topSongs = tracksToList(tracks.tracks.items);
+
+        if (fetchedTopSongs["statusCode"] == 200) {
+          log("can acc get host creds");
+          log("number of songs is" + fetchedTopSongs["body"].toString());
+          var tracks = Items.fromJson(fetchedTopSongs["body"]);
+          log("got items from json");
+          topSongs = tracksToList(tracks);
         }
         else {
+          log("using temp tracks");
           topSongs = tempTracks;
         }
       }
@@ -57,23 +66,15 @@ class _TopSongFutureBuilderState extends State<TopSongFutureBuilder> {
                 // child: TopSongsView(),
               );
             }
-            else if (snapshot.data == null ) {
+            else if (snapshot.data != null && topSongs.length > 0) {
               log("data is " + snapshot.data.toString());
-              return MaterialButton(
-                  onPressed: () {
-                    updateActiveSong = true;
-                    setState(() {});
-                  },
-                  child: Container(
-                      width: width,
-                      // child: NoActiveSongComponent()
-                  )
-              );
+              return
+                TopSongsView(tracks: snapshot.data);
 
             }
             else {
               return
-                TopSongsView(tracks: topSongs);
+                Container();
             }
 
           }

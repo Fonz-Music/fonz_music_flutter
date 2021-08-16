@@ -53,7 +53,7 @@ class _TopSongsViewState extends State<TopSongsView> {
 
             scrollDirection: Axis.horizontal,
             // itemCount: 4,
-            itemCount: tempTracks.length ~/2,
+            itemCount: widget.tracks.length ~/2,
             itemBuilder: (BuildContext context, int index) {
               // child:
 

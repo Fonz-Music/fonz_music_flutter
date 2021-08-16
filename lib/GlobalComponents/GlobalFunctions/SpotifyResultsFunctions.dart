@@ -1,10 +1,13 @@
 
 
+import 'dart:developer';
+
 import 'package:fonz_music_flutter/GlobalComponents/Objects/Track.dart';
 
 List<Track> tracksToList(tracks) {
   List<Track> trackList = [];
 
+  log("in tracksToList");
     for (var i in tracks) {
       var albumArt = i.album.images[0].url;
       var listArtist = i.artists;

@@ -144,56 +144,56 @@ class Tracks {
 class Items {
   Album _album;
   List<Artists> _artists;
-  int _discNumber;
-  int _durationMs;
-  bool _explicit;
-  ExternalIds _externalIds;
-  ExternalUrls _externalUrls;
-  String _href;
+  // int _discNumber;
+  // int _durationMs;
+  // bool _explicit;
+  // ExternalIds _externalIds;
+  // ExternalUrls _externalUrls;
+  // String _href;
   String _id;
-  bool _isLocal;
-  bool _isPlayable;
+  // bool _isLocal;
+  // bool _isPlayable;
   String _name;
-  int _popularity;
-  String _previewUrl;
-  int _trackNumber;
-  String _type;
+  // int _popularity;
+  // String _previewUrl;
+  // int _trackNumber;
+  // String _type;
   String _uri;
 
   Items(
       {Album album,
       List<Artists> artists,
-      int discNumber,
-      int durationMs,
-      bool explicit,
-      ExternalIds externalIds,
-      ExternalUrls externalUrls,
-      String href,
+      // int discNumber,
+      // int durationMs,
+      // bool explicit,
+      // ExternalIds externalIds,
+      // ExternalUrls externalUrls,
+      // String href,
       String id,
-      bool isLocal,
-      bool isPlayable,
+      // bool isLocal,
+      // bool isPlayable,
       String name,
-      int popularity,
-      String previewUrl,
-      int trackNumber,
-      String type,
+      // int popularity,
+      // String previewUrl,
+      // int trackNumber,
+      // String type,
       String uri}) {
     this._album = album;
     this._artists = artists;
-    this._discNumber = discNumber;
-    this._durationMs = durationMs;
-    this._explicit = explicit;
-    this._externalIds = externalIds;
-    this._externalUrls = externalUrls;
-    this._href = href;
+    // this._discNumber = discNumber;
+    // this._durationMs = durationMs;
+    // this._explicit = explicit;
+    // this._externalIds = externalIds;
+    // this._externalUrls = externalUrls;
+    // this._href = href;
     this._id = id;
-    this._isLocal = isLocal;
-    this._isPlayable = isPlayable;
+    // this._isLocal = isLocal;
+    // this._isPlayable = isPlayable;
     this._name = name;
-    this._popularity = popularity;
-    this._previewUrl = previewUrl;
-    this._trackNumber = trackNumber;
-    this._type = type;
+    // this._popularity = popularity;
+    // this._previewUrl = previewUrl;
+    // this._trackNumber = trackNumber;
+    // this._type = type;
     this._uri = uri;
   }
 
@@ -201,34 +201,34 @@ class Items {
   set album(Album album) => _album = album;
   List<Artists> get artists => _artists;
   set artists(List<Artists> artists) => _artists = artists;
-  int get discNumber => _discNumber;
-  set discNumber(int discNumber) => _discNumber = discNumber;
-  int get durationMs => _durationMs;
-  set durationMs(int durationMs) => _durationMs = durationMs;
-  bool get explicit => _explicit;
-  set explicit(bool explicit) => _explicit = explicit;
-  ExternalIds get externalIds => _externalIds;
-  set externalIds(ExternalIds externalIds) => _externalIds = externalIds;
-  ExternalUrls get externalUrls => _externalUrls;
-  set externalUrls(ExternalUrls externalUrls) => _externalUrls = externalUrls;
-  String get href => _href;
-  set href(String href) => _href = href;
+  // int get discNumber => _discNumber;
+  // set discNumber(int discNumber) => _discNumber = discNumber;
+  // int get durationMs => _durationMs;
+  // set durationMs(int durationMs) => _durationMs = durationMs;
+  // bool get explicit => _explicit;
+  // set explicit(bool explicit) => _explicit = explicit;
+  // ExternalIds get externalIds => _externalIds;
+  // set externalIds(ExternalIds externalIds) => _externalIds = externalIds;
+  // ExternalUrls get externalUrls => _externalUrls;
+  // set externalUrls(ExternalUrls externalUrls) => _externalUrls = externalUrls;
+  // String get href => _href;
+  // set href(String href) => _href = href;
   String get id => _id;
   set id(String id) => _id = id;
-  bool get isLocal => _isLocal;
-  set isLocal(bool isLocal) => _isLocal = isLocal;
-  bool get isPlayable => _isPlayable;
-  set isPlayable(bool isPlayable) => _isPlayable = isPlayable;
+  // bool get isLocal => _isLocal;
+  // set isLocal(bool isLocal) => _isLocal = isLocal;
+  // bool get isPlayable => _isPlayable;
+  // set isPlayable(bool isPlayable) => _isPlayable = isPlayable;
   String get name => _name;
   set name(String name) => _name = name;
-  int get popularity => _popularity;
-  set popularity(int popularity) => _popularity = popularity;
-  String get previewUrl => _previewUrl;
-  set previewUrl(String previewUrl) => _previewUrl = previewUrl;
-  int get trackNumber => _trackNumber;
-  set trackNumber(int trackNumber) => _trackNumber = trackNumber;
-  String get type => _type;
-  set type(String type) => _type = type;
+  // int get popularity => _popularity;
+  // set popularity(int popularity) => _popularity = popularity;
+  // String get previewUrl => _previewUrl;
+  // set previewUrl(String previewUrl) => _previewUrl = previewUrl;
+  // int get trackNumber => _trackNumber;
+  // set trackNumber(int trackNumber) => _trackNumber = trackNumber;
+  // String get type => _type;
+  // set type(String type) => _type = type;
   String get uri => _uri;
   set uri(String uri) => _uri = uri;
 
@@ -240,24 +240,24 @@ class Items {
         _artists.add(new Artists.fromJson(v));
       });
     }
-    _discNumber = json['disc_number'];
-    _durationMs = json['duration_ms'];
-    _explicit = json['explicit'];
-    _externalIds = json['external_ids'] != null
-        ? new ExternalIds.fromJson(json['external_ids'])
-        : null;
-    _externalUrls = json['external_urls'] != null
-        ? new ExternalUrls.fromJson(json['external_urls'])
-        : null;
-    _href = json['href'];
+    // _discNumber = json['disc_number'];
+    // _durationMs = json['duration_ms'];
+    // _explicit = json['explicit'];
+    // _externalIds = json['external_ids'] != null
+    //     ? new ExternalIds.fromJson(json['external_ids'])
+    //     : null;
+    // _externalUrls = json['external_urls'] != null
+    //     ? new ExternalUrls.fromJson(json['external_urls'])
+    //     : null;
+    // _href = json['href'];
     _id = json['id'];
-    _isLocal = json['is_local'];
-    _isPlayable = json['is_playable'];
+    // _isLocal = json['is_local'];
+    // _isPlayable = json['is_playable'];
     _name = json['name'];
-    _popularity = json['popularity'];
-    _previewUrl = json['preview_url'];
-    _trackNumber = json['track_number'];
-    _type = json['type'];
+    // _popularity = json['popularity'];
+    // _previewUrl = json['preview_url'];
+    // _trackNumber = json['track_number'];
+    // _type = json['type'];
     _uri = json['uri'];
   }
 
@@ -269,24 +269,24 @@ class Items {
     if (this._artists != null) {
       data['artists'] = this._artists.map((v) => v.toJson()).toList();
     }
-    data['disc_number'] = this._discNumber;
-    data['duration_ms'] = this._durationMs;
-    data['explicit'] = this._explicit;
-    if (this._externalIds != null) {
-      data['external_ids'] = this._externalIds.toJson();
-    }
-    if (this._externalUrls != null) {
-      data['external_urls'] = this._externalUrls.toJson();
-    }
-    data['href'] = this._href;
+    // data['disc_number'] = this._discNumber;
+    // data['duration_ms'] = this._durationMs;
+    // data['explicit'] = this._explicit;
+    // if (this._externalIds != null) {
+    //   data['external_ids'] = this._externalIds.toJson();
+    // }
+    // if (this._externalUrls != null) {
+    //   data['external_urls'] = this._externalUrls.toJson();
+    // }
+    // data['href'] = this._href;
     data['id'] = this._id;
-    data['is_local'] = this._isLocal;
-    data['is_playable'] = this._isPlayable;
+    // data['is_local'] = this._isLocal;
+    // data['is_playable'] = this._isPlayable;
     data['name'] = this._name;
-    data['popularity'] = this._popularity;
-    data['preview_url'] = this._previewUrl;
-    data['track_number'] = this._trackNumber;
-    data['type'] = this._type;
+    // data['popularity'] = this._popularity;
+    // data['preview_url'] = this._previewUrl;
+    // data['track_number'] = this._trackNumber;
+    // data['type'] = this._type;
     data['uri'] = this._uri;
     return data;
   }

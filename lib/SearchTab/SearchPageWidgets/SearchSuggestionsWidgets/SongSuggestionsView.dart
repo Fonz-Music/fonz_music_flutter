@@ -5,6 +5,7 @@ import 'package:fonz_music_flutter/SearchTab/SearchPageWidgets/SearchSuggestions
 
 import '../../../main.dart';
 import 'TopPlaylistsWidgets/TopPlaylistsView.dart';
+import 'TopSongsWidgets/TopSongsFutureBuilder.dart';
 import 'TopSongsWidgets/TopSongsView.dart';
 
 class SongSuggestionsView extends StatefulWidget {
@@ -42,7 +43,8 @@ class _SongSuggestionsViewState extends State<SongSuggestionsView> {
             Column(
               children: [
                 DetermineIfSpotifyButtonShown(),
-                TopSongsView(),
+                TopSongsFutureBuilder(),
+                // TopSongsView(),
                 TopArtistsView(),
                 TopPlaylistsView()
               ],

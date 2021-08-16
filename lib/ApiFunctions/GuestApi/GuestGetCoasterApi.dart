@@ -47,7 +47,8 @@ class GuestGetCoasterApi {
     }
     on DioError catch (e) {
       // log("this is msg " + e.response.statusMessage.toString());
-      // log("this is status " + e.response.statusCode.toString());
+      log("this is status " + e.response
+          .statusCode.toString());
       //
       // log("this is mssg" + e.response.data["message"].toString());
       // print("this is mssg" + e.response.data["code"].toString());
