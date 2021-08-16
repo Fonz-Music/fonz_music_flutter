@@ -15,6 +15,11 @@ class CoreUserAttributes {
   bool _hasConnectedCoasters = false;
   bool _hasAccount = false;
   String _userSpotifyId = "spotify account";
+  bool _agreedToEmail = false;
+  bool _agreedConsent = false;
+  String _userId = "";
+  String _userDisplayName = "";
+  String _userSessionId = "";
 
   setAttributes() async {
     log("setting attributes");
@@ -36,6 +41,32 @@ class CoreUserAttributes {
     if (spotifyIdFromStorage != null) {
       _userSpotifyId = spotifyIdFromStorage;
     }
+
+    final agreedEmailFromStorage = localPreferences.getBool("agreedToEmail");
+    if (agreedEmailFromStorage != null) {
+      _agreedToEmail = agreedEmailFromStorage;
+    }
+
+    final agreedConsentFromStorage = localPreferences.getBool("agreedConsent");
+    if (agreedConsentFromStorage != null) {
+      _agreedConsent = agreedConsentFromStorage;
+    }
+
+    final userIdFromStorage = localPreferences.getString("userId");
+    if (userIdFromStorage != null) {
+      _userId = userIdFromStorage;
+    }
+
+    final userDisplayNameFromStorage = localPreferences.getString("userDisplayName");
+    if (userDisplayNameFromStorage != null) {
+      _userDisplayName = userDisplayNameFromStorage;
+    }
+
+    final userSessionIdFromStorage = localPreferences.getString("userSessionId");
+    if (userSessionIdFromStorage != null) {
+      _userSessionId = userSessionIdFromStorage;
+    }
+
     log("spot is " + _connectedToSpotify.toString());
     log("coasters is " + _hasConnectedCoasters.toString());
     log("account is " + _hasAccount.toString());
@@ -103,6 +134,71 @@ class CoreUserAttributes {
 
   String getSpotifyId() {
     return _userSpotifyId;
+  }
+
+  // agree email
+  bool getAgreedEmail() {
+    return _agreedToEmail;
+  }
+  setAgreedEmail(bool boolie) async {
+    this._agreedToEmail = boolie;
+    // Create local preferences
+    SharedPreferences localPreferences = await SharedPreferences.getInstance();
+    // store in preferences
+    localPreferences.setBool("agreedToEmail", boolie);
+
+  }
+
+  // agree consent
+  bool getAgreedConsent() {
+    return _agreedConsent;
+  }
+  setAgreedConsent(bool boolie) async {
+    this._agreedConsent = boolie;
+    // Create local preferences
+    SharedPreferences localPreferences = await SharedPreferences.getInstance();
+    // store in preferences
+    localPreferences.setBool("agreedConsent", boolie);
+
+  }
+
+  // user id
+  String getUserId() {
+    return _userId;
+  }
+  setUserId(String newId) async {
+    this._userId = newId;
+    // Create local preferences
+    SharedPreferences localPreferences = await SharedPreferences.getInstance();
+    // store in preferences
+    localPreferences.setString("userId", newId);
+
+  }
+
+  // user display name
+  String getUserDisplayName() {
+    return _userDisplayName;
+  }
+  setUserDisplayName(String newName) async {
+    this._userDisplayName = newName;
+    // Create local preferences
+    SharedPreferences localPreferences = await SharedPreferences.getInstance();
+    // store in preferences
+    localPreferences.setString("userDisplayName", newName);
+
+  }
+
+  // user sessionId
+  String getUserSessionId() {
+    return _userSessionId;
+  }
+  setUserSessionId(String newId) async {
+    this._userSessionId = newId;
+    // Create local preferences
+    SharedPreferences localPreferences = await SharedPreferences.getInstance();
+    // store in preferences
+    localPreferences.setString("userSessionId", newId);
+
   }
 
 }
