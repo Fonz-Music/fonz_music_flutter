@@ -26,7 +26,7 @@ class _TopSongsFutureBuilderState extends State<TopSongsFutureBuilder> {
         final fetchedTopSongs = await SpotifySuggestionsApi.getGuestTopSongs(userAttributes.getUserSessionId());
         log("got top songs");
         var tracks = Items.fromJson(fetchedTopSongs["body"]);
-        topSongs = tracksToList(tracks);
+        topSongs = tracksToList([tracks]);
         log("top songs are " + topSongs.toString());
       }
       else {
@@ -35,10 +35,10 @@ class _TopSongsFutureBuilderState extends State<TopSongsFutureBuilder> {
 
         if (fetchedTopSongs["statusCode"] == 200) {
           log("can acc get host creds");
-          log("number of songs is" + fetchedTopSongs["body"].toString());
-          var tracks = Items.fromJson(fetchedTopSongs["body"]);
+          // log("number of songs is" + fetchedTopSongs["body"].toString());
+          var tracks = fetchedTopSongs["body"];
           log("got items from json");
-          topSongs = tracksToList(tracks);
+          topSongs = tracksJsonToList(tracks);
         }
         else {
           log("using temp tracks");
