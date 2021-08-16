@@ -95,13 +95,13 @@ class _SearchPageState extends State<SearchPage> {
                             )
                           ],
                         ),
-                        SearchBar(notifyParent: refresh),
+
 
                         ValueListenableBuilder<bool>(
                             valueListenable: pressedToLaunchQueueNfc,
                             builder: (context, value, child) {
                               return
-                                WaitForNfcToQueue();
+                                WaitForNfcToQueue(refresh);
                             }
                         ),
 
@@ -118,20 +118,25 @@ class _SearchPageState extends State<SearchPage> {
 
 
 
-  Widget WaitForNfcToQueue() {
+  Widget WaitForNfcToQueue(refresh) {
     if (!pressedToLaunchQueueNfc.value) {
 
       return
-        Stack(
+        Column(
           children: [
-            Column(
+            SearchBar(notifyParent: refresh),
+            Stack(
               children: [
+                Column(
+                  children: [
 
-                ActiveSongView(),
-                SongSuggestionsView(notifyParent: widget.notifyParent,)
+                    ActiveSongView(),
+                    SongSuggestionsView(notifyParent: widget.notifyParent,)
+                  ],
+                ),
+                DetermineIfResultsAreShown()
               ],
             ),
-            DetermineIfResultsAreShown()
           ],
         );
     }
