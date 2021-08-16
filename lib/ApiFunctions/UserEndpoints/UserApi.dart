@@ -20,7 +20,7 @@ class UserApi {
     dio.options.headers = {HttpHeaders.authorizationHeader: 'Bearer $token'};
     try {
 // execute endpoint
-      var response = await dio.put(endpoint, data: {email: email, password: password});
+      var response = await dio.put(endpoint, data: {displayName: displayName, email: email, password: password, agreedConsent: agreedConsent, agreedMarketing: agreedMarketing});
       log(response.statusCode.toString());
 
       if (response.statusCode == 200) {
@@ -34,8 +34,10 @@ class UserApi {
         SharedPreferences localPreferences = await SharedPreferences.getInstance();
         // store email
         localPreferences.setString("userEmail", email);
-        // store displayName
-        localPreferences.setString("userDisplayName", displayName);
+        // store userId
+        localPreferences.setString("userId", updateUserDecoded.userId);
+        // store agreed email
+        localPreferences.setBool("agreedEmail", agreedMarketing);
 
 
       }

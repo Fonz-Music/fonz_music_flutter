@@ -62,7 +62,7 @@ class CoreUserAttributes {
       _userDisplayName = userDisplayNameFromStorage;
     }
 
-    final userSessionIdFromStorage = localPreferences.getString("userSessionId");
+    final userSessionIdFromStorage = localPreferences.getString("userAccountSessionId");
     if (userSessionIdFromStorage != null) {
       _userSessionId = userSessionIdFromStorage;
     }
@@ -197,7 +197,7 @@ class CoreUserAttributes {
     // Create local preferences
     SharedPreferences localPreferences = await SharedPreferences.getInstance();
     // store in preferences
-    localPreferences.setString("userSessionId", newId);
+    localPreferences.setString("userAccountSessionId", newId);
 
   }
 
