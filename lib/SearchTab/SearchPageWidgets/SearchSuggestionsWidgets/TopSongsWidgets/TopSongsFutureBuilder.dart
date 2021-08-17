@@ -27,8 +27,9 @@ class _TopSongsFutureBuilderState extends State<TopSongsFutureBuilder> {
         log("got top songs");
         var tracks = Items.fromJson(fetchedTopSongs["body"]);
         topSongs = tracksToList([tracks]);
-        log("top songs are " + topSongs.toString());
+        // log("top songs are " + topSongs.toString());
       }
+      // get top Fonz songs
       else {
         log("using host creds");
         final fetchedTopSongs = await SpotifySuggestionsApi.getGuestTopSongs(hostSessionIdGlobal);
