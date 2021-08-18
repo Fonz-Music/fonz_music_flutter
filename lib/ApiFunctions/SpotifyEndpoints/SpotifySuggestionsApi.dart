@@ -36,7 +36,7 @@ class SpotifySuggestionsApi {
         "body": response.data
       };
     } on DioError catch (e) {
-      log("issue " + e.response.data);
+      log("issue " + e.response.data.toString());
       log("dailure");
       return {
         "statusCode": e.response.data["status"],
@@ -70,7 +70,7 @@ class SpotifySuggestionsApi {
         "body": response.data
       };
     } on DioError catch (e) {
-      log("issue " + e.response.data);
+      log("issue " + e.response.data.toString());
       log("dailure");
       return {
         "statusCode": e.response.data["status"],

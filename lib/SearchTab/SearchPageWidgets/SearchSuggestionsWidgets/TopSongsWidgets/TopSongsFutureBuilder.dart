@@ -25,9 +25,9 @@ class _TopSongsFutureBuilderState extends State<TopSongsFutureBuilder> {
         log("user has session ");
         final fetchedTopSongs = await SpotifySuggestionsApi.getGuestTopSongs(userAttributes.getUserSessionId());
         log("got top songs");
-        var tracks = Items.fromJson(fetchedTopSongs["body"]);
-        topSongs = tracksToList([tracks]);
-        // log("top songs are " + topSongs.toString());
+        var tracks = fetchedTopSongs["body"];
+        log("got items from json");
+        topSongs = tracksJsonToList(tracks);
       }
       // get top Fonz songs
       else {
@@ -47,6 +47,8 @@ class _TopSongsFutureBuilderState extends State<TopSongsFutureBuilder> {
         }
       }
       updateTopSongs = false;
+    }else {
+      log("does not need top songs");
     }
 
     return topSongs;

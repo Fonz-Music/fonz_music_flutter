@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:fonz_music_flutter/GlobalComponents/FrontEnd/FrontEndConstants.dart';
+import 'package:fonz_music_flutter/GlobalComponents/GlobalSessionVariables.dart';
 import 'package:fonz_music_flutter/SearchTab/SearchPageWidgets/SearchSuggestionsWidgets/ConnectSpotifySearchPage.dart';
+import 'package:fonz_music_flutter/SearchTab/SearchPageWidgets/SearchSuggestionsWidgets/TopArtistsWidgets/TopArtistsFutureBuilder.dart';
 import 'package:fonz_music_flutter/SearchTab/SearchPageWidgets/SearchSuggestionsWidgets/TopArtistsWidgets/TopArtistsView.dart';
 
 import '../../../main.dart';
@@ -45,7 +47,8 @@ class _SongSuggestionsViewState extends State<SongSuggestionsView> {
                 DetermineIfSpotifyButtonShown(),
                 TopSongsFutureBuilder(),
                 // TopSongsView(),
-                TopArtistsView(),
+                TopArtistsFutureBuilder(),
+                // TopArtistsView(artists: tempArtists),
                 TopPlaylistsView()
               ],
             ),
