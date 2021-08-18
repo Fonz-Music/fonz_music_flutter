@@ -25,7 +25,7 @@ class _ArtistComponentState extends State<ArtistComponent> {
     final height = size.height;
 
     return Container(
-      padding: EdgeInsets.all(5),
+      padding: EdgeInsets.fromLTRB(0, 10, 0 , 0),
       child: MaterialButton(
         onPressed: (){
           showModalBottomSheet<dynamic>(context: context,

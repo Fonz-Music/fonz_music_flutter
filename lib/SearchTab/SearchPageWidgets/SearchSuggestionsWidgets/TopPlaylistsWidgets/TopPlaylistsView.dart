@@ -58,14 +58,18 @@ class _TopPlaylistsViewState extends State<TopPlaylistsView> {
             color: determineColorThemeText(),
             borderRadius: BorderRadius.circular(CORNERRADIUSBUTTON),
           ),
-          child: ListView.separated(
-            scrollDirection: Axis.horizontal,
-            itemCount: widget.playlists.length,
-            itemBuilder: (BuildContext context, int index) {
-              return PlaylistComponent(givenPlaylist: widget.playlists[index]);
-            },
-            separatorBuilder: (BuildContext context,
-                int index) => const Divider(),
+          child: Container(
+            padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+            child: ListView.separated(
+
+              scrollDirection: Axis.horizontal,
+              itemCount: widget.playlists.length,
+              itemBuilder: (BuildContext context, int index) {
+                return PlaylistComponent(givenPlaylist: widget.playlists[index]);
+              },
+              separatorBuilder: (BuildContext context,
+                  int index) => const Divider(),
+            ),
           ),
         )
       ],
