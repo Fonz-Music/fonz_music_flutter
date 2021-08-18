@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:fonz_music_flutter/GlobalComponents/FrontEnd/FrontEndConstants.dart';
 import 'package:fonz_music_flutter/GlobalComponents/Objects/Artist.dart';
+import 'package:fonz_music_flutter/SearchTab/SearchPageWidgets/SearchSuggestionsWidgets/ModalComponents/ArtistModal.dart';
 
 import 'ArtistTrackModal.dart';
 
@@ -41,7 +42,7 @@ class _ArtistComponentState extends State<ArtistComponent> {
                               borderRadius: new BorderRadius.only(
                                   topLeft: const Radius.circular(25.0),
                                   topRight: const Radius.circular(25.0))),
-                          child: ArtistTrackModal(givenArtist: widget.givenArtist,),
+                          child: ArtistModal(givenArtist: widget.givenArtist,),
                         ),
                       )
                     ]

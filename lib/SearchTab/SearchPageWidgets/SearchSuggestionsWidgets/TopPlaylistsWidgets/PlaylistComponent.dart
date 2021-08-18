@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:fonz_music_flutter/GlobalComponents/FrontEnd/FrontEndConstants.dart';
 import 'package:fonz_music_flutter/GlobalComponents/Objects/Playlist.dart';
+import 'package:fonz_music_flutter/SearchTab/SearchPageWidgets/SearchSuggestionsWidgets/ModalComponents/PlaylistModal.dart';
 
 import 'PlaylistTrackModal.dart';
 
@@ -40,7 +41,7 @@ class _PlaylistComponentState extends State<PlaylistComponent> {
                               borderRadius: new BorderRadius.only(
                                   topLeft: const Radius.circular(25.0),
                                   topRight: const Radius.circular(25.0))),
-                          child: PlaylistTrackModal(givenPlaylist: widget.givenPlaylist,),
+                          child: PlaylistModal(givenPlaylist: widget.givenPlaylist,),
                         ),
                       )
                     ]

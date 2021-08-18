@@ -144,6 +144,9 @@ class _SearchPageState extends State<SearchPage> {
         );
     }
     else {
+      Timer(Duration(seconds: 5), () {
+        pressedToLaunchQueueNfc.value = false;
+      });
       // Navigator.push
       return Container(
         padding: EdgeInsets.fromLTRB(0, 30 , 0, 0),
