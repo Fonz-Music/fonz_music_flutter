@@ -72,9 +72,9 @@ class _SongSuggestionsViewState extends State<SongSuggestionsView> {
   double determineSongSugsHeight() {
 
     if (!userAttributes.getConnectedToSpotify()) {
-      return 820.0;
+      return 790.0;
     }
-    else return 770.0;
+    else return 740.0;
   }
 
 }
