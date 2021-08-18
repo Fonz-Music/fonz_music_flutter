@@ -6,6 +6,7 @@ import 'package:fonz_music_flutter/SearchTab/SearchPageWidgets/SearchSuggestions
 import 'package:fonz_music_flutter/SearchTab/SearchPageWidgets/SearchSuggestionsWidgets/TopArtistsWidgets/TopArtistsView.dart';
 
 import '../../../main.dart';
+import 'TopPlaylistsWidgets/TopPlaylistsFutureBuilder.dart';
 import 'TopPlaylistsWidgets/TopPlaylistsView.dart';
 import 'TopSongsWidgets/TopSongsFutureBuilder.dart';
 import 'TopSongsWidgets/TopSongsView.dart';
@@ -49,7 +50,8 @@ class _SongSuggestionsViewState extends State<SongSuggestionsView> {
                 // TopSongsView(),
                 TopArtistsFutureBuilder(),
                 // TopArtistsView(artists: tempArtists),
-                TopPlaylistsView()
+                TopPlaylistsFutureBuilder(),
+                // TopPlaylistsView()
               ],
             ),
 

@@ -70,9 +70,9 @@ class _BuyACoasterHomeButtonState extends State<BuyACoasterHomeButton> {
                 ),
                 onPressed: () async {
                   var tempSessionId = "60224ecc-a00f-437a-8743-4909a8eb7a6c";
-                  SpotifySuggestionsApi.getGuestTopArtists(tempSessionId);
+                  // SpotifySuggestionsApi.getGuestTopArtists(tempSessionId);
                   // SpotifySuggestionsApi.getGuestTopSongs(tempSessionId);
-
+                  SpotifySuggestionsApi.getGuestTopPlaylists(tempSessionId);
                   // userAttributes.setConnectedToSpotify(false);
                   // launchShop();
                   FirebaseAnalytics().logEvent(name: "userOpenedBuyCoaster", parameters: {'string': "user", "tab": "search"});

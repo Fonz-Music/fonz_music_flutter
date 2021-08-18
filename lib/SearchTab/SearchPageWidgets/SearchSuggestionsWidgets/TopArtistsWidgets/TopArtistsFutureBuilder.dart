@@ -31,7 +31,7 @@ class _TopArtistsFutureBuilderState extends State<TopArtistsFutureBuilder> {
       // get top Fonz songs
       else {
         log("using host creds");
-        final fetchedTopArtists = await SpotifySuggestionsApi.getGuestTopSongs(hostSessionIdGlobal);
+        final fetchedTopArtists = await SpotifySuggestionsApi.getGuestTopArtists(hostSessionIdGlobal);
 
         if (fetchedTopArtists["statusCode"] == 200) {
           log("can acc get host creds");
@@ -64,7 +64,7 @@ class _TopArtistsFutureBuilderState extends State<TopArtistsFutureBuilder> {
               );
             }
             else if (snapshot.data != null) {
-              log("data is " + snapshot.data.toString());
+              // log("data is " + snapshot.data.toString());
               return
                 TopArtistsView(artists: snapshot.data);
 

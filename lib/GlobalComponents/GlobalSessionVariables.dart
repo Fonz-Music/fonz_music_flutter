@@ -2,6 +2,7 @@
 import 'package:fonz_music_flutter/ApiFunctions/GuestApi/GuestSpotifyApi.dart';
 
 import 'Objects/Artist.dart';
+import 'Objects/Playlist.dart';
 import 'Objects/Track.dart';
 
 var hostSessionIdGlobal = "";
@@ -39,4 +40,16 @@ var tempArtists = [
   Artist("BENEE", "0Cp8WN4V8Tu4QJQwCN5Md4", "https://i.scdn.co/image/cf1265cb1c2c35d253cbbac9b1489bc181322ed3"),
   Artist("girl in red", "3uwAm6vQy7kWPS2bciKWx9", "https://i.scdn.co/image/ebff5a127cf8fbb20deb9bbcd02cfea64a660bef"),
   Artist("Rush", "2Hkut4rAAyrQxRdof7FVJq", "https://i.scdn.co/image/6fdfa7c623d77d5900e69eef2443340e3493a4bf")
+];
+
+List<Playlist> topPlaylists;
+var updateTopPlaylists = true;
+var tempPlaylists =
+[
+  Playlist("This Is Rush", "https://i.scdn.co/image/ab67706f0000000336834b90af842ac737f7dac3",  "37i9dQZF1DX9E92APFiTvV", 50),
+  Playlist("memoryLane",  "https://i.scdn.co/image/ab67706c0000bebbbbb8672f1afbe3add6554550",  "3sRM90oyy8Zul8iF3Cg3RF", 21),
+  Playlist("beautifulEscape",   "https://i.scdn.co/image/ab67706c0000bebb12bc8c494507c2f6550b919b", "4d2ObNuTa7AIMJY8TGvLDB", 31),
+  Playlist("manifest destiny", "https://i.scdn.co/image/ab67706c0000bebb802a02183d45115fc2639cb6",  "4TOUWjjIiwBNXj82cLnltq", 43),
+  Playlist("malibuNinetyTwo", "https://i.scdn.co/image/ab67706c0000bebb0e65fceaffd297b0f3f14756",  "6rqm7IuR0DRbktih6FV9jm", 83)
+
 ];
