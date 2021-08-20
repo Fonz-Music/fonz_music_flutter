@@ -287,42 +287,42 @@ class CoasterManagementApi {
   // --------------------------------------------now dio---------------------------------------------------------
   // edit coaster function
   // will be an umbrella function for now
-  static Future<String> editCoaster(
-      String coasterUID, bool paused, bool disabled, String coasterName) async {
-    String endpoint = address + host + coasters + coasterUID;
-    String token = await getJWTAndCheckIfExpired();
-    // String token = await FirebaseAuth.instance.currentUser.getIdToken();
-    // http
-    // var response = await http.put(endpoint,
-    //     headers: {HttpHeaders.authorizationHeader: 'Bearer $token'},
-    //     body: {paused: paused, disabled: disabled, coasterName: coasterName});
-    // dio
-    Dio dio = new Dio();
-    dio.options.headers = {HttpHeaders.authorizationHeader: 'Bearer $token'};
-    try {
-      var response = await dio.put(endpoint,
-          data: {paused: paused, disabled: disabled, coasterName: coasterName});
-
-      if (response.statusCode == 201) {
-        log('success edited coaster');
-        // return AddCoasterDecoder.fromJson(json.decode(response.body)).coasterUID;
-        return AddCoasterDecoder.fromJson(json.decode(response.data))
-            .coasterUID;
-      } else {
-        // FlutterCrashlytics().log(
-        //     'error on "editCoaster" api call with status of ${response.statusCode} & body of '
-        //     // '${response.body}');
-        //         '${response.data}');
-        return 'error editing Coaster';
-      }
-    } on DioError catch (e) {
-      // FlutterCrashlytics().log(
-      //     'error on "editCoaster" api call with status of ${e.response.statusCode} & body of '
-      //     // '${response.body}');
-      //         '${e.response.data}');
-      return "error editing coaster";
-    }
-  }
+  // static Future<String> editCoaster(
+  //     String coasterUID, bool paused, bool disabled, String coasterName) async {
+  //   String endpoint = address + host + coasters + coasterUID;
+  //   String token = await getJWTAndCheckIfExpired();
+  //   // String token = await FirebaseAuth.instance.currentUser.getIdToken();
+  //   // http
+  //   // var response = await http.put(endpoint,
+  //   //     headers: {HttpHeaders.authorizationHeader: 'Bearer $token'},
+  //   //     body: {paused: paused, disabled: disabled, coasterName: coasterName});
+  //   // dio
+  //   Dio dio = new Dio();
+  //   dio.options.headers = {HttpHeaders.authorizationHeader: 'Bearer $token'};
+  //   try {
+  //     var response = await dio.put(endpoint,
+  //         data: {"paused": paused, disabled: disabled, coasterName: coasterName});
+  //
+  //     if (response.statusCode == 201) {
+  //       log('success edited coaster');
+  //       // return AddCoasterDecoder.fromJson(json.decode(response.body)).coasterUID;
+  //       return AddCoasterDecoder.fromJson(json.decode(response.data))
+  //           .coasterUID;
+  //     } else {
+  //       // FlutterCrashlytics().log(
+  //       //     'error on "editCoaster" api call with status of ${response.statusCode} & body of '
+  //       //     // '${response.body}');
+  //       //         '${response.data}');
+  //       return 'error editing Coaster';
+  //     }
+  //   } on DioError catch (e) {
+  //     // FlutterCrashlytics().log(
+  //     //     'error on "editCoaster" api call with status of ${e.response.statusCode} & body of '
+  //     //     // '${response.body}');
+  //     //         '${e.response.data}');
+  //     return "error editing coaster";
+  //   }
+  // }
 
   // --------------------------------------------now dio---------------------------------------------------------
   // delete coaster function

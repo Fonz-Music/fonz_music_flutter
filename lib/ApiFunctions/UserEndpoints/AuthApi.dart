@@ -122,7 +122,7 @@ class AuthApi {
     Dio dio = new Dio();
 
     try {
-      var response = await dio.post(endpoint, data: {userId: userId, refreshToken: refreshToken});
+      var response = await dio.post(endpoint, data: {"userId": userId, "refreshToken": refreshToken});
       log(response.statusCode.toString());
       log("data is " + response.data.toString());
       if (response.statusCode == 200) {
