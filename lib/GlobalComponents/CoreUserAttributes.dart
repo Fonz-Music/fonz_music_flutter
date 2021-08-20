@@ -125,9 +125,11 @@ class CoreUserAttributes {
 
     // checks how many providers & updates accordingly
     if (musicProviders["body"].length > 0 && musicProviders["body"][0]["providerId"] != "") {
+      log("user has providers");
       setConnectedToSpotify(true);
     }
     else {
+      log("user does NOT have providers");
       setConnectedToSpotify(false);
     }
   }

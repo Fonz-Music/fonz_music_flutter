@@ -20,7 +20,7 @@ class _TopArtistsFutureBuilderState extends State<TopArtistsFutureBuilder> {
     if (updateTopArtists) {
       log("going to get top songs");
       // change to guest depending
-      if (userAttributes.getUserSessionId() != "") {
+      if (userAttributes.getConnectedToSpotify() && userAttributes.getUserSessionId() != "") {
         log("user has session ");
         final fetchedTopArtists = await SpotifySuggestionsApi.getGuestTopArtists(userAttributes.getUserSessionId());
         log("got top songs");
@@ -36,9 +36,9 @@ class _TopArtistsFutureBuilderState extends State<TopArtistsFutureBuilder> {
         // if (fetchedTopArtists["statusCode"] == 200) {
         //   log("can acc get host creds");
         //   // log("number of songs is" + fetchedTopSongs["body"].toString());
-        //   var artists = fetchedTopArtists["body"];
-        //   log("got artists from json");
-        //   topArtists = artistsJsonToList(artists);
+          var artists = fetchedTopArtists["body"];
+          log("got artists from json");
+          topArtists = artistsJsonToList(artists);
         // }
         // else {
         //   log("using temp artists");

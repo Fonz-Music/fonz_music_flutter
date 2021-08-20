@@ -43,18 +43,22 @@ class _SongSuggestionsViewState extends State<SongSuggestionsView> {
                   borderRadius: BorderRadius.circular(10)
               ),
             ),
-            Column(
-              children: [
-                DetermineIfSpotifyButtonShown(),
-                TopSongsFutureBuilder(),
-                // TopSongsView(),
-                TopArtistsFutureBuilder(),
-                // TopArtistsView(artists: tempArtists),
-                TopPlaylistsFutureBuilder(),
-                // TopPlaylistsView()
-              ],
-            ),
-
+            ValueListenableBuilder<bool>(
+              valueListenable: ValueNotifier(userAttributes.getConnectedToSpotify()),
+              builder: (context, value, child) {
+                return Column(
+                  children: [
+                    DetermineIfSpotifyButtonShown(),
+                    TopSongsFutureBuilder(),
+                    // TopSongsView(),
+                    TopArtistsFutureBuilder(),
+                    // TopArtistsView(artists: tempArtists),
+                    TopPlaylistsFutureBuilder(),
+                    // TopPlaylistsView()
+                  ],
+                );
+              }
+            )
 
           ]
       ),

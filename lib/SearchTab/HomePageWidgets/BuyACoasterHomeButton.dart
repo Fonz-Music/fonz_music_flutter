@@ -9,6 +9,7 @@ import 'package:fonz_music_flutter/ApiFunctions/GuestApi/GuestGetCoasterApi.dart
 import 'package:fonz_music_flutter/ApiFunctions/SpotifyEndpoints/SpotifySignInApi.dart';
 import 'package:fonz_music_flutter/ApiFunctions/SpotifyEndpoints/SpotifySuggestionsApi.dart';
 import 'package:fonz_music_flutter/GlobalComponents/FrontEnd/FrontEndConstants.dart';
+import 'package:fonz_music_flutter/GlobalComponents/GlobalFunctions/ConnectSpotify.dart';
 import 'package:fonz_music_flutter/GlobalComponents/GlobalFunctions/LaunchShop.dart';
 import 'package:fonz_music_flutter/MainTabs/CreateAccountPrompt.dart';
 import 'package:fonz_music_flutter/MainTabs/HostTab.dart';
@@ -69,10 +70,11 @@ class _BuyACoasterHomeButtonState extends State<BuyACoasterHomeButton> {
                     shadowLightColor: determineLightShadowRoundButton()
                 ),
                 onPressed: () async {
-                  var tempSessionId = "60224ecc-a00f-437a-8743-4909a8eb7a6c";
+                  // var tempSessionId = "60224ecc-a00f-437a-8743-4909a8eb7a6c";
                   // SpotifySuggestionsApi.getGuestTopArtists(tempSessionId);
                   // SpotifySuggestionsApi.getGuestTopSongs(tempSessionId);
-                  SpotifySuggestionsApi.getGuestTopPlaylists(tempSessionId);
+                  // SpotifySuggestionsApi.getGuestTopPlaylists(tempSessionId);
+                  linkSpotifyOnCallback();
                   // userAttributes.setConnectedToSpotify(false);
                   // launchShop();
                   FirebaseAnalytics().logEvent(name: "userOpenedBuyCoaster", parameters: {'string': "user", "tab": "search"});

@@ -109,6 +109,7 @@ class _ConnectSpotifySearchPageButtonState extends State<ConnectSpotifySearchPag
           else {
             await connectSpotify();
             // link to spotify
+            userAttributes.determineIfUserConnectedToSpotify();
             widget.notifyParent();
           }
           FirebaseAnalytics().logEvent(

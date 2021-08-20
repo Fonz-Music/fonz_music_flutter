@@ -62,5 +62,6 @@ linkSpotifyOnCallback() async {
   if (updateSessionWithProviderId["statusCode"] == 200) {
     userAttributes.setConnectedToSpotify(true);
   }
+  userAttributes.determineIfUserConnectedToSpotify();
 
 }

@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:fonz_music_flutter/GlobalComponents/FrontEnd/FrontEndConstants.dart';
+import 'package:fonz_music_flutter/main.dart';
 
 
 
@@ -134,6 +135,7 @@ class _ManageSpotifyFieldState extends State<ManageSpotifyField> {
                     ),
                     onPressed: () async{
 
+                      userAttributes.setConnectedToSpotify(false);
 
 
 
