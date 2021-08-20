@@ -90,7 +90,27 @@ List<Playlist> playlistsJsonToList(playlists) {
     log("post is " + newPlaylist.playlistName.toString());
     playlistList.add(newPlaylist);
   }
-
-
   return playlistList;
+}
+List<Track> playlistTracksJsonToList(tracks) {
+  List<Track> trackList = [];
+
+  log("in playlistTracksToList");
+  // log("tracks are " + tracks.toString());
+  for (var i in tracks) {
+    var albumArt = i["track"]["album"]["images"][0]["url"];
+    // log("album art is " + i["track"]["album"]["images"][0]["url"]);
+    var listArtist = i["track"]["artists"];
+    // log("artist is " + i["track"]["artists"].toString());
+    var externalUrl = i["track"]["external_urls"]["spotify"];
+    // log("external is " + i["track"]["external_urls"]["spotify"]);
+    List<String> listArtistString = [];
+    listArtist.forEach((e) => {listArtistString.add(e["name"])});
+    var post = new Track(i["track"]["name"], listArtistString, i["track"]["id"], albumArt);
+    // log("post is " + post.title.toString());
+    trackList.add(post);
+  }
+
+
+  return trackList;
 }

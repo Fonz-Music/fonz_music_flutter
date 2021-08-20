@@ -33,17 +33,17 @@ class _TopArtistsFutureBuilderState extends State<TopArtistsFutureBuilder> {
         log("using host creds");
         final fetchedTopArtists = await SpotifySuggestionsApi.getGuestTopArtists(hostSessionIdGlobal);
 
-        if (fetchedTopArtists["statusCode"] == 200) {
-          log("can acc get host creds");
-          // log("number of songs is" + fetchedTopSongs["body"].toString());
-          var artists = fetchedTopArtists["body"];
-          log("got artists from json");
-          topArtists = artistsJsonToList(artists);
-        }
-        else {
-          log("using temp artists");
-          topArtists = tempArtists;
-        }
+        // if (fetchedTopArtists["statusCode"] == 200) {
+        //   log("can acc get host creds");
+        //   // log("number of songs is" + fetchedTopSongs["body"].toString());
+        //   var artists = fetchedTopArtists["body"];
+        //   log("got artists from json");
+        //   topArtists = artistsJsonToList(artists);
+        // }
+        // else {
+        //   log("using temp artists");
+        //   topArtists = tempArtists;
+        // }
       }
       updateTopArtists = false;
     }
@@ -71,7 +71,7 @@ class _TopArtistsFutureBuilderState extends State<TopArtistsFutureBuilder> {
             }
             else {
               return
-                Container();
+                TopArtistsView(artists: tempArtists);
             }
 
           }

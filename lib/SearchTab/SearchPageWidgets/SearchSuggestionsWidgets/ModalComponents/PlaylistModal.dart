@@ -35,9 +35,9 @@ class _PlaylistModalState extends State<PlaylistModal> {
         if (fetchedTracks["statusCode"] == 200) {
           log("can acc get host creds");
           // log("number of songs is" + fetchedTopSongs["body"].toString());
-          var tracks = fetchedTracks["body"];
+          var tracks = fetchedTracks["body"]["items"];
           log("got items from json");
-          playlistTracks = tracksJsonToList(tracks);
+          playlistTracks = playlistTracksJsonToList(tracks);
         }
         else {
           log("using temp tracks");
