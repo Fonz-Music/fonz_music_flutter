@@ -1,6 +1,6 @@
 // String address = 'https://api.fonzmusic.com/';
-String address = "http://52.50.138.97:8080/";
-// String address = "http://beta.api.fonzmusic.com:8080/";
+// String address = "http://52.50.138.97:8080/";
+String address = "https://beta.api.fonzmusic.com/";
 String spotify = 'spotify/';
 String authenticate = 'authenticate/';
 String guest = 'guest/';

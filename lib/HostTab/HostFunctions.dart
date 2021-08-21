@@ -30,10 +30,11 @@ Future<CoasterObject> addCoaster() async {
   Map guestCoasterResponse;
 
   if (checkCoasterResponse["statusCode"] == 404 ) {
+    log("gonna check who owns");
     // check if coaster is owned by someone else
     guestCoasterResponse = await GuestGetCoasterApi.getCoasterDetails(coasterDetails[0]);
     // if not owened, add it
-    if (guestCoasterResponse["statusCode"] == 204) {
+    if (guestCoasterResponse["statusCode"] == 403) {
       Map addCoasterResponse = await CoasterManagementApi
           .addCoaster(coasterDetails[0]);
       log("second resp code: " +

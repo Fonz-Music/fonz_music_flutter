@@ -33,6 +33,9 @@ class AuthApi {
         "body": response.data};
     }
     on DioError catch (e) {
+      log("issue " + e.response.data.toString());
+      log("dailure");
+      log("issue " + e.response.data["message"]);
       return {
         "statusCode": e.response.data["status"],
         "code": e.response.data["code"],

@@ -128,6 +128,8 @@ class _NameYourFirstCoasterState extends State<NameYourFirstCoaster> {
                                 Timer(Duration(milliseconds: SUCCESSPAGELENGTH), () {
                                   userAttributes.setHasConnectedCoasters(true);
                                   // hasConnectedCoasters = true;
+                                  firstConnectedCoasterDetails.statusCode = 0;
+                                  widget.notifyParent();
                                   widget.controller.animateToPage(1,
                                       duration: Duration(seconds: 1), curve: Curves.easeInOutCirc);
                                 });

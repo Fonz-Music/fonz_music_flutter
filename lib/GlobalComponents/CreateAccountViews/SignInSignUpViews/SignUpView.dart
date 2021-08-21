@@ -56,7 +56,7 @@ class _SignUpViewState extends State<SignUpView> {
         _errorMessage += "please enter your password\n";
       }
       else {
-        if (_password.length < 12) {
+        if (_password.length < 8) {
           _errorMessage += "password must be atleast 12 characters\n";
         }
       }
@@ -68,6 +68,9 @@ class _SignUpViewState extends State<SignUpView> {
       }
       else if (_confirmPassword != _password) {
         _errorMessage += "your passwords do not match\n";
+      }
+      else if (!agreedToPolicy) {
+        _errorMessage += "you must accept our privacy policy\n";
       }
       else {
         log("not sure what is the issue is ");

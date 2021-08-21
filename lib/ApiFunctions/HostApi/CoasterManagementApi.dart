@@ -72,7 +72,11 @@ class CoasterManagementApi {
 
       if (response.statusCode == 200) {
         log("success getting coaster details");
-      } else {
+        if (response.data.isEmpty || response.data == null) {
+          response.statusCode = 404;
+        }
+      }
+      else {
         // FlutterCrashlytics().log(
         //     'error on "getSingleOwnedCoaster" api call with status of ${response.statusCode} & body of '
         //     // '${response.body}');
@@ -84,9 +88,7 @@ class CoasterManagementApi {
       }
       return {
         "statusCode": response.statusCode,
-        "code":
-        // response.body};
-        response.statusMessage,
+        "code": response.statusMessage,
         "body": response.data
       };
     } on DioError catch (e) {
