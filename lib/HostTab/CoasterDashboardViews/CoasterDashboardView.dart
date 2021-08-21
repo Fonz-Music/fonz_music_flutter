@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fonz_music_flutter/ApiFunctions/HostApi/CoasterManagementApi.dart';
 import 'package:fonz_music_flutter/GlobalComponents/FrontEnd/FrontEndConstants.dart';
@@ -179,7 +180,8 @@ class _CoasterDashboardViewState extends State<CoasterDashboardView> {
                                             color: determineColorThemeTextInverse(),
                                             fontWeight: FontWeight
                                                 .w800,
-                                            // decoration: determineLineThrough(coasterActive),
+                                            decoration: determineIfPausedCoasterHasLine(singleCoaster["active"])
+                                            // determineLineThrough(coasterActive),
                                           ),
                                           textAlign: TextAlign.left,
                                           overflow: TextOverflow.clip,
@@ -242,4 +244,10 @@ class _CoasterDashboardViewState extends State<CoasterDashboardView> {
       ),
     );
   }
+
+  determineIfPausedCoasterHasLine(bool active) {
+    if (active) return TextDecoration.none;
+    else return TextDecoration.lineThrough;
+  }
+
 }

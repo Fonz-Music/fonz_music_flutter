@@ -18,6 +18,7 @@ class _PauseCoasterButtonState extends State<PauseCoasterButton> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      color: (widget.coasterActive) ? determineColorThemeBackground() : LIGHTERGREY,
       child: TextButton(
         child: Row(
           children: [

@@ -246,7 +246,7 @@ class CoasterManagementApi {
   // disable coaster function - change bool
   // PUT /host/coaster/{coasterUID} body: { paused: true|false, disabled: true|false, name: 'string'}
   static Future pauseCoaster(String coasterUID, bool active) async {
-    log("bool is " + active.runtimeType.toString());
+    log("bool is " + active.toString());
     String endpoint = address + host + coasters + coasterUID;
     String token = await getJWTAndCheckIfExpired();
     // String token = await FirebaseAuth.instance.currentUser.getIdToken();
@@ -259,7 +259,7 @@ class CoasterManagementApi {
     dio.options.headers = {HttpHeaders.authorizationHeader: 'Bearer $token'};
     try {
       var response =
-      await dio.put(endpoint, data: {"active": active.toString()});
+      await dio.put(endpoint, data: {"active": active});
 
       if (response.statusCode == 200) {
         log('success paused coaster');
