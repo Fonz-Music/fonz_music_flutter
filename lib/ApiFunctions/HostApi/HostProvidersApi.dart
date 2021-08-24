@@ -34,6 +34,9 @@ class HostProvidersApi {
 
           log("storing this display name " + providersResponse[0]["displayName"].toString());
 
+          var spotifyEmail = fetchEmailFromSpotifyAdditional(providersResponse[0]["additional"]);
+
+          localPreferences.setString("spotifyEmail", spotifyEmail);
         }
         else {
           log("no providers");

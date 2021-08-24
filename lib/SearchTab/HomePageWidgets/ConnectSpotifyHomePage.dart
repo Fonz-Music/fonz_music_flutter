@@ -58,6 +58,8 @@ class _ConnectSpotifyHomePageButtonState extends State<ConnectSpotifyHomePageBut
                     shadowLightColor: determineLightShadowRoundButton()
                 ),
                 onPressed: () async {
+                  await connectSpotify();
+                  widget.notifyParent();
                   if (!userAttributes.getHasAccount()) {
                     showModalBottomSheet<dynamic>(context: context,
                         isScrollControlled: true,
@@ -79,13 +81,7 @@ class _ConnectSpotifyHomePageButtonState extends State<ConnectSpotifyHomePageBut
                           );
                         });
                   }
-                  else {
-                    await connectSpotify();
-                    // link to spotify
-                    // userAttributes.setConnectedToSpotify(true);
-                    // connectedToSpotify = true;
-                    widget.notifyParent();
-                  }
+                  userAttributes.determineIfUserConnectedToSpotify();
 
                   FirebaseAnalytics().logEvent(name: "userTappedConnectToSpotifyHost", parameters: {'user': "host"});
                 },

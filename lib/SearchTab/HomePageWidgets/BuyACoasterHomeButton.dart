@@ -6,6 +6,7 @@ import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:fonz_music_flutter/ApiFunctions/ApiConstants.dart';
 import 'package:fonz_music_flutter/ApiFunctions/AuthMethods.dart';
 import 'package:fonz_music_flutter/ApiFunctions/GuestApi/GuestGetCoasterApi.dart';
+import 'package:fonz_music_flutter/ApiFunctions/HostApi/HostProvidersApi.dart';
 import 'package:fonz_music_flutter/ApiFunctions/SpotifyEndpoints/SpotifySignInApi.dart';
 import 'package:fonz_music_flutter/ApiFunctions/SpotifyEndpoints/SpotifySuggestionsApi.dart';
 import 'package:fonz_music_flutter/GlobalComponents/FrontEnd/FrontEndConstants.dart';
@@ -74,7 +75,8 @@ class _BuyACoasterHomeButtonState extends State<BuyACoasterHomeButton> {
                   // SpotifySuggestionsApi.getGuestTopArtists(tempSessionId);
                   // SpotifySuggestionsApi.getGuestTopSongs(tempSessionId);
                   // SpotifySuggestionsApi.getGuestTopPlaylists(tempSessionId);
-                  linkSpotifyOnCallback();
+                  // linkSpotifyOnCallback();
+                  HostProvidersApi.getMusicProviders();
                   // userAttributes.setConnectedToSpotify(false);
                   // launchShop();
                   FirebaseAnalytics().logEvent(name: "userOpenedBuyCoaster", parameters: {'string': "user", "tab": "search"});

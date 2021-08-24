@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:fonz_music_flutter/ApiFunctions/UserEndpoints/UserApi.dart';
 import 'package:fonz_music_flutter/GlobalComponents/FrontEnd/FrontEndConstants.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../main.dart';
 
@@ -114,13 +115,14 @@ class _SignUpViewState extends State<SignUpView> {
         ),
         child: TextFormField(
           maxLines: 1,
-          keyboardType: TextInputType.emailAddress,
+          keyboardType: TextInputType.text,
           autofocus: false,
           style: TextStyle(
             fontFamily: FONZFONTTWO,
             fontSize: HEADINGFIVE,
             color: DARKERGREY,
           ),
+          initialValue: userAttributes.getSpotifyIdForSignIn(),
           decoration: InputDecoration(
             hintText: "display name",
             border: InputBorder.none,
@@ -133,12 +135,17 @@ class _SignUpViewState extends State<SignUpView> {
             });
 //            print(_email);
           },
+
           validator: (value) => value.isEmpty ? 'Email can\'t be empty' : null,
           onSaved: (value) => _displayName = value.trim(),
         ),
       ),
     );
+
+
   }
+
+
 
   Widget ShowEmailInputSignUp() {
     final size = MediaQuery.of(context).size;
@@ -157,6 +164,7 @@ class _SignUpViewState extends State<SignUpView> {
             maxLines: 1,
             keyboardType: TextInputType.emailAddress,
             autofocus: false,
+            initialValue: userAttributes.getSpotifyEmail(),
             style: TextStyle(
               fontFamily: FONZFONTTWO,
               fontSize: HEADINGFIVE,

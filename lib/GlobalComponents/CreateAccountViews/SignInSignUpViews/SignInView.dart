@@ -95,6 +95,7 @@ class _SignInViewState extends State<SignInView> {
           maxLines: 1,
           keyboardType: TextInputType.emailAddress,
           autofocus: false,
+          initialValue: userAttributes.getSpotifyEmail(),
           style: TextStyle(
             fontFamily: FONZFONTTWO,
             fontSize: HEADINGFIVE,

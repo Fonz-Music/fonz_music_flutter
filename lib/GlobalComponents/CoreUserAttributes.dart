@@ -15,11 +15,14 @@ class CoreUserAttributes {
   bool _hasConnectedCoasters = false;
   bool _hasAccount = false;
   String _userSpotifyId = "spotify account";
+  String _userSpotifyEmail = "";
   bool _agreedToEmail = false;
   bool _agreedConsent = false;
   String _userId = "";
   String _userDisplayName = "";
   String _userSessionId = "";
+
+  // bool throwCreateAccountPopup = false;
 
   setAttributes() async {
     log("setting attributes");
@@ -40,6 +43,11 @@ class CoreUserAttributes {
     final spotifyIdFromStorage = localPreferences.getString("spotifyDisplayName");
     if (spotifyIdFromStorage != null) {
       _userSpotifyId = spotifyIdFromStorage;
+    }
+
+    final spotifyEmailFromStorage = localPreferences.getString("spotifyEmail");
+    if (spotifyEmailFromStorage != null) {
+      _userSpotifyEmail = spotifyEmailFromStorage;
     }
 
     final agreedEmailFromStorage = localPreferences.getBool("agreedToEmail");
@@ -136,6 +144,15 @@ class CoreUserAttributes {
 
   String getSpotifyId() {
     return _userSpotifyId;
+  }
+
+  String getSpotifyIdForSignIn() {
+    if (_userSpotifyId == "spotify account") return "";
+    else return _userSpotifyId;
+  }
+
+  String getSpotifyEmail() {
+    return _userSpotifyEmail;
   }
 
   // agree email

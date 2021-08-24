@@ -85,6 +85,7 @@ class _ConnectSpotifySearchPageButtonState extends State<ConnectSpotifySearchPag
           ),
         ),
         onPressed: () async {
+          await connectSpotify();
           if (!userAttributes.getHasAccount()) {
             showModalBottomSheet<dynamic>(context: context,
                 isScrollControlled: true,
@@ -106,12 +107,9 @@ class _ConnectSpotifySearchPageButtonState extends State<ConnectSpotifySearchPag
                   );
                 });
           }
-          else {
-            await connectSpotify();
-            // link to spotify
-            userAttributes.determineIfUserConnectedToSpotify();
-            widget.notifyParent();
-          }
+
+          userAttributes.determineIfUserConnectedToSpotify();
+          widget.notifyParent();
           FirebaseAnalytics().logEvent(
               name: "userOpenedManageSpotify", parameters: {'string': "user"});
         },

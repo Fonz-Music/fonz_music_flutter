@@ -7,6 +7,8 @@ import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:fonz_music_flutter/GlobalComponents/FrontEnd/FrontEndConstants.dart';
 import 'package:fonz_music_flutter/GlobalComponents/GlobalFunctions/ConnectSpotify.dart';
 
+import '../../main.dart';
+
 class ConnectSpotifySettingsButton extends StatefulWidget {
   @override
   _ConnectSpotifySettingsButtonState createState() => _ConnectSpotifySettingsButtonState();
@@ -57,6 +59,7 @@ class _ConnectSpotifySettingsButtonState extends State<ConnectSpotifySettingsBut
         onPressed: () async {
           log("pressed sign in spotify settings");
           await connectSpotify();
+          userAttributes.determineIfUserConnectedToSpotify();
           FirebaseAnalytics().logEvent(
               name: "userOpenedManageSpotify", parameters: {'string': "user"});
         },

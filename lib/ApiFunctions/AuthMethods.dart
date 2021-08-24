@@ -110,3 +110,16 @@ String decodeBase64(String toDecode) {
   }
   return res;
 }
+
+String fetchEmailFromSpotifyAdditional(String additionalText) {
+  var textWithoutDash = additionalText.replaceAll("//", "");
+  log("texts w/o dash is" + textWithoutDash);
+  var compsFromAdditional = textWithoutDash.split(",");
+  //    print("texts w/o dash is \(textWithoutDash)")
+  var emailComp = compsFromAdditional[3];
+  log("email comp is " + emailComp.toString());
+  var compsFromEmail = emailComp.split(":");
+  var email = compsFromEmail[1];
+  log("email is " + email);
+  return email.replaceAll("\"", "");
+}
