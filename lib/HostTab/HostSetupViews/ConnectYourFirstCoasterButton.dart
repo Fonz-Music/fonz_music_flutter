@@ -7,6 +7,7 @@ import 'package:fonz_music_flutter/ApiFunctions/GuestApi/GuestGetCoasterApi.dart
 import 'package:fonz_music_flutter/ApiFunctions/HostApi/CoasterManagementApi.dart';
 import 'package:fonz_music_flutter/GlobalComponents/ExceptionHandling.dart';
 import 'package:fonz_music_flutter/GlobalComponents/FrontEnd/FrontEndConstants.dart';
+import 'package:fonz_music_flutter/MainTabs/CreateAccountPrompt.dart';
 
 import 'package:fonz_music_flutter/NfcFunctions/HostNfcFunctions.dart';
 
@@ -30,6 +31,11 @@ class ConnectYourFirstCoasterButton extends StatefulWidget {
 class _ConnectYourFirstCoasterButtonState extends State<ConnectYourFirstCoasterButton> {
   @override
   Widget build(BuildContext context) {
+
+    final size = MediaQuery.of(context).size;
+    final width = size.width;
+    final height = size.height;
+
     return Opacity(
       opacity: determineFirstCoasterOpacity(),
       child: Center(
@@ -59,16 +65,41 @@ class _ConnectYourFirstCoasterButtonState extends State<ConnectYourFirstCoasterB
                     shadowLightColor: determineLightShadowRoundButton()
                 ),
                 onPressed: () async {
-                  if (userAttributes.getConnectedToSpotify()) {
-                    pressedToConnectFirstCoaster = true;
-                    widget.notifyParent();
+                  if (userAttributes.getHasAccount()) {
+                    if (userAttributes.getConnectedToSpotify()) {
+                      pressedToConnectFirstCoaster = true;
+                      widget.notifyParent();
 
-                    firstConnectedCoasterDetails = await addCoaster();
+                      firstConnectedCoasterDetails = await addCoaster();
 
-                    // firstConnectedCoasterDetails.statusCode = 204;
-                    launchedNfcForFirstCoaster = true;
-                    pressedToConnectFirstCoaster = false;
-                    widget.notifyParent();
+                      // firstConnectedCoasterDetails.statusCode = 204;
+                      launchedNfcForFirstCoaster = true;
+                      pressedToConnectFirstCoaster = false;
+                      widget.notifyParent();
+                    }
+                  }
+                  else {
+                    showModalBottomSheet<dynamic>(context: context,
+                        isScrollControlled: true,
+                        builder: (BuildContext bc) {
+                          return Wrap(
+                              children: <Widget>[
+                                Container(
+                                  height: height * 0.95,
+                                  child: Container(
+                                    decoration: new BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius: new BorderRadius.only(
+                                            topLeft: const Radius.circular(
+                                                25.0),
+                                            topRight: const Radius.circular(
+                                                25.0))),
+                                    child: CreateAccountPrompt(popupContext: context),
+                                  ),
+                                )
+                              ]
+                          );
+                        });
                   }
                 },
 
