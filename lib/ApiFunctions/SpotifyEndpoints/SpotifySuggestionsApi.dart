@@ -94,7 +94,7 @@ class SpotifySuggestionsApi {
     log("about to get resp inside get top songs");
     try {
       var response = await dio.get(endpoint);
-      log("top songs mate: " + response.data.toString());
+      // log("top songs mate: " + response.data.toString());
       log("success");
       return {
         "statusCode": response.statusCode,
@@ -128,7 +128,7 @@ class SpotifySuggestionsApi {
     log("about to get resp inside get tracks from artist");
     try {
       var response = await dio.get(endpoint);
-      log("top songs mate: " + response.data.toString());
+      // log("top songs mate: " + response.data.toString());
       log("success");
       return {
         "statusCode": response.statusCode,
@@ -162,7 +162,7 @@ class SpotifySuggestionsApi {
     log("about to get resp inside get tracks from artist");
     try {
       var response = await dio.get(endpoint);
-      log("top songs mate: " + response.data.toString());
+      // log("top songs mate: " + response.data.toString());
       log("success");
       return {
         "statusCode": response.statusCode,

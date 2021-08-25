@@ -47,3 +47,23 @@ queueSongLaunchNfc(Track trackToQueue) async {
     }
   });
 }
+
+queueSongWithoutNfc(Track trackToQueue) async {
+  log("going to queue " + trackToQueue.title);
+  songAddedToQueue = trackToQueue.title;
+
+  var queueTrackResponse = await GuestSpotifyApi.queueTrackSpotify(trackToQueue.trackID, hostSessionIdGlobal);
+  if (queueTrackResponse["statusCode"] == 200) {
+    log("succesful q");
+    responseCodeFromQueue.value = "QUEUE_SUCCESS";
+  }
+  else if (queueTrackResponse["statusCode"] == 403) {
+    log("q delay");
+    responseCodeFromQueue.value = "QUEUED_BUT_DELAYED";
+  }
+  else {
+    log("fail q");
+    responseCodeFromQueue.value = "QUEUE_FAILURE";
+  }
+
+}

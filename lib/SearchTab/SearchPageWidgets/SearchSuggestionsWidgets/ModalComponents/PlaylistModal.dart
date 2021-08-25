@@ -24,27 +24,31 @@ class PlaylistModal extends StatefulWidget {
 
 class _PlaylistModalState extends State<PlaylistModal> {
 
-  List<Track> playlistTracks;
 
   Future<List<Track>> getTracksByPlaylistId() async {
+    if (updateTracksFromPlaylist) {
+      log("using host creds");
+      final fetchedTracks = await SpotifySuggestionsApi
+          .getTracksByPlaylist(
+          hostSessionIdGlobal, widget.givenPlaylist.playlistId);
 
-        log("using host creds");
-        final fetchedTracks = await SpotifySuggestionsApi
-            .getTracksByPlaylist(hostSessionIdGlobal, widget.givenPlaylist.playlistId);
-
-        if (fetchedTracks["statusCode"] == 200) {
-          log("can acc get host creds");
-          // log("number of songs is" + fetchedTopSongs["body"].toString());
-          var tracks = fetchedTracks["body"]["items"];
-          log("got items from json");
-          playlistTracks = playlistTracksJsonToList(tracks);
-        }
-        else {
-          log("using temp tracks");
-          playlistTracks = tempTracks;
-        }
-
-    return playlistTracks;
+      if (fetchedTracks["statusCode"] == 200) {
+        log("can acc get host creds");
+        // log("number of songs is" + fetchedTopSongs["body"].toString());
+        var tracks = fetchedTracks["body"]["items"];
+        log("got items from json");
+        tracksFromPlaylist = playlistTracksJsonToList(tracks);
+      }
+      else {
+        log("using temp tracks");
+        tracksFromPlaylist = tempTracks;
+      }
+      updateTracksFromPlaylist = false;
+    }
+    else {
+      log("does not need more tracks from playlist");
+    }
+    return tracksFromPlaylist;
   }
 
   @override

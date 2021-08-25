@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:fonz_music_flutter/GlobalComponents/FrontEnd/FrontEndConstants.dart';
+import 'package:fonz_music_flutter/GlobalComponents/GlobalSessionVariables.dart';
 import 'package:fonz_music_flutter/GlobalComponents/Objects/Artist.dart';
 import 'package:fonz_music_flutter/SearchTab/SearchPageWidgets/SearchSuggestionsWidgets/ModalComponents/ArtistModal.dart';
 
@@ -28,6 +29,7 @@ class _ArtistComponentState extends State<ArtistComponent> {
       padding: EdgeInsets.fromLTRB(0, 10, 0 , 0),
       child: MaterialButton(
         onPressed: (){
+          updateTracksFromArtist = true;
           showModalBottomSheet<dynamic>(context: context,
               // shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
               isScrollControlled: true,

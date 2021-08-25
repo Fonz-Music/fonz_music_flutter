@@ -27,10 +27,11 @@ class _TrackButtonState extends State<TrackButton> {
     return Container(
       padding: EdgeInsets.fromLTRB(0, 1, 0, 1),
       child: MaterialButton(
-        onPressed: () {
+        onPressed: () async {
           FocusScope.of(context).unfocus();
           log("pressed");
-          queueSongLaunchNfc(widget.givenTrack);
+          await queueSongWithoutNfc(widget.givenTrack);
+          // queueSongLaunchNfc(widget.givenTrack);
         },
         child: Container(
           width: width * 0.9,

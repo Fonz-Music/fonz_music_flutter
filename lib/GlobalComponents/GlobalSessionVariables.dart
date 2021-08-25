@@ -53,3 +53,9 @@ var tempPlaylists =
   Playlist("malibuNinetyTwo", "https://i.scdn.co/image/ab67706c0000bebb0e65fceaffd297b0f3f14756",  "6rqm7IuR0DRbktih6FV9jm", 83)
 
 ];
+
+List<Track> tracksFromPlaylist;
+var updateTracksFromPlaylist = true;
+
+List<Track> tracksFromArtist;
+var updateTracksFromArtist = true;

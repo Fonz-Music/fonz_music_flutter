@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:fonz_music_flutter/GlobalComponents/FrontEnd/FrontEndConstants.dart';
+import 'package:fonz_music_flutter/GlobalComponents/GlobalSessionVariables.dart';
 import 'package:fonz_music_flutter/GlobalComponents/Objects/Playlist.dart';
 import 'package:fonz_music_flutter/SearchTab/SearchPageWidgets/SearchSuggestionsWidgets/ModalComponents/PlaylistModal.dart';
 
@@ -27,6 +28,7 @@ class _PlaylistComponentState extends State<PlaylistComponent> {
       padding: EdgeInsets.all(5),
       child: MaterialButton(
         onPressed: (){
+          updateTracksFromPlaylist = true;
           showModalBottomSheet<dynamic>(context: context,
               // shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
               isScrollControlled: true,

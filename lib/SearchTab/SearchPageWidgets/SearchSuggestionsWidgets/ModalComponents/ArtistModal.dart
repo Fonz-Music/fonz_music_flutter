@@ -26,27 +26,32 @@ class ArtistModal extends StatefulWidget {
 
 class _ArtistModalState extends State<ArtistModal> {
 
-  List<Track> artistTracks;
+
 
   Future<List<Track>> getTracksByArtistId() async {
 
-    log("using host creds");
-    final fetchedTracks = await SpotifySuggestionsApi
-        .getTracksByArtist(hostSessionIdGlobal, widget.givenArtist.artistId);
+    if (updateTracksFromArtist) {
+      log("using host creds");
+      final fetchedTracks = await SpotifySuggestionsApi
+          .getTracksByArtist(hostSessionIdGlobal, widget.givenArtist.artistId);
 
-    if (fetchedTracks["statusCode"] == 200) {
-      log("can acc get host creds");
-      // log("number of songs is" + fetchedTopSongs["body"].toString());
-      var tracks = fetchedTracks["body"];
-      log("got items from json");
-      artistTracks = tracksJsonToList(tracks);
+      if (fetchedTracks["statusCode"] == 200) {
+        log("can acc get host creds");
+        // log("number of songs is" + fetchedTopSongs["body"].toString());
+        var tracks = fetchedTracks["body"];
+        log("got items from json");
+        tracksFromArtist = tracksJsonToList(tracks);
+      }
+      else {
+        log("using temp tracks");
+        tracksFromArtist = tempTracks;
+      }
     }
     else {
-      log("using temp tracks");
-      artistTracks = tempTracks;
+      log("does not need more tracks from artist");
     }
 
-    return artistTracks;
+    return tracksFromArtist;
   }
 
   @override
