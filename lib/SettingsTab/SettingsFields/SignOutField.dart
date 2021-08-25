@@ -137,9 +137,7 @@ class _SignOutFieldState extends State<SignOutField> {
                     ),
                     onPressed: () async{
                       log("signing out");
-                      await userAttributes.setHasAccount(false);
-                      await userAttributes.setHasConnectedCoasters(false);
-                      await userAttributes.setConnectedToSpotify(false);
+                      await userAttributes.deleteAttributesAfterSignOut();
 
                       // Create storage
                       final storage = new FlutterSecureStorage();

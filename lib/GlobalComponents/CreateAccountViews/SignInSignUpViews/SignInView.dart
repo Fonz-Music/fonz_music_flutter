@@ -200,10 +200,10 @@ class _SignInViewState extends State<SignInView> {
                 log("was 200, now settting ");
                 // set hasAccount to true
                 await userAttributes.setHasAccount(true);
-                // check if user has spotify
-                await userAttributes.determineIfUserConnectedToSpotify();
-                // check if user has coasters
-                await userAttributes.determineIfUserHasCoasters();
+
+                // sets all user attributes
+                await userAttributes.determineAllUserAttributesAfterSignIn();
+
 
                 // check if user has coasters
                 updatePageCoasterDashboard = true;

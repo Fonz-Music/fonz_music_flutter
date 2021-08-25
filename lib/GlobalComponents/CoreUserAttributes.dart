@@ -5,7 +5,9 @@ import 'dart:developer';
 import 'package:fonz_music_flutter/ApiFunctions/GuestApi/GuestSpotifyApi.dart';
 import 'package:fonz_music_flutter/ApiFunctions/HostApi/CoasterManagementApi.dart';
 import 'package:fonz_music_flutter/ApiFunctions/HostApi/HostProvidersApi.dart';
+import 'package:fonz_music_flutter/ApiFunctions/HostApi/HostSessionsApi.dart';
 import 'package:fonz_music_flutter/ApiFunctions/HostApi/HostSpotifyApi.dart';
+import 'package:fonz_music_flutter/ApiFunctions/UserEndpoints/UserApi.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 
@@ -78,6 +80,27 @@ class CoreUserAttributes {
     log("spot is " + _connectedToSpotify.toString());
     log("coasters is " + _hasConnectedCoasters.toString());
     log("account is " + _hasAccount.toString());
+  }
+
+  determineAllUserAttributesAfterSignIn() async {
+    await determineIfUserConnectedToSpotify();
+    await determineIfUserHasCoasters();
+    await UserApi.getUserAccount();
+    await determineIfUserHasSessionAndSetSessionId();
+    await setAttributes();
+  }
+
+  deleteAttributesAfterSignOut() async {
+    await setHasAccount(false);
+    await setConnectedToSpotify(false);
+    await setHasConnectedCoasters(false);
+    await setAgreedEmail(false);
+    await setUserDisplayName("");
+    await setUserId("");
+    await setUserSessionId("");
+
+
+
   }
 
   bool getHasAccount() {
@@ -219,5 +242,7 @@ class CoreUserAttributes {
     localPreferences.setString("userAccountSessionId", newId);
 
   }
-
+  determineIfUserHasSessionAndSetSessionId() async {
+    await HostSessionsApi.getAllSessions();
+  }
 }
