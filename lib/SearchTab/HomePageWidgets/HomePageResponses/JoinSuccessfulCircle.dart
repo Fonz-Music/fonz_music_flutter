@@ -2,15 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:fonz_music_flutter/GlobalComponents/FrontEnd/FrontEndConstants.dart';
 
-class SuccessWriteUid extends StatefulWidget {
+class JoinSuccessfulCircle extends StatefulWidget {
+  String connectedCoasterName;
+  String coasterHostName;
 
+  JoinSuccessfulCircle({Key key, @required this.connectedCoasterName, this.coasterHostName}) : super(key: key);
 
 
   @override
-  _SuccessWriteUidState createState() => _SuccessWriteUidState();
+  _JoinSuccessfulCircleState createState() => _JoinSuccessfulCircleState();
 }
 
-class _SuccessWriteUidState extends State<SuccessWriteUid> {
+class _JoinSuccessfulCircleState extends State<JoinSuccessfulCircle> {
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -24,12 +27,12 @@ class _SuccessWriteUidState extends State<SuccessWriteUid> {
                 height: 100,
                 child:
                 Container(
-                    padding: const EdgeInsets.all(20),
-                    child: Icon(
-                        Icons.check,
-                        color: SUCCESSGREEN,
-                        size: 50
-                    )
+                  padding: const EdgeInsets.all(20),
+                  child: Icon(
+                    Icons.check,
+                    color: SUCCESSGREEN,
+                    size: 50
+                  )
                 ),
               ),
               style: NeumorphicStyle(
@@ -45,7 +48,7 @@ class _SuccessWriteUidState extends State<SuccessWriteUid> {
           Padding(
             padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
             child: new Text(
-              "successfully wrote url to tag",
+              "successfully connected to ${widget.coasterHostName}'s coaster ${widget.connectedCoasterName}",
               style: TextStyle(
                 fontFamily: FONZFONTTWO,
                 fontSize: HEADINGFOUR,

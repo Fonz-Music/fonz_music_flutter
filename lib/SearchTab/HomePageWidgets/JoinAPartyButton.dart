@@ -3,21 +3,22 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:fonz_music_flutter/GlobalComponents/FrontEnd/FrontEndConstants.dart';
+import 'package:fonz_music_flutter/HostTab/HostSetup.dart';
 import 'package:fonz_music_flutter/SearchTab/HomePageWidgets/scanForCoasterDetails.dart';
 
-import '../HomeEncodePage.dart';
+import '../HomePageDecision.dart';
 
-class EncodeATagButton extends StatefulWidget {
+class JoinAPartyButton extends StatefulWidget {
 
-  EncodeATagButton({Key key, @required this.notifyParent}) : super(key: key);
+  JoinAPartyButton({Key key, @required this.notifyParent}) : super(key: key);
 
   final Function() notifyParent;
 
   @override
-  _EncodeATagButtonState createState() => _EncodeATagButtonState();
+  _JoinAPartyButtonState createState() => _JoinAPartyButtonState();
 }
 
-class _EncodeATagButtonState extends State<EncodeATagButton> {
+class _JoinAPartyButtonState extends State<JoinAPartyButton> {
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -47,13 +48,10 @@ class _EncodeATagButtonState extends State<EncodeATagButton> {
                   shadowLightColor: determineLightShadowRoundButton()
               ),
               onPressed: () async {
-                encodeTagResponse = "READING_TAG";
-                // widget.notifyParent();
+                pressedNfcButtonToJoinPartu = true;
+                widget.notifyParent();
 
-                var tagUidResp = await scanForTagUid();
-                encodeTagResponse = tagUidResp[0];
-                tagUid = tagUidResp[1];
-
+                hostCoasterDetails = await scanForCoasterDetails();
                 launchedNfcToJoinParty = true;
                 widget.notifyParent();
               },
@@ -63,7 +61,7 @@ class _EncodeATagButtonState extends State<EncodeATagButton> {
           Padding(
             padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
             child: new Text(
-              "encode a tag",
+              "queue a song",
               style: TextStyle(
                 fontFamily: FONZFONTTWO,
                 fontSize: HEADINGTHREE,

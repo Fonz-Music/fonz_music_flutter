@@ -2,15 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:fonz_music_flutter/GlobalComponents/FrontEnd/FrontEndConstants.dart';
 
-class SuccessReadUid extends StatefulWidget {
-
-
-
+class RewriteCoasterCircle extends StatefulWidget {
   @override
-  _SuccessReadUidState createState() => _SuccessReadUidState();
+  _RewriteCoasterCircleState createState() => _RewriteCoasterCircleState();
 }
 
-class _SuccessReadUidState extends State<SuccessReadUid> {
+class _RewriteCoasterCircleState extends State<RewriteCoasterCircle> {
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -24,32 +21,32 @@ class _SuccessReadUidState extends State<SuccessReadUid> {
                 height: 100,
                 child:
                 Container(
-                  padding: const EdgeInsets.all(20),
-                  child: Icon(
-                    Icons.check,
-                    color: SUCCESSGREEN,
-                    size: 50
-                  )
+                  padding: const EdgeInsets.all(30),
+                  child: Image(
+                    image: AssetImage("assets/lightGreyIcons/coasterIconLightGrey.png"),
+
+                  ),
                 ),
               ),
               style: NeumorphicStyle(
                   shape: NeumorphicShape.flat,
                   boxShape: NeumorphicBoxShape.circle(),
-                  border: NeumorphicBorder(width: 2, color: SUCCESSGREEN),
-                  color: determineColorThemeBackground(),
+                  border: NeumorphicBorder(width: 2, color: Colors.white),
+                  color: LILAC,
                   shadowDarkColor: determineLightShadowRoundButton(),
                   shadowLightColor: determineLightShadowRoundButton()
               ),
+
             ),
           ),
           Padding(
             padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
             child: new Text(
-              "successfully read tag uid",
+              "let's setup this coaster",
               style: TextStyle(
                 fontFamily: FONZFONTTWO,
                 fontSize: HEADINGFOUR,
-                color: SUCCESSGREEN,
+                color: determineColorThemeTextInverse(),
               ),
               textAlign: TextAlign.center,
             ),

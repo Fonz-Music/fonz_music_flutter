@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:fonz_music_flutter/GlobalComponents/FrontEnd/FrontEndConstants.dart';
 
-import '../../HomeEncodePage.dart';
+import '../../HomePageDecision.dart';
 
 class CoasterHasNoHost extends StatefulWidget {
 

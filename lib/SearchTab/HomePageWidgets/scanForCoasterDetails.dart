@@ -1,52 +1,57 @@
 
 
 
-import 'dart:async';
 import 'dart:developer';
-import 'dart:ffi';
 
-import 'package:fonz_music_flutter/ApiFunctions/HostApi/CoasterManagementApi.dart';
-import 'package:fonz_music_flutter/GlobalComponents/FrontEnd/FrontEndConstants.dart';
+import 'package:fonz_music_flutter/ApiFunctions/GuestApi/GuestGetCoasterApi.dart';
+import 'package:fonz_music_flutter/GlobalComponents/CoreUserAttributes.dart';
+import 'package:fonz_music_flutter/GlobalComponents/GlobalSessionVariables.dart';
 import 'package:fonz_music_flutter/GlobalComponents/Objects/CoasterObject.dart';
-import 'package:fonz_music_flutter/NfcFunctions/WriteTagFunctions.dart';
-import 'package:fonz_music_flutter/NfcFunctions/ReadTagFunctions.dart';
+import 'package:fonz_music_flutter/NfcFunctions/GuestNfcFunctions.dart';
 
-import '../HomeEncodePage.dart';
+Future<CoasterObject> scanForCoasterDetails() async {
+  log("starting the scan");
+  // create coaster object
+  CoasterObject hostCoasterDetails = CoasterObject("hostName", "coasterName", "sessionId", "coasterUid");
+  // get uid from coaster
+  String uidFromScannedCoaster = await GuestNfcFunctions.readNfcToJoinParty();
+  // uidFromScannedCoaster = "04ADDD1AE66C80";
+  if (uidFromScannedCoaster.length > 20) {
+    hostCoasterDetails.statusCode = 0;
+  }
+  else {
+    log("return from scan");
+    // semd uid to api
+    Map hostDetails = await GuestGetCoasterApi.getCoasterDetails(
+        uidFromScannedCoaster.toUpperCase());
+    // for debug
+    log("resp from api " + hostDetails.toString());
+    log("resp code " + hostDetails["statusCode"].toString());
 
+    // sets status code
+    hostCoasterDetails.setStatusCode(hostDetails["statusCode"]);
+    // if successful, set info
+    if (hostDetails["statusCode"] == 200) {
+      log("getting this far");
+      // if there is no host
 
-Future<String> writeUrlToCoaster(uidFromScannedTag) async {
+      // if there is a host, set it
+      // else {
+        hostCoasterDetails.coasterUid = uidFromScannedCoaster;
+        // hostCoasterDetails.hostName = hostDetails["body"].coaster.name;
+        hostCoasterDetails.hostName = "host";
+        hostCoasterDetails.coasterName = hostDetails["body"].coaster.name;
+        hostCoasterDetails.sessionId = hostDetails["body"].session.sessionId;
+        hostSessionIdGlobal = hostDetails["body"].session.sessionId;
+        print("details are " + hostCoasterDetails.coasterName.toString());
+        log("stored coaster ");
 
-    log("starting to write");
-    // write url
-    var successfulWrite = await WriteTagFunctions.writeUrlOnTag(
-        uidFromScannedTag);
-    if (!successfulWrite) {
-      return "DID_NOT_WRITE_URL";
+      // }
     }
-    else {
-      // update api
-      var updateCoasterResponse = CoasterManagementApi.classifyCoasterAsEncoded(uidFromScannedTag, true, groupCoasterBelongs);
-
-
-      return updateCoasterResponse;
-
+    else if (hostDetails["statusCode"] == 403 && hostDetails["code"] == "COASTER_NO_HOST") {
+      hostCoasterDetails.statusCode = 600;
     }
-
-
-}
-
-  Future<List<String>> scanForTagUid() async {
-    log("starting the scan");
-
-    // get uid from coaster
-    String uidFromScannedTag = await ReadTagFunctions.readTagUid();
-
-    if (uidFromScannedTag == "NFC_NOT_SUPPORTED") {
-      return [uidFromScannedTag,""];
-    }
-    else if (uidFromScannedTag.length == 14) {
-      return ["SUCCESS_ON_READ",uidFromScannedTag];
-    }
-    else return ["DID_NOT_FETCH_UID",""];
   }
 
+  return hostCoasterDetails;
+}
