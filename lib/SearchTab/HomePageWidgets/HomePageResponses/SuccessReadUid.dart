@@ -2,12 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:fonz_music_flutter/GlobalComponents/FrontEnd/FrontEndConstants.dart';
 
-class RewriteCoasterCircle extends StatefulWidget {
+class SuccessReadUid extends StatefulWidget {
+
+
+
   @override
-  _RewriteCoasterCircleState createState() => _RewriteCoasterCircleState();
+  _SuccessReadUidState createState() => _SuccessReadUidState();
 }
 
-class _RewriteCoasterCircleState extends State<RewriteCoasterCircle> {
+class _SuccessReadUidState extends State<SuccessReadUid> {
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -21,32 +24,32 @@ class _RewriteCoasterCircleState extends State<RewriteCoasterCircle> {
                 height: 100,
                 child:
                 Container(
-                  padding: const EdgeInsets.all(30),
-                  child: Image(
-                    image: AssetImage("assets/lightGreyIcons/coasterIconLightGrey.png"),
-
-                  ),
+                  padding: const EdgeInsets.all(20),
+                  child: Icon(
+                    Icons.check,
+                    color: SUCCESSGREEN,
+                    size: 50
+                  )
                 ),
               ),
               style: NeumorphicStyle(
                   shape: NeumorphicShape.flat,
                   boxShape: NeumorphicBoxShape.circle(),
-                  border: NeumorphicBorder(width: 2, color: Colors.white),
-                  color: LILAC,
+                  border: NeumorphicBorder(width: 2, color: SUCCESSGREEN),
+                  color: determineColorThemeBackground(),
                   shadowDarkColor: determineLightShadowRoundButton(),
                   shadowLightColor: determineLightShadowRoundButton()
               ),
-
             ),
           ),
           Padding(
             padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
             child: new Text(
-              "let's setup this coaster",
+              "successfully read tag uid",
               style: TextStyle(
                 fontFamily: FONZFONTTWO,
                 fontSize: HEADINGFOUR,
-                color: determineColorThemeTextInverse(),
+                color: SUCCESSGREEN,
               ),
               textAlign: TextAlign.center,
             ),

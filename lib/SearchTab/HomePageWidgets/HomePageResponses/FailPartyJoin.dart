@@ -3,7 +3,7 @@ import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:fonz_music_flutter/GlobalComponents/FrontEnd/FrontEndConstants.dart';
 import 'package:fonz_music_flutter/SearchTab/HomePageWidgets/scanForCoasterDetails.dart';
 
-import '../../HomePageDecision.dart';
+import '../../HomeEncodePage.dart';
 
 class FailPartyJoin extends StatefulWidget {
 
@@ -48,7 +48,9 @@ class _FailPartyJoinState extends State<FailPartyJoin> {
                   shadowLightColor: determineLightShadowRoundButton()
               ),
               onPressed: () async {
-                hostCoasterDetails = await scanForCoasterDetails();
+                var tagUidResp = await scanForTagUid();
+                encodeTagResponse = tagUidResp[0];
+                tagUid = tagUidResp[1];
                 widget.notifyParent();
               },
             ),
