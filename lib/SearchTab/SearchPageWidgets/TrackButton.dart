@@ -30,7 +30,7 @@ class _TrackButtonState extends State<TrackButton> {
         onPressed: () async {
           FocusScope.of(context).unfocus();
           log("pressed");
-          await queueSongWithoutNfc(widget.givenTrack);
+          await queueSongWithoutNfc(widget.givenTrack, context);
           // queueSongLaunchNfc(widget.givenTrack);
         },
         child: Container(

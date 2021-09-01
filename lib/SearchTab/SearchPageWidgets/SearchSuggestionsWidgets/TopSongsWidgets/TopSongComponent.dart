@@ -29,7 +29,7 @@ class _TopSongComponentState extends State<TopSongComponent> {
       padding: EdgeInsets.fromLTRB(0,5,0,5),
       child: MaterialButton(
         onPressed: () async {
-          await queueSongWithoutNfc(widget.track);
+          await queueSongWithoutNfc(widget.track, context);
           // queueSongLaunchNfc(widget.track);
         },
         child: Container(

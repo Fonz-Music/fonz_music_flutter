@@ -48,7 +48,9 @@ dependencies:
 #  to enable the icon on launch
   flutter_launcher_icons: ^0.9.1
 #  flutter_native_splash: ^0.3.2
-
+#  toast to show song success
+#  fluttertoast: ^8.0.8
+  flutter_styled_toast: ^2.0.0
 
 dev_dependencies:
   flutter_test:
