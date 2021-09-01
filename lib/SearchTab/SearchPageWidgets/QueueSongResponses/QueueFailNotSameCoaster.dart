@@ -56,7 +56,7 @@ class QueueFailNotSameCoaster extends StatelessWidget {
                       "you must tap the same coaster to queue.",
                       style: TextStyle(
                         fontFamily: FONZFONTTWO,
-                        fontSize: HEADINGFIVE,
+                        fontSize: HEADINGSIX,
                         color: determineColorThemeTextInverse(),
                       ),
                       textAlign: TextAlign.left,

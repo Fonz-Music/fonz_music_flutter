@@ -56,7 +56,7 @@ class QueuedButDelayed extends StatelessWidget {
                       "queued but delayed. ensure your host is playing spotify.",
                       style: TextStyle(
                         fontFamily: FONZFONTTWO,
-                        fontSize: HEADINGFIVE,
+                        fontSize: HEADINGSIX,
                         color: determineColorThemeTextInverse(),
                       ),
                       textAlign: TextAlign.left,

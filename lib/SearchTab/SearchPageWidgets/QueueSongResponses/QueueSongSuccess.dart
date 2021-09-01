@@ -56,7 +56,7 @@ class QueueSongSuccess extends StatelessWidget {
                     "$songAddedToQueue added to ${hostCoasterDetails.hostName}'s queue!",
                     style: TextStyle(
                       fontFamily: FONZFONTTWO,
-                      fontSize: HEADINGFIVE,
+                      fontSize: HEADINGSIX,
                       color: determineColorThemeTextInverse(),
                     ),
                     textAlign: TextAlign.left,

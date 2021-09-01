@@ -75,18 +75,21 @@ class CoasterDecoder {
   String coasterId;
   bool active;
   String userId;
+  var group;
 
   CoasterDecoder({
     this.name,
     this.userId,
     this.coasterId,
-    this.active});
+    this.active,
+  this.group});
 
   CoasterDecoder.fromJson(Map<String, dynamic> json) {
     coasterId = json['coasterId'];
     name = json['name'];
     active = json['active'];
     userId = json['userId'];
+    group = json['group'];
   }
 }
 

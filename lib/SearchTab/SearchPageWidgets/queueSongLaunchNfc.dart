@@ -2,6 +2,7 @@
 import 'dart:async';
 import 'dart:developer';
 
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_styled_toast/flutter_styled_toast.dart';
 
@@ -15,6 +16,7 @@ import 'package:fonz_music_flutter/SearchTab/HomePageDecision.dart';
 import 'package:fonz_music_flutter/SearchTab/SearchPageWidgets/QueueSongResponses/QueueSongFail.dart';
 import 'package:fonz_music_flutter/SearchTab/SearchPageWidgets/QueueSongResponses/QueueSongSuccess.dart';
 import 'package:fonz_music_flutter/SearchTab/SearchPageWidgets/QueueSongResponses/QueuedButDelayed.dart';
+import 'package:fonz_music_flutter/main.dart';
 
 import '../SearchPage.dart';
 //
@@ -71,6 +73,14 @@ queueSongWithoutNfc(Track trackToQueue, context) async {
       height: 60,
       child: QueueSongSuccess(),
     ), context: context, position: StyledToastPosition.top);
+    FirebaseAnalytics().logEvent(name: "songQueueSuccess", parameters: {
+      'user': "guest",
+      "sessionId":hostSessionIdGlobal,
+      "userId":userAttributes.getUserId(),
+      "group":groupFromCoaster,
+      "tagUid":hostCoasterDetails.coasterUid,
+      "songQueued":songAddedToQueue
+    });
     // responseCodeFromQueue.value = "QUEUE_SUCCESS";
   }
   else if (queueTrackResponse["statusCode"] == 403) {
@@ -80,6 +90,13 @@ queueSongWithoutNfc(Track trackToQueue, context) async {
       height: 60,
       child: QueuedButDelayed(),
     ), context: context, position: StyledToastPosition.top);
+    FirebaseAnalytics().logEvent(name: "songQueueFail", parameters: {
+      'user': "guest",
+      "sessionId":hostSessionIdGlobal,
+      "userId":userAttributes.getUserId(),
+      "group":groupFromCoaster,
+      "tagUid":hostCoasterDetails.coasterUid,
+    });
     // responseCodeFromQueue.value = "QUEUED_BUT_DELAYED";
   }
   else {
@@ -89,6 +106,13 @@ queueSongWithoutNfc(Track trackToQueue, context) async {
       height: 60,
       child: QueueSongFail(),
     ), context: context, position: StyledToastPosition.top);
+    FirebaseAnalytics().logEvent(name: "songQueueFail", parameters: {
+      'user': "guest",
+      "sessionId":hostSessionIdGlobal,
+      "userId":userAttributes.getUserId(),
+      "group":groupFromCoaster,
+      "tagUid":hostCoasterDetails.coasterUid,
+    });
     // responseCodeFromQueue.value = "QUEUE_FAILURE";
   }
 

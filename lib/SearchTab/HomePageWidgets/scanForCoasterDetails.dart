@@ -45,7 +45,10 @@ Future<CoasterObject> scanForCoasterDetails() async {
         hostSessionIdGlobal = hostDetails["body"].session.sessionId;
         print("details are " + hostCoasterDetails.coasterName.toString());
         log("stored coaster ");
-
+        if (hostDetails["body"].coaster.group != null) {
+          log("group isnt null");
+          groupFromCoaster = hostDetails["body"].coaster.group;
+        }
       // }
     }
     else if (hostDetails["statusCode"] == 403 && hostDetails["code"] == "COASTER_NO_HOST") {

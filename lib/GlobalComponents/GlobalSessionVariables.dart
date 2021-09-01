@@ -6,6 +6,7 @@ import 'Objects/Playlist.dart';
 import 'Objects/Track.dart';
 
 var hostSessionIdGlobal = "";
+var groupFromCoaster = "";
 
 // active song
 ActiveSongDecoder activeSongNowPlaying;
