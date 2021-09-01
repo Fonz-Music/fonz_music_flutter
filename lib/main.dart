@@ -65,6 +65,8 @@ void main() async {
 
 
   runApp(FonzMusicApp());
+
+
 }
 
 Future<void> initUniLinks() async {
@@ -186,7 +188,7 @@ class Splash extends StatelessWidget {
 
 int currentTab = 1;
 CoreUserAttributes userAttributes = CoreUserAttributes();
-
+var userConnectedToSpotify = ValueNotifier<bool>(userAttributes.getConnectedToSpotify());
 
 class MyHomePage extends StatefulWidget {
 
@@ -216,6 +218,13 @@ class _MyHomePageState extends State<MyHomePage> {
       setState(() {
 
       } );
+    });
+    // this updates the app when it reopens after spotify sign in
+    SystemChannels.lifecycle.setMessageHandler((msg){
+      debugPrint('SystemChannels> $msg');
+      if(msg==AppLifecycleState.resumed.toString()){
+        setState((){});
+      }
     });
   }
 

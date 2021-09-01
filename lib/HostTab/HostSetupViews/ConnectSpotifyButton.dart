@@ -84,9 +84,9 @@ class _ConnectSpotifyButtonState extends State<ConnectSpotifyButton> {
                           });
                     }
                     // link to spotify
-                    userAttributes.determineIfUserConnectedToSpotify();
+                    await userAttributes.determineIfUserConnectedToSpotify();
                     widget.notifyParent();
-                  FirebaseAnalytics().logEvent(name: "userTappedConnectToSpotifyHost", parameters: {'user': "host"});
+                    FirebaseAnalytics().logEvent(name: "userTappedConnectSpotify", parameters: {'user': "user","tab":"host"});
                 },
 
               ),

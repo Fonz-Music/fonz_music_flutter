@@ -75,7 +75,7 @@ class _HomeDecisionPageState extends State<HomeDecisionPage> {
           ),
           Spacer(),
           ValueListenableBuilder<bool>(
-            valueListenable: ValueNotifier(userAttributes.getConnectedToSpotify()),
+            valueListenable: ValueNotifier(userConnectedToSpotify.value),
             builder: (context, value, child) {
               return
                 HomePageMainBody(widget.currentTab, widget.notifyParent);

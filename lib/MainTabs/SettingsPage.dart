@@ -143,7 +143,7 @@ class _SettingsPageState extends State<SettingsPage> {
           // change name
           ChangeNameButton(),
           // connect to spotify
-          ConnectSpotifySettingsButton(),
+          ConnectSpotifySettingsButton(notifyParent: widget.notifyParent,),
           // sign out
           SignOutButton(notifyParent: widget.notifyParent),
         ],

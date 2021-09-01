@@ -10,6 +10,8 @@ import 'package:fonz_music_flutter/ApiFunctions/HostApi/HostSpotifyApi.dart';
 import 'package:fonz_music_flutter/ApiFunctions/UserEndpoints/UserApi.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../main.dart';
+
 
 
 class CoreUserAttributes {
@@ -158,6 +160,7 @@ class CoreUserAttributes {
     if (musicProviders["body"].length > 0 && musicProviders["body"][0]["providerId"] != "") {
       log("user has providers");
       setConnectedToSpotify(true);
+      userConnectedToSpotify.value = true;
     }
     else {
       log("user does NOT have providers");

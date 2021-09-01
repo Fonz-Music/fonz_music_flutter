@@ -136,7 +136,7 @@ class _ManageSpotifyFieldState extends State<ManageSpotifyField> {
                     onPressed: () async{
 
                       userAttributes.setConnectedToSpotify(false);
-
+                      userConnectedToSpotify.value = false;
 
 
 

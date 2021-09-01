@@ -44,7 +44,7 @@ class _SongSuggestionsViewState extends State<SongSuggestionsView> {
               ),
             ),
             ValueListenableBuilder<bool>(
-              valueListenable: ValueNotifier(userAttributes.getConnectedToSpotify()),
+              valueListenable: ValueNotifier(userConnectedToSpotify.value),
               builder: (context, value, child) {
                 return Column(
                   children: [

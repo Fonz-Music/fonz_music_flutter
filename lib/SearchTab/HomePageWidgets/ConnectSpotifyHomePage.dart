@@ -59,7 +59,7 @@ class _ConnectSpotifyHomePageButtonState extends State<ConnectSpotifyHomePageBut
                 ),
                 onPressed: () async {
                   await connectSpotify();
-                  widget.notifyParent();
+
                   if (!userAttributes.getHasAccount()) {
                     showModalBottomSheet<dynamic>(context: context,
                         isScrollControlled: true,
@@ -82,8 +82,8 @@ class _ConnectSpotifyHomePageButtonState extends State<ConnectSpotifyHomePageBut
                         });
                   }
                   userAttributes.determineIfUserConnectedToSpotify();
-
-                  FirebaseAnalytics().logEvent(name: "userTappedConnectToSpotifyHost", parameters: {'user': "host"});
+                  widget.notifyParent();
+                  FirebaseAnalytics().logEvent(name: "userTappedConnectSpotify", parameters: {'user': "user","tab":"search"});
                 },
 
               ),
