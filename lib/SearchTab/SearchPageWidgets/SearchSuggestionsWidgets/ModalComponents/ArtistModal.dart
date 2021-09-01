@@ -62,12 +62,12 @@ class _ArtistModalState extends State<ArtistModal> {
     final height = size.height;
 
     return
-      ValueListenableBuilder<String>(
-          valueListenable: responseCodeFromQueue,
-          builder:  (context, value, child) {
-            return
-              Stack(
-                children: [
+      // ValueListenableBuilder<String>(
+      //     valueListenable: responseCodeFromQueue,
+      //     builder:  (context, value, child) {
+      //       return
+      //         Stack(
+      //           children: [
                   Container(
                     height: height * 0.9,
                     color: determineColorThemeBackground(),
@@ -128,10 +128,10 @@ class _ArtistModalState extends State<ArtistModal> {
                               ],
                             )
                         ),
-                        ValueListenableBuilder<bool>(
-                            valueListenable: pressedToLaunchQueueNfc,
-                            builder: (context, value, child) {
-                              return
+                        // ValueListenableBuilder<bool>(
+                        //     valueListenable: pressedToLaunchQueueNfc,
+                        //     builder: (context, value, child) {
+                        //       return
                                 FutureBuilder(
                                     future: getTracksByArtistId(),
                                     builder: (BuildContext context, AsyncSnapshot snapshot) {
@@ -153,21 +153,21 @@ class _ArtistModalState extends State<ArtistModal> {
 
                                     }
 
-                                );
-                            }
+                      //           );
+                      //       }
                         ),
                       ],
                     ),
-                  ),
-                  Column(
-                    children: [
-                      DisplayQueueSongResponses(context),
-                      Spacer()
-                    ],
-                  ),
-                ],
-              );
-          }
+                  // ),
+          //         Column(
+          //           children: [
+          //             DisplayQueueSongResponses(context),
+          //             Spacer()
+          //           ],
+          //         ),
+          //       ],
+          //     );
+          // }
       );
   }
 }

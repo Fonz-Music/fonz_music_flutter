@@ -6,7 +6,6 @@ import 'package:fonz_music_flutter/GlobalComponents/GlobalSessionVariables.dart'
 import 'package:fonz_music_flutter/GlobalComponents/Objects/Artist.dart';
 import 'package:fonz_music_flutter/SearchTab/SearchPageWidgets/SearchSuggestionsWidgets/ModalComponents/ArtistModal.dart';
 
-import 'ArtistTrackModal.dart';
 
 class ArtistComponent extends StatefulWidget {
 

@@ -20,8 +20,7 @@ import 'SearchPageWidgets/SearchBarWidgets/SearchResultsView.dart';
 import 'SearchPageWidgets/SearchSuggestionsWidgets/DetermineQueueSongResps.dart';
 import 'SearchPageWidgets/SearchSuggestionsWidgets/SongSuggestionsView.dart';
 
-var pressedToLaunchQueueNfc = ValueNotifier<bool>(false);
-var responseCodeFromQueue = ValueNotifier<String>("");
+
 String songAddedToQueue = "";
 
 class SearchPage extends StatefulWidget {
@@ -50,110 +49,70 @@ class _SearchPageState extends State<SearchPage> {
 
     return SingleChildScrollView(
       child:
-      ValueListenableBuilder<String>(
-          valueListenable: responseCodeFromQueue,
-          builder:  (context, value, child) {
-            return
-              Stack(
-                children: [
+          Column(
+              children: [
+                Row(
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.fromLTRB(20, 30, 0, 0),
+                      child: new Text(
+                        "search",
+                        style: TextStyle(
+                          fontFamily: FONZFONTTWO,
+                          fontSize: HEADINGTHREE,
+                          color: Colors.white,
+                        ),
+                        textAlign: TextAlign.left,
+                      ),
+                    ),
+                    Spacer(),
+                    TextButton(
+                      onPressed: () {
+                        log("sessionId is " + hostSessionIdGlobal);
+                        widget.controller.animateToPage(0,
+                            duration: Duration(seconds: 1), curve: Curves.easeInOutCirc);
 
-                  Column(
+                        connectedToAHost = false;
+                        widget.notifyParent();
+                      },
+                      child: Padding(
+                        padding: EdgeInsets.fromLTRB(20, 30, 20, 0),
+                        child: new Text(
+                          "leave party",
+                          style: TextStyle(
+                            fontFamily: FONZFONTTWO,
+                            fontSize: HEADINGFIVE,
+                            color: Colors.black,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+                Column(
+                  children: [
+                    SearchBar(notifyParent: refresh),
+                    Stack(
                       children: [
-                        Row(
+                        Column(
                           children: [
-                            Padding(
-                              padding: EdgeInsets.fromLTRB(20, 30, 0, 0),
-                              child: new Text(
-                                "search",
-                                style: TextStyle(
-                                  fontFamily: FONZFONTTWO,
-                                  fontSize: HEADINGTHREE,
-                                  color: Colors.white,
-                                ),
-                                textAlign: TextAlign.left,
-                              ),
-                            ),
-                            Spacer(),
-                            TextButton(
-                              onPressed: () {
-                                log("sessionId is " + hostSessionIdGlobal);
-                                widget.controller.animateToPage(0,
-                                    duration: Duration(seconds: 1), curve: Curves.easeInOutCirc);
 
-                                connectedToAHost = false;
-                                widget.notifyParent();
-                              },
-                              child: Padding(
-                                padding: EdgeInsets.fromLTRB(20, 30, 20, 0),
-                                child: new Text(
-                                  "leave party",
-                                  style: TextStyle(
-                                    fontFamily: FONZFONTTWO,
-                                    fontSize: HEADINGFIVE,
-                                    color: Colors.black,
-                                  ),
-                                  textAlign: TextAlign.center,
-                                ),
-                              ),
-                            )
+                            ActiveSongView(),
+                            SongSuggestionsView(notifyParent: widget.notifyParent,)
                           ],
                         ),
-
-
-                        ValueListenableBuilder<bool>(
-                            valueListenable: pressedToLaunchQueueNfc,
-                            builder: (context, value, child) {
-                              return
-                                WaitForNfcToQueue(refresh);
-                            }
-                        ),
-
-
-                      ]
-                  ),
-                  DisplayQueueSongResponses(context),
-                ],
-              );
-          }
-      ),
+                        DetermineIfResultsAreShown()
+                      ],
+                    ),
+                  ],
+                )
+              ]
+          )
     );
   }
 
 
-
-  Widget WaitForNfcToQueue(refresh) {
-    if (!pressedToLaunchQueueNfc.value) {
-
-      return
-        Column(
-          children: [
-            SearchBar(notifyParent: refresh),
-            Stack(
-              children: [
-                Column(
-                  children: [
-
-                    ActiveSongView(),
-                    SongSuggestionsView(notifyParent: widget.notifyParent,)
-                  ],
-                ),
-                DetermineIfResultsAreShown()
-              ],
-            ),
-          ],
-        );
-    }
-    else {
-      Timer(Duration(seconds: 5), () {
-        pressedToLaunchQueueNfc.value = false;
-      });
-      // Navigator.push
-      return Container(
-        padding: EdgeInsets.fromLTRB(0, 30 , 0, 0),
-        child: TapYourPhoneBlack(),
-      );
-    }
-  }
 
 
 

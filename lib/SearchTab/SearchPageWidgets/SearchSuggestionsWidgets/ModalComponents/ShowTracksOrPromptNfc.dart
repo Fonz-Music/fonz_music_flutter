@@ -23,7 +23,7 @@ class _ShowTracksOrPromptNfcState extends State<ShowTracksOrPromptNfc> {
       final width = size.width;
       final height = size.height;
 
-      if (!pressedToLaunchQueueNfc.value) {
+      // if (!pressedToLaunchQueueNfc.value) {
 
         return
           Container(
@@ -70,11 +70,11 @@ class _ShowTracksOrPromptNfcState extends State<ShowTracksOrPromptNfc> {
               ],
             ),
           );
-      }
-      else return Container(
-        // height: 0,
-        child: TapYourPhoneLilac(),
-      );
+      // }
+      // else return Container(
+      //   // height: 0,
+      //   child: TapYourPhoneLilac(),
+      // );
 
   }
 }

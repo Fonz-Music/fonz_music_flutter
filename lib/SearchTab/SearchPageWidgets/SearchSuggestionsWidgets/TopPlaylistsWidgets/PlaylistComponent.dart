@@ -6,7 +6,6 @@ import 'package:fonz_music_flutter/GlobalComponents/GlobalSessionVariables.dart'
 import 'package:fonz_music_flutter/GlobalComponents/Objects/Playlist.dart';
 import 'package:fonz_music_flutter/SearchTab/SearchPageWidgets/SearchSuggestionsWidgets/ModalComponents/PlaylistModal.dart';
 
-import 'PlaylistTrackModal.dart';
 
 class PlaylistComponent extends StatefulWidget {
 
