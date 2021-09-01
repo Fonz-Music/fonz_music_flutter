@@ -406,6 +406,8 @@ class GetSingleOwnedCoasterDecoder {
   bool paused;
   bool active;
   String userId;
+  var group;
+  bool encoded;
 
   GetSingleOwnedCoasterDecoder(
       {this.status,
@@ -414,7 +416,9 @@ class GetSingleOwnedCoasterDecoder {
         this.name,
         this.userId,
         this.paused,
-        this.active});
+        this.active,
+      this.group,
+      this.encoded});
 
   GetSingleOwnedCoasterDecoder.fromJson(Map<String, dynamic> json) {
     status = json['status'];
@@ -424,6 +428,8 @@ class GetSingleOwnedCoasterDecoder {
     paused = json['paused'];
     active = json['active'];
     userId = json['userId'];
+    group = json['group'];
+    encoded = json['encoded'];
   }
 
   Map<String, dynamic> toJson() {
@@ -435,7 +441,8 @@ class GetSingleOwnedCoasterDecoder {
     data['paused'] = this.paused;
     data['active'] = this.active;
     data['userId'] = this.userId;
-
+    data['group'] = this.group;
+    data['encoded'] = this.encoded;
     return data;
   }
 }

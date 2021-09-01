@@ -1,8 +1,10 @@
 import 'dart:async';
 import 'dart:developer';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:fonz_music_flutter/GlobalComponents/FrontEnd/FrontEndConstants.dart';
+import 'package:fonz_music_flutter/GlobalComponents/GlobalSessionVariables.dart';
 import 'package:fonz_music_flutter/GlobalComponents/Objects/CoasterObject.dart';
 import 'package:fonz_music_flutter/HostTab/CoasterDashboardViews/RewriteCoasterCircle.dart';
 import 'package:fonz_music_flutter/HostTab/HostSetupViews/ConnectSpotifyButton.dart';
@@ -101,7 +103,14 @@ class _HostSetupPageState extends State<HostSetupPage> {
       // else {
         // if successful
         if (firstConnectedCoasterDetails.statusCode == 204) {
-
+          FirebaseAnalytics().logEvent(name: "userConnectCoaster", parameters: {
+            'user': "guest",
+            "sessionId":firstConnectedCoasterDetails.sessionId,
+            "userId":userAttributes.getUserId(),
+            "group":groupFromCoaster,
+            "tagUid":firstConnectedCoasterDetails.coasterUid,
+          });
+          userAttributes.setHasConnectedCoasters(true);
 
 
           // writes url + uid on coaster

@@ -1,13 +1,16 @@
 import 'dart:async';
 import 'dart:developer';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:fonz_music_flutter/GlobalComponents/FrontEnd/FrontEndConstants.dart';
+import 'package:fonz_music_flutter/GlobalComponents/GlobalSessionVariables.dart';
 import 'package:fonz_music_flutter/GlobalComponents/Objects/CoasterObject.dart';
 import 'package:fonz_music_flutter/HostTab/CoasterDashboardViews/AddCoasterButton.dart';
 import 'package:fonz_music_flutter/NfcFunctions/HostNfcFunctions.dart';
 import 'package:fonz_music_flutter/SearchTab/HomePageWidgets/HomePageResponses/FailPartyJoin.dart';
 
+import '../main.dart';
 import 'CoasterDashboardViews/CoasterDashboardView.dart';
 import 'CoasterDashboardViews/NameYourNewCoaster.dart';
 import 'CoasterDashboardViews/RewriteCoasterCircle.dart';
@@ -93,7 +96,13 @@ class _CoasterDashboardPageState extends State<CoasterDashboardPage> {
       // else {
       // if successful
       if (newConnectedCoasterDetails.statusCode == 204) {
-
+        FirebaseAnalytics().logEvent(name: "userConnectCoaster", parameters: {
+          'user': "guest",
+          "sessionId":newConnectedCoasterDetails.sessionId,
+          "userId":userAttributes.getUserId(),
+          "group":groupFromCoaster,
+          "tagUid":newConnectedCoasterDetails.coasterUid,
+        });
         // writes url + uid on coaster
         if (newConnectedCoasterDetails.needToEncodeCoaster) {
           // tells user they need to connect to their account

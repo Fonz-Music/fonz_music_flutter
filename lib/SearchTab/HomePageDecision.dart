@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
 import 'package:fonz_music_flutter/GlobalComponents/FrontEnd/FrontEndConstants.dart';
+import 'package:fonz_music_flutter/GlobalComponents/GlobalSessionVariables.dart';
 import 'package:fonz_music_flutter/GlobalComponents/Objects/CoasterObject.dart';
 import 'package:fonz_music_flutter/MainTabs/SearchTab.dart';
 import 'package:fonz_music_flutter/SearchTab/HomePageWidgets/ConnectSpotifyHomePage.dart';
@@ -109,8 +110,13 @@ class _HomeDecisionPageState extends State<HomeDecisionPage> {
         // if successful
         if (hostCoasterDetails.statusCode == 200) {
           // this tells firebase there was a successful party join
-          FirebaseAnalytics().logEvent(
-              name: "guestJoinedSession", parameters: {'string': "guest"});
+          FirebaseAnalytics().logEvent(name: "guestJoinPartySuccess", parameters: {
+            'user': "guest",
+            "sessionId":hostCoasterDetails.sessionId,
+            "userId":userAttributes.getUserId(),
+            "group":groupFromCoaster,
+            "tagUid":hostCoasterDetails.coasterUid,
+          });
           Timer(Duration(milliseconds: SUCCESSPAGELENGTH), () {
             widget.controller.animateToPage(1,
                 duration: Duration(seconds: 1), curve: Curves.easeInOutCirc);
@@ -128,7 +134,13 @@ class _HomeDecisionPageState extends State<HomeDecisionPage> {
           );
         }
         else if (hostCoasterDetails.statusCode == 600) {
-          FirebaseAnalytics().logEvent(name: "guestTappedUnownedCoaster", parameters: {'string': "guest"});
+          FirebaseAnalytics().logEvent(name: "guestTappedUnownedCoaster", parameters: {
+            'user': "guest",
+            "sessionId":hostCoasterDetails.sessionId,
+            "userId":userAttributes.getUserId(),
+            "group":groupFromCoaster,
+            "tagUid":hostCoasterDetails.coasterUid,
+          });
           return CoasterHasNoHost(tabSelected: widget.currentTab, notifyParent: widget.notifyParent );
         }
         // if unsuccessful
@@ -140,13 +152,26 @@ class _HomeDecisionPageState extends State<HomeDecisionPage> {
           });
 
           if (hostCoasterDetails.statusCode == 0) {
-            FirebaseAnalytics().logEvent(name: "guestDoesntSupportNfc", parameters: {'string': "guest"});
+            FirebaseAnalytics().logEvent(name: "guestDoesntSupportNfc", parameters: {
+              'user': "guest",
+              "sessionId":hostCoasterDetails.sessionId,
+              "userId":userAttributes.getUserId(),
+              "group":groupFromCoaster,
+              "tagUid":hostCoasterDetails.coasterUid,
+            });
             return FailPartyJoin(
               errorMessage: "your phone doesn't support NFC",
               errorImage: getDisableIcon(),
             );
           }
           else {
+            FirebaseAnalytics().logEvent(name: "guestJoinPartyFail", parameters: {
+              'user': "guest",
+              "sessionId":hostCoasterDetails.sessionId,
+              "userId":userAttributes.getUserId(),
+              "group":groupFromCoaster,
+              "tagUid":hostCoasterDetails.coasterUid,
+            });
             return Container(
               child: FailPartyJoin(
                 errorMessage: "something went wrong",

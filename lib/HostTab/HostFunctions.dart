@@ -55,6 +55,10 @@ Future<CoasterObject> addCoaster() async {
     // FirebaseAnalytics().logEvent(name: "hostTappedSomeoneElsesCoaster", parameters: {'string': "host"});
     coasterResponse.coasterName = checkCoasterResponse["body"]["name"];
     // newConnectedCoasterDetails.hostName = checkCoasterResponse["body"]["displayName"];
+    // if (checkCoasterResponse["body"]["group"] != null) {
+    //   coasterResponse.group = checkCoasterResponse["body"]["name"]
+    // }
+    coasterResponse.needToEncodeCoaster = checkCoasterResponse["body"]["encoded"];
     coasterResponse.hostName = "host";
     coasterResponse.setStatusCode(200);
   }
