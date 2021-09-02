@@ -1,4 +1,4 @@
-package com.example.fonz
+package com.fonzmusic.fonz
 
 import androidx.annotation.NonNull
 import io.flutter.embedding.android.FlutterActivity
