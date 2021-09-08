@@ -79,7 +79,8 @@ queueSongWithoutNfc(Track trackToQueue, context) async {
       "userId":userAttributes.getUserId(),
       "group":groupFromCoaster,
       "tagUid":hostCoasterDetails.coasterUid,
-      "songQueued":songAddedToQueue
+      "songQueued":songAddedToQueue,
+      "device":"android"
     });
     // responseCodeFromQueue.value = "QUEUE_SUCCESS";
   }
@@ -96,6 +97,7 @@ queueSongWithoutNfc(Track trackToQueue, context) async {
       "userId":userAttributes.getUserId(),
       "group":groupFromCoaster,
       "tagUid":hostCoasterDetails.coasterUid,
+      "device":"android"
     });
     // responseCodeFromQueue.value = "QUEUED_BUT_DELAYED";
   }
@@ -112,6 +114,7 @@ queueSongWithoutNfc(Track trackToQueue, context) async {
       "userId":userAttributes.getUserId(),
       "group":groupFromCoaster,
       "tagUid":hostCoasterDetails.coasterUid,
+      "device":"android"
     });
     // responseCodeFromQueue.value = "QUEUE_FAILURE";
   }

@@ -116,6 +116,7 @@ class _HomeDecisionPageState extends State<HomeDecisionPage> {
             "userId":userAttributes.getUserId(),
             "group":groupFromCoaster,
             "tagUid":hostCoasterDetails.coasterUid,
+            "device":"android"
           });
           Timer(Duration(milliseconds: SUCCESSPAGELENGTH), () {
             widget.controller.animateToPage(1,
@@ -136,10 +137,12 @@ class _HomeDecisionPageState extends State<HomeDecisionPage> {
         else if (hostCoasterDetails.statusCode == 600) {
           FirebaseAnalytics().logEvent(name: "guestTappedUnownedCoaster", parameters: {
             'user': "guest",
-            "sessionId":hostCoasterDetails.sessionId,
+            // "sessionId":hostCoasterDetails.sessionId,
             "userId":userAttributes.getUserId(),
-            "group":groupFromCoaster,
+            // "group":groupFromCoaster,
             "tagUid":hostCoasterDetails.coasterUid,
+            "device":"android",
+            "reason":"what have you found?\nthis isn't a Fonz coaster :/"
           });
           return CoasterHasNoHost(tabSelected: widget.currentTab, notifyParent: widget.notifyParent );
         }
@@ -154,10 +157,12 @@ class _HomeDecisionPageState extends State<HomeDecisionPage> {
           if (hostCoasterDetails.statusCode == 0) {
             FirebaseAnalytics().logEvent(name: "guestDoesntSupportNfc", parameters: {
               'user': "guest",
-              "sessionId":hostCoasterDetails.sessionId,
+              // "sessionId":hostCoasterDetails.sessionId,
               "userId":userAttributes.getUserId(),
-              "group":groupFromCoaster,
+              // "group":groupFromCoaster,
               "tagUid":hostCoasterDetails.coasterUid,
+              "device":"android",
+              "reason":"the nfc or wifi didn't work properly :/"
             });
             return FailPartyJoin(
               errorMessage: "your phone doesn't support NFC",
@@ -167,10 +172,11 @@ class _HomeDecisionPageState extends State<HomeDecisionPage> {
           else {
             FirebaseAnalytics().logEvent(name: "guestJoinPartyFail", parameters: {
               'user': "guest",
-              "sessionId":hostCoasterDetails.sessionId,
+              // "sessionId":hostCoasterDetails.sessionId,
               "userId":userAttributes.getUserId(),
-              "group":groupFromCoaster,
+              // "group":groupFromCoaster,
               "tagUid":hostCoasterDetails.coasterUid,
+              "device":"android"
             });
             return Container(
               child: FailPartyJoin(

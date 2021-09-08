@@ -66,7 +66,7 @@ class _ConnectSpotifySettingsButtonState extends State<ConnectSpotifySettingsBut
           await connectSpotify();
           await userAttributes.determineIfUserConnectedToSpotify();
           widget.notifyParent();
-          FirebaseAnalytics().logEvent(name: "userTappedConnectSpotify", parameters: {'user': "user","tab":"settings"});
+          FirebaseAnalytics().logEvent(name: "userTappedConnectSpotify", parameters: {'user': "user","tab":"settings","device":"android"});
         },
 
       ),

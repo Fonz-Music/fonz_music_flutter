@@ -76,9 +76,9 @@ class _BuyACoasterHomeButtonState extends State<BuyACoasterHomeButton> {
                   // SpotifySuggestionsApi.getGuestTopSongs(tempSessionId);
                   // SpotifySuggestionsApi.getGuestTopPlaylists(tempSessionId);
                   // linkSpotifyOnCallback();
-                  HostProvidersApi.getMusicProviders();
+                  // HostProvidersApi.getMusicProviders();
                   // userAttributes.setConnectedToSpotify(false);
-                  // launchShop();
+                  launchShop();
                   FirebaseAnalytics().logEvent(name: "userOpenedBuyCoaster", parameters: {'string': "user", "tab": "search"});
                 },
 
@@ -87,7 +87,7 @@ class _BuyACoasterHomeButtonState extends State<BuyACoasterHomeButton> {
             Padding(
               padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
               child: new Text(
-                "buy a coaster",
+                "get a coaster",
                 style: TextStyle(
                   fontFamily: FONZFONTTWO,
                   fontSize: HEADINGSIX,

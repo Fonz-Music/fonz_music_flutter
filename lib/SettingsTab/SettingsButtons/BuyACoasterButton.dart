@@ -38,7 +38,7 @@ class _BuyACoasterButtonState extends State<BuyACoasterButton> {
                 ),
               ),
               Text(
-                "buy a coaster",
+                "get a coaster",
                 style: TextStyle(
                   fontFamily: FONZFONTONE,
                   fontSize: HEADINGSIX,
@@ -57,7 +57,7 @@ class _BuyACoasterButtonState extends State<BuyACoasterButton> {
         ),
         onPressed: () async {
           launchShop();
-          FirebaseAnalytics().logEvent(name: "userOpenedBuyCoaster", parameters: {'string': "user"});
+          FirebaseAnalytics().logEvent(name: "userPressedBuyCoaster", parameters: {'string': "user"});
         },
 
       ),

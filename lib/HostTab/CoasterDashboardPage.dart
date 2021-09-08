@@ -102,6 +102,7 @@ class _CoasterDashboardPageState extends State<CoasterDashboardPage> {
           "userId":userAttributes.getUserId(),
           "group":groupFromCoaster,
           "tagUid":newConnectedCoasterDetails.coasterUid,
+          "device":"android"
         });
         // writes url + uid on coaster
         if (newConnectedCoasterDetails.needToEncodeCoaster) {

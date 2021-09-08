@@ -68,11 +68,12 @@ class _SignOutButtonState extends State<SignOutButton> {
                 return SignOutField(popupContext: popupContext, notifyParent: widget.notifyParent);
               }
           );
+          FirebaseAnalytics().logEvent(name: "userSignedOut", parameters: {'string': "user","device":"android"});
           // widget.notifyParent();
         },
         // onPressed: () {
         //   log("pressed sign out");
-        //   FirebaseAnalytics().logEvent(name: "userSignedOut", parameters: {'string': "user"});
+
         // },
 
       ),

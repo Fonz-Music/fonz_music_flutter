@@ -109,6 +109,7 @@ class _HostSetupPageState extends State<HostSetupPage> {
             "userId":userAttributes.getUserId(),
             "group":groupFromCoaster,
             "tagUid":firstConnectedCoasterDetails.coasterUid,
+            "device":"android"
           });
           userAttributes.setHasConnectedCoasters(true);
 
