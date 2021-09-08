@@ -94,6 +94,11 @@ getSpotifyIconAmber() {
 getSpotifyIconWhite() {
   return "assets/fonzIcons/spotifyIconWhite.png";
 }
+// -------------------------- Leave Party Icon --------------------------------
+getLeavePartyIcon() {
+  if (darkMode) return "assets/fonzIcons/leavePartyWhite.png";
+  else return "assets/fonzIcons/leavePartyBlack.png";
+}
 
 // -------------------Colors-------------------------------------
 
