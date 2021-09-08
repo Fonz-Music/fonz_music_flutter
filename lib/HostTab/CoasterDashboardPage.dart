@@ -4,6 +4,7 @@ import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:fonz_music_flutter/GlobalComponents/FrontEnd/FrontEndConstants.dart';
+import 'package:fonz_music_flutter/GlobalComponents/GlobalFunctions/LaunchShop.dart';
 import 'package:fonz_music_flutter/GlobalComponents/GlobalSessionVariables.dart';
 import 'package:fonz_music_flutter/GlobalComponents/Objects/CoasterObject.dart';
 import 'package:fonz_music_flutter/HostTab/CoasterDashboardViews/AddCoasterButton.dart';
@@ -49,21 +50,62 @@ class _CoasterDashboardPageState extends State<CoasterDashboardPage> {
     return Container(
       child: Column(
         children: [
-          Container(
-              width: width,
-              padding: EdgeInsets.fromLTRB(0, 0, 0, 30),
-              child: Padding(
-                padding: EdgeInsets.fromLTRB(20, 30, 0, 0),
-                child: new Text(
-                  "coasters",
-                  style: TextStyle(
-                    fontFamily: FONZFONTTWO,
-                    fontSize: HEADINGTHREE,
-                    color: Colors.white,
+          Row(
+            children: [
+              // Container(
+              //     width: width,
+              //     padding: EdgeInsets.fromLTRB(0, 0, 0, 30),
+              //     child:
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(20, 30, 0, 0),
+                    child: new Text(
+                      "coasters",
+                      style: TextStyle(
+                        fontFamily: FONZFONTTWO,
+                        fontSize: HEADINGTHREE,
+                        color: Colors.white,
+                      ),
+                      textAlign: TextAlign.left,
+                    ),
+                  // )
+              ),
+              Spacer(),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(20, 30, 20, 0),
+                child: NeumorphicButton(
+                  child: Container(
+                    width: 25,
+                    height: 25,
+                    child:
+                    Container(
+                      // padding: const EdgeInsets.all(5),
+                      child: Icon(
+                        Icons.shopping_cart_outlined,
+                        color: determineColorThemeTextInverse(),
+                        size: 18,
+                      )
+                      // child: Image(
+                      //   image: AssetImage(getLeavePartyIcon()),
+                      //
+                      // ),
+                    ),
                   ),
-                  textAlign: TextAlign.left,
+                  padding: EdgeInsets.all(7),
+                  style: NeumorphicStyle(
+                      shape: NeumorphicShape.flat,
+                      boxShape: NeumorphicBoxShape.circle(),
+                      // border: NeumorphicBorder(width: 2, color: LILAC),
+                      color: determineColorThemeBackground(),
+                      shadowDarkColor: determineLightShadowRoundButton(),
+                      shadowLightColor: determineLightShadowRoundButton()
+                  ),
+                  onPressed: () async {
+                    launchShop();
+                  },
+
                 ),
-              )
+              ),
+            ],
           ),
           Container(
             height: height * 0.1
