@@ -104,7 +104,7 @@ class _HostSetupPageState extends State<HostSetupPage> {
         // if successful
         if (firstConnectedCoasterDetails.statusCode == 204) {
           FirebaseAnalytics().logEvent(name: "userConnectCoaster", parameters: {
-            'user': "guest",
+            'user': "host",
             "sessionId":firstConnectedCoasterDetails.sessionId,
             "userId":userAttributes.getUserId(),
             "group":groupFromCoaster,
@@ -160,14 +160,32 @@ class _HostSetupPageState extends State<HostSetupPage> {
             refresh();
           });
           if (firstConnectedCoasterDetails.statusCode == 200) {
+            FirebaseAnalytics().logEvent(name: "userConnectCoasterFail", parameters: {
+              'user': "host",
+              "sessionId":firstConnectedCoasterDetails.sessionId,
+              "userId":userAttributes.getUserId(),
+              "group":groupFromCoaster,
+              "tagUid":firstConnectedCoasterDetails.coasterUid,
+              "device":"android",
+              "reason":"someone else's coaster"
+            });
             return Container(
               child:  CoasterHasDifferentHost(connectedCoasterName: firstConnectedCoasterDetails.coasterName, coasterHostName: firstConnectedCoasterDetails.hostName,),
             );
           }
           else {
+            FirebaseAnalytics().logEvent(name: "userConnectCoasterFail", parameters: {
+              'user': "host",
+              "sessionId":firstConnectedCoasterDetails.sessionId,
+              "userId":userAttributes.getUserId(),
+              "group":groupFromCoaster,
+              "tagUid":firstConnectedCoasterDetails.coasterUid,
+              "device":"android",
+              "reason":firstConnectedCoasterDetails.errorMessage
+            });
             return Container(
               child: FailPartyJoin(
-                errorMessage: "something went wrong",
+                errorMessage: firstConnectedCoasterDetails.errorMessage,
                 errorImage: getDisableIcon(),
               ),
             );

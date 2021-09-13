@@ -89,6 +89,7 @@ Future<CoasterObject> addCoasterWithoutTapping(coasterUid) async {
   log(" code: " +
       addCoasterResponse["body"].toString());
       if (addCoasterResponse["statusCode"] != 200 ) {
+        coasterResponse.errorMessage = addCoasterResponse["body"].toString();
         coasterResponse.setStatusCode(addCoasterResponse["statusCode"]);
         // coasterResponse.statusCode = addCoasterResponse["statusCode"];
       }

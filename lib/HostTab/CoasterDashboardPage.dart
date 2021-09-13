@@ -139,7 +139,7 @@ class _CoasterDashboardPageState extends State<CoasterDashboardPage> {
       // if successful
       if (newConnectedCoasterDetails.statusCode == 204) {
         FirebaseAnalytics().logEvent(name: "userConnectCoaster", parameters: {
-          'user': "guest",
+          'user': "host",
           "sessionId":newConnectedCoasterDetails.sessionId,
           "userId":userAttributes.getUserId(),
           "group":groupFromCoaster,
@@ -202,6 +202,15 @@ class _CoasterDashboardPageState extends State<CoasterDashboardPage> {
         });
         // if someone else's coaster
         if (newConnectedCoasterDetails.statusCode == 403) {
+          FirebaseAnalytics().logEvent(name: "userConnectCoasterFail", parameters: {
+            'user': "host",
+            "sessionId":newConnectedCoasterDetails.sessionId,
+            "userId":userAttributes.getUserId(),
+            "group":groupFromCoaster,
+            "tagUid":newConnectedCoasterDetails.coasterUid,
+            "device":"android",
+            "reason":"someone else's coaster"
+          });
           return Container(
             decoration: BoxDecoration(
                 color: determineColorThemeBackground(),
@@ -213,6 +222,14 @@ class _CoasterDashboardPageState extends State<CoasterDashboardPage> {
         }
         // if your existing coaster
         else if (newConnectedCoasterDetails.statusCode == 200) {
+          FirebaseAnalytics().logEvent(name: "userTappedTheirOwnCoaster", parameters: {
+            'user': "host",
+            "sessionId":newConnectedCoasterDetails.sessionId,
+            "userId":userAttributes.getUserId(),
+            "group":groupFromCoaster,
+            "tagUid":newConnectedCoasterDetails.coasterUid,
+            "device":"android",
+          });
           return Container(
               decoration: BoxDecoration(
                   color: determineColorThemeBackground(),
@@ -223,10 +240,19 @@ class _CoasterDashboardPageState extends State<CoasterDashboardPage> {
           );
         }
         else {
+          FirebaseAnalytics().logEvent(name: "userConnectCoasterFail", parameters: {
+            'user': "host",
+            "sessionId":newConnectedCoasterDetails.sessionId,
+            "userId":userAttributes.getUserId(),
+            "group":groupFromCoaster,
+            "tagUid":newConnectedCoasterDetails.coasterUid,
+            "device":"android",
+            "reason":newConnectedCoasterDetails.errorMessage
+          });
           return Container(
             padding: EdgeInsets.fromLTRB(20, 0, 20, height * 0.1),
             child: FailPartyJoin(
-              errorMessage: "something went wrong",
+              errorMessage: newConnectedCoasterDetails.errorMessage,
               errorImage: getDisableIcon(),
             ),
           );
