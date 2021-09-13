@@ -75,6 +75,34 @@ Future<CoasterObject> addCoaster() async {
 
 }
 
+
+Future<CoasterObject> addCoasterWithoutTapping(coasterUid) async {
+
+  var coasterResponse = CoasterObject("", "", "", "");
+
+  log("uid is " + coasterUid);
+
+      Map addCoasterResponse = await CoasterManagementApi
+          .addCoaster(coasterUid);
+      log("second resp code: " +
+          addCoasterResponse["statusCode"].toString());
+  log(" code: " +
+      addCoasterResponse["body"].toString());
+      if (addCoasterResponse["statusCode"] != 200 ) {
+        coasterResponse.setStatusCode(addCoasterResponse["statusCode"]);
+        // coasterResponse.statusCode = addCoasterResponse["statusCode"];
+      }
+      else {
+        coasterResponse.setStatusCode(204);
+        updatePageCoasterDashboard = true;
+        // coasterResponse.statusCode = 204;
+      }
+
+
+  return coasterResponse;
+
+}
+
 // dep 9 aug
 
 // Map checkCoasterResponse = await GuestGetCoasterApi.getCoasterDetails(coasterDetails[0]);

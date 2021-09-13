@@ -11,6 +11,7 @@ import 'package:fonz_music_flutter/MainTabs/SearchTab.dart';
 import 'package:fonz_music_flutter/SearchTab/HomePageWidgets/ConnectSpotifyHomePage.dart';
 
 import 'package:fonz_music_flutter/SearchTab/HomePageWidgets/HomePageResponses/FailPartyJoin.dart';
+import 'package:fonz_music_flutter/SearchTab/HomePageWidgets/HomePageResponses/SuccessAddCoasterNoHost.dart';
 import 'package:fonz_music_flutter/SearchTab/HomePageWidgets/HostAPartyButton.dart';
 import 'package:fonz_music_flutter/SearchTab/HomePageWidgets/JoinAPartyButton.dart';
 import 'package:fonz_music_flutter/SearchTab/HomePageWidgets/HomePageResponses/JoinSuccessfulCircle.dart';
@@ -134,7 +135,7 @@ class _HomeDecisionPageState extends State<HomeDecisionPage> {
             child: JoinSuccessfulCircle(connectedCoasterName: hostCoasterDetails.coasterName, coasterHostName: hostCoasterDetails.hostName),
           );
         }
-        else if (hostCoasterDetails.statusCode == 600) {
+        else if (hostCoasterDetails.statusCode == 600 || hostCoasterDetails.statusCode == 204) {
           FirebaseAnalytics().logEvent(name: "guestTappedUnownedCoaster", parameters: {
             'user': "guest",
             // "sessionId":hostCoasterDetails.sessionId,
@@ -144,7 +145,26 @@ class _HomeDecisionPageState extends State<HomeDecisionPage> {
             "device":"android",
             "reason":"what have you found?\nthis isn't a Fonz coaster :/"
           });
-          return CoasterHasNoHost(tabSelected: widget.currentTab, notifyParent: widget.notifyParent );
+          return CoasterHasNoHost(tabSelected: widget.currentTab, notifyParent: widget.notifyParent, coasterUid: hostCoasterDetails.coasterUid );
+        }
+        else if (hostCoasterDetails.statusCode == 201) {
+          // this tells firebase there was a successful party join
+          FirebaseAnalytics().logEvent(name: "userConnectCoaster", parameters: {
+            'user': "guest",
+            "userId":userAttributes.getUserId(),
+            "group":groupFromCoaster,
+            "tagUid":hostCoasterDetails.coasterUid,
+            "device":"android"
+          });
+          userAttributes.setHasConnectedCoasters(true);
+          Timer(Duration(seconds: 2), () {
+            launchedNfcToJoinParty = false;
+            pressedNfcButtonToJoinPartu = false;
+          });
+
+          return Container(
+            child: SuccessAddCoasterNoHost(),
+          );
         }
         // if unsuccessful
         else {

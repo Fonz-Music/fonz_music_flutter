@@ -15,6 +15,7 @@ Future<CoasterObject> scanForCoasterDetails() async {
   CoasterObject hostCoasterDetails = CoasterObject("hostName", "coasterName", "sessionId", "coasterUid");
   // get uid from coaster
   String uidFromScannedCoaster = await GuestNfcFunctions.readNfcToJoinParty();
+  hostCoasterDetails.coasterUid = uidFromScannedCoaster;
   // uidFromScannedCoaster = "04ADDD1AE66C80";
   if (uidFromScannedCoaster.length > 20) {
     hostCoasterDetails.statusCode = 0;

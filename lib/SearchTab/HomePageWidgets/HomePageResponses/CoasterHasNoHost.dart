@@ -1,17 +1,24 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:fonz_music_flutter/GlobalComponents/FrontEnd/FrontEndConstants.dart';
+import 'package:fonz_music_flutter/GlobalComponents/GlobalFunctions/ConnectSpotify.dart';
+import 'package:fonz_music_flutter/HostTab/CoasterDashboardViews/CoasterDashboardFields/RenameCoasterField.dart';
+import 'package:fonz_music_flutter/HostTab/HostFunctions.dart';
+import 'package:fonz_music_flutter/MainTabs/CreateAccountPrompt.dart';
+import 'package:fonz_music_flutter/main.dart';
 
 import '../../HomePageDecision.dart';
 
 class CoasterHasNoHost extends StatefulWidget {
 
 
-  CoasterHasNoHost({Key key, @required this.tabSelected, this.notifyParent}) : super(key: key);
+  CoasterHasNoHost({Key key, @required this.tabSelected, this.notifyParent, this.coasterUid}) : super(key: key);
   var tabSelected;
   Function notifyParent;
+  var coasterUid;
 
   @override
   _CoasterHasNoHostState createState() => _CoasterHasNoHostState();
@@ -20,6 +27,11 @@ class CoasterHasNoHost extends StatefulWidget {
 class _CoasterHasNoHostState extends State<CoasterHasNoHost> {
   @override
   Widget build(BuildContext context) {
+
+    final size = MediaQuery.of(context).size;
+    final width = size.width;
+    final height = size.height;
+
     return Center(
       child: Column(
         children: [
@@ -82,13 +94,85 @@ class _CoasterHasNoHostState extends State<CoasterHasNoHost> {
               child: FlatButton(
                 onPressed: () async {
 
-                    Timer(Duration(milliseconds: SUCCESSPAGELENGTH), () {
-                      // move tab selected to 0
-                      launchedNfcToJoinParty = false;
-                      pressedNfcButtonToJoinPartu = false;
-                      widget.tabSelected = 0;
-                      widget.notifyParent();
-                    });
+                  log("pressed connect");
+                  // user has account
+                  if (userAttributes.getHasAccount()) {
+                    log("has acc");
+                    // if user has spot
+                    if (userAttributes.getConnectedToSpotify()) {
+                      log("has spot");
+                      log("uid nefore is " + widget.coasterUid);
+                      hostCoasterDetails = await addCoasterWithoutTapping(widget.coasterUid);
+                      log("status code is " + hostCoasterDetails.statusCode.toString());
+                      // if added success
+                      if (hostCoasterDetails.statusCode == 204) {
+                        // throw rename modal
+                        await showDialog(
+                            context: context,
+                            builder: (popupContext) {
+                              return RenameCoasterField(coasterUid: widget.coasterUid, popupContext: popupContext, coasterName: hostCoasterDetails.coasterName,);
+                            }
+                        );
+                        hostCoasterDetails.statusCode = 201;
+                        widget.notifyParent();
+                      }
+                    }
+                    // else prompt to connect spot
+                    else {
+                      log("no spot");
+                      await connectSpotify();
+                      if (!userAttributes.getHasAccount()) {
+                        showModalBottomSheet<dynamic>(context: context,
+                            isScrollControlled: true,
+                            builder: (BuildContext bc) {
+                              return Wrap(
+                                  children: <Widget>[
+                                    Container(
+                                      height: height * 0.95,
+                                      child: Container(
+                                        decoration: new BoxDecoration(
+                                            color: Colors.white,
+                                            borderRadius: new BorderRadius.only(
+                                                topLeft: const Radius.circular(
+                                                    25.0),
+                                                topRight: const Radius.circular(
+                                                    25.0))),
+                                        child: CreateAccountPrompt(popupContext: context),
+                                      ),
+                                    )
+                                  ]
+                              );
+                            });
+                      }
+                      // link to spotify
+                      await userAttributes.determineIfUserConnectedToSpotify();
+                    }
+                  }
+                  // else prompt to create acc
+                  else {
+                    log("no acc");
+                    showModalBottomSheet<dynamic>(context: context,
+                        isScrollControlled: true,
+                        builder: (BuildContext bc) {
+                          return Wrap(
+                              children: <Widget>[
+                                Container(
+                                  height: height * 0.95,
+                                  child: Container(
+                                    decoration: new BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius: new BorderRadius.only(
+                                            topLeft: const Radius.circular(
+                                                25.0),
+                                            topRight: const Radius.circular(
+                                                25.0))),
+                                    child: CreateAccountPrompt(popupContext: context),
+                                  ),
+                                )
+                              ]
+                          );
+                        });
+                  }
 
                   // Timer(Duration(seconds: 1),
                   //         () => widget.loginCallback());
