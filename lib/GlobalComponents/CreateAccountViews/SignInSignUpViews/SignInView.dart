@@ -41,7 +41,17 @@ class _SignInViewState extends State<SignInView> {
     }
     else {
       _errorMessage ="";
-      if (_email.length < 3) {
+      // set email to spot email if empty
+      if (_email == "") {
+        if (userAttributes.getSpotifyEmail() != "") {
+          _email = userAttributes.getSpotifyEmail();
+        }
+        else {
+          _errorMessage += "please enter your email\n";
+        }
+
+      }
+      else if (_email.length < 3) {
         _errorMessage += "please enter your email\n";
       }
       else {
@@ -109,9 +119,10 @@ class _SignInViewState extends State<SignInView> {
           ),
           onChanged: (value) {
             setState(() {
+
               _email = value;
             });
-//            print(_email);
+           print(_email);
           },
           validator: (value) => value.isEmpty ? 'Email can\'t be empty' : null,
           onSaved: (value) => _email = value.trim(),

@@ -39,7 +39,7 @@ Future<String> getJWTAndCheckIfExpired() async {
       }
       else {
         log("getting refresh access");
-        accessToken = refreshEndpointResp["body"]["accessToken"];
+        accessToken = refreshEndpointResp["body"].accessToken;
       }
 
 

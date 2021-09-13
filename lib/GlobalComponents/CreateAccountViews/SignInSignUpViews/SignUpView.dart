@@ -45,7 +45,16 @@ class _SignUpViewState extends State<SignUpView> {
     }
     else {
       _errorMessage ="";
-      if (_email.length < 3) {
+      if (_email == "") {
+        if (userAttributes.getSpotifyEmail() != "") {
+          _email = userAttributes.getSpotifyEmail();
+        }
+        else {
+          _errorMessage += "please enter your email\n";
+        }
+
+      }
+      else if (_email.length < 3) {
         _errorMessage += "please enter your email\n";
       }
       else {
@@ -61,7 +70,16 @@ class _SignUpViewState extends State<SignUpView> {
           _errorMessage += "password must be atleast 12 characters\n";
         }
       }
-      if (_displayName.length < 3){
+      if (_displayName == "") {
+        if (userAttributes.getSpotifyIdForSignIn() != "") {
+          _displayName = userAttributes.getSpotifyIdForSignIn();
+        }
+        else {
+          _errorMessage += "please enter your email\n";
+        }
+
+      }
+      else if (_displayName.length < 3){
         _errorMessage += "please enter your display name\n";
       }
       if (_confirmPassword.length < 3){
