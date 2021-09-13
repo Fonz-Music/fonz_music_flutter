@@ -5,6 +5,7 @@ import 'package:fonz_music_flutter/ApiFunctions/UserEndpoints/UserApi.dart';
 import 'package:fonz_music_flutter/GlobalComponents/FrontEnd/FrontEndConstants.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../main.dart';
 
@@ -461,12 +462,15 @@ class _SignUpViewState extends State<SignUpView> {
                       activeColor: AMBER,
                       checkColor: Colors.white,
                     ),
-                    Text(
-                      "i agree to Fonz Music's email policy",
-                      style: TextStyle(
-                          fontFamily: FONZFONTONE,
-                          fontSize: 12,
-                          color: Colors.white),
+                    InkWell(
+                      child: Text(
+                        "i agree to Fonz Music's email policy",
+                        style: TextStyle(
+                            fontFamily: FONZFONTONE,
+                            fontSize: 12,
+                            color: Colors.white),
+                      ),
+
                     ),
                   ]
               ),
@@ -488,12 +492,23 @@ class _SignUpViewState extends State<SignUpView> {
                           color: Colors.white
                       ),
                     ),
-                    Text(
-                      "i agree to Fonz Music's privacy policy",
-                      style: TextStyle(
-                          fontFamily: FONZFONTONE,
-                          fontSize: 12,
-                          color: Colors.white),
+                    InkWell(
+                      child: Text(
+                        "i agree to Fonz Music's privacy policy",
+                        style: TextStyle(
+                            fontFamily: FONZFONTONE,
+                            fontSize: 12,
+                            color: Colors.white),
+                      ),
+                      onTap: () async {
+                        var url = "https://fonzmusic.com/privacy-policy";
+                        if (await canLaunch(url))
+                          await launch(url);
+                        else
+                          // can't launch url, there is some error
+                          throw "Could not launch $url";
+                        log("pressed priv policy");
+                      },
                     ),
                   ]
               ),
