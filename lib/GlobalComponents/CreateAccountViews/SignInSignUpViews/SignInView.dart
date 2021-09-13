@@ -106,6 +106,7 @@ class _SignInViewState extends State<SignInView> {
           keyboardType: TextInputType.emailAddress,
           autofocus: false,
           initialValue: userAttributes.getSpotifyEmail(),
+          autofillHints: [AutofillHints.email],
           style: TextStyle(
             fontFamily: FONZFONTTWO,
             fontSize: HEADINGFIVE,
@@ -147,6 +148,7 @@ class _SignInViewState extends State<SignInView> {
           maxLines: 1,
           obscureText: true,
           autofocus: false,
+          autofillHints: [AutofillHints.password],
           style: TextStyle(
             fontFamily: FONZFONTTWO,
             fontSize: HEADINGFIVE,

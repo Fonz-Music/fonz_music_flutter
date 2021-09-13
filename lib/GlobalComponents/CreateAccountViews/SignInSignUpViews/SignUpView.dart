@@ -136,6 +136,7 @@ class _SignUpViewState extends State<SignUpView> {
           maxLines: 1,
           keyboardType: TextInputType.text,
           autofocus: false,
+          autofillHints: [AutofillHints.name],
           style: TextStyle(
             fontFamily: FONZFONTTWO,
             fontSize: HEADINGFIVE,
@@ -184,6 +185,7 @@ class _SignUpViewState extends State<SignUpView> {
             keyboardType: TextInputType.emailAddress,
             autofocus: false,
             initialValue: userAttributes.getSpotifyEmail(),
+            autofillHints: [AutofillHints.email],
             style: TextStyle(
               fontFamily: FONZFONTTWO,
               fontSize: HEADINGFIVE,
