@@ -67,67 +67,67 @@ class _SearchPageState extends State<SearchPage> {
                       ),
                     ),
                     Spacer(),
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(20, 30, 20, 0),
-                      child: NeumorphicButton(
-                        child: Container(
-                          width: 30,
-                          height: 30,
-                          child:
-                          Container(
-                              padding: const EdgeInsets.all(5),
-                              // child: Icon(
-                              //   Icons.shopping_cart_outlined,
-                              //   color: LILAC,
-                              // )
-                            child: Image(
-                              image: AssetImage(getLeavePartyIcon()),
-
-                            ),
-                          ),
-                        ),
-                        padding: EdgeInsets.all(5),
-                        style: NeumorphicStyle(
-                            shape: NeumorphicShape.flat,
-                            boxShape: NeumorphicBoxShape.circle(),
-                            // border: NeumorphicBorder(width: 2, color: LILAC),
-                            color: determineColorThemeBackground(),
-                            shadowDarkColor: determineLightShadowRoundButton(),
-                            shadowLightColor: determineLightShadowRoundButton()
-                        ),
-                        onPressed: () async {
-                          log("sessionId is " + hostSessionIdGlobal);
-                          widget.controller.animateToPage(0,
-                              duration: Duration(seconds: 1), curve: Curves.easeInOutCirc);
-
-                          connectedToAHost = false;
-                          widget.notifyParent();
-                          },
-
-                      ),
-                    ),
-                    // TextButton(
-                    //   onPressed: () {
-                    //     log("sessionId is " + hostSessionIdGlobal);
-                    //     widget.controller.animateToPage(0,
-                    //         duration: Duration(seconds: 1), curve: Curves.easeInOutCirc);
+                    // Padding(
+                    //   padding: const EdgeInsets.fromLTRB(20, 30, 20, 0),
+                    //   child: NeumorphicButton(
+                    //     child: Container(
+                    //       width: 30,
+                    //       height: 30,
+                    //       child:
+                    //       Container(
+                    //           padding: const EdgeInsets.all(5),
+                    //           // child: Icon(
+                    //           //   Icons.shopping_cart_outlined,
+                    //           //   color: LILAC,
+                    //           // )
+                    //         child: Image(
+                    //           image: AssetImage(getLeavePartyIcon()),
                     //
-                    //     connectedToAHost = false;
-                    //     widget.notifyParent();
-                    //   },
-                    //   child: Padding(
-                    //     padding: EdgeInsets.fromLTRB(20, 30, 20, 0),
-                    //     child: new Text(
-                    //       "leave party",
-                    //       style: TextStyle(
-                    //         fontFamily: FONZFONTTWO,
-                    //         fontSize: HEADINGFIVE,
-                    //         color: Colors.black,
+                    //         ),
                     //       ),
-                    //       textAlign: TextAlign.center,
                     //     ),
+                    //     padding: EdgeInsets.all(5),
+                    //     style: NeumorphicStyle(
+                    //         shape: NeumorphicShape.flat,
+                    //         boxShape: NeumorphicBoxShape.circle(),
+                    //         // border: NeumorphicBorder(width: 2, color: LILAC),
+                    //         color: determineColorThemeBackground(),
+                    //         shadowDarkColor: determineLightShadowRoundButton(),
+                    //         shadowLightColor: determineLightShadowRoundButton()
+                    //     ),
+                    //     onPressed: () async {
+                    //       log("sessionId is " + hostSessionIdGlobal);
+                    //       widget.controller.animateToPage(0,
+                    //           duration: Duration(seconds: 1), curve: Curves.easeInOutCirc);
+                    //
+                    //       connectedToAHost = false;
+                    //       widget.notifyParent();
+                    //       },
+                    //
                     //   ),
-                    // )
+                    // ),
+                    TextButton(
+                      onPressed: () {
+                        log("sessionId is " + hostSessionIdGlobal);
+                        widget.controller.animateToPage(0,
+                            duration: Duration(seconds: 1), curve: Curves.easeInOutCirc);
+
+                        connectedToAHost = false;
+                        widget.notifyParent();
+                      },
+                      child: Padding(
+                        padding: EdgeInsets.fromLTRB(20, 30, 20, 0),
+                        child: new Text(
+                          "leave party",
+                          style: TextStyle(
+                            fontFamily: FONZFONTTWO,
+                            fontSize: HEADINGFIVE,
+                            color: Colors.black,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    )
                   ],
                 ),
                 Column(
