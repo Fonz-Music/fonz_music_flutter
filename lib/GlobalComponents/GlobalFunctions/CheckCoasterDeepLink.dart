@@ -1,10 +1,12 @@
 
 import 'dart:developer';
 
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:fonz_music_flutter/ApiFunctions/GuestApi/GuestGetCoasterApi.dart';
 import 'package:fonz_music_flutter/MainTabs/SearchTab.dart';
 import 'package:fonz_music_flutter/SearchTab/HomePageDecision.dart';
 
+import '../../main.dart';
 import '../CoreUserAttributes.dart';
 import '../GlobalSessionVariables.dart';
 
@@ -41,4 +43,12 @@ checkCoasterDeepLink(String uidFromScannedCoaster) async {
     pressedNfcButtonToJoinPartu = true;
     launchedNfcToJoinParty = true;
   }
+
+  FirebaseAnalytics().logEvent(name: "userUsedDeepLinking", parameters: {
+    "sessionId":hostCoasterDetails.sessionId,
+    "userId":userAttributes.getUserId(),
+    "group":groupFromCoaster,
+    "tagUid":hostCoasterDetails.coasterUid,
+    "device":"android",
+  });
 }
