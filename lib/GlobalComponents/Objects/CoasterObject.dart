@@ -8,6 +8,7 @@ class CoasterObject {
   String sessionId;
   int statusCode = 0;
   bool needToEncodeCoaster = false;
+  String errorMessage = "";
 
 
   CoasterObject(this.hostName, this.coasterName, this.sessionId, this.coasterUid);

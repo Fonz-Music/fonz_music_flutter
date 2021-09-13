@@ -197,11 +197,12 @@ class _HomeDecisionPageState extends State<HomeDecisionPage> {
               "userId":userAttributes.getUserId(),
               // "group":groupFromCoaster,
               "tagUid":hostCoasterDetails.coasterUid,
-              "device":"android"
+              "device":"android",
+              "reason":hostCoasterDetails.errorMessage.toString()
             });
             return Container(
               child: FailPartyJoin(
-                errorMessage: "something went wrong",
+                errorMessage: hostCoasterDetails.errorMessage.toString(),
                 errorImage: getDisableIcon(),
               ),
             );

@@ -55,6 +55,9 @@ Future<CoasterObject> scanForCoasterDetails() async {
     else if (hostDetails["statusCode"] == 403 && hostDetails["code"] == "COASTER_NO_HOST") {
       hostCoasterDetails.statusCode = 600;
     }
+    else {
+      hostCoasterDetails.errorMessage = hostDetails["body"];
+    }
   }
 
   return hostCoasterDetails;
