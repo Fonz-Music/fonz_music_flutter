@@ -160,6 +160,7 @@ class _HomeDecisionPageState extends State<HomeDecisionPage> {
           Timer(Duration(seconds: 2), () {
             launchedNfcToJoinParty = false;
             pressedNfcButtonToJoinPartu = false;
+            widget.notifyParent();
           });
 
           return Container(

@@ -121,29 +121,6 @@ class _CoasterHasNoHostState extends State<CoasterHasNoHost> {
                     else {
                       log("no spot");
                       await connectSpotify();
-                      if (!userAttributes.getHasAccount()) {
-                        showModalBottomSheet<dynamic>(context: context,
-                            isScrollControlled: true,
-                            builder: (BuildContext bc) {
-                              return Wrap(
-                                  children: <Widget>[
-                                    Container(
-                                      height: height * 0.95,
-                                      child: Container(
-                                        decoration: new BoxDecoration(
-                                            color: Colors.white,
-                                            borderRadius: new BorderRadius.only(
-                                                topLeft: const Radius.circular(
-                                                    25.0),
-                                                topRight: const Radius.circular(
-                                                    25.0))),
-                                        child: CreateAccountPrompt(popupContext: context),
-                                      ),
-                                    )
-                                  ]
-                              );
-                            });
-                      }
                       // link to spotify
                       await userAttributes.determineIfUserConnectedToSpotify();
                     }
@@ -166,7 +143,7 @@ class _CoasterHasNoHostState extends State<CoasterHasNoHost> {
                                                 25.0),
                                             topRight: const Radius.circular(
                                                 25.0))),
-                                    child: CreateAccountPrompt(popupContext: context),
+                                    child: CreateAccountPrompt(notifyParent: widget.notifyParent, popupContext: bc),
                                   ),
                                 )
                               ]
