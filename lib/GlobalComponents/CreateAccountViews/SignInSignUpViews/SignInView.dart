@@ -80,7 +80,7 @@ class _SignInViewState extends State<SignInView> {
         ShowEmailInputSignIn(),
         ShowPasswordInputSignIn(),
         ShowUserError(),
-        ShowForgotPasswordButton(),
+        // ShowForgotPasswordButton(),
         // OrAppleOrGoogle(),
         ShowSignInButton(),
 
