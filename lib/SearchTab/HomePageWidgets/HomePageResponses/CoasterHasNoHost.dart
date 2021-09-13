@@ -155,7 +155,7 @@ class _CoasterHasNoHostState extends State<CoasterHasNoHost> {
                   //         () => widget.loginCallback());
                 },
                 child: Text(
-                  'connect',
+                  '${(userAttributes.getConnectedToSpotify())? 'connect to coaster' : 'connect to Spotify'}',
                   style: TextStyle(
                     fontFamily: FONZFONTTWO,
                     fontWeight: FontWeight.w800,
