@@ -3,7 +3,17 @@ import 'package:fonz_music_flutter/GlobalComponents/FrontEnd/FrontEndConstants.d
 import 'package:fonz_music_flutter/SearchTab/HomePageDecision.dart';
 import 'package:fonz_music_flutter/SearchTab/SearchPage.dart';
 
-class QueueSongFail extends StatelessWidget {
+class QueueSongFail extends StatefulWidget {
+
+  QueueSongFail({Key key, this.reasonForFailure}) : super(key: key);
+  var reasonForFailure;
+
+  @override
+  State<QueueSongFail> createState() => _QueueSongFailState();
+}
+
+class _QueueSongFailState extends State<QueueSongFail> {
+
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +63,7 @@ class QueueSongFail extends StatelessWidget {
                   SizedBox(
                     width: width * 0.65,
                     child: Text(
-                      "$songAddedToQueue was NOT added to ${hostCoasterDetails.hostName}'s queue :/",
+                      "$songAddedToQueue was NOT added to ${hostCoasterDetails.hostName}'s queue :/\n${widget.reasonForFailure}",
                       style: TextStyle(
                         fontFamily: FONZFONTTWO,
                         fontSize: HEADINGSIX,

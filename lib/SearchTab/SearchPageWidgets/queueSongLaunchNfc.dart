@@ -86,6 +86,7 @@ queueSongWithoutNfc(Track trackToQueue, context) async {
   }
   else if (queueTrackResponse["statusCode"] == 403) {
     log("q delay");
+    hostCoasterDetails.errorMessage = queueTrackResponse["body"].toString();
     showToastWidget(Container(
       width: width * COMPONENTWIDTH,
       height: 60,
@@ -97,16 +98,18 @@ queueSongWithoutNfc(Track trackToQueue, context) async {
       "userId":userAttributes.getUserId(),
       "group":groupFromCoaster,
       "tagUid":hostCoasterDetails.coasterUid,
-      "device":"android"
+      "device":"android",
+      "reason":hostCoasterDetails.errorMessage
     });
     // responseCodeFromQueue.value = "QUEUED_BUT_DELAYED";
   }
   else {
     log("fail q");
+    hostCoasterDetails.errorMessage = queueTrackResponse["body"].toString();
     showToastWidget(Container(
       width: width * COMPONENTWIDTH,
       height: 60,
-      child: QueueSongFail(),
+      child: QueueSongFail(reasonForFailure: hostCoasterDetails.errorMessage),
     ), context: context, position: StyledToastPosition.top);
     FirebaseAnalytics().logEvent(name: "songQueueFail", parameters: {
       'user': "guest",
@@ -114,7 +117,8 @@ queueSongWithoutNfc(Track trackToQueue, context) async {
       "userId":userAttributes.getUserId(),
       "group":groupFromCoaster,
       "tagUid":hostCoasterDetails.coasterUid,
-      "device":"android"
+      "device":"android",
+      "reason":hostCoasterDetails.errorMessage
     });
     // responseCodeFromQueue.value = "QUEUE_FAILURE";
   }
