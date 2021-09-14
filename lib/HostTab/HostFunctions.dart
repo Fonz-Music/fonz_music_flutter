@@ -61,13 +61,13 @@ Future<CoasterObject> addCoaster() async {
     //   coasterResponse.group = checkCoasterResponse["body"]["name"]
     // }
     coasterResponse.needToEncodeCoaster = checkCoasterResponse["body"]["encoded"];
-    coasterResponse.hostName = "host";
+    coasterResponse.hostName = checkCoasterResponse["body"].hostName;
     coasterResponse.setStatusCode(200);
   }
   else if (guestCoasterResponse["statusCode"] == 200) {
     coasterResponse.coasterName = guestCoasterResponse["body"].coaster.name;
     // newConnectedCoasterDetails.hostName = checkCoasterResponse["body"]["displayName"];
-    coasterResponse.hostName = "host";
+    coasterResponse.hostName = guestCoasterResponse["body"].hostName;
     coasterResponse.setStatusCode(403);
   }
 
