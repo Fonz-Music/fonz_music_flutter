@@ -118,15 +118,18 @@ class GetHostCoasterDecoder {
 
   var coaster;
   var session;
+  String hostName;
 
   GetHostCoasterDecoder({
     this.coaster,
     this.session,
+    this.hostName
     });
 
   GetHostCoasterDecoder.fromJson(Map<String, dynamic> json) {
     coaster = json['coaster'];
     session = json['session'];
+    hostName = json['hostName'];
 
     coaster = CoasterDecoder.fromJson(json['coaster']);
     session = SessionDecoder.fromJson(json['session']);

@@ -44,7 +44,7 @@ class _SearchPageState extends State<SearchPage> {
 
     refresh() {
       setState(() {
-        log("resetting search page");
+        log("reseting search page");
       });
     }
 

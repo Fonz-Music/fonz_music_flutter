@@ -40,7 +40,7 @@ Future<CoasterObject> scanForCoasterDetails() async {
       // else {
         hostCoasterDetails.coasterUid = uidFromScannedCoaster;
         // hostCoasterDetails.hostName = hostDetails["body"].coaster.name;
-        hostCoasterDetails.hostName = "host";
+        hostCoasterDetails.hostName = hostDetails["body"].hostName;
         hostCoasterDetails.coasterName = hostDetails["body"].coaster.name;
         hostCoasterDetails.sessionId = hostDetails["body"].session.sessionId;
         hostSessionIdGlobal = hostDetails["body"].session.sessionId;
