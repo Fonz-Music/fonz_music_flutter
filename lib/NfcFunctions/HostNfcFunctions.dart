@@ -46,16 +46,25 @@ class HostNfcFunctions {
   static Future<bool> writeNFC(String uid) async {
     try {
       bool wroteSuccessfully = false;
-
+      Stream<NDEFTag> _stream;
       // do you need this? since its always called in _grabCoasterUid() anyways
       bool _isNFCSupported = await NFC.isNDEFSupported;
       //
 
       if (_isNFCSupported) {
         log("nfc is suppoted");
+        log("url is " + uid);
 //        var _stream =
 
-        await NFC.writeNDEF(await _buildMessage(uid), message: 'Activating your Fonz Coaster!', once: true).first;
+        var msg = await _buildMessage(uid);
+        log("built msg");
+
+        await NFC.writeNDEF(msg, once: true).first;
+        _stream.listen((NDEFTag tag) {
+          print("wrote to tag");
+        });
+        // var record = await _stream.first;
+        // await NFC.writeNDEF(msg, message: 'Activating your Fonz Coaster!', once: true).first;
         wroteSuccessfully = true;
         log("uid is: " + uid);
 //        log("uid is: " + uid);
@@ -79,10 +88,15 @@ class HostNfcFunctions {
 
   static Future<NDEFMessage> _buildMessage(String uid) async {
     List<NDEFRecord> _records = [];
-    var fonzUrl = Uri(path: "fonzmusic.com/" + uid, scheme: "https://");
+    // var plainUrl = "fonzmusic.com/" + uid;
+    var fonzUrl = Uri.https("fonzmusic.com", uid);
+    // var fonzUrl = "fonzmusic.com/" + uid;
+    log("url is " + fonzUrl.toString());
     NDEFRecord url = new NDEFRecord.uri(fonzUrl);
-
+    // NDEFRecord url = new NDEFRecord.plain(data)
+    // log("ndef url is " + url.);
     _records.add(url);
+    log("added rec hrer");
     return NDEFMessage.withRecords(_records);
   }
 

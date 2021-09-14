@@ -140,7 +140,8 @@ class _TroubleShootCoasterFieldState extends State<TroubleShootCoasterField> {
                       newConnectedCoasterDetails.setEncodeCoaster(true);
                       launchedNfcForNewCoaster = true;
                       pressedToConnectNewCoaster = false;
-                      newConnectedCoasterDetails.statusCode = 204;
+                      newConnectedCoasterDetails.statusCode = 206;
+                      newConnectedCoasterDetails.coasterUid = widget.coasterUid;
 
                       // coasterActive = !coasterActive;
                       log("here? ");

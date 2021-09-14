@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
+import 'package:fonz_music_flutter/ApiFunctions/HostApi/CoasterManagementApi.dart';
 import 'package:fonz_music_flutter/GlobalComponents/FrontEnd/FrontEndConstants.dart';
 import 'package:fonz_music_flutter/GlobalComponents/GlobalFunctions/LaunchShop.dart';
 import 'package:fonz_music_flutter/GlobalComponents/GlobalSessionVariables.dart';
@@ -167,6 +168,7 @@ class _CoasterDashboardPageState extends State<CoasterDashboardPage> {
               await HostNfcFunctions.writeNFC(newConnectedCoasterDetails.coasterUid);
               newConnectedCoasterDetails.setEncodeCoaster(false);
               pressedToConnectNewCoaster = true;
+              await CoasterManagementApi.updateEncodedCoaster(newConnectedCoasterDetails.coasterUid);
               setState(() {});
             });
             return Container(
@@ -192,6 +194,28 @@ class _CoasterDashboardPageState extends State<CoasterDashboardPage> {
 
 
 
+      }
+      // trouble shoot coaster
+      else if (newConnectedCoasterDetails.statusCode == 206) {
+
+          Timer(Duration(milliseconds: 0), () async {
+            await HostNfcFunctions.writeNFC(newConnectedCoasterDetails.coasterUid);
+            newConnectedCoasterDetails.setEncodeCoaster(false);
+            pressedToConnectNewCoaster = false;
+            launchedNfcForNewCoaster = false;
+            await CoasterManagementApi.updateEncodedCoaster(newConnectedCoasterDetails.coasterUid);
+            setState(() {});
+          });
+          return Container(
+              child: Container(
+                  decoration: BoxDecoration(
+                      color: determineColorThemeBackground(),
+                      borderRadius: BorderRadius.circular(10)
+                  ),
+                  padding: EdgeInsets.fromLTRB(20, 0, 20, height * 0.1),
+                  child: TapYourPhoneLilac()
+              )
+          );
       }
       // if unsuccessful
       else {
