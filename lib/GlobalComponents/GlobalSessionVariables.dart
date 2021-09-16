@@ -56,11 +56,12 @@ List<Playlist> topPlaylists;
 var updateTopPlaylists = true;
 var tempPlaylists =
 [
-  Playlist("This Is Rush", "https://i.scdn.co/image/ab67706f0000000336834b90af842ac737f7dac3",  "37i9dQZF1DX9E92APFiTvV", 50),
-  Playlist("memoryLane",  "https://i.scdn.co/image/ab67706c0000bebbbbb8672f1afbe3add6554550",  "3sRM90oyy8Zul8iF3Cg3RF", 21),
-  Playlist("beautifulEscape",   "https://i.scdn.co/image/ab67706c0000bebb12bc8c494507c2f6550b919b", "4d2ObNuTa7AIMJY8TGvLDB", 31),
-  Playlist("manifest destiny", "https://i.scdn.co/image/ab67706c0000bebb802a02183d45115fc2639cb6",  "4TOUWjjIiwBNXj82cLnltq", 43),
-  Playlist("malibuNinetyTwo", "https://i.scdn.co/image/ab67706c0000bebb0e65fceaffd297b0f3f14756",  "6rqm7IuR0DRbktih6FV9jm", 83)
+  Playlist("t-shirt weather", "https://i.scdn.co/image/ab67706c0000bebb4782902e9ffcb3bb86cccb30",  "450Qb5OrMrsUop1dAlYBzt", 147),
+  Playlist("loveBytes",  "https://i.scdn.co/image/ab67706c0000bebb9b9513be9ec5855f6ca7f292",  "7EH7GHNyv4WGHNgNDmAIsi", 208),
+  Playlist("itRunsThroughMe",   "https://i.scdn.co/image/ab67706c0000bebbe90916b767f2d807693ec92f", "0xcjMAJmLaJNqh7T8ZYwiA", 125),
+  Playlist("likeChanel",   "https://i.scdn.co/image/ab67706c0000bebb97618a5798f29ae672b9eb3f", "0prPSwUI18YvnjcJog28AT", 77),
+  Playlist("toKeepYouSound",   "https://i.scdn.co/image/ab67706c0000bebb0aec42f042641d173ded32d1", "2e5Sm7qY9VPfByZojYKKi9", 89),
+  Playlist("bangers and bumpers",   "https://mosaic.scdn.co/640/ab67616d0000b27374558885d860bb58d78d1de8ab67616d0000b273b87da477ad10e87b09b88d1eab67616d0000b273ec3d15eab5bd77027abc4b23ab67616d0000b273eedabed826eeb6506a4c700d", "3sr4hesDPkwWLhUDwxo0cq", 147),
 
 ];
 
