@@ -1,6 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.fonzmusic.fonz">
+    package="com.fonzmusic.fonz"
+    xmlns:dist="http://schemas.android.com/apk/distribution">
 
+    <dist:module dist:instant="true" />
     <application
         android:name="io.flutter.app.FlutterApplication"
         android:label="Fonz Music"
@@ -31,7 +33,7 @@
                 android:name="io.flutter.embedding.android.SplashScreenDrawable"
                 android:resource="@drawable/launch_background" />
 
-            <intent-filter>
+            <intent-filter >
                 <action android:name="android.intent.action.MAIN" />
 <!--                <action android:name="android.nfc.action.NDEF_DISCOVERED" />-->
 <!--                <action android:name="android.nfc.action.TECH_DISCOVERED"/>-->
@@ -49,28 +51,29 @@
 <!--                    android:host="guest" />-->
 
             </intent-filter>
-            <intent-filter>
+            <intent-filter android:autoVerify="true">
                 <action android:name="android.intent.action.VIEW" />
                 <action android:name="android.nfc.action.NDEF_DISCOVERED" />
                 <action android:name="android.nfc.action.TECH_DISCOVERED"/>
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
                 <action android:name="android.intent.action.OPEN_FROM_NFC_URL" />
-                <data
-                    android:scheme="https"
-                    android:host="fonzmusic.com" />
+                <data android:scheme="https" />
+                <data android:scheme="http" />
+                <data  android:host="fonzmusic.com" />
             </intent-filter>
-            <intent-filter>
+            <intent-filter android:autoVerify="true">
                 <action android:name="android.intent.action.VIEW" />
                 <action android:name="android.nfc.action.NDEF_DISCOVERED" />
                 <action android:name="android.nfc.action.TECH_DISCOVERED"/>
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
                 <action android:name="android.intent.action.OPEN_FROM_NFC_URL" />
-                <data
-                    android:scheme="http"
-                    android:host="fonzmusic.com"
-                    android:pathPattern="/spotify" />
+                <data android:scheme="https" />
+                <data android:scheme="http" />
+                <data  android:host="fonzmusic.com" />
+                <data  android:pathPattern="/spotify" />
+
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />

@@ -16,18 +16,27 @@ var updateActiveSong = true;
 List<Track> topSongs;
 var updateTopSongs = true;
 var tempTracks = [
-  Track("Boyfriend", [" Big Time Rush"], "1rKBOL9kJfX1Y4C3QaOvRH", "https://i.scdn.co/image/ab67616d0000b27350acd1f66ebd5b84630c7129"),
-  Track.withUrl("Is It True", ["Tame Impala"], "6RZmhpvukfyeSURhf4kZ0d", "https://i.scdn.co/image/ab67616d0000b27358267bd34420a00d5cf83a49", "https://open.spotify.com/track/6RZmhpvukfyeSURhf4kZ0d"),
-  Track.withUrl("The Spirit Of Radio", ["Rush"], "4e9hUiLsN4mx61ARosFi7p", "https://i.scdn.co/image/ab67616d0000b27306c0d7ebcabad0c39b566983", "https://open.spotify.com/track/4e9hUiLsN4mx61ARosFi7p"),
-  Track.withUrl("Limelight", ["Rush"], "0K6yUnIKNsFtfIpTgGtcHm", "https://i.scdn.co/image/ab67616d0000b27372833c1ae3343cbfb4617073", "https://open.spotify.com/track/0K6yUnIKNsFtfIpTgGtcHm"),
-  Track.withUrl("Prune, You Talk Funny", [" Gus Dapperton"], "6sHCvZe1PHrOAuYlwTLNH4",  "https://i.scdn.co/image/ab67616d0000b273ba8dea5129b6e43b59fadad7", "https://open.spotify.com/track/6sHCvZe1PHrOAuYlwTLNH4"),
-  Track.withUrl("Supalonely", [" BENEE"], "3GZoWLVbmxcBys6g0DLFLf",   "https://i.scdn.co/image/ab67616d0000b2734bd20e01d00de4b35b61f5f7",  "https://open.spotify.com/track/3GZoWLVbmxcBys6g0DLFLf"),
-  Track.withUrl("Post Humorous", [" Gus Dapperton"], "0yb9DKhu0xA0h0qvKOHVwu",   "https://i.scdn.co/image/ab67616d0000b2731dc1bd83254e89b474ca496b",  "https://open.spotify.com/track/0yb9DKhu0xA0h0qvKOHVwu"),
-  Track.withUrl("I\'m Just Snacking", [" Gus Dapperton"], "6413UUgINHbZsCJeJBFlmT",    "https://i.scdn.co/image/ab67616d0000b27303c5191d01d37d5c795697df",  "https://open.spotify.com/track/6413UUgINHbZsCJeJBFlmT"),
-  Track.withUrl("Palms (with Channel Tres)", [" Gus Dapperton Channel Tres"], "0Lskej1hiep1PKXoz7KhyO", "https://i.scdn.co/image/ab67616d0000b273fd9c5111af2d35d22fb4a512",  "https://open.spotify.com/track/0Lskej1hiep1PKXoz7KhyO"),
-  Track.withUrl("Somewhere (feat. Gus Dapperton)", [" Surf Mesa Gus Dapperton"], "0bmQ5H9mHFzRnJ4ZntylFg",  "https://i.scdn.co/image/ab67616d0000b273ba3286704e1aec6a762ab144",  "https://open.spotify.com/track/0bmQ5H9mHFzRnJ4ZntylFg"),
-  Track.withUrl("Medicine", [" Gus Dapperton"], "7lLtAjBc4Fkaw0FkBQWlSX",   "https://i.scdn.co/image/ab67616d0000b2731dc1bd83254e89b474ca496b",  "https://open.spotify.com/track/7lLtAjBc4Fkaw0FkBQWlSX"),
-  Track.withUrl("I\'m On Fire", [" Gus Dapperton"], "0lhcKPk0fppMAnFUt3QNy7",   "https://i.scdn.co/image/ab67616d0000b273ada32af03830941f2b510bd9", "https://open.spotify.com/track/0lhcKPk0fppMAnFUt3QNy7"),];
+  Track.withUrl("Chanel", ["Frank Ocean"], "6Nle9hKrkL1wQpwNfEkxjh", "https://i.scdn.co/image/ab67616d0000b273a0b780c23fc3c19bd412b234", "https://open.spotify.com/track/6Nle9hKrkL1wQpwNfEkxjh"),
+  Track.withUrl("Do Me a Favour", ["Arctic Monkeys"], "13NCxLOlvQ4Tnexgfp03Gs", "https://i.scdn.co/image/ab67616d0000b2730c8ac83035e9588e8ad34b90", "https://open.spotify.com/track/13NCxLOlvQ4Tnexgfp03Gs"),
+  Track.withUrl("Pacifier", ["Catfish and the Bottlemen"], "1rcu88dzWE5GyqtpuWvd0C", "https://i.scdn.co/image/ab67616d0000b273b87da477ad10e87b09b88d1e", "https://open.spotify.com/track/1rcu88dzWE5GyqtpuWvd0C"),
+  Track.withUrl("Verdigris", ["Gus Dapperton"], "0praNEF55GE8iZca1tC8BM", "https://i.scdn.co/image/ab67616d0000b27361d8be1be46d21609f68d476", "https://open.spotify.com/track/0praNEF55GE8iZca1tC8BM"),
+  Track.withUrl("What They Want", ["Russ"], "3pndPhlQWjuSoXhcIIdBjv", "https://i.scdn.co/image/ab67616d0000b273cb045e684adce8d49ada4045", "https://open.spotify.com/track/3pndPhlQWjuSoXhcIIdBjv"),
+  Track.withUrl("Take My Breath", ["The Weeknd"], "6OGogr19zPTM4BALXuMQpF", "https://i.scdn.co/image/ab67616d0000b2733c041e53cb5c38b6de03e758", "https://open.spotify.com/track/6OGogr19zPTM4BALXuMQpF"),
+  Track.withUrl("Digital Love", ["Daft Punk"], "2VEZx7NWsZ1D0eJ4uv5Fym", "https://i.scdn.co/image/ab67616d0000b273b33d46dfa2635a47eebf63b2", "https://open.spotify.com/track/2VEZx7NWsZ1D0eJ4uv5Fym"),
+  Track.withUrl("Bonny", ["Prefab Sprout"], "6XGup1vnoRarqS5Eb0zeUc", "https://i.scdn.co/image/ab67616d0000b273e40c4c9d5f19d2ab9886a534", "https://open.spotify.com/track/6XGup1vnoRarqS5Eb0zeUc"),
+  Track.withUrl("ooh La", ["The Kooks"], "6xqCTPxYnRf8X0p6N5Vw2T", "https://i.scdn.co/image/ab67616d0000b2736e8b31b2e7cec192c603eece", "https://open.spotify.com/track/6xqCTPxYnRf8X0p6N5Vw2T"),
+  Track.withUrl("Hello?", ["Clairo", "Rejjie Snow"], "7qwt4xUIqQWCu1DJf96g2k", "https://i.scdn.co/image/ab67616d0000b273bf94e27360806b5aa5025f93", "https://open.spotify.com/track/7qwt4xUIqQWCu1DJf96g2k"),
+  Track.withUrl("A Fool Moon Night", ["THE KOXX"], "6c7JQdDL94DF8ECGCwT3zG", "https://i.scdn.co/image/ab67616d0000b27300e62f490dd62b191d6c6874", "https://open.spotify.com/track/6c7JQdDL94DF8ECGCwT3zG"),
+  Track.withUrl("Glue", ["Bicep"], "2aJDlirz6v2a4HREki98cP", "https://i.scdn.co/image/ab67616d0000b273d4322a9004288009f6da2975", "https://open.spotify.com/track/2aJDlirz6v2a4HREki98cP"),
+  Track.withUrl("Losing It", ["FISHER"], "6ho0GyrWZN3mhi9zVRW7xi", "https://i.scdn.co/image/ab67616d0000b2739367c1ee2eec0bf3a04b4868", "https://open.spotify.com/track/6ho0GyrWZN3mhi9zVRW7xi"),
+  Track.withUrl("Believe What I Say", ["Kanye West"], "73uxnSsFMeJ15POpd3zgrV", "https://i.scdn.co/image/ab67616d0000b2736ba1cffc9b2c5469503430b3", "https://open.spotify.com/track/73uxnSsFMeJ15POpd3zgrV"),
+  Track.withUrl("Anseo (Single Mix)", ["Denise Chaila", "Jafaris"], "6DW0XcQeWW9s4SU5cStQqc", "https://i.scdn.co/image/ab67616d0000b273f0ad7b153c7ca8ea32579a20", "https://open.spotify.com/track/6DW0XcQeWW9s4SU5cStQqc"),
+  Track.withUrl("I Still Haven't Found What I'm Looking For", ["U2"], "6wpGqhRvJGNNXwWlPmkMyO", "https://i.scdn.co/image/ab67616d0000b273b7bea3d01f04e6d0408d2afe", "https://open.spotify.com/track/6wpGqhRvJGNNXwWlPmkMyO"),
+  Track.withUrl("A.D.H.D", ["Kendrick Lamar"], "2Fw5S2gaOSZzdN5dFoC2dj", "https://i.scdn.co/image/ab67616d0000b273eddb2639b74ac6c202032ebe", "https://open.spotify.com/track/2Fw5S2gaOSZzdN5dFoC2dj"),
+  Track.withUrl("Zombie", ["The Cranberries"], "7EZC6E7UjZe63f1jRmkWxt", "https://i.scdn.co/image/ab67616d0000b27372d481a5999197ef5f42f796", "https://open.spotify.com/track/7EZC6E7UjZe63f1jRmkWxt"),
+  Track.withUrl("That Funny Feeling", ["Bo Burnham"], "7uCq4vBPffjaTMlE8EQzJD", "https://i.scdn.co/image/ab67616d0000b2732853b5ea06ddc676b337c389", "https://open.spotify.com/track/7uCq4vBPffjaTMlE8EQzJD"),
+  Track.withUrl("Bonkers", ["Dizzee Rascal","Armand Van Helden"], "6ddQ5KCkvCggk3j6KdA0zL", "https://i.scdn.co/image/ab67616d0000b2736f754c78ad0a1cb7fa2d6c4f", "https://open.spotify.com/track/6ddQ5KCkvCggk3j6KdA0zL"),
+  ];
 
 List<Artist> topArtists;
 var updateTopArtists = true;
