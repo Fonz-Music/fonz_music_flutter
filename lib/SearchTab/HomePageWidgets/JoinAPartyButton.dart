@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:fonz_music_flutter/GlobalComponents/FrontEnd/FrontEndConstants.dart';
+import 'package:fonz_music_flutter/GlobalComponents/GlobalFunctions/ConnectSpotify.dart';
 import 'package:fonz_music_flutter/HostTab/HostSetup.dart';
 import 'package:fonz_music_flutter/SearchTab/HomePageWidgets/scanForCoasterDetails.dart';
 
@@ -48,6 +49,9 @@ class _JoinAPartyButtonState extends State<JoinAPartyButton> {
                   shadowLightColor: determineLightShadowRoundButton()
               ),
               onPressed: () async {
+
+                // linkSpotifyOnCallback();
+
                 pressedNfcButtonToJoinPartu = true;
                 widget.notifyParent();
 

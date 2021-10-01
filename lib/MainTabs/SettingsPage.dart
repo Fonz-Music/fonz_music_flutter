@@ -12,6 +12,7 @@ import 'package:fonz_music_flutter/SettingsTab/SettingsButtons/ConnectSpotifySet
 import 'package:fonz_music_flutter/SettingsTab/SettingsButtons/CreateAccountSettingsButton.dart';
 import 'package:fonz_music_flutter/SettingsTab/SettingsButtons/DetermineAmountSongRequests.dart';
 import 'package:fonz_music_flutter/SettingsTab/SettingsButtons/ManageSpotifyButton.dart';
+import 'package:fonz_music_flutter/SettingsTab/SettingsButtons/SendDeveloperFeedback.dart';
 import 'package:fonz_music_flutter/SettingsTab/SettingsButtons/SignOutButton.dart';
 
 import '../main.dart';
@@ -132,6 +133,8 @@ class _SettingsPageState extends State<SettingsPage> {
           ManageSpotifyButton(notifyParent: widget.notifyParent),
           // sign out
           SignOutButton(notifyParent: widget.notifyParent),
+          // send dev feedback
+          SendDeveloperFeedbackButton()
 
         ],
       );
@@ -146,6 +149,9 @@ class _SettingsPageState extends State<SettingsPage> {
           ConnectSpotifySettingsButton(notifyParent: widget.notifyParent,),
           // sign out
           SignOutButton(notifyParent: widget.notifyParent),
+          // send dev feedback
+          SendDeveloperFeedbackButton(),
+
         ],
       );
     }
