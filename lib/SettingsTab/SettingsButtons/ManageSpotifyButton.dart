@@ -6,6 +6,8 @@ import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:fonz_music_flutter/GlobalComponents/FrontEnd/FrontEndConstants.dart';
 import 'package:fonz_music_flutter/SettingsTab/SettingsFields/ManageSpotifyField.dart';
+import 'package:fonz_music_flutter/SettingsTab/SettingsFields/SignOutSpotifyField.dart';
+import 'package:fonz_music_flutter/SettingsTab/SettingsFields/TroubleShootSpotifyField.dart';
 import 'package:fonz_music_flutter/main.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -47,11 +49,28 @@ class _ManageSpotifyButtonState extends State<ManageSpotifyButton> {
     final width = size.width;
     final height = size.height;
 
-    return Padding(
+    return Container(
       padding: const EdgeInsets.fromLTRB(0, 5, 0, 5),
-      child: NeumorphicButton(
-        child: Container(
+      width: width * 0.9,
+      decoration: BoxDecoration(
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.5),
+            spreadRadius: 5,
+            blurRadius: 7,
+            offset: Offset(0, 3), // changes position of shadow
+          ),
+        ]
+      ),
+      // color: determineColorThemeText(),
+      // child: NeumorphicButton(
+      child: ExpansionTile(
+        backgroundColor: determineColorThemeText(),
+        collapsedBackgroundColor: determineColorThemeText(),
+        title: Container(
+        // child: Container(
           width: width * 0.8,
+          color: determineColorThemeText(),
           child: Row(
             children: [
               Padding(
@@ -72,24 +91,32 @@ class _ManageSpotifyButtonState extends State<ManageSpotifyButton> {
               ),
             ],
           ),
-        ),
-        style: NeumorphicStyle(
-            shape: NeumorphicShape.flat,
-            boxShape: NeumorphicBoxShape.rect(),
-            color: determineColorThemeBackground(),
-            shadowDarkColor: determineLightShadowRoundButton(),
-            shadowLightColor: determineLightShadowRoundButton()
-        ),
-        onPressed: () async {
+          // decoration: BoxDecoration(
+          //   color: determineColorThemeText()
+          // ),
 
-          await showDialog(
-              context: context,
-              builder: (popupContext) {
-                return ManageSpotifyField(popupContext: popupContext, notifyParent: widget.notifyParent);
-              }
-          );
-          // widget.notifyParent();
-        },
+        ),
+        // style: NeumorphicStyle(
+        //     shape: NeumorphicShape.flat,
+        //     boxShape: NeumorphicBoxShape.rect(),
+        //     color: determineColorThemeBackground(),
+        //     shadowDarkColor: determineLightShadowRoundButton(),
+        //     shadowLightColor: determineLightShadowRoundButton()
+        // ),
+        // onPressed: () async {
+        //
+        //   await showDialog(
+        //       context: context,
+        //       builder: (popupContext) {
+        //         return ManageSpotifyField(popupContext: popupContext, notifyParent: widget.notifyParent);
+        //       }
+        //   );
+        //   // widget.notifyParent();
+        // },
+        children: [
+          SignOutSpotifyField(notifyParent: widget.notifyParent,),
+          TroubleShootSpotifyField()
+        ],
         // onPressed: () {
         //   log("pressed sign out");
         //   FirebaseAnalytics().logEvent(name: "userOpenedManageSpotify", parameters: {'string': "user"});
