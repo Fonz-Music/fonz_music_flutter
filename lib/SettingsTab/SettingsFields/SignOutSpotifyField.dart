@@ -19,16 +19,16 @@ class _SignOutSpotifyFieldState extends State<SignOutSpotifyField> {
         children: [
           Container(
 
-            padding: const EdgeInsets.fromLTRB(10, 10, 10, 5),
+            padding: const EdgeInsets.fromLTRB(2, 2, 2, 2),
             child: Text(
               'do you wanna disconnect from Spotify?',
               style: TextStyle(
                 fontFamily: FONZFONTONE,
-                fontSize: HEADINGSIX,
+                fontSize: HEADINGFIVE,
                 color: determineColorThemeTextInverse(),
               ),
               textAlign: TextAlign
-                  .left,
+                  .center,
             ),
           ),
           Padding(

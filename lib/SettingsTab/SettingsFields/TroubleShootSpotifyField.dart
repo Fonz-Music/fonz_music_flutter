@@ -17,16 +17,16 @@ class _TroubleShootSpotifyFieldState extends State<TroubleShootSpotifyField> {
         children: [
           Container(
 
-            padding: const EdgeInsets.fromLTRB(10, 10, 10, 5),
+            padding: const EdgeInsets.fromLTRB(2, 2, 2, 2),
             child: Text(
               'troubleshoot your Spotify connection?',
               style: TextStyle(
                 fontFamily: FONZFONTONE,
-                fontSize: HEADINGSIX,
+                fontSize: HEADINGFIVE,
                 color: determineColorThemeTextInverse(),
               ),
               textAlign: TextAlign
-                  .left,
+                  .center,
             ),
           ),
           Padding(

@@ -27,10 +27,23 @@ class _SignOutButtonState extends State<SignOutButton> {
     final width = size.width;
     final height = size.height;
 
-    return Padding(
+    return Container(
       padding: const EdgeInsets.fromLTRB(0, 5, 0, 5),
-      child: NeumorphicButton(
-        child: Container(
+      width: width * 0.9,
+      decoration: BoxDecoration(
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.5),
+              spreadRadius: 5,
+              blurRadius: 7,
+              offset: Offset(0, 3), // changes position of shadow
+            ),
+          ]
+      ),
+      child: ExpansionTile(
+        backgroundColor: determineColorThemeText(),
+        collapsedBackgroundColor: determineColorThemeText(),
+        title: Container(
           width: width * 0.8,
           child: Row(
             children: [
@@ -53,29 +66,9 @@ class _SignOutButtonState extends State<SignOutButton> {
             ],
           ),
         ),
-        style: NeumorphicStyle(
-            shape: NeumorphicShape.flat,
-            boxShape: NeumorphicBoxShape.rect(),
-            color: determineColorThemeBackground(),
-            shadowDarkColor: determineLightShadowRoundButton(),
-            shadowLightColor: determineLightShadowRoundButton()
-        ),
-        onPressed: () async {
-
-          await showDialog(
-              context: context,
-              builder: (popupContext) {
-                return SignOutField(popupContext: popupContext, notifyParent: widget.notifyParent);
-              }
-          );
-          FirebaseAnalytics().logEvent(name: "userSignedOut", parameters: {'string': "user","device":"android"});
-          // widget.notifyParent();
-        },
-        // onPressed: () {
-        //   log("pressed sign out");
-
-        // },
-
+        children: [
+          SignOutField(notifyParent: widget.notifyParent,)
+        ],
       ),
     );
   }

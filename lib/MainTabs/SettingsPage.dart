@@ -58,21 +58,23 @@ class _SettingsPageState extends State<SettingsPage> {
                 children: [
 
 
-                  Container(
-                      width: width,
-                      padding: EdgeInsets.fromLTRB(0, 0, 0, 20),
-                      child: Padding(
-                        padding: EdgeInsets.fromLTRB(20, 30, 0, 0),
-                        child: new Text(
-                          "settings",
-                          style: TextStyle(
-                            fontFamily: FONZFONTTWO,
-                            fontSize: HEADINGTHREE,
-                            color: determineColorThemeTextInverse(),
+                  Flexible(
+                    child: Container(
+                        width: width,
+                        padding: EdgeInsets.fromLTRB(0, 0, 0, 20),
+                        child: Padding(
+                          padding: EdgeInsets.fromLTRB(20, 30, 0, 0),
+                          child: new Text(
+                            "settings",
+                            style: TextStyle(
+                              fontFamily: FONZFONTTWO,
+                              fontSize: HEADINGTHREE,
+                              color: determineColorThemeTextInverse(),
+                            ),
+                            textAlign: TextAlign.left,
                           ),
-                          textAlign: TextAlign.left,
-                        ),
-                      )
+                        )
+                    ),
                   ),
                   Row(
                     children: [
