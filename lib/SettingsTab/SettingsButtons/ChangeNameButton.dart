@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:fonz_music_flutter/GlobalComponents/FrontEnd/FrontEndConstants.dart';
 import 'package:fonz_music_flutter/SettingsTab/SettingsFields/RenameDisplayNameField.dart';
+import 'package:fonz_music_flutter/main.dart';
 
 class ChangeNameButton extends StatefulWidget {
   @override
@@ -12,6 +13,16 @@ class ChangeNameButton extends StatefulWidget {
 }
 
 class _ChangeNameButtonState extends State<ChangeNameButton> {
+
+  String userName = userAttributes.getUserDisplayName();
+
+  refresh() {
+    setState(() {
+      log("setting state high");
+      userName = userAttributes.getUserDisplayName();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
 
@@ -19,10 +30,23 @@ class _ChangeNameButtonState extends State<ChangeNameButton> {
     final width = size.width;
     final height = size.height;
 
-    return Padding(
+    return Container(
       padding: const EdgeInsets.fromLTRB(0, 5, 0, 5),
-      child: NeumorphicButton(
-        child: Container(
+      width: width * 0.9,
+      decoration: BoxDecoration(
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.5),
+              spreadRadius: 5,
+              blurRadius: 7,
+              offset: Offset(0, 3), // changes position of shadow
+            ),
+          ]
+      ),
+      child: ExpansionTile(
+        backgroundColor: determineColorThemeText(),
+        collapsedBackgroundColor: determineColorThemeText(),
+        title: Container(
           width: width * 0.8,
           child: Row(
             children: [
@@ -35,7 +59,7 @@ class _ChangeNameButtonState extends State<ChangeNameButton> {
                 ),
               ),
               Text(
-                "change your name",
+                "$userName",
                 style: TextStyle(
                   fontFamily: FONZFONTONE,
                   fontSize: HEADINGSIX,
@@ -45,24 +69,27 @@ class _ChangeNameButtonState extends State<ChangeNameButton> {
             ],
           ),
         ),
-        style: NeumorphicStyle(
-            shape: NeumorphicShape.flat,
-            boxShape: NeumorphicBoxShape.rect(),
-            color: determineColorThemeBackground(),
-            shadowDarkColor: determineLightShadowRoundButton(),
-            shadowLightColor: determineLightShadowRoundButton()
-        ),
-        onPressed: () async {
-
-          await showDialog(
-              context: context,
-              builder: (popupContext) {
-                return RenameDisplayNameField(popupContext: popupContext);
-              }
-          );
-          FirebaseAnalytics().logEvent(name: "userChangedName", parameters: {'string': "user"});
-          // widget.notifyParent();
-        },
+        children: [
+          RenameDisplayNameField(notifyParent: refresh)
+        ],
+        // style: NeumorphicStyle(
+        //     shape: NeumorphicShape.flat,
+        //     boxShape: NeumorphicBoxShape.rect(),
+        //     color: determineColorThemeBackground(),
+        //     shadowDarkColor: determineLightShadowRoundButton(),
+        //     shadowLightColor: determineLightShadowRoundButton()
+        // ),
+        // onPressed: () async {
+        //
+        //   await showDialog(
+        //       context: context,
+        //       builder: (popupContext) {
+        //         return RenameDisplayNameField(popupContext: popupContext);
+        //       }
+        //   );
+        //   FirebaseAnalytics().logEvent(name: "userChangedName", parameters: {'string': "user"});
+        //   // widget.notifyParent();
+        // },
 
 
       ),

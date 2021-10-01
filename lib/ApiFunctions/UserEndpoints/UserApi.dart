@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:fonz_music_flutter/ApiFunctions/AuthMethods.dart';
+import 'package:fonz_music_flutter/main.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../ApiConstants.dart';
@@ -82,12 +83,10 @@ class UserApi {
         SharedPreferences localPreferences = await SharedPreferences.getInstance();
         // store email
         localPreferences.setString("userEmail", updateUserDecoded.email);
-        // store userId
-        localPreferences.setString("userId", updateUserDecoded.userId);
-        // store agreed email
-        localPreferences.setBool("agreedEmail", updateUserDecoded.agreedMarketing);
-        // store displayName
-        localPreferences.setString("userDisplayName", updateUserDecoded.displayName);
+
+        userAttributes.setUserDisplayName(updateUserDecoded.displayName);
+        userAttributes.setUserId(updateUserDecoded.userId);
+        userAttributes.setAgreedEmail(updateUserDecoded.agreedMarketing);
 
 
       }
@@ -108,6 +107,53 @@ class UserApi {
 
 
   }
+  // update user dispaly name
+  static Future<Map> updateUserDisplayName(String displayName) async {
+    String endpoint = address + user;
+    // fetch token
+    String token = await getJWTAndCheckIfExpired();
+    // dio
+    Dio dio = new Dio();
+    // add auth token
+    dio.options.headers = {HttpHeaders.authorizationHeader: 'Bearer $token'};
+    try {
+// execute endpoint
+      var response = await dio.put(endpoint, data: {"displayName": displayName});
+      log(response.statusCode.toString());
+
+      if (response.statusCode == 200) {
+        // to return data
+        final updateUserDecoded = UpdateAccountDecoder.fromJson(response.data);
+        log("resp data is " + response.data.toString());
+        log("resp msg is " + response.statusMessage.toString());
+        response.data = updateUserDecoded;
+
+        // Create local preferences
+        SharedPreferences localPreferences = await SharedPreferences.getInstance();
+        // store email
+        localPreferences.setString("userEmail", updateUserDecoded.email);
+
+
+        userAttributes.setUserDisplayName(updateUserDecoded.displayName);
+        userAttributes.setUserId(updateUserDecoded.userId);
+        userAttributes.setAgreedEmail(updateUserDecoded.agreedMarketing);
+
+      }
+      log("status code of update account is " + response.statusCode.toString());
+      return {"statusCode": response.statusCode, "code": response.statusMessage,
+        "body": response.data};
+    }
+    on DioError catch (e) {
+      log("status code " +e.response.toString());
+      log("status code " +e.response.data["status"].toString());
+      return {
+        "statusCode": e.response.data["status"],
+        "code": e.response.data["code"],
+        "body": e.response.data["message"]
+      };
+    }
+  }
+
 }
 
 

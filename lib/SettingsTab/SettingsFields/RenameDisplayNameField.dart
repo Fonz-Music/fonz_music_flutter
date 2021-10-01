@@ -4,12 +4,13 @@ import 'dart:developer';
 
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:fonz_music_flutter/ApiFunctions/HostApi/CoasterManagementApi.dart';
+import 'package:fonz_music_flutter/ApiFunctions/UserEndpoints/UserApi.dart';
 import 'package:fonz_music_flutter/GlobalComponents/FrontEnd/FrontEndConstants.dart';
 
 class RenameDisplayNameField extends StatefulWidget {
 
-  RenameDisplayNameField({Key key, this.popupContext}) : super(key: key);
-  final popupContext;
+  RenameDisplayNameField({Key key, this.notifyParent}) : super(key: key);
+  final notifyParent;
   @override
   _RenameDisplayNameFieldState createState() => _RenameDisplayNameFieldState();
 }
@@ -26,56 +27,57 @@ class _RenameDisplayNameFieldState extends State<RenameDisplayNameField> {
     final width = size.width;
     final height = size.height;
 
-    return SimpleDialog(
-      contentPadding: EdgeInsets.zero,
-      // contentPadding: EdgeInsets.all(0),
-      insetPadding: EdgeInsets.fromLTRB(width * 0.07, 0, width * 0.07, 0),
-      // insetPadding: EdgeInsets.zero,
-      titlePadding: EdgeInsets.all(0),
-      shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius
-              .circular(CORNERRADIUSBUTTON)
-      ),
-      backgroundColor: determineColorThemeBackground(),
-      title:
-      Container(
-        width: width * 0.8,
-        color: AMBER,
-        padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
-        child: Row(
-          children: [
-            Padding(
-              padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
-              child: Text(
-                'rename',
-                style: TextStyle(
-                  fontFamily: FONZFONTONE,
-                  fontSize: HEADINGFIVE,
-                  color: Colors.white,
-                ),
-                textAlign: TextAlign
-                    .center,
-              ),
-            ),
-            Spacer(),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(0, 0, 15, 0),
-              child:  Center(
-                child: Container(
-                  height: 25,
-                  width: 30,
-                  child: Image(
-                    image: AssetImage(
-                        getEditIconLight()),
-                  ),
-                ),
-              ),
-            )
-
-          ],
-        ),
-      ),
-      children: [
+    return
+      // SimpleDialog(
+      // contentPadding: EdgeInsets.zero,
+      // // contentPadding: EdgeInsets.all(0),
+      // insetPadding: EdgeInsets.fromLTRB(width * 0.07, 0, width * 0.07, 0),
+      // // insetPadding: EdgeInsets.zero,
+      // titlePadding: EdgeInsets.all(0),
+      // shape: RoundedRectangleBorder(
+      //     borderRadius: BorderRadius
+      //         .circular(CORNERRADIUSBUTTON)
+      // ),
+      // backgroundColor: determineColorThemeBackground(),
+      // title:
+      // Container(
+      //   width: width * 0.8,
+      //   color: AMBER,
+      //   padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
+      //   child: Row(
+      //     children: [
+      //       Padding(
+      //         padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
+      //         child: Text(
+      //           'rename',
+      //           style: TextStyle(
+      //             fontFamily: FONZFONTONE,
+      //             fontSize: HEADINGFIVE,
+      //             color: Colors.white,
+      //           ),
+      //           textAlign: TextAlign
+      //               .center,
+      //         ),
+      //       ),
+      //       Spacer(),
+      //       Padding(
+      //         padding: const EdgeInsets.fromLTRB(0, 0, 15, 0),
+      //         child:  Center(
+      //           child: Container(
+      //             height: 25,
+      //             width: 30,
+      //             child: Image(
+      //               image: AssetImage(
+      //                   getEditIconLight()),
+      //             ),
+      //           ),
+      //         ),
+      //       )
+      //
+      //     ],
+      //   ),
+      // ),
+      // children: [
         Column(
           children: [
             Padding(
@@ -127,6 +129,7 @@ class _RenameDisplayNameFieldState extends State<RenameDisplayNameField> {
                           onSaved: (value) {
                             log("value " + value);
                             name = value;
+                            // value = "";
                           }
                       ),
                     ),
@@ -139,17 +142,19 @@ class _RenameDisplayNameFieldState extends State<RenameDisplayNameField> {
                         child: FlatButton(
                           onPressed: () async {
                             // this should remove key board
-                            FocusScope.of(widget.popupContext).unfocus();
+                            FocusScope.of(context).unfocus();
                             log("pressed ");
                             if (_newNameKey.currentState.validate()) {
                               _newNameKey.currentState.save();
                               // here call api
+                              await UserApi.updateUserDisplayName(name);
                               // await CoasterManagementApi.renameCoaster(widget.coasterUid, name);
                             }
                             // updatePageCoasterDashboard = true;
                             // tells firebase that the host changed the coaster name
                             FirebaseAnalytics().logEvent(name: "hostChangedCoasterName", parameters: {'string':"host" });
-                            Navigator.pop(widget.popupContext);
+                            widget.notifyParent();
+                            // Navigator.pop(widget.popupContext);
                           },
                           child: Icon(
                             Icons.check,
@@ -169,8 +174,8 @@ class _RenameDisplayNameFieldState extends State<RenameDisplayNameField> {
               ),
             ),
           ],
-        )
-      ],
+      //   )
+      // ],
     );
   }
 }

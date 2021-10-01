@@ -62,8 +62,6 @@ class _ManageSpotifyButtonState extends State<ManageSpotifyButton> {
           ),
         ]
       ),
-      // color: determineColorThemeText(),
-      // child: NeumorphicButton(
       child: ExpansionTile(
         backgroundColor: determineColorThemeText(),
         collapsedBackgroundColor: determineColorThemeText(),
@@ -78,7 +76,7 @@ class _ManageSpotifyButtonState extends State<ManageSpotifyButton> {
                 child: Image(
                   image: AssetImage("assets/fonzIcons/spotifyIconAmber.png"),
                   height: 30,
-                  width: 30,
+                  width: 30
                 ),
               ),
               Text(
@@ -91,37 +89,11 @@ class _ManageSpotifyButtonState extends State<ManageSpotifyButton> {
               ),
             ],
           ),
-          // decoration: BoxDecoration(
-          //   color: determineColorThemeText()
-          // ),
-
         ),
-        // style: NeumorphicStyle(
-        //     shape: NeumorphicShape.flat,
-        //     boxShape: NeumorphicBoxShape.rect(),
-        //     color: determineColorThemeBackground(),
-        //     shadowDarkColor: determineLightShadowRoundButton(),
-        //     shadowLightColor: determineLightShadowRoundButton()
-        // ),
-        // onPressed: () async {
-        //
-        //   await showDialog(
-        //       context: context,
-        //       builder: (popupContext) {
-        //         return ManageSpotifyField(popupContext: popupContext, notifyParent: widget.notifyParent);
-        //       }
-        //   );
-        //   // widget.notifyParent();
-        // },
         children: [
           SignOutSpotifyField(notifyParent: widget.notifyParent,),
           TroubleShootSpotifyField()
         ],
-        // onPressed: () {
-        //   log("pressed sign out");
-        //   FirebaseAnalytics().logEvent(name: "userOpenedManageSpotify", parameters: {'string': "user"});
-        // },
-
       ),
     );
   }
