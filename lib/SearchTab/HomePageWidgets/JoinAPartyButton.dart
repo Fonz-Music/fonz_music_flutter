@@ -52,7 +52,8 @@ class _JoinAPartyButtonState extends State<JoinAPartyButton> {
               onPressed: () async {
 
                 var sessionIdTemp = "a66f55e2-a99d-45c7-99b3-99213e1f4ec3";
-                SpotifyPaginatedApi.getGuestTopSongs(sessionIdTemp, 0);
+                SpotifyPaginatedApi.getGuestTopArtistsPaginated(sessionIdTemp, 0);
+                SpotifyPaginatedApi.getGuestTopPlaylistsPaginated(sessionIdTemp, 0);
                 // linkSpotifyOnCallback();
 
                 // pressedNfcButtonToJoinPartu = true;
