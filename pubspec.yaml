@@ -55,7 +55,8 @@ dependencies:
   flutter_email_sender: ^5.0.2
 #  debouncer for search results
   easy_debounce: ^2.0.1
-
+#  pagination package for search
+  infinite_scroll_pagination: ^3.1.0
 
 dev_dependencies:
   flutter_test:

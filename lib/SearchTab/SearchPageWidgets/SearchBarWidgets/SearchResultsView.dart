@@ -16,6 +16,7 @@ import 'package:fonz_music_flutter/GlobalComponents/Objects/Track.dart';
 import '../TrackButton.dart';
 import 'SearchBar.dart';
 
+List<Track> songsSearched;
 
 class SearchResultsView extends StatefulWidget {
   SearchResultsView({Key key}) : super(key: key);
@@ -87,18 +88,22 @@ class _SearchResultsViewState extends State<SearchResultsView> {
     var response;
     EasyDebounce.debounce(
         "sessionSearchPaginated",
-        Duration(milliseconds: 600),
+        Duration(milliseconds: 400),
             () async {
           log("inside debouncer");
           response = await GuestSpotifyApi.sessionSearch(hostSessionIdGlobal, search); });
 
     // Make sure the above example finishes before continuting
-    await Future.delayed(Duration(milliseconds: 900));
+    await Future.delayed(Duration(milliseconds: 1000));
 
     // var response = await GuestSpotifyApi.sessionSearch(hostSessionIdGlobal, search);
 
     var searchResponse;
     log("resp from search " + response.toString());
+    if (response == null) {
+      log("nothing from seach");
+      return songsSearched;
+    }
     // if (response.statusCode == 200) {
     if (response["statusCode"] == 200) {
       log("spotiy code: 200");
@@ -113,8 +118,11 @@ class _SearchResultsViewState extends State<SearchResultsView> {
       var tracks = await searchResponse.tracks.items;
       // var tracks = await searchResponse.
       // List<Track> list = [];
-      List<Track> list = tracksToList(tracks);
-      return list;
+      songsSearched = tracksToList(tracks);
+
+
+
+      return songsSearched;
       // try {
       //   for (var i in tracks) {
       //     var albumArt = i.album.images[0].url;

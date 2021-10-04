@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:fonz_music_flutter/GlobalComponents/FrontEnd/FrontEndConstants.dart';
 
@@ -74,6 +75,7 @@ class _SearchBarState extends State<SearchBar> {
                         child: TextFormField(
                           onChanged: (value) {
                             setState(() {
+                              EasyDebounce.cancel('sessionSearchPaginated');
                               searchSong.value = value;
                             });
                           },
