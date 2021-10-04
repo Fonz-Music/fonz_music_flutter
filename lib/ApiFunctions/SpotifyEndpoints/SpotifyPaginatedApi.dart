@@ -93,10 +93,10 @@ class SpotifyPaginatedApi {
     // dio
     Dio dio = new Dio();
     dio.options.headers = {HttpHeaders.authorizationHeader: 'Bearer $token'};
-    // log("about to get resp inside get top artists");
+    log("about to get resp inside get top artists");
     try {
       var response = await dio.get(endpoint);
-      log("top artists mate: " + response.data.toString());
+      // log("top artists mate: " + response.data.toString());
       log("success");
       return {
         "statusCode": response.statusCode,
@@ -131,7 +131,7 @@ class SpotifyPaginatedApi {
     log("about to get resp inside get top songs");
     try {
       var response = await dio.get(endpoint);
-      // log("top playlists mate: " + response.data.toString());
+      log("top playlists mate: " + response.data.toString());
       log("success");
       return {
         "statusCode": response.statusCode,
@@ -143,6 +143,41 @@ class SpotifyPaginatedApi {
     } on DioError catch (e) {
       log("issue " + e.response.data);
       log("dailure");
+      return {
+        "statusCode": e.response.data["status"],
+        "code": e.response.data["code"],
+        "body": e.response.data["body"]
+      };
+    }
+  }
+
+  static Future<Map> getTracksByPlaylistPaginated(String sessionId, String playlistId, int offset) async {
+    // log("Session id " + sessionId);
+    var offsetString = "?limit=10&offset=" + offset.toString() + "";
+    String endpoint =
+        address + guest + sessionId + '/' + spotify + search + "playlist/" + playlistId + offsetString;
+    log(endpoint);
+    // fetch token
+    String token = await getJWTAndCheckIfExpired();
+
+    // dio
+    Dio dio = new Dio();
+    dio.options.headers = {HttpHeaders.authorizationHeader: 'Bearer $token'};
+    log("about to get resp inside get tracks from playlistID");
+    try {
+      var response = await dio.get(endpoint);
+      log("songs by playlistId mate: " + response.data.toString());
+      log("success");
+      return {
+        "statusCode": response.statusCode,
+        "message":
+        // response.body};
+        response.statusMessage,
+        "body": response.data
+      };
+    } on DioError catch (e) {
+      log("status code " +e.response.data["statusCode"].toString());
+      log("status code " +e.response.toString());
       return {
         "statusCode": e.response.data["status"],
         "code": e.response.data["code"],
