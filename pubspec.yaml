@@ -53,7 +53,8 @@ dependencies:
   flutter_styled_toast: ^2.0.0
 #  to send an email for developer feedback
   flutter_email_sender: ^5.0.2
-
+#  debouncer for search results
+  easy_debounce: ^2.0.1
 
 
 dev_dependencies:

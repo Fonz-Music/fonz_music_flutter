@@ -51,19 +51,19 @@ class _JoinAPartyButtonState extends State<JoinAPartyButton> {
               ),
               onPressed: () async {
 
-                var sessionIdTemp = "a66f55e2-a99d-45c7-99b3-99213e1f4ec3";
-                var tempPlaylistId = "4eoLqTsFZCYSSRczcTnHMl";
+                // var sessionIdTemp = "a66f55e2-a99d-45c7-99b3-99213e1f4ec3";
+                // var tempPlaylistId = "4eoLqTsFZCYSSRczcTnHMl";
                 // SpotifyPaginatedApi.getGuestTopPlaylistsPaginated(sessionIdTemp, 0);
-                SpotifyPaginatedApi.getTracksByPlaylistPaginated(sessionIdTemp, tempPlaylistId, 0);
+                // SpotifyPaginatedApi.getTracksByPlaylistPaginated(sessionIdTemp, tempPlaylistId, 0);
                 // linkSpotifyOnCallback();
                 // https://open.spotify.com/playlist/4eoLqTsFZCYSSRczcTnHMl?si=c1a80572ee6b4368
 
-                // pressedNfcButtonToJoinPartu = true;
-                // widget.notifyParent();
-                //
-                // hostCoasterDetails = await scanForCoasterDetails();
-                // launchedNfcToJoinParty = true;
-                // widget.notifyParent();
+                pressedNfcButtonToJoinPartu = true;
+                widget.notifyParent();
+
+                hostCoasterDetails = await scanForCoasterDetails();
+                launchedNfcToJoinParty = true;
+                widget.notifyParent();
               },
 
             ),

@@ -28,8 +28,8 @@ class GuestSpotifyApi {
     log("about to get resp inside sessopnSearch");
     try {
       var response = await dio.get(endpoint);
-      log(response.data.toString());
-      log("success");
+      // log(response.data.toString());
+      log("success getting tracks");
       return {
         "statusCode": response.statusCode,
         "message":

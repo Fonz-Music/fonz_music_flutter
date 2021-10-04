@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:developer';
 
+import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:fonz_music_flutter/ApiFunctions/GuestApi/GuestSpotifyApi.dart';
 import 'package:fonz_music_flutter/ApiFunctions/SpotifySuggestionInterpreter.dart';
@@ -83,8 +84,18 @@ class _SearchResultsViewState extends State<SearchResultsView> {
     //TODO: use based on guest sid
 
     // var host = await RepositoryServiceAuth.getActiveHostAccount();
+    var response;
+    EasyDebounce.debounce(
+        "sessionSearchPaginated",
+        Duration(milliseconds: 600),
+            () async {
+          log("inside debouncer");
+          response = await GuestSpotifyApi.sessionSearch(hostSessionIdGlobal, search); });
 
-    var response = await GuestSpotifyApi.sessionSearch(hostSessionIdGlobal, search);
+    // Make sure the above example finishes before continuting
+    await Future.delayed(Duration(milliseconds: 900));
+
+    // var response = await GuestSpotifyApi.sessionSearch(hostSessionIdGlobal, search);
 
     var searchResponse;
     log("resp from search " + response.toString());
@@ -157,23 +168,15 @@ class _SearchResultsViewState extends State<SearchResultsView> {
     super.initState();
   }
 
-  // Timer debounce;
-  //
-  // Future<List<Track>> handleSearch() async {
-  //   var results;
-  //   final debouncer = Debouncer<String>(Duration(milliseconds: 250), (value) async {
-  //     results = await search(searchSong.value);
-  //   });
-  //   return results;
-  // }
-
-
-
   @override
   Widget build(BuildContext context) {
-
+    // EasyDebounce.debounce(
+    //     "sessionSearchPaginated",
+    //     Duration(milliseconds: 1500),
+    //         ()  {
+    //       log("inside debouncer");
+    //       _search = search(searchSong.value); });
     _search = search(searchSong.value);
-    // _search = handleSearch();
   // _search = completer.future;
 
     final size = MediaQuery.of(context).size;
