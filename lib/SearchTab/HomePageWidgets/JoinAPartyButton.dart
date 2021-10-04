@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
+import 'package:fonz_music_flutter/ApiFunctions/SpotifyEndpoints/SpotifyPaginatedApi.dart';
 import 'package:fonz_music_flutter/GlobalComponents/FrontEnd/FrontEndConstants.dart';
 import 'package:fonz_music_flutter/GlobalComponents/GlobalFunctions/ConnectSpotify.dart';
 import 'package:fonz_music_flutter/HostTab/HostSetup.dart';
@@ -50,14 +51,16 @@ class _JoinAPartyButtonState extends State<JoinAPartyButton> {
               ),
               onPressed: () async {
 
+                var sessionIdTemp = "a66f55e2-a99d-45c7-99b3-99213e1f4ec3";
+                // SpotifyPaginatedApi.sessionSearchPaginated(sessionIdTemp, "bicep", 0);
                 // linkSpotifyOnCallback();
 
-                pressedNfcButtonToJoinPartu = true;
-                widget.notifyParent();
-
-                hostCoasterDetails = await scanForCoasterDetails();
-                launchedNfcToJoinParty = true;
-                widget.notifyParent();
+                // pressedNfcButtonToJoinPartu = true;
+                // widget.notifyParent();
+                //
+                // hostCoasterDetails = await scanForCoasterDetails();
+                // launchedNfcToJoinParty = true;
+                // widget.notifyParent();
               },
 
             ),
