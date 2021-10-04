@@ -46,4 +46,39 @@ class SpotifyPaginatedApi {
     }
   }
 
+  static Future<Map> getGuestTopSongs(String sessionId, int offset) async {
+    // log("Session id " + sessionId);
+    var offsetString = "&offset=" + offset.toString() + "&limit=20";
+    String endpoint =
+        address + guest + sessionId + '/' + spotify + search + "top?type=tracks" + offsetString;
+    log(endpoint);
+    // fetch token
+    String token = await getJWTAndCheckIfExpired();
+
+    // dio
+    Dio dio = new Dio();
+    dio.options.headers = {HttpHeaders.authorizationHeader: 'Bearer $token'};
+    log("about to get resp inside paginated get top songs");
+    try {
+      var response = await dio.get(endpoint);
+      log("top songs mate: " + response.data.toString());
+      log("success");
+      return {
+        "statusCode": response.statusCode,
+        "message":
+        // response.body};
+        response.statusMessage,
+        "body": response.data
+      };
+    } on DioError catch (e) {
+      log("issue " + e.response.data.toString());
+      log("dailure");
+      return {
+        "statusCode": e.response.data["status"],
+        "code": e.response.data["code"],
+        "body": e.response.data["body"]
+      };
+    }
+  }
+
 }
