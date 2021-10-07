@@ -58,28 +58,9 @@ class _TopSongsViewState extends State<TopSongsView> {
               // child:
 
               return Column(
-                // mainAxisAlignment: MainAxisAlignment.center,
-                // mainAxisSize: MainAxisSize.min,
                 children: [
                   TopSongComponent(track: widget.tracks[index]),
                   TopSongComponent(track: widget.tracks[index + widget.tracks.length ~/2]),
-                  // Row(
-                  //
-                  //   // mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  //   mainAxisSize: MainAxisSize.min,
-                  //   children: [
-                  //
-                  //     // TopSongComponent(track: tempTracks[1]),
-                  //   ],
-                  // ),
-                  // Row(
-                  //   mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  //   mainAxisSize: MainAxisSize.min,
-                  //   children: [
-                  //     TopSongComponent(track: tempTracks[index + tempTracks.length ~/2]),
-                  //     // TopSongComponent(track: tempTracks[3]),
-                  //   ],
-                  // ),
                 ],
               );
             },
