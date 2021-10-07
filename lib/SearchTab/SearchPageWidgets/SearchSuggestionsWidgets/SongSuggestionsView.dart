@@ -53,8 +53,8 @@ class _SongSuggestionsViewState extends State<SongSuggestionsView> {
                     // TopSongsView(),
                     TopArtistsFutureBuilder(),
                     // TopArtistsView(artists: tempArtists),
-                    TopPlaylistsFutureBuilder(),
-                    // TopPlaylistsView()
+                    // TopPlaylistsFutureBuilder(),
+                    TopPlaylistsView()
                   ],
                 );
               }

@@ -34,18 +34,9 @@ class _TopPlaylistsFutureBuilderState extends State<TopPlaylistsFutureBuilder> {
         log("using host creds");
         final fetchedTopPlaylists = await SpotifySuggestionsApi
             .getGuestTopPlaylists(hostSessionIdGlobal);
-
-        // if (fetchedTopPlaylists["statusCode"] == 200) {
-        //   log("can acc get host creds");
-        //   // log("number of songs is" + fetchedTopSongs["body"].toString());
           var playlists = fetchedTopPlaylists["body"];
           log("got items from json");
           topPlaylists = playlistsJsonToList(playlists);
-        // }
-        // else {
-        //   log("using temp tracks");
-        //   topPlaylists = tempPlaylists;
-        // }
       }
       updateTopPlaylists = false;
     } else {

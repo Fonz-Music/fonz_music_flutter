@@ -71,12 +71,12 @@ class _TopSongsFutureBuilderState extends State<TopSongsFutureBuilder> {
     super.initState();
   }
 
-  // @override
-  // void dispose() {
-  //   // 4
-  //   _topSongsController.dispose();
-  //   super.dispose();
-  // }
+  @override
+  void dispose() {
+    // 4
+    _topSongsController.dispose();
+    super.dispose();
+  }
 
   Future<void> fetchTopSongs(int offset) async {
     // TODO: Implement the function's body.

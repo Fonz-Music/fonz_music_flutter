@@ -78,7 +78,7 @@ List<Playlist> playlistsJsonToList(playlists) {
   log("in playlistsToList");
   // log("artists are " + playlists.toString());
   for (var i in playlists) {
-    log("about to get art");
+    // log("about to get art");
     // log("name is " + i["name"]);
     var artistArt = i["images"][0]["url"];
     // log("artust art is " + i["images"][0]["url"]);
@@ -87,7 +87,7 @@ List<Playlist> playlistsJsonToList(playlists) {
     // log("playlist id is " + i["id"]);
     // log("playlist total is " + i["tracks"]["total"].runtimeType.toString());
     var newPlaylist = new Playlist(i["name"], artistArt, i["id"], i["tracks"]["total"]);
-    log("post is " + newPlaylist.playlistName.toString());
+    // log("post is " + newPlaylist.playlistName.toString());
     playlistList.add(newPlaylist);
   }
   return playlistList;

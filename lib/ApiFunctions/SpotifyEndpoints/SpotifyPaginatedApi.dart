@@ -118,7 +118,8 @@ class SpotifyPaginatedApi {
 
   static Future<Map> getGuestTopPlaylistsPaginated(String sessionId, int offset) async {
     // log("Session id " + sessionId);
-    var offsetString = "&offset=" + offset.toString() + "&limit=10";
+    log("offset is " + offset.toString());
+    var offsetString = "&offset=" + offset.toString() + "&limit=8";
     String endpoint =
         address + guest + sessionId + '/' + spotify + search + "top?type=playlists" + offsetString;
     log(endpoint);
@@ -128,7 +129,7 @@ class SpotifyPaginatedApi {
     // dio
     Dio dio = new Dio();
     dio.options.headers = {HttpHeaders.authorizationHeader: 'Bearer $token'};
-    log("about to get resp inside get top songs");
+    log("about to get resp inside get top playlists paginated");
     try {
       var response = await dio.get(endpoint);
       log("top playlists mate: " + response.data.toString());
