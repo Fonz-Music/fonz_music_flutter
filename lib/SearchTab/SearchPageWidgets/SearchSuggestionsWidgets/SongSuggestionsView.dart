@@ -51,8 +51,8 @@ class _SongSuggestionsViewState extends State<SongSuggestionsView> {
                     DetermineIfSpotifyButtonShown(),
                     TopSongsFutureBuilder(),
                     // TopSongsView(),
-                    TopArtistsFutureBuilder(),
-                    // TopArtistsView(artists: tempArtists),
+                    // TopArtistsFutureBuilder(),
+                    TopArtistsView(),
                     // TopPlaylistsFutureBuilder(),
                     TopPlaylistsView()
                   ],
