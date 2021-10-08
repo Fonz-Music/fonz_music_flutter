@@ -12,7 +12,7 @@ class SpotifyPaginatedApi {
   static Future<Map> sessionSearchPaginated(String sessionId, String term, int offset) async {
     // log("Session id " + sessionId);
 
-    var offsetString = "&offset=" + offset.toString() + "&limit=20";
+    var offsetString = "&offset=" + offset.toString() + "&limit=10";
     String endpoint =
         address + guest + sessionId + '/' + spotify + searchTerm + term + offsetString;
     log(endpoint);
