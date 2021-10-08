@@ -15,10 +15,6 @@ final _topGuestSongsController = PagingController(
   // 2
   firstPageKey: 0,
 );
-final _bottomGuestSongsController = PagingController(
-  // 2
-  firstPageKey: 0,
-);
 
 int topSongsOffset = 0;
 // int bottomGuestSongsOffset = 0;
@@ -35,6 +31,7 @@ class TopSongsView extends StatefulWidget {
 class _TopSongsViewState extends State<TopSongsView> {
 
   Future<List<Track>> getTopSongs() async {
+    log("offset " + topSongsOffset.toString());
     if (updateTopSongs) {
       log("going to get top songs");
       // change to guest depending
@@ -60,36 +57,48 @@ class _TopSongsViewState extends State<TopSongsView> {
   @override
   void initState() {
     // 3
-    _topGuestSongsController.addPageRequestListener((offset) {
-      fetchTopSongs();
-      _bottomGuestSongsController.addPageRequestListener((offset) {
-        fetchTopSongs();
-      });
+    _topGuestSongsController.addPageRequestListener((offset) async {
+      await fetchTopSongs();
+      // _bottomGuestSongsController.addPageRequestListener((offset) {
+      //   fetchTopSongs();
+      // });
     });
 
     super.initState();
   }
 
-  @override
-  void dispose() {
-    // 4
-    _topGuestSongsController.dispose();
-    _bottomGuestSongsController.dispose();
-    super.dispose();
-  }
+  // @override
+  // void dispose() {
+  //   // 4
+  //   _topGuestSongsController.dispose();
+  //
+  //   super.dispose();
+  // }
 
   Future<void> fetchTopSongs() async {
-    // TODO: Implement the function's body.
-    var songs = await getTopSongs();
-    var modulus = topSongsOffset % 10;
-    if (modulus == 0 || modulus.isEven) {
-      _topGuestSongsController.appendPage(songs, topSongsOffset);
+    updateTopSongs = true;
+    var topTracks = await getTopSongs();
+    // topSongsOffset = topSongsOffset + 10;
+    // var bottomTracks = await getTopSongs(topSongsOffset);
+    List<List<Track>> doubleTracks = [];
+    for (int i = 0; i < topTracks.length; i += 2) {
+      log("track is " + topTracks[i].title + " index is " + i.toString());
+      var tracksTogether = [topTracks[i], topTracks[i + 1]];
+      doubleTracks.add(tracksTogether);
     }
-    else {
-      _bottomGuestSongsController.appendPage(songs, topSongsOffset);
-    }
+    log("just did double tracks");
+    log(doubleTracks.toString());
+    // var modulus = topSongsOffset / 10;
+    // log("modulus is " + modulus.toString());
+    // log("top songs is " + topSongsOffset.toString());
+    // if (modulus == 0 || modulus.toInt().isEven) {
+      _topGuestSongsController.appendPage(doubleTracks, topSongsOffset);
+    // }
+    // else {
+    //   _bottomGuestSongsController.appendPage(songs, topSongsOffset);
+    // }
 
-    topSongsOffset += 10;
+    topSongsOffset += 20;
   }
 
 
@@ -122,81 +131,54 @@ class _TopSongsViewState extends State<TopSongsView> {
         Container(
           padding: const EdgeInsets.fromLTRB(0, 0, 0, 5),
           width: width * COMPONENTWIDTH,
-          height: 140,
-          // child: Column(
-          // children: [
-          //   Container(
-          //     height: 100,
-          //     child: RefreshIndicator(
-          //       onRefresh: () => Future.sync(
-          //         // 2
-          //             () => _topGuestSongsController.refresh(),
-          //       ),
-          //       // 3
-          //       child: PagedListView.separated(
-          //         // 4
-          //         scrollDirection: Axis.horizontal,
-          //         pagingController: _topGuestSongsController,
-          //         padding: const EdgeInsets.all(16),
-          //         separatorBuilder: (context, index) => const SizedBox(
-          //           height: 16,
-          //         ),
-          //         builderDelegate: PagedChildBuilderDelegate(
-          //           itemBuilder: (context, track, index)  {
-          //             // log("track is " + track.toString());
-          //             return TopSongComponent(track: track);
-          //           },
-          //           noItemsFoundIndicatorBuilder: (context) => Container(child: Text("no songs"),),
-          //         ),
-          //       ),
-          //     ),
-          //   ),
-          //   Container(
-          //     height: 100,
-          //     child: RefreshIndicator(
-          //       onRefresh: () => Future.sync(
-          //         // 2
-          //             () => _bottomGuestSongsController.refresh(),
-          //       ),
-          //       // 3
-          //       child: PagedListView.separated(
-          //         // 4
-          //         scrollDirection: Axis.horizontal,
-          //         pagingController: _bottomGuestSongsController,
-          //         padding: const EdgeInsets.all(16),
-          //         separatorBuilder: (context, index) => const SizedBox(
-          //           height: 16,
-          //         ),
-          //         builderDelegate: PagedChildBuilderDelegate(
-          //           itemBuilder: (context, track, index)  {
-          //             log("bottom track is " + track.toString());
-          //             return TopSongComponent(track: track);
-          //           },
-          //           noItemsFoundIndicatorBuilder: (context) => Container(child: Text("no songs"),),
-          //         ),
-          //       ),
-          //     ),
-          //   ),
-          //   ],
+          height: 160,
+          child:
+             RefreshIndicator(
+                onRefresh: () => Future.sync(
+                  // 2
+                      () => _topGuestSongsController.refresh(),
+                ),
+                // 3
+                child: PagedListView.separated(
+                  // 4
+                  scrollDirection: Axis.horizontal,
+                  pagingController: _topGuestSongsController,
+                  padding: const EdgeInsets.all(16),
+                  separatorBuilder: (context, index) => const SizedBox(
+                    height: 16,
+                  ),
+                  builderDelegate: PagedChildBuilderDelegate(
+                    itemBuilder: (context, doubleTracks, index)  {
+                      log("track is " + doubleTracks[0].title.toString());
+                      return Column(
+                        children: [
+                          TopSongComponent(track: doubleTracks[0]),
+                          TopSongComponent(track: doubleTracks[1]),
+                        ],
+                      );
+                    },
+                    noItemsFoundIndicatorBuilder: (context) => Container(child: Text("no songs"),),
+                  ),
+                ),
+              ),
+          // child: ListView.builder(
+          //
+          //   scrollDirection: Axis.horizontal,
+          //   // itemCount: 4,
+          //   itemCount: widget.tracks.length ~/2,
+          //   itemBuilder: (BuildContext context, int index) {
+          //     // child:
+          //
+          //     return Column(
+          //       children: [
+          //         TopSongComponent(track: widget.tracks[index]),
+          //         TopSongComponent(track: widget.tracks[index + widget.tracks.length ~/2]),
+          //       ],
+          //     );
+          //   },
+          //   // separatorBuilder: (BuildContext context,
+          //   //     int index) =>  Container()
           // ),
-          child: ListView.builder(
-
-            scrollDirection: Axis.horizontal,
-            // itemCount: 4,
-            itemCount: widget.tracks.length ~/2,
-            itemBuilder: (BuildContext context, int index) {
-              // child:
-
-              return Column(
-                children: [
-                  TopSongComponent(track: widget.tracks[index]),
-                  TopSongComponent(track: widget.tracks[index + widget.tracks.length ~/2]),
-                ],
-              );
-            },
-            // separatorBuilder: (BuildContext context,
-            //     int index) =>  Container()
-          ),
         ),
       ],
     );

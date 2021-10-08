@@ -37,11 +37,11 @@ List<Track> tracksJsonToList(tracks) {
   // log("tracks are " + tracks.toString());
   for (var i in tracks) {
     var albumArt = i["album"]["images"][0]["url"];
-    log("album art is " + i["album"]["images"][0]["url"]);
+    // log("album art is " + i["album"]["images"][0]["url"]);
     var listArtist = i["artists"];
-    log("artist is " + i["artists"].toString());
+    // log("artist is " + i["artists"].toString());
     var externalUrl = i["external_urls"]["spotify"];
-    log("external is " + i["external_urls"]["spotify"]);
+    // log("external is " + i["external_urls"]["spotify"]);
     List<String> listArtistString = [];
     listArtist.forEach((e) => {listArtistString.add(e["name"])});
     var post = new Track(i["name"], listArtistString, i["id"], albumArt);

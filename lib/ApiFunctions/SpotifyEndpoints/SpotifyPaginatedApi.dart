@@ -61,7 +61,7 @@ class SpotifyPaginatedApi {
     // log("about to get resp inside paginated get top songs");
     try {
       var response = await dio.get(endpoint);
-      log("top songs mate: " + response.data.toString());
+      // log("top songs mate: " + response.data.toString());
       log("success");
       return {
         "statusCode": response.statusCode,

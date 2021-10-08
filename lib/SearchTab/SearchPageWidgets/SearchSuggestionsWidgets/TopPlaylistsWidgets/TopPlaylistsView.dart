@@ -40,12 +40,12 @@ class _TopPlaylistsViewState extends State<TopPlaylistsView> {
     super.initState();
   }
 
-  @override
-  void dispose() {
-    // 4
-    _topPlaylistsController.dispose();
-    super.dispose();
-  }
+  // @override
+  // void dispose() {
+  //   // 4
+  //   _topPlaylistsController.dispose();
+  //   super.dispose();
+  // }
 
   Future<void> fetchTopPlaylists() async {
     // TODO: Implement the function's body.
