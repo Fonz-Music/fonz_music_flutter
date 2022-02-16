@@ -1,16 +1,11 @@
 # fonz_music_flutter
 
-A new Flutter project for Fonz 2.0, Fonz Music's 2nd app release.
+Repository for the Fonz Music app written in Flutter.
 
-## Getting Started
+This repository is the Android codebase for the app Fonz Music. The app can be downloaded at https://play.google.com/store/apps/details?id=com.fonzmusic.fonz&hl=en_IE&gl=US.
 
-This project is a starting point for a Flutter application.
+Fonz Music allows guests to add songs to their Host's Spotify Queue using the Host's Spotify credentials.
 
-A few resources to get you started if this is your first Flutter project:
+This app contains an can be launched by tapping on any Fonz Music NFC coaster. 
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Some components of this app include: NFC reading, NFC writing, RESTful API calls, User Auth, Pagination (on Song Search), Shared Preferences, Keystore.
